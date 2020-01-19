@@ -1,0 +1,264 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Glaciers of GNP</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+        }
+
+        #ui-dropdown {
+            position: absolute;
+            z-index: 1000;
+            top: 16px;
+            left: 16px;
+            padding: 0px 24px 8px 20px;
+            /* background: rgba(256, 256, 256, .9); */
+            border-radius: 5px;
+        }
+
+        #legend-list {
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            color: #555;
+            font-size: 8pt;
+            background-color: white;
+            font-family: inherit;
+            font-weight: 500;
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight {
+            font-weight: 700;
+        }
+
+        .leaflet-tooltip {
+            color: #555;
+            font-size: 8pt;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="map"></div>
+
+    <div id="ui-dropdown">
+        <select id="legend-list">
+            <option selected value="999">Select Glacier</option>
+            <option disabled>───────────</option>
+        </select>
+    </div>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+
+    <script>
+        const options = {
+            zoomControl: false,
+            zoomSnap: .1
+        }
+
+        const map = L.map('map', options);
+
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community',
+        }).addTo(map);
+
+        map.addControl(L.control.zoom({
+            position: 'topright'
+        }));
+
+        // use D3 fetch to request data with async requests
+        const glaciers1966 = d3.json('data/glaciers-1966.json');
+        const glaciers1998 = d3.json('data/glaciers-1998.json');
+        const glaciers2005 = d3.json('data/glaciers-2005.json');
+        const glaciers2015 = d3.json('data/glaciers-2015.json');
+        const glacierPts = d3.json('data/glacier-pts.json');
+
+        // use Promise to wait until data is all loaded
+        Promise.all([glaciers1966, glaciers1998, glaciers2005, glaciers2015, glacierPts]).then(drawMap);
+
+        function drawMap(data) {
+            // function is called when Promise is fulfilled and data is ready
+            // pull out separate data arrays and assign to variables
+            const g66 = data[0];
+            const g98 = data[1];
+            const g05 = data[2];
+            const g15 = data[3];
+            const gPts = data[4];
+
+            // store a reference to the HTML list
+            const legendList = $('#legend-list');
+
+            // create a layerGroup with the geojson data
+            const glaciersLayerGroup = L.geoJson(gPts, {
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, {
+                        color: 'red',
+                        weight: 1,
+                        fillColor: 'red',
+                        fillOpacity: 1,
+                        radius: 3
+                    });
+                },
+                onEachFeature(feature, layer) {
+                    let tooltip = feature.properties.GLACNAME;
+                    layer.bindTooltip(tooltip, {
+                        sticky: true,
+                        className: "tooltip"
+                    });
+                    //when mousing over a polygon layer
+                    layer.on('mouseover', function () {
+                        // provide a visual affordance
+                        this.setStyle({
+                            color: 'yellow',
+                            weight: 1,
+                            fillColor: 'yellow',
+                            fillOpacity: 1,
+                            radius: 5
+                        }).bringToFront();
+                        // select the corresponding list item
+                        // and add the highlight class to make bold
+                        $('#glacierList-' + feature.properties.num).addClass('highlight');
+                        // when mousing out
+                        layer.on('mouseout', function () {
+                            // reset back to our base styling opacity
+                            this.setStyle({
+                                color: 'red',
+                                weight: 1,
+                                fillColor: 'red',
+                                fillOpacity: 1,
+                                radius: 3
+                            });
+                            // remove the class highlight from the legend list item
+                            $('#glacierList-' + feature.properties.num).removeClass(
+                                'highlight');
+                        });
+                        // zoom to layer on click
+                        layer.on('click', function () {
+                            map.flyTo(this.getLatLng(), 14);
+
+                            // change dropdown list to selected glacier 
+                            const valueNum = feature.properties.num;
+                            $(".legend-item").each(function () {
+                                if ($(this).val() == valueNum) {
+                                    $('#ui-dropdown option[value=' + valueNum + ']')
+                                        .attr('selected', 'selected');
+                                };
+                            });
+                        });
+                    })
+                }
+            }).addTo(map);
+
+            // fit map bounds to feature extent
+            map.fitBounds(glaciersLayerGroup.getBounds(), {
+                padding: [20, 20]
+            });
+
+            createDropdownList();
+
+            function createDropdownList() {
+                // create empty container for legend glacier names
+                const legendNameList = [];
+                for (var names in gPts.features) {
+                    const props = gPts.features[names].properties;
+                    legendNameList.push(props);
+                };
+
+                // alphabetize list
+                legendNameList.sort(function (a, b) {
+                    return a.GLACNAME - b.GLACNAME
+                });
+
+                // list item for each feature in the legend
+                for (let i = 1; i <= gPts.features.length; i++) {
+                    const legendNames = [legendNameList[i - 1].GLACNAME];
+                    legendList.append('<option class="legend-item" id="glacierList-' + i + '" value=' + i + '><a>' +
+                        legendNames + '</a></option>');
+                };
+
+                $('select[id="legend-list"]').change(function () {
+                    attribute = $(this).val();
+                    num = parseInt(attribute);
+                    highlightGlacier(num);
+                    zoomToGlacier(num);
+                    if (num === 999) {
+                        map.flyToBounds(glaciersLayerGroup.getBounds(), {
+                            padding: [20, 20]
+                        });
+                    };
+                });
+            };
+
+            function highlightGlacier(glacierNum) {
+                // loop through the glacier polygons
+                glaciersLayerGroup.eachLayer(function (layer) {
+                    // if the glacier id matches the one we're mousing over
+                    if (layer.feature.properties.num === glacierNum) {
+                        // change the layer style
+                        layer.setStyle({
+                            color: 'yellow',
+                            weight: 1,
+                            fillColor: 'yellow',
+                            fillOpacity: 1,
+                            radius: 5
+                        }).bringToFront();
+                    } else {
+                        layer.setStyle({
+                            color: 'red',
+                            weight: 1,
+                            fillColor: 'red',
+                            fillOpacity: 1,
+                            radius: 3
+                        });
+                    };
+                });
+            };
+
+            function zoomToGlacier(glacierNum) {
+                // loop through the glacier polygons
+                glaciersLayerGroup.eachLayer(function (layer) {
+                    // if the glacier id matches the one clicked on:
+                    if (layer.feature.properties.num === glacierNum) {
+                        map.flyTo(layer.getLatLng(), 14);
+                    };
+                });
+            };
+
+            // // toggle glacier layer on zoom level 
+            // map.on('zoomend', onZoomend);
+
+            // function onZoomend() {
+            //     if (map.getZoom() >= 10) {
+            //         map.removeLayer(regionsLayerGroup);
+            //         $('.legend-item').removeClass('highlight');
+            //     };
+            //     if (map.getZoom() < 10) {
+            //         map.addLayer(regionsLayerGroup);
+            //     };
+            // };
+        };
+    </script>
+</body>
+
+</html>
