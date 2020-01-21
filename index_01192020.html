@@ -95,7 +95,7 @@
 
         .navbar-icon {
             padding-right: 6px;
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
         .navbar-icon:hover {
@@ -132,7 +132,8 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-        <span class="navbar-brand mb-0 h1">Visualizing 50 Years of Change of Named Glaciers in Glacier National Park,
+        <span class="navbar-brand mb-0 h1" title="Visualizing 50 Years of Change of Named Glaciers in Glacier National Park,
+        Montana">Visualizing 50 Years of Change of Named Glaciers in Glacier National Park,
             Montana</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -142,15 +143,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                    <a class="navbar-icon" href="#">
-                        <img src="/icons/info-outline.svg" width="24" height="24" alt="project information" title="project information">
-                      </a>
-                    <a class="navbar-icon" href="#">
-                        <img src="/icons/zoom_out_round.svg" width="24" height="24" alt="zoom to full extent" title="zoom to full extent">
-                      </a>
+                    <a class="navbar-icon" id="info-icon" href="#">
+                        <img src="/icons/info-outline.svg" width="24" height="24" alt="Project Information"
+                            title="Project Information">
+                    </a>
+                    <a class="navbar-icon" id="extent-icon">
+                        <img src="/icons/zoom_out_round.svg" width="24" height="24" alt="Zoom to Full Extent"
+                            title="Zoom to Full Extent">
+                    </a>
                     <div class="btn-group">
                         <button type="button" class="btn btn-outline-light btn-sm dropdown-toggle"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="select glacier">
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt="Select Glacier" title="Select Glacier">
                             Select Glacier
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
@@ -173,19 +176,6 @@
             <option selected value="999">Select Glacier</option>
             <option disabled>───────────</option>
         </select>
-    </div>
-
-    <div class="btn-group">
-        <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-            Select Glacier
-        </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <a class="dropdown-item" href="#">More here</a>
-        </div>
     </div>
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -298,6 +288,13 @@
             // fit map bounds to feature extent
             map.fitBounds(glaciersLayerGroup.getBounds(), {
                 padding: [20, 20]
+            });
+
+            // extent icon
+            $('#extent-icon').click(function () {
+                map.flyToBounds(glaciersLayerGroup.getBounds(), {
+                    padding: [20, 20]
+                });
             });
 
 
