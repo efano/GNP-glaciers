@@ -109,6 +109,37 @@
             // store a reference to the HTML list
             const legendList = $('#legend-list');
 
+            createDropdownList();
+            function createDropdownList() {
+                // create empty container for legend glacier names
+                const legendNameList = [];
+                for (var names in gPts.features) {
+                    const props = gPts.features[names].properties;
+                    legendNameList.push(props);
+                };
+                // alphabetize list
+                legendNameList.sort(function (a, b) {
+                    return a.GLACNAME - b.GLACNAME
+                });
+                // list item for each feature in the legend
+                for (let i = 1; i <= gPts.features.length; i++) {
+                    const legendNames = [legendNameList[i - 1].GLACNAME];
+                    legendList.append('<option class="legend-item" id="glacierList-' + i + '" value=' + i + '><a>' +
+                        legendNames + '</a></option>');
+                };
+                $('select[id="legend-list"]').change(function () {
+                    attribute = $(this).val();
+                    num = parseInt(attribute);
+                    highlightGlacier(num);
+                    zoomToGlacier(num);
+                    if (num === 999) {
+                        map.flyToBounds(glaciersLayerGroup.getBounds(), {
+                            padding: [20, 20]
+                        });
+                    };
+                });
+            };
+
             // create a layerGroup with the geojson data
             const glaciersLayerGroup = L.geoJson(gPts, {
                 pointToLayer: function (feature, latlng) {
@@ -174,41 +205,6 @@
             map.fitBounds(glaciersLayerGroup.getBounds(), {
                 padding: [20, 20]
             });
-
-            createDropdownList();
-
-            function createDropdownList() {
-                // create empty container for legend glacier names
-                const legendNameList = [];
-                for (var names in gPts.features) {
-                    const props = gPts.features[names].properties;
-                    legendNameList.push(props);
-                };
-
-                // alphabetize list
-                legendNameList.sort(function (a, b) {
-                    return a.GLACNAME - b.GLACNAME
-                });
-
-                // list item for each feature in the legend
-                for (let i = 1; i <= gPts.features.length; i++) {
-                    const legendNames = [legendNameList[i - 1].GLACNAME];
-                    legendList.append('<option class="legend-item" id="glacierList-' + i + '" value=' + i + '><a>' +
-                        legendNames + '</a></option>');
-                };
-
-                $('select[id="legend-list"]').change(function () {
-                    attribute = $(this).val();
-                    num = parseInt(attribute);
-                    highlightGlacier(num);
-                    zoomToGlacier(num);
-                    if (num === 999) {
-                        map.flyToBounds(glaciersLayerGroup.getBounds(), {
-                            padding: [20, 20]
-                        });
-                    };
-                });
-            };
 
             function highlightGlacier(glacierNum) {
                 // loop through the glacier polygons
