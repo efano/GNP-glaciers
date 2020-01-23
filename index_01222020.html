@@ -48,7 +48,7 @@
             width: 100%;
             border: none;
             border-radius: 4px;
-            color: #222;
+            color: #37474F;
             font-size: 8pt;
             background-color: white;
             font-family: inherit;
@@ -58,13 +58,13 @@
 
         .highlight {
             font-weight: 800;
-            background-color: #dbe8ec;
-            color: #222;
+            background-color: whitesmoke;
+            color: #37474F;
         }
 
         .leaflet-tooltip {
             white-space: nowrap;
-            color: #222;
+            color: #37474F;
             font-size: 9pt;
             font-weight: 600;
             padding: 2px 5px;
@@ -77,7 +77,7 @@
         }
 
         .navbar-icon:hover {
-            color: #007d97;
+            color: #455A64;
             opacity: 1;
         }
 
@@ -89,7 +89,7 @@
         .btn.active:hover,
         .dropdown-toggle:focus,
         .dropdown-toggle:hover {
-            color: #222 !important;
+            color: #37474F !important;
         }
 
         .dropdown-menu {
@@ -98,7 +98,7 @@
         }
 
         .dropdown-item {
-            color: #222
+            color: #37474F
         }
 
         .dropdown-item:hover {
@@ -225,7 +225,7 @@
             const glaciersLayerGroup = L.geoJson(gPts, {
                 pointToLayer: function (feature, latlng) {
                     return L.circleMarker(latlng, {
-                        color: '#333',
+                        color: '#263238',
                         weight: 1,
                         fillColor: colorize(feature.properties.areaLoss),
                         fillOpacity: 0.8,
@@ -242,7 +242,7 @@
                     layer.on('mouseover', function () {
                         // provide a visual affordance
                         this.setStyle({
-                            color: '#333',
+                            color: '#263238',
                             weight: 1.5,
                             fillColor: colorize(feature.properties.areaLoss),
                             fillOpacity: 0.8,
@@ -256,7 +256,7 @@
                     layer.on('mouseout', function () {
                         // reset back to our base styling opacity
                         this.setStyle({
-                            color: '#333',
+                            color: '#263238',
                             weight: 1,
                             fillColor: colorize(feature.properties.areaLoss),
                             fillOpacity: 0.8,
@@ -299,7 +299,7 @@
                     if (layer.feature.properties.num === glacierNum) {
                         // change the layer style
                         layer.setStyle({
-                            color: '#333',
+                            color: '#263238',
                             weight: 1.5,
                             fillColor: colorize(layer.feature.properties.areaLoss),
                             fillOpacity: 0.8,
@@ -309,7 +309,7 @@
                     // deselects layer highlight on legend mouseout
                     $('.dropdown-item').on('mouseout', function () {
                         layer.setStyle({
-                            color: '#333',
+                            color: '#263238',
                             weight: 1,
                             fillColor: colorize(layer.feature.properties.areaLoss),
                             fillOpacity: 0.8,
