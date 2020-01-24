@@ -11,11 +11,6 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <style>
-        :root {
-            --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        }
-
         * {
             cursor: default !important;
         }
@@ -42,13 +37,14 @@
             width: 100%;
             top: 46px;
             bottom: 0;
+            background-color: white;
         }
 
         #dropdown-list {
             width: 100%;
             border: none;
             border-radius: 4px;
-            color: #555;
+            color: #333;
             font-size: 8pt;
             background-color: white;
             font-family: inherit;
@@ -58,13 +54,13 @@
 
         .highlight {
             font-weight: 800;
-            background-color: #dbe8ec;
-            color: #444;
+            background-color: whitesmoke;
+            color: #333;
         }
 
         .leaflet-tooltip {
             white-space: nowrap;
-            color: #444;
+            color: #333;
             font-size: 9pt;
             font-weight: 600;
             padding: 2px 5px;
@@ -77,7 +73,7 @@
         }
 
         .navbar-icon:hover {
-            color: #007d97;
+            color: #555;
             opacity: 1;
         }
 
@@ -89,7 +85,7 @@
         .btn.active:hover,
         .dropdown-toggle:focus,
         .dropdown-toggle:hover {
-            color: #555 !important;
+            color: #333 !important;
         }
 
         .dropdown-menu {
@@ -98,18 +94,54 @@
         }
 
         .dropdown-item {
-            color: #555
+            color: #333
         }
 
         .dropdown-item:hover {
-            background-color: #dbe8ec;
+            background-color: whitesmoke;
             font-weight: 800;
+        }
+
+        .glacierPtLegend {
+            /* background-color: rgba(255, 255, 255, 0.6); */
+            border-radius: 3px;
+            bottom: 46px;
+            position: absolute;
+            left: 12px;
+            z-index: 950;
+            font-size: 7pt;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: #333;
+        }
+
+        .glacierPtLegend h6 {
+            font-size: 9pt;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: #333;
+            font-weight: 600;
+        }
+
+        #gradient {
+            display: inline-block;
+            height: 70px;
+            width: 10px;
+            background-color: #5D0081;
+            background-image: linear-gradient(to top, yellow, #fd7731, #e31060, #5D0081);
+            border-style: solid;
+            border-color: #333;
+            border-width: thin;
+        }
+
+        #gradientTop {
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 5px;
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar" style="background-color: #006d83;">
+    <nav class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar" style="background-color: #555;">
         <span class="navbar-nav-scroll">Visualizing 50 Years of Change of Named Glaciers in Glacier National Park,
             Montana</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -140,10 +172,18 @@
     </nav>
 
     <div id="map"></div>
+    <div id="glacierPtLegend" class="glacierPtLegend">
+        <h6>Area Loss</h6>
+        <div id="glacierPtLegendContainer">
+            <div id="gradient"></div>
+            <div id="gradientTop">Largest</div>
+        </div>
+    </div>
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.6/chroma.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
@@ -163,6 +203,14 @@
 
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles &copy; Esri &mdash; Esri, USGS, NPS, and the GIS User Community',
+            opacity: 0.9
+        }).addTo(map);
+
+        // create scalebar
+        L.control.scale({
+            position: 'bottomleft',
+            metric: true,
+            maxWidth: 100,
         }).addTo(map);
 
         // use D3 fetch to request data with async requests
@@ -183,33 +231,52 @@
             const g15 = data[3];
             const gPts = data[4];
 
-            // store a reference to the HTML list
+            // store a reference to the glacier dropdown list
             const legendList = $('#dropdown-list');
             const legendNameList = [];
             for (names in gPts.features) {
                 const props = gPts.features[names].properties;
                 legendNameList.push(props);
             };
-            // alphabetize list
+
+            // alphabetize glacier dropdown list
             legendNameList.sort(function (a, b) {
                 return a.GLACNAME - b.GLACNAME
             });
-            // list item for each feature in the legend
+            // add glacier names to the glacier dropdown list
             for (let i = 1; i <= gPts.features.length; i++) {
                 const legendNames = [legendNameList[i - 1].GLACNAME];
                 legendList.append('<a class="dropdown-item" id="glacierList-' + i + '" value=' + i + '>' +
                     legendNames + '</a>');
             };
 
+            // create chroma.js color scheme
+            const glacierLoss = [];
+            // loop through the feature data
+            gPts.features.forEach(function (feature) {
+                if (feature.properties.pctD > 0) {
+                    glacierLoss.push(feature.properties.pctD);
+                }
+            });
+
+            // use chroma.limits to determine
+            const breaks = chroma.limits(glacierLoss, 'q', 7);
+            // build a colorize function
+            const colorize = chroma
+                .scale(['yellow', '#5D0081'])
+                .domain(breaks)
+                .mode('lch')
+                .correctLightness();
+
             // create a layerGroup with the geojson data
             const glaciersLayerGroup = L.geoJson(gPts, {
                 pointToLayer: function (feature, latlng) {
                     return L.circleMarker(latlng, {
-                        color: '#007d97',
-                        weight: 2,
-                        fillColor: '#007d97',
-                        fillOpacity: 0.5,
-                        radius: 4
+                        color: '#333',
+                        weight: 1,
+                        fillColor: colorize(feature.properties.pctD),
+                        fillOpacity: 0.8,
+                        radius: 5
                     })
                 },
                 onEachFeature(feature, layer) {
@@ -222,11 +289,11 @@
                     layer.on('mouseover', function () {
                         // provide a visual affordance
                         this.setStyle({
-                            color: '#007d97',
-                            weight: 3,
-                            fillColor: '#007d97',
-                            fillOpacity: 0.5,
-                            radius: 10
+                            color: '#333',
+                            weight: 1.5,
+                            fillColor: colorize(feature.properties.pctD),
+                            fillOpacity: 0.8,
+                            radius: 12
                         }).bringToFront();
 
                         // select the cooresponding list item and add the highlight class to make bold
@@ -236,16 +303,16 @@
                     layer.on('mouseout', function () {
                         // reset back to our base styling opacity
                         this.setStyle({
-                            color: '#007d97',
-                            weight: 2,
-                            fillColor: '#007d97',
-                            fillOpacity: 0.5,
-                            radius: 4
+                            color: '#333',
+                            weight: 1,
+                            fillColor: colorize(feature.properties.pctD),
+                            fillOpacity: 0.8,
+                            radius: 5
                         });
 
                         $('#glacierList-' + feature.properties.num).removeClass('highlight');
                     });
-                    
+
                     layer.on('click', function () {
                         // change 'Select Glacier' button to glacier name
                         btnObj = $("#btn-dropdown");
@@ -279,21 +346,21 @@
                     if (layer.feature.properties.num === glacierNum) {
                         // change the layer style
                         layer.setStyle({
-                            color: '#007d97',
-                            weight: 3,
-                            fillColor: '#007d97',
-                            fillOpacity: 0.5,
-                            radius: 10
+                            color: '#333',
+                            weight: 1.5,
+                            fillColor: colorize(layer.feature.properties.pctD),
+                            fillOpacity: 0.8,
+                            radius: 12
                         }).bringToFront();
                     };
                     // deselects layer highlight on legend mouseout
                     $('.dropdown-item').on('mouseout', function () {
                         layer.setStyle({
-                            color: '#007d97',
-                            weight: 2,
-                            fillColor: '#007d97',
-                            fillOpacity: 0.5,
-                            radius: 4
+                            color: '#333',
+                            weight: 1,
+                            fillColor: colorize(layer.feature.properties.pctD),
+                            fillOpacity: 0.8,
+                            radius: 5
                         });
                     });
                 });
@@ -330,7 +397,7 @@
                 });
             });
 
-           // ********** end of glacier points **********     
+            // ********** end of glacier points coding **********     
 
         };
     </script>
