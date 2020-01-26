@@ -103,13 +103,13 @@
         }
 
         .glacierPtLegend {
-            background-color: rgba(255, 255, 255, .7);
-            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, .5);
+            /* box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); */
             border-radius: 3px;
             bottom: 46px;
             width: 88px;
             position: absolute;
-            left: 10px;
+            left: 8px;
             z-index: 950;
             font-size: 8pt;
             font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -217,7 +217,7 @@
         L.control.scale({
             position: 'bottomleft',
             metric: true,
-            maxWidth: 100,
+            maxWidth: 120,
         }).addTo(map);
 
         // use D3 fetch to request data with async requests
@@ -250,7 +250,7 @@
                         color: '#a6a6a6',
                         weight: 1,
                         lineJoin: 'round',
-                        dashArray: '3,4'
+                        dashArray: '2,4'
                     };
                 }
             }).addTo(map);
