@@ -114,7 +114,7 @@
             font-size: 8pt;
             font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             color: #444;
-            
+
         }
 
         .glacierPtLegend h6 {
@@ -221,22 +221,39 @@
         }).addTo(map);
 
         // use D3 fetch to request data with async requests
+        const parkBounds = d3.json('data/boundary.json');
+        const glacierPts = d3.json('data/glacier-pts.json');
         const glaciers1966 = d3.json('data/glaciers-1966.json');
         const glaciers1998 = d3.json('data/glaciers-1998.json');
         const glaciers2005 = d3.json('data/glaciers-2005.json');
         const glaciers2015 = d3.json('data/glaciers-2015.json');
-        const glacierPts = d3.json('data/glacier-pts.json');
 
         // use Promise to wait until data is all loaded
-        Promise.all([glaciers1966, glaciers1998, glaciers2005, glaciers2015, glacierPts]).then(drawMap);
+        Promise.all([parkBounds, glacierPts, glaciers1966, glaciers1998, glaciers2005, glaciers2015]).then(drawMap);
 
         function drawMap(data) {
             // function is called when Promise is fulfilled and data is ready pull out separate data arrays and assign to variables
-            const g66 = data[0];
-            const g98 = data[1];
-            const g05 = data[2];
-            const g15 = data[3];
-            const gPts = data[4];
+            const park = data[0];
+            const gPts = data[1];
+            const g66 = data[2];
+            const g98 = data[3];
+            const g05 = data[4];
+            const g15 = data[5];
+
+            console.log(data);
+
+            // add park boundary
+            const parkBoundary = L.geoJson(park, {
+                style: function (feature) {
+                    // use the colors object to style each polygon a unique color
+                    return {
+                        color: '#a6a6a6',
+                        weight: 1,
+                        lineJoin: 'round',
+                        dashArray: '3,4'
+                    };
+                }
+            }).addTo(map);
 
             // store a reference to the glacier dropdown list
             const legendList = $('#dropdown-list');
@@ -332,9 +349,7 @@
             }).addTo(map);
 
             // fit map bounds to feature extent
-            map.fitBounds(glaciersLayerGroup.getBounds(), {
-                padding: [20, 20]
-            });
+            map.fitBounds(parkBoundary.getBounds());
 
             // select all the list items and on mouseover
             $('.dropdown-item').on('mouseover', function () {
