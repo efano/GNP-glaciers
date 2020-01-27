@@ -18,7 +18,6 @@
         body {
             font-family: sans-serif;
             margin: 0;
-            padding: 0;
         }
 
         .navbar {
@@ -39,6 +38,34 @@
             bottom: 0;
             background-color: white;
         }
+
+        .leaflet-left .leaflet-control-scale {
+            margin-left: 10px;
+        }
+
+        .leaflet-control-scale-line {
+            border: 1px solid #444;
+            border-top: none;
+            line-height: .7;
+            padding: 2px 5px 1px;
+            font-size: 9px;
+            white-space: nowrap;
+            overflow: hidden;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, .5);
+        }
+
+        .leaflet-control-scale-line:not(:first-child) {
+            border-top: 1px solid #444;
+            border-bottom: none;
+            margin-top: 1px;
+        }
+
+        .leaflet-control-scale-line:not(:first-child):not(:last-child) {
+            border-bottom: 1px solid #444;
+        }
+
 
         #dropdown-list {
             width: 100%;
@@ -106,7 +133,7 @@
             background-color: rgba(255, 255, 255, .5);
             /* box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); */
             border-radius: 3px;
-            bottom: 46px;
+            bottom: 34px;
             width: 88px;
             position: absolute;
             left: 8px;
@@ -114,16 +141,22 @@
             font-size: 8pt;
             font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             color: #444;
+            font-weight: 400;
 
         }
 
-        .glacierPtLegend h6 {
+        .glacierPtLegend h4 {
             font-size: 11pt;
-            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            color: #444;
             font-weight: 500;
             margin-top: 6px;
             margin-left: 10px;
+        }
+
+        .glacierPtLegend h6 {
+            font-size: 8pt;
+            margin-left: 10px;
+            margin-top: -6px;
+            margin-bottom: 10px;
         }
 
         #gradient {
@@ -156,7 +189,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="navbar-nav ml-md-auto">
-            <li class="nav-item dropdown">
+            <li>
                 <a class="navbar-icon" id="info-icon" href="#">
                     <img src="icons/info-outline.svg" width="24" height="24" alt="Project Information"
                         title="Project Information">
@@ -171,7 +204,7 @@
                         title="Select Glacier">
                         Select Glacier
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right" id="dropdown-list">
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-md-right" id="dropdown-list">
                     </div>
                 </div>
             </li>
@@ -180,7 +213,9 @@
 
     <div id="map"></div>
     <div id="glacierPtLegend" class="glacierPtLegend">
-        <h6>Area Loss</h6>
+        <h4>Area Loss</h4>
+        <h6>(1966 &ndash; 2015)</h6>
+
         <div id="glacierPtLegendContainer">
             <div id="gradient"></div>
             <div id="gradientTop">Largest<br><br><br>Smallest</div>
@@ -414,9 +449,7 @@
                 // clear glacier name in dropdown
                 $("#btn-dropdown").text("Select Glacier");
                 // zoom to extent icon
-                map.flyToBounds(glaciersLayerGroup.getBounds(), {
-                    padding: [20, 20]
-                });
+                map.flyToBounds(parkBoundary.getBounds());
             });
 
             // ********** end of glacier points coding **********     
