@@ -27,7 +27,7 @@
 
         .navbar-nav-scroll {
             color: white;
-            font-size: 16pt;
+            font-size: 22px;
             font-weight: 500;
         }
 
@@ -44,10 +44,11 @@
         }
 
         .leaflet-control-scale-line {
-            border: 1px solid #444;
+            border: 1px solid #555;
             border-top: none;
             line-height: .7;
             padding: 2px 5px 1px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 9px;
             white-space: nowrap;
             overflow: hidden;
@@ -57,22 +58,21 @@
         }
 
         .leaflet-control-scale-line:not(:first-child) {
-            border-top: 1px solid #444;
+            border-top: 1px solid #555;
             border-bottom: none;
             margin-top: 1px;
         }
 
         .leaflet-control-scale-line:not(:first-child):not(:last-child) {
-            border-bottom: 1px solid #444;
+            border-bottom: 1px solid #555;
         }
-
 
         #dropdown-list {
             width: 100%;
             border: none;
             border-radius: 4px;
             color: #333;
-            font-size: 8pt;
+            font-size: 11px;
             background-color: white;
             font-family: inherit;
             font-weight: 500;
@@ -88,8 +88,8 @@
         .leaflet-tooltip {
             white-space: nowrap;
             color: #333;
-            font-size: 9pt;
-            font-weight: 600;
+            font-size: 11px;
+            font-weight: 700;
             padding: 2px 5px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
@@ -138,30 +138,30 @@
             position: absolute;
             left: 8px;
             z-index: 950;
-            font-size: 8pt;
+            font-size: 9px;
             font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             color: #444;
             font-weight: 400;
-
         }
 
         .glacierPtLegend h4 {
-            font-size: 11pt;
+            font-size: 14px;
             font-weight: 500;
             margin-top: 6px;
             margin-left: 10px;
         }
 
         .glacierPtLegend h6 {
-            font-size: 8pt;
+            font-size: 10px;
+            font-weight: 400;
             margin-left: 10px;
-            margin-top: -6px;
+            margin-top: -8px;
             margin-bottom: 10px;
         }
 
         #gradient {
             display: inline-block;
-            height: 60px;
+            height: 62px;
             width: 12px;
             margin-left: 10px;
             margin-bottom: 6px;
@@ -218,7 +218,7 @@
 
         <div id="glacierPtLegendContainer">
             <div id="gradient"></div>
-            <div id="gradientTop">Largest<br><br><br>Smallest</div>
+            <div id="gradientTop">Largest<br><br><br><br>Smallest</div>
         </div>
     </div>
 
