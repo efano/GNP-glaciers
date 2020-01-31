@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Glacier Change of GNP</title>
+    <title>Glacier Retreat in Glacier National Park</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -179,8 +179,7 @@
 
 <body>
     <nav class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar" style="background-color: #555;">
-        <span class="navbar-nav-scroll">Visualizing 50 Years of Change of Named Glaciers in Glacier National Park,
-            Montana</span>
+        <span class="navbar-nav-scroll">Visualizing Glacier Retreat in Glacier National Park, Montana</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -211,7 +210,7 @@
     <div id="map"></div>
     <div id="glacierPtLegend" class="glacierPtLegend">
         <h4>Area Loss</h4>
-        <h6>(1966 &ndash; 2015)</h6>
+        <h6>(1850 &ndash; 2015)</h6>
 
         <div id="glacierPtLegendContainer">
             <div id="gradient"></div>
@@ -255,22 +254,15 @@
         // use D3 fetch to request data with async requests
         const parkBounds = d3.json('data/boundary.json');
         const glacierPts = d3.json('data/glacier-pts.json');
-        const glaciers1966 = d3.json('data/glaciers-1966.json');
-        const glaciers1998 = d3.json('data/glaciers-1998.json');
-        const glaciers2005 = d3.json('data/glaciers-2005.json');
-        const glaciers2015 = d3.json('data/glaciers-2015.json');
+        
 
         // use Promise to wait until data is all loaded
-        Promise.all([parkBounds, glacierPts, glaciers1966, glaciers1998, glaciers2005, glaciers2015]).then(drawMap);
+        Promise.all([parkBounds, glacierPts]).then(drawMap);
 
         function drawMap(data) {
             // function is called when Promise is fulfilled and data is ready pull out separate data arrays and assign to variables
             const park = data[0];
             const gPts = data[1];
-            const g66 = data[2];
-            const g98 = data[3];
-            const g05 = data[4];
-            const g15 = data[5];
 
             console.log(data);
 
@@ -321,8 +313,7 @@
             const colorize = chroma
                 .scale(['yellow', '#5D0081'])
                 .domain(breaks)
-                .mode('lch')
-                .correctLightness();
+                .mode('lch');
 
             // create a layerGroup with the geojson data
             const glaciersLayerGroup = L.geoJson(gPts, {
