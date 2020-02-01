@@ -6,9 +6,9 @@
     <meta charset="utf-8">
 
     <title>Glacier Retreat in Glacier National Park</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
 
     <style>
         * {
@@ -16,8 +16,15 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             margin: 0;
+        }
+
+        #map {
+            position: absolute;
+            width: 100%;
+            top: 52px;
+            bottom: 0;
+            background-color: whitesmoke;
         }
 
         .navbar {
@@ -26,17 +33,9 @@
         }
 
         .navbar-nav-scroll {
-            color: white;
+            color: #484848;
             font-size: 24px;
             font-weight: 400;
-        }
-
-        #map {
-            position: absolute;
-            width: 100%;
-            top: 52px;
-            bottom: 0;
-            background-color: white;
         }
 
         .leaflet-left .leaflet-control-scale {
@@ -44,7 +43,7 @@
         }
 
         .leaflet-control-scale-line {
-            border: 1px solid #555;
+            border: 1px solid #484848;
             border-top: none;
             line-height: .7;
             padding: 2px 5px 1px;
@@ -57,39 +56,19 @@
         }
 
         .leaflet-control-scale-line:not(:first-child) {
-            border-top: 1px solid #555;
+            border-top: 1px solid #484848;
             border-bottom: none;
             margin-top: 1px;
         }
 
         .leaflet-control-scale-line:not(:first-child):not(:last-child) {
-            border-bottom: 1px solid #555;
-        }
-
-        #dropdown-list {
-            width: 100%;
-            border: none;
-            border-radius: 4px;
-            color: #333;
-            font-size: 11px;
-            background-color: white;
-            font-family: inherit;
-            font-weight: 500;
-            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #484848;
         }
 
         .highlight {
-            font-weight: 700;
+            font-weight: 600;
             background-color: whitesmoke;
-            color: #333;
-        }
-
-        .leaflet-tooltip {
-            white-space: nowrap;
-            color: #333;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 2px 5px;
+            color: #484848;
         }
 
         .navbar-icon {
@@ -98,19 +77,17 @@
         }
 
         .navbar-icon:hover {
-            color: #555;
+            color: #fafafa;
             opacity: 1;
+        }
+
+        .btn-outline-secondary {
+            border: 1px solid #484848;
+            color: #484848;
         }
 
         .btn-group {
             margin-left: 4px;
-        }
-
-        .btn.active:focus,
-        .btn.active:hover,
-        .dropdown-toggle:focus,
-        .dropdown-toggle:hover {
-            color: #333 !important;
         }
 
         .dropdown-menu {
@@ -119,16 +96,36 @@
         }
 
         .dropdown-item {
-            color: #333
+            color: #484848
         }
 
         .dropdown-item:hover {
             background-color: whitesmoke;
-            font-weight: 700;
+            font-weight: 600;
+        }
+
+        #dropdown-list {
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            color: #484848;
+            font-size: 11px;
+            background-color: white;
+            font-family: inherit;
+            font-weight: 600;
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .leaflet-tooltip {
+            white-space: nowrap;
+            color: #484848;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 5px;
         }
 
         .glacierPtLegend {
-            background-color: rgba(255, 255, 255, .5);
+            background-color: rgba(255, 255, 255, .6);
             /* box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); */
             border-radius: 3px;
             bottom: 34px;
@@ -136,21 +133,19 @@
             position: absolute;
             left: 8px;
             z-index: 950;
-            font-size: 10px;
-            color: #444;
-            font-weight: 400;
+            color: #484848;
         }
 
         .glacierPtLegend h4 {
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 600;
             margin-top: 6px;
             margin-left: 10px;
         }
 
         .glacierPtLegend h6 {
             font-size: 10px;
-            font-weight: 500;
+            font-weight: 600;
             margin-left: 9px;
             margin-top: -8px;
             margin-bottom: 10px;
@@ -165,21 +160,22 @@
             background-color: #5D0081;
             background-image: linear-gradient(to top, yellow, #fd7731, #e31060, #5D0081);
             border-style: solid;
-            border-color: #333;
+            border-color: #484848;
             border-width: thin;
         }
 
         #gradientTop {
+            font-size: 10px;
+            font-weight: 500;
             display: inline-block;
             vertical-align: top;
             margin-top: -2px;
         }
-
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar" style="background-color: #555;">
+    <nav class="navbar navbar-expand navbar-light flex-column flex-md-row bd-navbar" style="background-color: #fafafa;">
         <span class="navbar-nav-scroll">Visualizing Glacier Retreat in Glacier National Park, Montana</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -196,7 +192,7 @@
                         title="Zoom to Full Extent">
                 </a>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-outline-light btn-sm dropdown-toggle" id="btn-dropdown"
+                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" id="btn-dropdown"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt="Select Glacier"
                         title="Select Glacier">
                         Select Glacier
@@ -242,8 +238,12 @@
 
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles &copy; Esri &mdash; Esri, USGS, NPS, and the GIS User Community',
-            opacity: 0.9
+            opacity: 0.8
         }).addTo(map);
+
+        // L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}', {
+        //     maxZoom: 13
+        // }).addTo(map);
 
         // create scalebar
         L.control.scale({
@@ -255,7 +255,7 @@
         // use D3 fetch to request data with async requests
         const parkBounds = d3.json('data/boundary.json');
         const glacierPts = d3.json('data/glacier-pts.json');
-        
+
 
         // use Promise to wait until data is all loaded
         Promise.all([parkBounds, glacierPts]).then(drawMap);
@@ -272,7 +272,7 @@
                 style: function (feature) {
                     // use the colors object to style each polygon a unique color
                     return {
-                        color: '#a6a6a6',
+                        color: '#999',
                         weight: 1,
                         lineJoin: 'round',
                         dashArray: '2,4'
@@ -320,7 +320,7 @@
             const glaciersLayerGroup = L.geoJson(gPts, {
                 pointToLayer: function (feature, latlng) {
                     return L.circleMarker(latlng, {
-                        color: '#333',
+                        color: '#484848',
                         weight: 1,
                         fillColor: colorize(feature.properties.pctD),
                         fillOpacity: 0.8,
@@ -337,7 +337,7 @@
                     layer.on('mouseover', function () {
                         // provide a visual affordance
                         this.setStyle({
-                            color: '#333',
+                            color: '#484848',
                             weight: 1.5,
                             fillColor: colorize(feature.properties.pctD),
                             fillOpacity: 0.8,
@@ -351,7 +351,7 @@
                     layer.on('mouseout', function () {
                         // reset back to our base styling opacity
                         this.setStyle({
-                            color: '#333',
+                            color: '#484848',
                             weight: 1,
                             fillColor: colorize(feature.properties.pctD),
                             fillOpacity: 0.8,
@@ -392,7 +392,7 @@
                     if (layer.feature.properties.num === glacierNum) {
                         // change the layer style
                         layer.setStyle({
-                            color: '#333',
+                            color: '#484848',
                             weight: 1.5,
                             fillColor: colorize(layer.feature.properties.pctD),
                             fillOpacity: 0.8,
@@ -402,7 +402,7 @@
                     // deselects layer highlight on legend mouseout
                     $('.dropdown-item').on('mouseout', function () {
                         layer.setStyle({
-                            color: '#333',
+                            color: '#484848',
                             weight: 1,
                             fillColor: colorize(layer.feature.properties.pctD),
                             fillOpacity: 0.8,
