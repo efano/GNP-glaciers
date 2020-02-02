@@ -1,7 +1,5 @@
 # GNP-glaciers
 
-## Project Description
-
 ### Topics of Interest
 
 * Natural resources
@@ -18,7 +16,5 @@ This web map will help the user better understand the affects of climate change 
 ### Datasets
 
 [Glacier extent polygon datasets (1966 - 2015)](https://www.sciencebase.gov/catalog/item/58af7022e4b01ccd54f9f542)
-
 [LIA polygon dataset](https://www.sciencebase.gov/catalog/item/5b194f1ce4b092d965237f5f)
-
 [Repeat photographs](https://www.usgs.gov/centers/norock/science/repeat-photography-project?qt-science_center_objects=0#qt-science_center_objects)
