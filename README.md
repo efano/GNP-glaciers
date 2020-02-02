@@ -7,9 +7,9 @@
 
 ### Summary of Data Topic
 
-I am interested in designing an interactive map that displays glacier loss in Glacier National Park, Montana. The USGS has been documenting glacier area loss within the Park since 1966 using aerial and satellite imagery. Datasets of digitized polygons of glacier outlines exist for 1966, 1998, 2005 and 2015. Additionally, a maximum glacier extent dataset exists from the mid-19th century Little Ice Age (LIA) based on terminal moraine locations. The USGS and NPS also have a rich collection of historical photographs, including a repeat photography project that will be incorporated into the web map. 
+I am interested in designing an interactive map that reveals [glacier loss in Glacier National Park, Montana](https://www.usgs.gov/centers/norock/science/retreat-glaciers-glacier-national-park?qt-science_center_objects=0#qt-science_center_objects). The USGS has been documenting glacier area loss within the Park since 1966 using aerial and satellite imagery. Datasets of digitized polygons of glacier outlines exist for 1966, 1998, 2005 and 2015. Additionally, a maximum glacier extent dataset exists from the mid-19th century Little Ice Age (LIA) based on terminal moraine locations. The USGS and NPS also have a rich collection of historical photographs, including a repeat photography project that will be incorporated into the web map.
 
-The map will initially display each glacier as a point symbolized by greatest area loss between 1966 and 2015. A toggle switch will display which glaciers have lost their glacier designation (area less than 25 acres) within that time period. When zoomed-in the polygon area extents will be interactively displayed by year, along with an interactive legend displaying a graph of data analyzed. A link on the legend will also navigate to the corresponding repeat photographs.
+Developing an interactive map that displays glacier loss is a clear and poignant indicator of climate change that is occuring now, and in this country.
 
 This web map will help the user better understand the affects of climate change occurring on the national landscape.
 
