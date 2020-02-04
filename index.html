@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:900&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -125,11 +126,11 @@
         }
 
         .glacierPtLegend {
-            background-color: rgba(255, 255, 255, .7);
+            background-color: rgba(255, 255, 255, .8);
             /* box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); */
             border-radius: 3px;
             bottom: 34px;
-            width: 94px;
+            width: 180px;
             position: absolute;
             left: 8px;
             z-index: 950;
@@ -137,9 +138,9 @@
         }
 
         .glacierPtLegend h4 {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
-            margin-top: 6px;
+            margin-top: 12px;
             margin-left: 10px;
         }
 
@@ -151,27 +152,53 @@
             margin-bottom: 10px;
         }
 
+        .glacierPtLegendText {
+            font-size: 10px;
+            font-weight: 300;
+        }
+
         #gradient {
             display: inline-block;
-            height: 56px;
-            width: 12px;
+            height: 10px;
+            width: 151px;
             margin-left: 10px;
             margin-bottom: 6px;
             background-color: #5D0081;
-            background-image: linear-gradient(to top, yellow, #fd7731, #e31060, #5D0081);
-            border-style: solid;
+            background-image: linear-gradient(to right, yellow, #fd7731, #e31060, #5D0081);
+            /* border-style: solid;
             border-color: #484848;
-            border-width: thin;
+            border-width: thin; */
         }
 
-        #gradientTop {
+        #gradientGreatest {
             font-size: 10px;
-            font-weight: 400;
-            display: inline-block;
-            vertical-align: top;
-            margin-top: -2px;
+            font-weight: 300;
+            margin-top: -10px;
+            margin-left: 12px;
+            margin-bottom: 16px;
         }
 
+        #sizeCrit {
+            margin-top: 10px;
+            margin-bottom: 16px; 
+            margin-left: -26px;
+            list-style: none;
+            line-height: 1;
+        }
+
+        #stangnant {
+            margin-left: 1px;
+        }
+
+        #xStangnant {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: 16px;
+            margin-left: 1px;
+
+        }
+
+        
     </style>
 </head>
 
@@ -207,12 +234,30 @@
 
     <div id="map"></div>
     <div id="glacierPtLegend" class="glacierPtLegend">
-        <h4>Area Loss</h4>
-        <h6>(1966 &ndash; 2015)</h6>
-
-        <div id="glacierPtLegendContainer">
-            <div id="gradient"></div>
-            <div id="gradientTop">Greatest<br><br><br>Least</div>
+        <div>
+            <h4>Glacier Area Loss</h4>
+            <h6>(1966 &ndash; 2015)</h6>
+            <div id="areaGradient">
+                <div id="gradient"></div>
+                <div id="gradientGreatest">Least &nbsp; &emsp; &ensp; &ensp; &#8594; &emsp; &ensp; &ensp; Greatest</div>
+            </div>
+        </div>
+        <div>
+            <h4>Minimum Size Criterion</h4>
+            <h6>(0.1 km&sup2; or ~25 acres)</h6>
+            <ul id="sizeCrit">
+                <li>
+                    <svg width="12" height="12">
+                        <rect x="4" y="-4" width="8" height="8" transform="rotate(45)" style="fill:transparent; stroke-width:1; stroke:#484848"/>
+                    </svg>
+                    <span class="glacierPtLegendText">Active</span>
+                </li>
+                <li>
+                    <span class="glacierPtLegendText" id="xStangnant">x</span>
+                    <span class="glacierPtLegendText" id="stangnant">Stagnant</span>
+                </li>
+            </ul>
+    
         </div>
     </div>
 
@@ -227,6 +272,8 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    <script src="js/leaflet-svg-shape-markers.js"></script>
+
 
     <script>
         const options = {
@@ -257,7 +304,6 @@
         const parkBounds = d3.json('data/boundary.json');
         const glacierPts = d3.json('data/glacier-pts.json');
 
-
         // use Promise to wait until data is all loaded
         Promise.all([parkBounds, glacierPts]).then(drawMap);
 
@@ -271,7 +317,7 @@
                 style: function (feature) {
                     // use the colors object to style each polygon a unique color
                     return {
-                        color: '#999',
+                        color: '#888',
                         weight: 1,
                         lineJoin: 'round',
                         dashArray: '2,4'
@@ -315,16 +361,27 @@
                 .domain(breaks)
                 .mode('lch');
 
-            // create a layerGroup with the geojson data
+            // create a layerGroup with the point geojson data
             const glaciersLayerGroup = L.geoJson(gPts, {
                 pointToLayer: function (feature, latlng) {
-                    return L.circleMarker(latlng, {
-                        color: '#484848',
-                        weight: 1,
-                        fillColor: colorize(feature.properties.pctD),
-                        fillOpacity: 0.8,
-                        radius: 5
-                    })
+                    let type = feature.properties.active1966;
+                    if (type === "y") {
+                        return L.shapeMarker(latlng, {
+                            shape: "diamond",
+                            color: '#484848',
+                            weight: 1,
+                            fillColor: colorize(feature.properties.pctD),
+                            fillOpacity: 0.8,
+                            radius: 6
+                        })
+                    } else {
+                        return L.shapeMarker(latlng, {
+                            shape: "x",
+                            color: colorize(feature.properties.pctD),
+                            weight: 3,
+                            radius: 6,
+                        });
+                    }
                 },
                 onEachFeature(feature, layer) {
                     let tooltip = feature.properties.GLACNAME;
@@ -336,7 +393,6 @@
                     layer.on('mouseover', function () {
                         // provide a visual affordance
                         this.setStyle({
-                            weight: 1.5,
                             radius: 12
                         }).bringToFront();
 
@@ -347,8 +403,7 @@
                     layer.on('mouseout', function () {
                         // reset back to our base styling opacity
                         this.setStyle({
-                            weight: 1,
-                            radius: 5
+                            radius: 6
                         });
 
                         $('#glacierList-' + feature.properties.num).removeClass('highlight');
@@ -385,15 +440,13 @@
                     if (layer.feature.properties.num === glacierNum) {
                         // change the layer style
                         layer.setStyle({
-                            weight: 1.5,
                             radius: 12
                         }).bringToFront();
                     };
                     // deselects layer highlight on legend mouseout
                     $('.dropdown-item').on('mouseout', function () {
                         layer.setStyle({
-                            weight: 1,
-                            radius: 5
+                            radius: 6
                         });
                     });
                 });
