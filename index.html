@@ -202,6 +202,12 @@
         .toggle {
             color: #999;
         }
+
+        .toggle--s {
+            font-size: 10px;
+            line-height: 12px;
+            padding: 3px 12px;
+        }
     </style>
 </head>
 
@@ -260,23 +266,14 @@
                 </li>
             </ul>
 
-            <!-- <div class="legendPtSwitch">
-                <label class="switch-container">
-                    <span class="year1966">1966</span>
-                    <input type="checkbox" />
-                    <div class="switch switch--gray"></div>
-                    <span class="year2015">2015</span>
+            <div class="toggle-group mr18">
+                <label class="toggle-container">
+                    <input checked name="toggle-small" type="radio" />
+                    <div class="toggle toggle--darken75 toggle--s">1966</div>
                 </label>
-            </div> -->
-
-            <div class='toggle-group mr18'>
-                <label class='toggle-container'>
-                    <input checked name='toggle-small' type='radio' />
-                    <div class='toggle toggle--darken75 toggle--s'>1966</div>
-                </label>
-                <label class='toggle-container'>
-                    <input name='toggle-small' type='radio' />
-                    <div class='toggle toggle--darken75 toggle--s'>2015</div>
+                <label class="toggle-container">
+                    <input name="toggle-small" type="radio" />
+                    <div class="toggle toggle--darken75 toggle--s">2015</div>
                 </label>
             </div>
 
@@ -391,14 +388,14 @@
                             weight: 1,
                             fillColor: colorize(feature.properties.pctD),
                             fillOpacity: 0.8,
-                            radius: 6
+                            radius: 7
                         })
                     } else {
                         return L.shapeMarker(latlng, {
                             shape: "x",
                             color: colorize(feature.properties.pctD),
                             weight: 3,
-                            radius: 6,
+                            radius: 7,
                         })
                     }
                 },
@@ -422,7 +419,7 @@
                     layer.on('mouseout', function () {
                         // reset back to our base styling opacity
                         this.setStyle({
-                            radius: 6
+                            radius: 7
                         });
 
                         $('#glacierList-' + feature.properties.num).removeClass('highlight');
@@ -433,6 +430,10 @@
                         btnObj = $("#btn-dropdown");
                         $(btnObj).text($(".highlight").text());
                         $(btnObj).val($(".highlight").text());
+
+                        // hide point legend
+                        $(".glacierPtLegend").hide();
+
                         // zoom to layer on click
                         map.flyTo(this.getLatLng(), 14);
                     });
@@ -465,7 +466,7 @@
                     // deselects layer highlight on legend mouseout
                     $('.dropdown-item').on('mouseout', function () {
                         layer.setStyle({
-                            radius: 6
+                            radius: 7
                         });
                     });
                 });
@@ -483,6 +484,9 @@
                 $(btnObj).text($(this).text());
                 $(btnObj).val($(this).text());
 
+                // hide point legend
+                $(".glacierPtLegend").hide();
+
                 // loop through the glacier points
                 glaciersLayerGroup.eachLayer(function (layer) {
                     // if the glacier id matches...
@@ -496,6 +500,8 @@
             $('#extent-icon').click(function () {
                 // clear glacier name in dropdown
                 $("#btn-dropdown").text("Select Glacier");
+                // show point legend
+                $(".glacierPtLegend").show();
                 // zoom to extent icon
                 map.flyToBounds(parkBoundary.getBounds());
             });
