@@ -8,6 +8,7 @@
     <title>Glacier Retreat in Glacier National Park</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:900&display=swap" rel="stylesheet">
 
@@ -23,7 +24,7 @@
         #map {
             position: absolute;
             width: 100%;
-            top: 52px;
+            top: 42px;
             bottom: 0;
             background-color: whitesmoke;
         }
@@ -36,11 +37,11 @@
         .navbar-nav-scroll {
             color: #484848;
             font-size: 24px;
-            font-weight: 400;
+            font-weight: 600;
         }
 
         .leaflet-left .leaflet-control-scale {
-            margin-left: 10px;
+            margin-left: 12px;
         }
 
         .leaflet-control-scale-line {
@@ -66,29 +67,25 @@
             border-bottom: 1px solid #484848;
         }
 
-        .highlight {
-            font-weight: 600;
-            background-color: whitesmoke;
-            color: #484848;
-        }
-
         .navbar-icon {
+            color: #484848;
+            margin-top: 3px;
+            font-size: 26px;
             padding-right: 6px;
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
         .navbar-icon:hover {
-            color: #fafafa;
             opacity: 1;
         }
 
-        .btn-outline-secondary {
-            border: 1px solid #484848;
-            color: #484848;
+        .btnNavbar {
+            opacity: 0.9;
         }
 
-        .btn-group {
-            margin-left: 4px;
+        .btn:hover,
+        .btn.is-active {
+            background-color: whitesmoke;
         }
 
         .dropdown-menu {
@@ -96,25 +93,25 @@
             overflow-y: auto;
         }
 
-        .dropdown-item {
-            color: #484848
-        }
-
-        .dropdown-item:hover {
-            background-color: #fafafa;
-            font-weight: 600;
-        }
-
         #dropdown-list {
             width: 100%;
             border: none;
             border-radius: 4px;
             color: #484848;
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
             font-size: 11px;
             background-color: white;
-            font-family: inherit;
+        }
+
+        .dropdown-item:hover {
+            background-color: whitesmoke;
             font-weight: 600;
-            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight {
+            font-weight: 600;
+            background-color: whitesmoke;
+            color: #484848;
         }
 
         .leaflet-tooltip {
@@ -130,60 +127,58 @@
             /* box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); */
             border-radius: 3px;
             bottom: 34px;
-            width: 180px;
+            width: 196px;
             position: absolute;
-            left: 8px;
+            left: 12px;
             z-index: 950;
             color: #484848;
         }
 
         .glacierPtLegend h4 {
             font-size: 14px;
-            font-weight: 500;
+            font-weight: bold;
             margin-top: 12px;
-            margin-left: 10px;
+            margin-left: 16px;
         }
 
         .glacierPtLegend h6 {
             font-size: 10px;
-            font-weight: 500;
-            margin-left: 9px;
-            margin-top: -8px;
+            font-weight: bold;
+            margin-left: 16px;
             margin-bottom: 10px;
         }
 
         .glacierPtLegendText {
             font-size: 10px;
-            font-weight: 300;
+            font-weight: bold;
+            color: #888;
         }
 
         #gradient {
             display: inline-block;
             height: 10px;
-            width: 151px;
-            margin-left: 10px;
+            width: 156px;
+            margin-left: 16px;
             margin-bottom: 6px;
             background-color: #5D0081;
             background-image: linear-gradient(to right, yellow, #fd7731, #e31060, #5D0081);
-            /* border-style: solid;
-            border-color: #484848;
-            border-width: thin; */
         }
 
         #gradientGreatest {
             font-size: 10px;
-            font-weight: 300;
-            margin-top: -10px;
-            margin-left: 12px;
+            font-weight: bold;
+            color: #888;
+            margin-top: -16px;
+            margin-left: 16px;
             margin-bottom: 16px;
         }
 
         #sizeCrit {
             margin-top: 10px;
-            margin-bottom: 16px; 
-            margin-left: -26px;
+            margin-left: 24px;
             list-style: none;
-            line-height: 1;
+            line-height: 1.1;
+            color: #484848;
         }
 
         #stangnant {
@@ -195,10 +190,18 @@
             font-weight: 900;
             font-size: 16px;
             margin-left: 1px;
-
+            color: #484848
         }
 
-        
+        .toggle-group {
+            margin-top: 10px;
+            margin-left: 24px;
+            margin-bottom: 10px;
+        }
+
+        .toggle {
+            color: #999;
+        }
     </style>
 </head>
 
@@ -210,25 +213,23 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="navbar-nav ml-md-auto">
-            <li>
-                <a class="navbar-icon" id="info-icon" href="#">
-                    <img src="icons/info-outline.svg" width="24" height="24" alt="Project Information"
-                        title="Project Information">
-                </a>
-                <a class="navbar-icon" id="extent-icon">
-                    <img src="icons/zoom_out_round.svg" width="24" height="24" alt="Zoom to Full Extent"
-                        title="Zoom to Full Extent">
-                </a>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" id="btn-dropdown"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt="Select Glacier"
-                        title="Select Glacier">
-                        Select Glacier
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-md-right" id="dropdown-list">
-                    </div>
+            <a class="navbar-icon" id="info-icon">
+                <svg class="icon">
+                    <use xlink:href="#icon-info" /></svg>
+            </a>
+            <a class="navbar-icon" id="extent-icon">
+                <svg class="icon">
+                    <use xlink:href="#icon-fullscreen" /></svg>
+            </a>
+
+            <div class="btn-group">
+                <button type="button" class="btn btnNavbar btn--stroke btn--darken75 dropdown-toggle" id="btn-dropdown"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Glacier
+                </button>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-md-right" id="dropdown-list">
                 </div>
-            </li>
+            </div>
         </ul>
     </nav>
 
@@ -239,7 +240,7 @@
             <h6>(1966 &ndash; 2015)</h6>
             <div id="areaGradient">
                 <div id="gradient"></div>
-                <div id="gradientGreatest">Least &nbsp; &emsp; &ensp; &ensp; &#8594; &emsp; &ensp; &ensp; Greatest</div>
+                <div id="gradientGreatest">Smallest &nbsp; &emsp; &emsp; &#8594; &nbsp; &emsp; &emsp; Largest</div>
             </div>
         </div>
         <div>
@@ -248,23 +249,37 @@
             <ul id="sizeCrit">
                 <li>
                     <svg width="12" height="12">
-                        <rect x="4" y="-4" width="8" height="8" transform="rotate(45)" style="fill:transparent; stroke-width:1; stroke:#484848"/>
+                        <rect x="4" y="-4" width="8" height="8" transform="rotate(45)"
+                            style="fill:transparent; stroke-width:1; stroke:#484848" />
                     </svg>
-                    <span class="glacierPtLegendText">Active</span>
+                    <span class="glacierPtLegendText">Active ( &gt; 0.1 km&sup2;)</span>
                 </li>
                 <li>
                     <span class="glacierPtLegendText" id="xStangnant">x</span>
-                    <span class="glacierPtLegendText" id="stangnant">Stagnant</span>
+                    <span class="glacierPtLegendText" id="stangnant">Stagnant ( &lt; 0.1 km&sup2;)</span>
                 </li>
             </ul>
 
-            <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                <label class="custom-control-label" for="customSwitch1">2015</label>
-              </div>
+            <!-- <div class="legendPtSwitch">
+                <label class="switch-container">
+                    <span class="year1966">1966</span>
+                    <input type="checkbox" />
+                    <div class="switch switch--gray"></div>
+                    <span class="year2015">2015</span>
+                </label>
+            </div> -->
 
-            
-    
+            <div class='toggle-group mr18'>
+                <label class='toggle-container'>
+                    <input checked name='toggle-small' type='radio' />
+                    <div class='toggle toggle--darken75 toggle--s'>1966</div>
+                </label>
+                <label class='toggle-container'>
+                    <input name='toggle-small' type='radio' />
+                    <div class='toggle toggle--darken75 toggle--s'>2015</div>
+                </label>
+            </div>
+
         </div>
     </div>
 
@@ -272,6 +287,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.6/chroma.min.js"></script>
+    <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
@@ -295,10 +311,6 @@
             attribution: 'Tiles &copy; Esri &mdash; Esri, USGS, NPS, and the GIS User Community',
             opacity: 0.8
         }).addTo(map);
-
-        // L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}', {
-        //     maxZoom: 13
-        // }).addTo(map);
 
         // create scalebar
         L.control.scale({
@@ -387,7 +399,7 @@
                             color: colorize(feature.properties.pctD),
                             weight: 3,
                             radius: 6,
-                        });
+                        })
                     }
                 },
                 onEachFeature(feature, layer) {
