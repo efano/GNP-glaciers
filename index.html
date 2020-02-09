@@ -338,8 +338,6 @@
                     };
                 }
             }).addTo(map);
-            // fit map bounds to feature extent
-            map.fitBounds(parkBounds.getBounds());
             extentIcon(parkBounds);
         };
 
@@ -357,6 +355,10 @@
                     })
                 }
             }).addTo(map);
+            // fit map bounds to feature extent
+            map.fitBounds(glaciersLayerGroup.getBounds(), {
+                padding: [15, 15]
+            });
             drawPts(glaciersLayerGroup);
             buildPtUI(glaciersLayerGroup);
             drawDropDownList(ptData);
@@ -527,7 +529,7 @@
                     // if the glacier id matches...
                     if (layer.feature.properties.num === glacierNum) {
                         map.flyTo(layer.getLatLng(), 14);
-                    };  
+                    };
                 });
             })
         };
@@ -545,7 +547,6 @@
                 map.flyToBounds(parkBounds.getBounds());
             });
         };
-
     </script>
 </body>
 
