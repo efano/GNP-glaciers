@@ -11,10 +11,12 @@
     <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
     <style>
         * {
             cursor: default !important;
+            font-family: 'Open Sans', sans-serif;
         }
 
         body {
@@ -24,7 +26,7 @@
         #map {
             position: absolute;
             width: 100%;
-            top: 42px;
+            top: 48px;
             bottom: 0;
             background-color: whitesmoke;
         }
@@ -32,12 +34,75 @@
         .navbar {
             z-index: 900;
             box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+            height: 50px;
         }
 
         .navbar-nav-scroll {
             color: #484848;
             font-size: 24px;
             font-weight: 600;
+        }
+
+        #icon-group {
+            margin-top: 26px;
+        }
+
+        .navbar-icon {
+            color: #888;
+            font-size: 26px;
+            padding-right: 30px;
+        }
+
+        .navbar-icon:hover {
+            opacity: 1;
+            color: #484848;
+        }
+
+        .leaflet-control-layers {
+            box-shadow: 0 0px 0px rgba(255, 255, 255, 0.0);
+            background: transparent;
+        }
+
+        .leaflet-control-layers-expanded .leaflet-control-layers-list {
+            line-height: 1.5;
+            color: #484848;
+            padding-left: 10px;
+        }
+
+        .navbar-nav .btn-group {
+            opacity: 0.9;
+        }
+
+        .navbar-nav .btn-group .btn:hover,
+        .navbar-nav .btn-group .btn.is-active {
+            background-color: #e9e9e9;
+        }
+
+        .dropdown-menu {
+            line-height: .8;
+            overflow-y: auto;
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            color: #484848;
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+            font-size: 11px;
+            background-color: white;
+        }
+
+        .dropdown-item:hover {
+            background-color: whitesmoke;
+            font-weight: 600;
+        }
+
+        .highlight {
+            font-weight: 600;
+            background-color: whitesmoke;
+            color: #484848;
+        }
+
+        #baselayerDropdown {
+            margin-top: -20px;
         }
 
         .leaflet-left .leaflet-control-scale {
@@ -67,55 +132,6 @@
             border-bottom: 1px solid #484848;
         }
 
-        .navbar-icon {
-            color: #484848;
-            margin-top: 3px;
-            font-size: 26px;
-            padding-right: 6px;
-            opacity: 0.6;
-        }
-
-        .navbar-icon:hover {
-            opacity: 1;
-        }
-
-        .navbar-nav .btn-group {
-            opacity: 0.9;
-        }
-
-        .navbar-nav .btn-group .btn:hover,
-        .navbar-nav .btn-group .btn.is-active {
-            background-color: #e9e9e9;
-        }
-
-        .dropdown-menu {
-            line-height: .7;
-            overflow-y: auto;
-            width: 100%;
-            border: none;
-            border-radius: 4px;
-            color: #484848;
-            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-            font-size: 11px;
-            background-color: white;
-        }
-
-        /* #xPt {
-            -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .7));
-            filter: drop-shadow(3px 3px 20px rgba(0, 0, 0, .7)) !important;
-        } */
-
-        .dropdown-item:hover {
-            background-color: whitesmoke;
-            font-weight: 600;
-        }
-
-        .highlight {
-            font-weight: 600;
-            background-color: whitesmoke;
-            color: #484848;
-        }
-
         .pt-tooltip {
             white-space: nowrap;
             color: #484848;
@@ -124,7 +140,7 @@
         }
 
         .glacierPtLegend {
-            background-color: rgba(255, 255, 255, .8);
+            background-color: rgba(255, 255, 255, .9);
             /* box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); */
             border-radius: 3px;
             bottom: 34px;
@@ -222,24 +238,38 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <ul class="navbar-nav ml-md-auto">
-            <a class="navbar-icon" id="info-icon">
-                <svg class="icon">
-                    <use xlink:href="#icon-info" /></svg>
-            </a>
-            <a class="navbar-icon" id="extent-icon">
-                <svg class="icon">
-                    <use xlink:href="#icon-fullscreen" /></svg>
-            </a>
-            <div class="btn-group">
-                <button type="button" class="btn btnNavbar btn--stroke btn--darken75 dropdown-toggle" id="btn-dropdown"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Select Glacier
-                </button>
-                <div class="dropdown-menu dropdown-menu-right dropdown-menu-md-right" id="dropdown-list">
-                </div>
-            </div>
+        <ul class="navbar-nav ml-md-auto" id="icon-group">
+            <li class="nav-item">
+                <a class="navbar-icon" href="#" id="info-icon">
+                    <svg class="icon">
+                        <use xlink:href="#icon-info" /></svg>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="navbar-icon" href="#" id="navbarDropdown layers-icon" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <svg class="icon">
+                        <use xlink:href="#icon-layers" /></svg>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="baselayerDropdown"></div>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-icon" href="#" id="extent-icon">
+                    <svg class="icon">
+                        <use xlink:href="#icon-fullscreen" /></svg>
+                </a>
+            </li>
         </ul>
+
+        <div class="btn-group">
+            <button type="button" class="btn btnNavbar btn--stroke btn--darken75 dropdown-toggle" id="btn-dropdown"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select Glacier&thinsp;
+            </button>
+            <div class="dropdown-menu" id="dropdown-list">
+            </div>
+        </div>
+
     </nav>
 
     <div id="map"></div>
@@ -299,18 +329,46 @@
 
 
     <script>
+        // basemaps
+        const topoESRI = L.tileLayer(
+            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
+                opacity: 0.9
+            });
+        const imageryESRI = L.tileLayer(
+            'https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
+                opacity: 0.8
+            });
+        const topoUSGS = L.tileLayer(
+            'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
+                opacity: 0.8
+            });
+        const imageryUSGS = L.tileLayer(
+            'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
+                opacity: 0.8
+            });
+        const imageryTopoUSGS = L.tileLayer(
+            'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
+                opacity: 0.8
+            });
+
         const options = {
             center: [48.75, -114],
             zoom: 9,
-            zoomSnap: .1
+            zoomSnap: .1,
+            layers: topoESRI,
         }
 
         const map = L.map('map', options);
 
-        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Tiles &copy; Esri &mdash; Esri, USGS, NPS, and the GIS User Community',
-            opacity: 0.8
-        }).addTo(map);
+        // L.tileLayer('https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        //     attribution: 'Tiles &copy; Esri &mdash; Esri, USGS, NPS, and the GIS User Community',
+        //     opacity: 0.8
+        // }).addTo(map);
 
         // create scalebar
         L.control.scale({
@@ -318,6 +376,28 @@
             metric: true,
             maxWidth: 120,
         }).addTo(map);
+
+        let baseLayers = {
+            "ESRI Topo": topoESRI,
+            "ESRI Imagery": imageryESRI,
+            "USGS Topo": topoUSGS,
+            "USGS Imagery": imageryUSGS,
+            "USGS Imagery Topo": imageryTopoUSGS,
+        };
+
+        // basemap legend
+        const control = L.control.layers(baseLayers, null, {
+            collapsed: false
+        }).addTo(map);
+        // call the getContainer routine
+        const htmlObject = control.getContainer();
+        // get the desired parent node
+        const a = document.getElementById('baselayerDropdown');
+        // append the node to the new parent, recursively searching out and re-parenting nodes
+        function setParent(el, newParent) {
+            newParent.appendChild(el);
+        }
+        setParent(htmlObject, a);
 
         let attribute = "active1966"
 
@@ -331,7 +411,7 @@
             const parkBounds = L.geoJson(boundsData, {
                 style: function (feature, layer) {
                     return {
-                        color: '#888',
+                        color: '#999',
                         weight: 1,
                         lineJoin: 'round',
                         dashArray: '2,4'
@@ -357,7 +437,7 @@
             }).addTo(map);
             // fit map bounds to feature extent
             map.fitBounds(glaciersLayerGroup.getBounds(), {
-                padding: [15, 15]
+                padding: [10, 10]
             });
             drawPts(glaciersLayerGroup);
             buildPtUI(glaciersLayerGroup);
