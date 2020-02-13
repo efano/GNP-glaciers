@@ -58,16 +58,55 @@
             color: #484848;
         }
 
+
+
+
+
         .leaflet-control-layers {
-            box-shadow: 0 0px 0px rgba(255, 255, 255, 0.0);
-            background: transparent;
+            box-shadow: 0 0px 0px rgba(255, 255, 255, 0);
+            background: white;
+            min-width: 8.5rem;
+            padding: 10px 8px 10px 16px;
         }
 
         .leaflet-control-layers-expanded .leaflet-control-layers-list {
-            line-height: 1.5;
+            line-height: 1.6;
             color: #484848;
-            padding-left: 10px;
         }
+
+        #baselayerDropdown {
+            margin-top: -20px;
+            color: #484848;
+            font-size: 11px;
+            background-color: white;
+            min-width: 8.5rem;
+            border: none;
+            border-radius: 4px;
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+            padding: 0px;
+        }
+
+        #baselayerDropdown .leaflet-control-layers-selector {
+            position: absolute;
+            left: -100vw;
+        }
+
+        #radioText:hover {
+            font-weight: 600;
+        }
+
+        .leaflet-control-layers-selector:checked~#radioText {
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        
+
+
+
+
+
+
 
         #btn-dropdown {
             opacity: 0.8;
@@ -76,34 +115,35 @@
 
         #btn-dropdown:hover,
         #btn-dropdown.is-active {
-            background-color: #eeeeee;
+            background-color: #eee;
         }
 
-        .dropdown-menu {
+        #dropdown-list {
             line-height: .8;
             overflow-y: auto;
-            width: 100%;
             border: none;
             border-radius: 4px;
             color: #484848;
             box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
             font-size: 11px;
             background-color: white;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-right: 10px;
+        }
+
+        .dropdown-item {
+            margin-left: -6px;
         }
 
         .dropdown-item:hover {
-            background-color: whitesmoke;
+            background-color: white;
             font-weight: 600;
         }
 
         .highlight {
             font-weight: 600;
-            background-color: #eeeeee;
             color: #484848;
-        }
-
-        #baselayerDropdown {
-            margin-top: -20px;
         }
 
         .leaflet-left .leaflet-control-scale {
@@ -241,21 +281,21 @@
         </button>
         <ul class="navbar-nav ml-md-auto" id="icon-group">
             <li class="nav-item">
-                <a class="navbar-icon" href="#" id="info-icon" title="project information">
+                <a class="navbar-icon" href="#" id="info-icon" title="Project Information">
                     <svg class="icon">
                         <use xlink:href="#icon-info" /></svg>
                 </a>
             </li>
             <li class="nav-item dropdown">
                 <a class="navbar-icon" href="#" id="navbarDropdown layers-icon" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false" title="select basemap">
+                    aria-haspopup="true" aria-expanded="false" title="Select Basemap">
                     <svg class="icon">
                         <use xlink:href="#icon-layers" /></svg>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="baselayerDropdown"></div>
             </li>
             <li class="nav-item">
-                <a class="navbar-icon" href="#" id="extent-icon" title="zoom to park extent">
+                <a class="navbar-icon" href="#" id="extent-icon" title="Zoom to Park Extent">
                     <svg class="icon">
                         <use xlink:href="#icon-fullscreen" /></svg>
                 </a>
@@ -399,6 +439,10 @@
             newParent.appendChild(el);
         }
         setParent(htmlObject, a);
+
+        // assign id to basemap legend to hide radio buttons
+        $('#baselayerDropdown .leaflet-control-layers .leaflet-control-layers-list .leaflet-control-layers-base label div span')
+            .attr('id', 'radioText');
 
         let attribute = "active1966"
 
