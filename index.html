@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
@@ -58,10 +58,6 @@
             color: #484848;
         }
 
-
-
-
-
         .leaflet-control-layers {
             box-shadow: 0 0px 0px rgba(255, 255, 255, 0);
             background: white;
@@ -99,14 +95,6 @@
             font-weight: 600;
             text-decoration: underline;
         }
-
-        
-
-
-
-
-
-
 
         #btn-dropdown {
             opacity: 0.8;
@@ -181,8 +169,8 @@
         }
 
         .glacierPtLegend {
-            background-color: rgba(255, 255, 255, .9);
-            /* box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); */
+            background-color: rgba(255, 255, 255, .85);
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
             border-radius: 3px;
             bottom: 34px;
             width: 196px;
@@ -234,17 +222,14 @@
         #sizeCrit {
             margin-left: 24px;
             list-style: none;
-            line-height: 1.1;
+            line-height: 1;
             color: #484848;
         }
 
         #active {
             color: #484848;
-            font-size: 12px;
-        }
-
-        #stangnant {
-            margin-left: 1px;
+            font-size: 20px;
+            margin-left: -2px;
         }
 
         #xStangnant {
@@ -253,6 +238,10 @@
             font-size: 16px;
             margin-left: 1px;
             color: #484848;
+        }
+
+        #stangnant {
+            margin-left: 2px;
         }
 
         .toggle-group {
@@ -269,6 +258,14 @@
             line-height: 12px;
             padding: 3px 12px;
         }
+
+        /* .leaflet-top.leaflet-right {
+            right: 300px;
+            margin-top: -30px;
+            z-index: 900;
+        } */
+
+
     </style>
 </head>
 
@@ -329,11 +326,7 @@
             <h6>(0.1 km&sup2; or ~25 acres)</h6>
             <ul id="sizeCrit">
                 <li>
-                    <!-- <svg width="12" height="12">
-                        <rect x="4" y="-4" width="8" height="8" transform="rotate(45)"
-                            style="fill:transparent; stroke-width:1; stroke:#484848" />
-                    </svg> -->
-                    <span class="glacierPtLegendText" id="active">&#x25b2;</span>
+                    <span class="glacierPtLegendText" id="active">&#x25C6;</span>
                     <span class="glacierPtLegendText">Active ( &gt; 0.1 km&sup2;)</span>
                 </li>
                 <li>
@@ -365,16 +358,17 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet-src.js"></script>
     <script src="js/leaflet-svg-shape-markers.js"></script>
 
 
     <script>
+
         // basemaps
         const topoESRI = L.tileLayer(
             'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
-                opacity: 0.9
+                opacity: 0.9,
             });
         const imageryESRI = L.tileLayer(
             'https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -402,21 +396,9 @@
             zoom: 9,
             zoomSnap: .1,
             layers: topoESRI,
-        }
+        };
 
         const map = L.map('map', options);
-
-        // L.tileLayer('https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        //     attribution: 'Tiles &copy; Esri &mdash; Esri, USGS, NPS, and the GIS User Community',
-        //     opacity: 0.8
-        // }).addTo(map);
-
-        // create scalebar
-        L.control.scale({
-            position: 'bottomleft',
-            metric: true,
-            maxWidth: 120,
-        }).addTo(map);
 
         let baseLayers = {
             "ESRI Topo": topoESRI,
@@ -428,29 +410,38 @@
 
         // basemap legend
         const control = L.control.layers(baseLayers, null, {
-            collapsed: false
+            collapsed: false,
         }).addTo(map);
+
         // call the getContainer routine
-        const htmlObject = control.getContainer();
+        let htmlObject = control.getContainer();
         // get the desired parent node
-        const a = document.getElementById('baselayerDropdown');
+        let newParent = document.getElementById('baselayerDropdown');
         // append the node to the new parent, recursively searching out and re-parenting nodes
         function setParent(el, newParent) {
             newParent.appendChild(el);
-        }
-        setParent(htmlObject, a);
-
+        };
+        setParent(htmlObject, newParent);
+        
         // assign id to basemap legend to hide radio buttons
         $('#baselayerDropdown .leaflet-control-layers .leaflet-control-layers-list .leaflet-control-layers-base label div span')
             .attr('id', 'radioText');
 
+        // create scalebar
+        L.control.scale({
+            position: 'bottomleft',
+            metric: true,
+            maxWidth: 120,
+        }).addTo(map);
+
+        // global variable
         let attribute = "active1966"
 
         // use d3-fetch to boundary.json
         const parkBounds = d3.json("data/boundary.json").then(function (boundsData) {
             drawParkBounds(boundsData); // send data out of callback to a new function
         });
-
+        // draw park boundary
         function drawParkBounds(boundsData) {
             // add to the map
             const parkBounds = L.geoJson(boundsData, {
@@ -499,6 +490,7 @@
                 let type = props[attribute];
 
                 if (type === "n") {
+                    layer.bringToFront(),
                     layer.setStyle({
                         shape: "x",
                         color: colorize(props.pctD),
@@ -508,12 +500,12 @@
                     })
                 } else if (type === "y") {
                     layer.setStyle({
-                        shape: "triangle",
+                        shape: "diamond",
                         color: '#484848',
                         fillColor: colorize(props.pctD),
                         weight: 1,
                         fillOpacity: 0.8,
-                        radius: 7
+                        radius: 7,
                     })
                 };
 
@@ -522,10 +514,11 @@
 
                 //when mousing over a glacier point
                 layer.on('mouseover', function () {
+                    layer.bringToFront();
                     // provide a visual affordance
                     layer.setStyle({
                         radius: 12
-                    }).bringToFront();
+                    });
 
                     // select the cooresponding list item and add the highlight class to make bold
                     $('#glacierList-' + props.num).addClass('highlight');
@@ -540,7 +533,7 @@
                     $('#glacierList-' + props.num).removeClass('highlight');
                 });
 
-                layer.on('click', function () {
+                layer.on('mousedown', function () {
                     // change 'Select Glacier' button to glacier name
                     btnObj = $("#btn-dropdown");
                     $(btnObj).text($(".highlight").text());
