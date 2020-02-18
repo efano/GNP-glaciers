@@ -7,7 +7,7 @@
 {"type":"Feature","geometry":{"type":"Point","coordinates":[-114.049815,48.890183]},"properties":{"GLACNAME":"Carter Glacier","num":6,"pctD":0.368157316,"active1966":"y","active2015":"y"}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[-113.830041,48.851925]},"properties":{"GLACNAME":"Chaney Glacier","num":7,"pctD":0.406751312,"active1966":"y","active2015":"y"}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[-114.015577,48.928931]},"properties":{"GLACNAME":"Dixon Glacier","num":8,"pctD":0.567801594,"active1966":"y","active2015":"y"}},
-{"type":"Feature","geometry":{"type":"Point","coordinates":[-113.72853,48.746663]},"properties":{"GLACNAME":"Gem Glacier","num":9,"pctD":0.239650351,"active1966":"y","active2015":"n"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-113.72853,48.746663]},"properties":{"GLACNAME":"Gem Glacier","num":9,"pctD":0.239650351,"active1966":"n","active2015":"n"}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[-113.751598,48.324396]},"properties":{"GLACNAME":"Grant Glacier","num":10,"pctD":0.19725304,"active1966":"y","active2015":"y"}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[-113.727029,48.752423]},"properties":{"GLACNAME":"Grinnell Glacier","num":11,"pctD":0.447441605,"active1966":"y","active2015":"y"}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[-114.228955,48.950044]},"properties":{"GLACNAME":"Harris Glacier","num":12,"pctD":0.769289422,"active1966":"y","active2015":"n"}},
