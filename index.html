@@ -65,6 +65,11 @@
             padding: 10px 8px 10px 16px;
         }
 
+        .leaflet-bar {
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
         .leaflet-control-layers-expanded .leaflet-control-layers-list {
             line-height: 1.6;
             color: #484848;
@@ -259,7 +264,6 @@
             line-height: 12px;
             padding: 3px 12px;
         }
-
     </style>
 </head>
 
@@ -298,8 +302,8 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Select Glacier&thinsp;
             </button>
-            <div class="dropdown-menu" id="dropdown-list">
-            </div>
+            <ul class="dropdown-menu" id="dropdown-list">
+            </ul>
         </div>
 
     </nav>
@@ -357,7 +361,6 @@
 
 
     <script>
-
         // basemaps
         const topoESRI = L.tileLayer(
             'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
@@ -416,7 +419,7 @@
             newParent.appendChild(el);
         };
         setParent(htmlObject, newParent);
-        
+
         // assign id to basemap legend to hide radio buttons
         $('#baselayerDropdown .leaflet-control-layers .leaflet-control-layers-list .leaflet-control-layers-base label div span')
             .attr('id', 'radioText');
@@ -429,7 +432,7 @@
         }).addTo(map);
 
         // global variable
-        let attribute = "active1966"
+        let status = "active1966"
 
         // use d3-fetch to boundary.json
         const parkBounds = d3.json("data/boundary.json").then(function (boundsData) {
@@ -469,6 +472,26 @@
             map.fitBounds(glaciersLayerGroup.getBounds(), {
                 padding: [10, 10]
             });
+
+            map.on('zoomend', function () {
+                var zoomlevel = map.getZoom();
+                if (zoomlevel >= 12) {
+                    $('#dropdown-list .dropdown-item').removeClass('highlight');
+                    $(".glacierPtLegend").hide();
+                    if (map.hasLayer(glaciersLayerGroup)) {
+                        map.removeLayer(glaciersLayerGroup);
+                    }
+                }
+                if (zoomlevel < 12) {
+                    $("#btn-dropdown").text("Select Glacier");
+                    $(".glacierPtLegend").show();
+                    map.addLayer(glaciersLayerGroup);
+                    glaciersLayerGroup.setStyle({
+                        radius: 7
+                    });
+                }
+            });
+
             drawPts(glaciersLayerGroup);
             buildPtUI(glaciersLayerGroup);
             drawDropDownList(ptData);
@@ -481,17 +504,17 @@
             colorize = getColors(glaciersLayerGroup);
             glaciersLayerGroup.eachLayer(function (layer) {
                 let props = layer.feature.properties;
-                let type = props[attribute];
+                let type = props[status];
 
                 if (type === "n") {
                     layer.bringToFront(),
-                    layer.setStyle({
-                        shape: "x",
-                        color: colorize(props.pctD),
-                        weight: 3,
-                        fillOpacity: 1,
-                        radius: 7
-                    })
+                        layer.setStyle({
+                            shape: "x",
+                            color: colorize(props.pctD),
+                            weight: 3,
+                            fillOpacity: 1,
+                            radius: 7
+                        })
                 } else if (type === "y") {
                     layer.setStyle({
                         shape: "diamond",
@@ -513,7 +536,6 @@
                     layer.setStyle({
                         radius: 12
                     });
-
                     // select the cooresponding list item and add the highlight class to make bold
                     $('#glacierList-' + props.num).addClass('highlight');
                 });
@@ -523,18 +545,16 @@
                     layer.setStyle({
                         radius: 7
                     });
-
                     $('#glacierList-' + props.num).removeClass('highlight');
                 });
 
                 layer.on('mousedown', function () {
+                    map.removeLayer(glaciersLayerGroup);
                     // change 'Select Glacier' button to glacier name
                     btnObj = $("#btn-dropdown");
                     $(btnObj).text($(".highlight").text());
                     $(btnObj).val($(".highlight").text());
-
-                    // hide point legend
-                    //$(".glacierPtLegend").hide();
+                    $('[id="dropdown-list"]').removeClass('show');
 
                     // zoom to layer on click
                     map.flyTo(this.getLatLng(), 14);
@@ -545,7 +565,7 @@
         function buildPtUI(glaciersLayerGroup) {
             $("input[name='toggle-small pt-radio']").change(function () {
                 let activeTxt = this.value;
-                attribute = activeTxt;
+                status = activeTxt;
                 drawPts(glaciersLayerGroup);
             });
         };
@@ -586,8 +606,8 @@
             // add glacier names to the glacier dropdown list
             for (let i = 1; i <= ptData.features.length; i++) {
                 const legendNames = [legendNameList[i - 1].GLACNAME];
-                legendList.append('<a class="dropdown-item" id="glacierList-' + i + '" value=' + i + '>' +
-                    legendNames + '</a>');
+                legendList.append('<li><a class="dropdown-item" id="glacierList-' + i + '" value=' + i + '>' +
+                    legendNames + '</a></li>');
             };
         };
 
@@ -624,17 +644,15 @@
 
             // select list items and on mouseover
             $('.dropdown-item').on('click', function () {
+                map.removeLayer(glaciersLayerGroup);
                 // extract the specific number from the specific item being moused over
                 let num = this.id.replace('glacierList-', '');
                 glacierNum = parseInt(num);
 
                 // change 'Select Glacier' button to glacier name
-                btnObj = $(this).parent().siblings('button');
+                btnObj = $(this).parent().parent().siblings('button');
                 $(btnObj).text($(this).text());
                 $(btnObj).val($(this).text());
-
-                // hide point legend
-                //$(".glacierPtLegend").hide();
 
                 // loop through the glacier points
                 glaciersLayerGroup.eachLayer(function (layer) {
@@ -649,13 +667,6 @@
         // extent button on click
         function extentIcon(parkBounds) {
             $('#extent-icon').click(function () {
-                // clear glacier name in dropdown
-                $("#btn-dropdown").text("Select Glacier");
-
-                // show point legend                       
-                //$(".glacierPtLegend").show();
-
-                // zoom to extent
                 map.flyToBounds(parkBounds.getBounds());
             });
         };
