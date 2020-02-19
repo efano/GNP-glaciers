@@ -1,0 +1,1016 @@
+<metadata>
+	<idinfo>
+		<citation>
+			<citeinfo>
+				<origin>Daniel B Fagre</origin>
+				<origin>Lisa A McKeon</origin>
+				<origin>Chelsea J Martin-Mikle</origin>
+				<pubdate>2018</pubdate>
+				<title>A comprehensive inventory of maximum glacial extent in Glacier National Park during the peak of the Little Ice Age</title>
+				<geoform>Vector Digital Data Set (Polygon)</geoform>
+				<pubinfo>
+					<pubplace>Reston, VA</pubplace>
+					<publish>U.S. Geological Survey</publish>
+				</pubinfo>
+				<onlink>https://doi.org/10.5066/P95YJ3CN</onlink>
+			</citeinfo>
+		</citation>
+		<descript>
+			<abstract>These polygon features represent the maximum extent of glaciers in Glacier National Park and two glaciers on U.S. Forest Service’s Flathead National Forest land during the peak of the Little Ice Age (mid-nineteenth century). Glacial margins are based on moraine deposits that result from active glaciation, and do not depict perennial snow and ice. The criteria used for determining which moraines constituted a former glacier were a) whether a terminal moraine was present, and b) whether the glacier area was five aces or more.  Moraines were digitized based on the best available imagery, including WorldView imagery acquired between 2015 and 2017, border Imagery from the Department of Homeland Security acquired in 2009 and GoogleEarth imagery. High resolution imagery was supplemented with oblique aerial photographs flown in 2009 and 2016, historic photographs from the USGS photograph collection, and field notes from a 1914 USGS survey. Digitization was completed by Chelsea Martin-Mikle (USGS) and local knowledge and interpretation were provided by Dan Fagre and Lisa McKeon (USGS) in February, 2017 – February, 2018. Glacier margins were digitized at 1:2000 scale.</abstract>
+			<purpose>This dataset was created to develop a time series and history of glacier recession in Glacier National Park (GNP), Montana, USA.  The dataset delineates the perimeters of glaciers of Glacier National Park and two additional glaciers on U.S. Forest Service’s Flathead National Forest land during the peak of the Little Ice Age (mid-nineteenth century).  The peak of the Little Ice Age is the most recent maximum extent in glacier size for which there is still significant morainal evidence.   Establishing the rates of glacier retreat, using the decreasing area of glacier ice, is key to understanding the Glacier National Park ecosystem and future state of resources.  For instance, glacial meltwater is critical habitat for endangered stream insects.  More broadly, retreating glaciers are indicative of long-term climate change and have hydrologic and ecologic importance to many park resources.  Glaciers and their retreat are of great interest to park visitors and the American public and are part of Glacier National Park's appeal.  This is important because Glacier National Park is a major driver of the regional economy.  Appropriate use of these data include comparing Glacier National Park's glacier area from different periods, such as more recent years included in an earlier data release (Glacier margin time series [1966, 1998, 2005, 2015] of the named glaciers of Glacier National Park, MT, USA), and to different parts of the world.  The change in glacier area can be used to create models of glacier-climate interactions, and to estimate glacier contributions to streamflow.</purpose>
+			<supplinf>This dataset represents a comprehensive inventory of the glaciers of Glacier National Park (including 2 nearby glaciers on U.S. Forest Service’s Flathead National Forest land). The inventory represents the minimum number of glaciers that existed during the peak of the Little Ice Age (mid-nineteenth century) and constitutes a subset of the total snow and ice inventory of the park.  The inventory does not represent a comprehensive accounting of all permanent snow and ice features in the park and does not include rock glaciers. A subsequent dataset will be published that will include all cryospheric features and better represent the hydrologic contribution of snow and ice features of the park.  Glaciers typically leave visible moraines, as can perennial snow and ice over time. Similarly, pronival ramparts can appear similar to moraines.  The criteria used for differentiating between ramparts and moraines, and for determining which moraines constitute a former glacier were a) whether a distinct terminal moraine was present, b) whether the glacier area was five acres or more, and c) whether the terminal moraine was breached by glacial meltwater.   These criteria served as a guide in determining which features were moraines and no one variable necessarily ruled out the inclusion of a feature.  Additionally, variables such as aspect, elevation, composition and geometry of rock debris, topographic position, presence of rock flour in nearby lakes, visible scouring or discoloration of bedrock and presence of vegetation pre-dating the mid-nineteenth century were analyzed. Features difficult to categorize were reviewed by an 8-person panel including 3 USGS scientists, National Park Service scientists and academics. When a feature remained difficult to categorize, it was excluded from the inventory. When segments of a glacial margin displayed no visible evidence, the segment was estimated and assigned a category that corresponds to a level of confidence.  File attributes define categories and detail the length of each glacial margin that fall into each category.  Corresponding shape files available upon request.</supplinf>
+		</descript>
+		<timeperd>
+			<timeinfo>
+				<mdattim>
+					<sngdate>
+						<caldate>20141019</caldate>
+					</sngdate>
+					<sngdate>
+						<caldate>20150822</caldate>
+					</sngdate>
+					<sngdate>
+						<caldate>20150912</caldate>
+					</sngdate>
+					<sngdate>
+						<caldate>20160612</caldate>
+					</sngdate>
+					<sngdate>
+						<caldate>20150925</caldate>
+					</sngdate>
+					<sngdate>
+						<caldate>20170929</caldate>
+					</sngdate>
+					<sngdate>
+						<caldate>20160820</caldate>
+					</sngdate>
+					<sngdate>
+						<caldate>20160821</caldate>
+					</sngdate>
+					<sngdate>
+						<caldate>2005</caldate>
+					</sngdate>
+					<sngdate>
+						<caldate>200906</caldate>
+					</sngdate>
+				</mdattim>
+			</timeinfo>
+			<current>observed</current>
+		</timeperd>
+		<status>
+			<progress>Complete</progress>
+			<update>None planned</update>
+		</status>
+		<spdom>
+			<bounding>
+				<westbc>-114.2486</westbc>
+				<eastbc>-113.3643</eastbc>
+				<northbc>49.0226</northbc>
+				<southbc>48.3084</southbc>
+			</bounding>
+		</spdom>
+		<keywords>
+			<theme>
+				<themekt>ISO 19115 Topic Category</themekt>
+				<themekey>environment</themekey>
+				<themekey>geoscientificInformation</themekey>
+			</theme>
+			<theme>
+				<themekt>USGS Biocomplexity Thesaurus</themekt>
+				<themekey>glaciers</themekey>
+				<themekey>cryosphere</themekey>
+			</theme>
+			<theme>
+				<themekt>None</themekt>
+				<themekey>glacier area</themekey>
+				<themekey>alpine glacier</themekey>
+				<themekey>glacier retreat</themekey>
+				<themekey>satellite imagery</themekey>
+				<themekey>aerial imagery</themekey>
+				<themekey>moraine</themekey>
+			</theme>
+			<theme>
+				<themekt>USGS Thesaurus</themekt>
+				<themekey>snow and ice cover</themekey>
+			</theme>
+			<place>
+				<placekt>Geographic Names Information System</placekt>
+				<placekey>Glacier National Park</placekey>
+				<placekey>Flathead National Forest</placekey>
+			</place>
+			<place>
+				<placekt>Common geographic areas</placekt>
+				<placekey>Montana</placekey>
+			</place>
+		</keywords>
+		<accconst>None</accconst>
+		<useconst>None</useconst>
+		<ptcontac>
+			<cntinfo>
+				<cntorgp>
+					<cntorg>U.S. Geological Survey</cntorg>
+					<cntper>Daniel B Fagre</cntper>
+				</cntorgp>
+				<cntpos>Research Ecologist</cntpos>
+				<cntaddr>
+					<addrtype>mailing address</addrtype>
+					<address>PO Box 169</address>
+					<city>West Glacier</city>
+					<state>MT</state>
+					<postal>59936</postal>
+					<country>USA</country>
+				</cntaddr>
+				<cntvoice>406-888-7922</cntvoice>
+				<cntfax>406-888-7923</cntfax>
+				<cntemail>dan_fagre@usgs.gov</cntemail>
+			</cntinfo>
+		</ptcontac>
+		<datacred>Daniel B. Fagre,  Lisa A. McKeon, Chelsea J. Martin-Mikle (USGS at GNP).</datacred>
+		<native>Environment as of Metadata Creation: Microsoft Windows 7 Version 6.1 (Build 7601) Service Pack 1; Esri ArcGIS 10.4.1 (Build 5686) Service Pack N/A (Build N/A)</native>
+		<crossref>
+			<citeinfo>
+				<origin>Daniel B Fagre</origin>
+				<origin>Lisa A McKeon</origin>
+				<origin>Kristina A Dick</origin>
+				<origin>Andrew G Fountain</origin>
+				<pubdate>20170510</pubdate>
+				<title>Glacier margin time series (1966, 1998, 2005, 2015) of the named glaciers of Glacier National Park, MT, USA</title>
+				<geoform>vector digital data</geoform>
+				<onlink>https://doi.org/10.5066/F7P26WB1</onlink>
+			</citeinfo>
+		</crossref>
+	</idinfo>
+	<dataqual>
+		<attracc>
+			<attraccr>Initial glacier moraine analysis and digitization was performed by Chelsea Martin-Mikle using the best imagery available and industry-standard mapping software (ArcMAP).  Each margin was subsequently reviewed by Dan Fagre and Lisa McKeon with finalized versions representing the consensus of analysis.  Potential inaccuracies inherent to the imagery were not addressed except by excluding images that were visually distorted or heavily shaded.  Mapped perimeters were compared to a limited number of ground surveys using Global Positioning Systems (GPS), however, for recent imagery such as WorldView, the spatial resolution and accuracy of georeferencing were superior.  WorldView imagery is available at https://evwhs.digitalglobe.com/.   WorldView, NAIP and other products downloaded from web sources were already corrected for spatial accuracy and were used as is, i.e. no additional geo- or ortho-rectification was conducted. WorldView images with the lowest off-nadir angles were used whenever possible to keep spatial errors to a minimum.  The off-nadir angles are reported for those images.   For each glacier, supplemental imagery was used to aid in interpreting the exact glacier perimeter based on moraine deposits during the mid-nineteenth century.  Portions of some glacial moraines were covered by seasonal snow or were not visible.  Some glaciers, particularly those facing north or northeast, were deep in shadows and details in the shadowed areas were difficult to discern.  Oblique terrestrial and aerial photography were compared to help delineate the moraines in those cases.  Photographs of glacial moraines shot by John Scurlock in 2009 were the most useful.  These are available at http://glaciers.research.pdx.edu/image-galleries/Lewis-Range-MT.  Historic photographs were also used to assess glacial extent during the late nineteenth and early twentieth century.  These are available at http://glaciers.research.pdx.edu/.   In cases where imagery was not available or was poor in quality, 2009 imagery from the Department of Homeland Security and Google Earth were used. </attraccr>
+		</attracc>
+		<logic>No formal logical accuracy tests were conducted.  Margins were delineated based on visual interpretation of glacial moraines. This was supplemented by cross-checking with multiple other images, both terrestrial oblique photography and other sources of aerial photography.  GoogleEarth was used for interpreting 3-dimensional aspects of images from aerial and satellite photography.  There were no expected ranges per se. The expectation was that glaciers covered more area in the mid-nineteenth century than they did in subsequent years.  This occurred.  Where glacier perimeters seemed as if they didn’t reflect likely location in the basin topography, extra efforts were made to assess relevant historic photographs.</logic>
+		<complete>Data set is considered complete for the information presented, as described in the abstract.  The focus of this dataset was on moraines that reflect active glaciation during the peak of the Little Ice Age. Others had features of transitional glaciation but do not reflect active glaciation.  There are other cases where a robust, small glacier may have existed,  but there is not enough evidence to say it was not a pronival rampart. These features were not included in this survey.  Where heavy shading, image distortion, or image quality was compromised in some way which made margin delineation uncertain, supplemental imagery was used to best determine margin.  Users are advised to read the rest of the metadata record and record attributes for additional details.</complete>
+		<posacc>
+			<horizpa>
+				<horizpar>A formal accuracy assessment of the horizontal positional information in the data set has not been conducted.</horizpar>
+			</horizpa>
+			<vertacc>
+				<vertaccr>A formal accuracy assessment of the vertical positional information in the data set has either not been conducted, or is not applicable.</vertaccr>
+			</vertacc>
+		</posacc>
+		<lineage>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>WorldView-1 satellite</origin>
+						<pubdate>20150822</pubdate>
+						<title>WorldView-01 satellite image</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Longmont, CO, USA</pubplace>
+							<publish>DigitalGlobe</publish>
+						</pubinfo>
+						<othercit>off-nadir angle 27.0</othercit>
+						<onlink>https://www.digitalglobe.com/</onlink>
+					</citeinfo>
+				</srccite>
+				<srcscale>12000</srcscale>
+				<typesrc>Digital and/or Hardcopy Resources</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>20150822</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 1</srccitea>
+				<srccontr>glacier margins derived from WorldView-1 imagery taken on 20150822</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>WorldView-1 satellite</origin>
+						<pubdate>20141019</pubdate>
+						<title>WorldView-01 satellite image</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Longmont, CO, USA</pubplace>
+							<publish>DigitalGlobe</publish>
+						</pubinfo>
+						<othercit>off-nadir angle 105.0</othercit>
+						<onlink>https://www.digitalglobe.com/</onlink>
+					</citeinfo>
+				</srccite>
+				<srcscale>12000</srcscale>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>20141019</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 2</srccitea>
+				<srccontr>glacier margins derived from WorldView-1 imagery taken on 20141019</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>WorldView-1 satellite</origin>
+						<pubdate>20150912</pubdate>
+						<title>WorldView-01 satellite image</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Longmont, CO, USA</pubplace>
+							<publish>DigitalGlobe</publish>
+						</pubinfo>
+						<othercit>off-nadir angle 4.73</othercit>
+						<onlink>https://www.digitalglobe.com/</onlink>
+					</citeinfo>
+				</srccite>
+				<srcscale>12000</srcscale>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>20150912</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 3</srccitea>
+				<srccontr>glacier margins derived from WorldView-1 imagery taken on 20150912</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>WorldView-1 satellite</origin>
+						<pubdate>20150822</pubdate>
+						<title>WorldView-01 satellite image</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Longmont, CO, USA</pubplace>
+							<publish>DigitalGlobe</publish>
+						</pubinfo>
+						<othercit>off-nadir angle 11.7</othercit>
+						<onlink>https://www.digitalglobe.com/</onlink>
+					</citeinfo>
+				</srccite>
+				<srcscale>12000</srcscale>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>20150822</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 4</srccitea>
+				<srccontr>glacier margins derived from WorldView-1 imagery taken on 20150822</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>WorldView-1 satellite</origin>
+						<pubdate>20150925</pubdate>
+						<title>WorldView-01 satellite image</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Longmont, CO, USA</pubplace>
+							<publish>DigitalGlobe</publish>
+						</pubinfo>
+						<othercit>off-nadir angle 16.8</othercit>
+						<onlink>https://www.digitalglobe.com/</onlink>
+					</citeinfo>
+				</srccite>
+				<srcscale>12000</srcscale>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>20150925</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 6</srccitea>
+				<srccontr>glacier margins derived from WorldView-1 imagery taken on 20150925</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>WorldView-1 satellite</origin>
+						<pubdate>20150822</pubdate>
+						<title>WorldView-01 satellite image</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Longmont, CO, USA</pubplace>
+							<publish>DigitalGlobe</publish>
+						</pubinfo>
+						<othercit>off-nadir angle 14.9</othercit>
+						<onlink>https://www.digitalglobe.com/</onlink>
+					</citeinfo>
+				</srccite>
+				<srcscale>12000</srcscale>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>20150822</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 7</srccitea>
+				<srccontr>glacier margins derived from WorldView-1 imagery taken on 20150822</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>WorldView-1 satellite</origin>
+						<pubdate>20150912</pubdate>
+						<title>WorldView-01 satellite image</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Longmont, CO, USA</pubplace>
+							<publish>DigitalGlobe</publish>
+						</pubinfo>
+						<othercit>off-nadir angle 16.7</othercit>
+						<onlink>https://www.digitalglobe.com/</onlink>
+					</citeinfo>
+				</srccite>
+				<srcscale>12000</srcscale>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>20150912</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 8</srccitea>
+				<srccontr>glacier margins derived from WorldView-1 imagery taken on 20150912</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>WorldView-1 satellite</origin>
+						<pubdate>20150822</pubdate>
+						<title>WorldView-01 satellite image</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Longmont, CO, USA</pubplace>
+							<publish>DigitalGlobe</publish>
+						</pubinfo>
+						<othercit>off-nadir angle 7.91</othercit>
+						<onlink>https://www.digitalglobe.com/</onlink>
+					</citeinfo>
+				</srccite>
+				<srcscale>12000</srcscale>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>20150822</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 9</srccitea>
+				<srccontr>glacier margins derived from WorldView-1 imagery taken on 20150822</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>WorldView-1 satellite</origin>
+						<pubdate>20150925</pubdate>
+						<title>WorldView-01 satellite image</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Longmont, CO, USA</pubplace>
+							<publish>DigitalGlobe</publish>
+						</pubinfo>
+						<othercit>off-nadir angle 23.0</othercit>
+						<onlink>https://www.digitalglobe.com/</onlink>
+					</citeinfo>
+				</srccite>
+				<srcscale>12000</srcscale>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>20150925</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 10</srccitea>
+				<srccontr>glacier margins derived from WorldView-1 imagery taken on 20150925</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>WorldView-3 satellite</origin>
+						<pubdate>20160821</pubdate>
+						<title>WorldView-03 satellite image</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Longmont, CO, USA</pubplace>
+							<publish>DigitalGlobe</publish>
+						</pubinfo>
+						<othercit>off-nadir angle 7.42</othercit>
+						<onlink>https://www.digitalglobe.com/</onlink>
+					</citeinfo>
+				</srccite>
+				<srcscale>12000</srcscale>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>20160821</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 11</srccitea>
+				<srccontr>glacier margins derived from WorldView-1 imagery taken on 20160822</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>WorldView-1 satellite</origin>
+						<pubdate>20150912</pubdate>
+						<title>WorldView-01 satellite image</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Longmont, CO, USA</pubplace>
+							<publish>DigitalGlobe</publish>
+						</pubinfo>
+						<othercit>off-nadir angle 26.2</othercit>
+						<onlink>https://www.digitalglobe.com/</onlink>
+					</citeinfo>
+				</srccite>
+				<srcscale>12000</srcscale>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>20150912</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 12</srccitea>
+				<srccontr>glacier margins derived from WorldView-1 imagery taken on 20150912</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>WorldView-3 satellite</origin>
+						<pubdate>20160820</pubdate>
+						<title>WorldView-03 satellite image</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Longmont, CO, USA</pubplace>
+							<publish>DigitalGlobe</publish>
+						</pubinfo>
+						<othercit>off-nadir angle 21.2</othercit>
+						<onlink>https://www.digitalglobe.com/</onlink>
+					</citeinfo>
+				</srccite>
+				<srcscale>12000</srcscale>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>20160820</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 13</srccitea>
+				<srccontr>glacier margins derived from WorldView-1 imagery taken on 20160820</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>WorldView-2 satellite</origin>
+						<pubdate>20170929</pubdate>
+						<title>WorldView-02 satellite image</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Longmont, CO, USA</pubplace>
+							<publish>DigitalGlobe</publish>
+						</pubinfo>
+						<othercit>off-nadir angle 24.5</othercit>
+						<onlink>https://www.digitalglobe.com/</onlink>
+					</citeinfo>
+				</srccite>
+				<srcscale>12000</srcscale>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>20170929</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 14</srccitea>
+				<srccontr>glacier margins derived from WorldView-1 imagery taken on 20170929</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>WorldView-2 satellite</origin>
+						<pubdate>20160612</pubdate>
+						<title>WorldView-02 satellite image</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Longmont, CO, USA</pubplace>
+							<publish>DigitalGlobe</publish>
+						</pubinfo>
+						<othercit>off-nadir angle 20.2</othercit>
+						<onlink>https://www.digitalglobe.com/</onlink>
+					</citeinfo>
+				</srccite>
+				<srcscale>12000</srcscale>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>20160612</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 15</srccitea>
+				<srccontr>glacier margins derived from WorldView-1 imagery taken on 20160612</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>USDA Farm Service Agency</origin>
+						<pubdate>2005</pubdate>
+						<title>NAIP 2005 aerial imagery</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Salt Lake City, UT</pubplace>
+							<publish>National Agriculture Imagery Program</publish>
+						</pubinfo>
+						<onlink>https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/</onlink>
+					</citeinfo>
+				</srccite>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<rngdates>
+							<begdate>20050731</begdate>
+							<enddate>20050827</enddate>
+						</rngdates>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 16</srccitea>
+				<srccontr>glacier margins derived from NAIP imagery collected in 2005</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>Department of Homeland Security</origin>
+						<pubdate>2009</pubdate>
+						<title>DOHS 2009 Boarder Imagery</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<othercit>Metadata contact: Montana State Library P.O. Box 201800 Helena, Montana 59620-1800 Telephone: 406-444-5354 TDD/TTY telephone: 406-444-4799 Fax: 406-444-0266E- Mail: geoinfo@mt.gov</othercit>
+						<onlink>ftp://ftp.geoinfo.msl.mt.gov/Data/Spatial/NonMSDI/Shapefiles/Orthophoto_Index_Border_2009.zip</onlink>
+					</citeinfo>
+				</srccite>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<rngdates>
+							<begdate>20090601</begdate>
+							<enddate>20090631</enddate>
+						</rngdates>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 17</srccitea>
+				<srccontr>glacier margins derived from DOHS boarder imagery collected in July, 2009</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>WorldView-1 satellite</origin>
+						<pubdate>20160915</pubdate>
+						<title>WorldView-01 satellite image</title>
+						<geoform>Raster Digital Data (Aerial Imagery)</geoform>
+						<pubinfo>
+							<pubplace>Longmont, CO, USA</pubplace>
+							<publish>DigitalGlobe</publish>
+						</pubinfo>
+						<othercit>off-nadir angle 105</othercit>
+						<onlink>https://www.digitalglobe.com/</onlink>
+					</citeinfo>
+				</srccite>
+				<srcscale>12000</srcscale>
+				<typesrc>Digital and/or Hardcopy</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>20160915</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>observed</srccurr>
+				</srctime>
+				<srccitea>Source 18</srccitea>
+				<srccontr>glacier margins derived from WorldView-1 imagery taken on 20160915</srccontr>
+			</srcinfo>
+			<procstep>
+				<procdesc>Acquire most appropriate satellite imagery from DigitalGlobe EV web hosting.  Imagery is selected by choosing the image that shows the least seasonal snow to best reveal glacier moraines.  If multiple WorldView images are available for the same location, the image with the lowest off-nadir angle was chosen to reduce error. File attributes list specific images used in analysis.  Export image as GeoTiff.</procdesc>
+				<procdate>20170224</procdate>
+			</procstep>
+			<procstep>
+				<procdesc>Import selected satellite image in to ArcGIS.  Visually determine glacier margin based on moraines and digitize margin at 1:2000 scale.  Where heavy shading, image distortion, or image quality was compromised in some way, supplemental imagery from another date was used to best determine margin.  Note that glacial headwalls were commonly underestimated due to the difficulty inherent in observing vertical  change from an aerial perspective. When this was the case, the known headwall location from the 2015 glacier margins were used.  Oblique aerial photos and historic photos from the USGS collection were referenced to determine the mid-nineteenth century extent when source imagery was not adequate.  File attributes list specific photos used in analysis. Attribute naming convention for WorldView source imagery includes the satellite used to acquire the image, the date of the referenced image and the off-nadir angle (ONA) of the image (i.e. wv01_ 20150822 ONA 27.0).  If multiple images are listed in the source column, the first image is the “primary” image and is the most useful for digitization, whereas the second image listed is the "secondary" image and was somewhat less useful as a reference image (possibly due to higher off-nadir angle, seasonal snow, shading or image distortion).</procdesc>
+				<procdate>20170221</procdate>
+			</procstep>
+		</lineage>
+	</dataqual>
+	<spdoinfo>
+		<direct>Vector</direct>
+		<ptvctinf>
+			<sdtsterm>
+				<sdtstype>G-polygon</sdtstype>
+				<ptvctcnt>147</ptvctcnt>
+			</sdtsterm>
+		</ptvctinf>
+	</spdoinfo>
+	<spref>
+		<horizsys>
+			<planar>
+				<gridsys>
+					<gridsysn>Universal Transverse Mercator</gridsysn>
+					<utm>
+						<utmzone>12</utmzone>
+						<transmer>
+							<sfctrmer>0.9996</sfctrmer>
+							<longcm>-111.0</longcm>
+							<latprjo>0.00000000</latprjo>
+							<feast>500000.0</feast>
+							<fnorth>0.00000000</fnorth>
+						</transmer>
+					</utm>
+				</gridsys>
+				<planci>
+					<plance>coordinate pair</plance>
+					<coordrep>
+						<absres>0.6096</absres>
+						<ordres>0.6096</ordres>
+					</coordrep>
+					<plandu>meters</plandu>
+				</planci>
+			</planar>
+			<geodetic>
+				<horizdn>North_American_Datum_1983</horizdn>
+				<ellips>GRS_1980</ellips>
+				<semiaxis>6378137.0</semiaxis>
+				<denflat>298.257222101</denflat>
+			</geodetic>
+		</horizsys>
+	</spref>
+	<eainfo>
+		<detailed>
+			<enttyp>
+				<enttypl>mid19thcent_GNPglaciers.shp Attribute Table</enttypl>
+				<enttypd>Table containing attribute information associated with the data set</enttypd>
+				<enttypds>Producer defined</enttypds>
+			</enttyp>
+			<attr>
+				<attrlabl>FID</attrlabl>
+				<attrdef>Internal feature number</attrdef>
+				<attrdefs>ESRI</attrdefs>
+				<attrdomv>
+					<udom>Sequential unique whole numbers that are automatically generated.</udom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>Shape</attrlabl>
+				<attrdef>Feature geometry</attrdef>
+				<attrdefs>ESRI</attrdefs>
+				<attrdomv>
+					<edom>
+						<edomv>Polygon</edomv>
+						<edomvd>The feature geometry of the shapes</edomvd>
+						<edomvds>Producer defined</edomvds>
+					</edom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>Glac_Name</attrlabl>
+				<attrdef>Glacier name</attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<udom>Name of glacier when glacier has a name, otherwise 'none'.</udom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>Year</attrlabl>
+				<attrdef>Year of source data used to delineate glacier margins</attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<edom>
+						<edomv>2015</edomv>
+						<edomvd>year 2015 of Gregorian Calendar</edomvd>
+						<edomvds>Producer defined</edomvds>
+					</edom>
+				</attrdomv>
+				<attrdomv>
+					<edom>
+						<edomv>2014</edomv>
+						<edomvd>year 2014 of Gregorian Calendar</edomvd>
+						<edomvds>Producer defined</edomvds>
+					</edom>
+				</attrdomv>
+				<attrdomv>
+					<edom>
+						<edomv>2016</edomv>
+						<edomvd>year 2016 of Gregorian Calendar</edomvd>
+						<edomvds>Producer defined</edomvds>
+					</edom>
+				</attrdomv>
+				<attrdomv>
+					<edom>
+						<edomv>2009</edomv>
+						<edomvd>year 2009 of Gregorian Calendar</edomvd>
+						<edomvds>Producer defined</edomvds>
+					</edom>
+				</attrdomv>
+				<attrdomv>
+					<edom>
+						<edomv>2015, 2009</edomv>
+						<edomvd>years 2015 and 2009 of Gregorian Calendar</edomvd>
+						<edomvds>Producer defined</edomvds>
+					</edom>
+				</attrdomv>
+				<attrdomv>
+					<edom>
+						<edomv>2005</edomv>
+						<edomvd>year 2005 of Gregorian Calendar</edomvd>
+						<edomvds>Producer defined</edomvds>
+					</edom>
+				</attrdomv>
+				<attrdomv>
+					<edom>
+						<edomv>2005, 2016</edomv>
+						<edomvd>years 2005 and 2016 of Gregorian Calendar</edomvd>
+						<edomvds>Producer defined</edomvds>
+					</edom>
+				</attrdomv>
+				<attrdomv>
+					<edom>
+						<edomv>2017</edomv>
+						<edomvd>year 2017 of Gregorian Calendar</edomvd>
+						<edomvds>Producer defined</edomvds>
+					</edom>
+				</attrdomv>
+				<attrdomv>
+					<edom>
+						<edomv>2016, 2009</edomv>
+						<edomvd>years 2016 and 2009 of Gregorian Calendar</edomvd>
+						<edomvds>Producer defined</edomvds>
+					</edom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>Scale</attrlabl>
+				<attrdef>Scale of source data</attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<edom>
+						<edomv>1:2000</edomv>
+						<edomvd>map scale of 1:2000</edomvd>
+						<edomvds>Producer defined</edomvds>
+					</edom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>drainage</attrlabl>
+				<attrdef>Drainage glacier margin is located in</attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<udom>Drainage basin where glacier margin is located.</udom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>Source</attrlabl>
+				<attrdef>Source imagery used to digitize each glacier margin</attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<udom>Name of specific image(s) used to delineate glacial margin.  The attribute naming convention for WorldView source imagery includes the satellite used to acquire the image, the date of the referenced image and the off-nadir angle (ONA) of the image (i.e. wv01_ 20150822 ONA 27.0).  Other imagery used to digitize glacier margins are imagery products and do not include specific dates and off-nadir angles (i.e. 2009 DOHS imagery and 2005 NAIP imagery). Users are advised to read the rest of the metadata record for additional details.  If multiple images are listed in the source column, the first image is the “primary” image and is the most useful for digitization, whereas the second image listed is the "secondary" image and was somewhat less useful as a reference image (possibly due to higher off-nadir angle, seasonal snow, shading or image distortion).</udom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>Notes_USGS</attrlabl>
+				<attrdef>Items of note pertaining to features or imagery issues</attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<udom>Explanation of moraine segments that may appear ambiguous.</udom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>Area1850</attrlabl>
+				<attrdef>Area of main body of glacier during the peak of the Little Ice Age </attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<rdom>
+						<rdommin>11553.434014</rdommin>
+						<rdommax>4970064.26313</rdommax>
+						<attrunit>square meters</attrunit>
+					</rdom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>X_COORD</attrlabl>
+				<attrdef>UTM X-coordinate, NAD 1983 UTM Zone 12N</attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<rdom>
+						<rdommin>262710.772908</rdommin>
+						<rdommax>324585.809528</rdommax>
+						<attrunit>meter</attrunit>
+					</rdom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>Y_COORD</attrlabl>
+				<attrdef>UTM Y-coordinate, NAD 1983 UTM Zone 12N</attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<rdom>
+						<rdommin>5356121.02881</rdommin>
+						<rdommax>5432566.63112</rdommax>
+						<attrunit>meter</attrunit>
+					</rdom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>Classifica</attrlabl>
+				<attrdef>The portion defined by the polygon to be the maximum extent of the glacier during the peak of the Little Ice Age</attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<edom>
+						<edomv>Little Ice Age max glacial extent</edomv>
+						<edomvd>the portion defined by the polygon to be the maximum extent of the glacier during the peak of the Little Ice Age</edomvd>
+						<edomvds>Producer defined</edomvds>
+					</edom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>Ownership</attrlabl>
+				<attrdef>Federal land designation for the location of the glacier</attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<edom>
+						<edomv>Glacier National Park</edomv>
+						<edomvd>Glacier National Park, Department of Interior</edomvd>
+						<edomvds>Producer defined</edomvds>
+					</edom>
+				</attrdomv>
+				<attrdomv>
+					<edom>
+						<edomv>Flathead National Forest</edomv>
+						<edomvd>Flathead National Forest, Department of Agriculture</edomvd>
+						<edomvds>Producer defined</edomvds>
+					</edom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>Known</attrlabl>
+				<attrdef>The length of the polygon depicting the maximum extent of the glacier during the peak of the Little Ice Age based on visible, physical evidence (i.e. moraines, vegetation, bedrock texture, bedrock coloration)</attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<rdom>
+						<rdommin>0</rdommin>
+						<rdommax>17358</rdommax>
+						<attrunit>meters</attrunit>
+					</rdom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>very_confi</attrlabl>
+				<attrdef>In absence of visible, physical evidence (including due to shadows, seasonal snow and aerial imagery limitations) segments of a glacial margin that are estimated with a high level of confidence based on obvious topographic patterns. Note: these segments always underestimate margin area when in question</attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<rdom>
+						<rdommin>0</rdommin>
+						<rdommax>1222</rdommax>
+						<attrunit>meters</attrunit>
+					</rdom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>mod_confid</attrlabl>
+				<attrdef>In absence of visible, physical evidence (including due to shadows, seasonal snow and aerial imagery limitations) segments of a glacial margin that are estimated with a moderate level of confidence based on likely topographic patterns. Note: these segments always underestimate margin area when in question</attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<rdom>
+						<rdommin>0</rdommin>
+						<rdommax>913</rdommax>
+						<attrunit>meters</attrunit>
+					</rdom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>perimeter</attrlabl>
+				<attrdef>Total length of perimeter of the polygon depicting the maximum extent of the glacial margin during the peak of the Little Ice Age</attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<rdom>
+						<rdommin>484</rdommin>
+						<rdommax>17358</rdommax>
+						<attrunit>meters</attrunit>
+					</rdom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl>aspect</attrlabl>
+				<attrdef>Mean aspect of all pixels within the polygon that represents the maximum extent of the glacier during the peak of the Little Ice Age</attrdef>
+				<attrdefs>Producer defined</attrdefs>
+				<attrdomv>
+					<rdom>
+						<rdommin>0</rdommin>
+						<rdommax>311</rdommax>
+						<attrunit>degrees</attrunit>
+					</rdom>
+				</attrdomv>
+			</attr>
+		</detailed>
+		<overview>
+			<eaover>The entity and attribute information provided here describes the tabular data associated with the data set. Please review the detailed descriptions that are provided (the individual attribute descriptions) for information on the values that appear as fields/table entries of the data set.</eaover>
+			<eadetcit>The entity and attribute information was generated by the individual and/or agency identified as the originator of the data set. Please review the rest of the metadata record for additional details and information.</eadetcit>
+		</overview>
+	</eainfo>
+	<distinfo>
+		<distrib>
+			<cntinfo>
+				<cntorgp>
+					<cntorg>U.S. Geological Survey</cntorg>
+					<cntper>GS ScienceBase</cntper>
+				</cntorgp>
+				<cntaddr>
+					<addrtype>mailing address</addrtype>
+					<address>Denver Federal Center, Building 810, Mail Stop 302</address>
+					<city>Denver</city>
+					<state>CO</state>
+					<postal>80225</postal>
+					<country>USA</country>
+				</cntaddr>
+				<cntvoice>1-888-275-8747</cntvoice>
+				<cntemail>sciencebase@usgs.gov</cntemail>
+			</cntinfo>
+		</distrib>
+		<distliab>Distributor assumes no liability for misuse of data.  Unless otherwise stated, all data, metadata and related materials are considered to satisfy the quality standards relative to the purpose for which the data were collected. Although these data and associated metadata have been reviewed for accuracy and completeness and approved for release by the U.S. Geological Survey (USGS), no warranty expressed or implied is made regarding the display or utility of the data on any other system or for general or scientific purposes, nor shall the act of distribution constitute any such warranty.</distliab>
+		<stdorder>
+			<digform>
+				<digtinfo>
+					<formname>Digital Data</formname>
+				</digtinfo>
+				<digtopt>
+					<onlinopt>
+						<computer>
+							<networka>
+								<networkr>https://doi.org/10.5066/P95YJ3CN</networkr>
+							</networka>
+						</computer>
+					</onlinopt>
+				</digtopt>
+			</digform>
+			<fees>None. No fees are applicable for obtaining the data set.</fees>
+		</stdorder>
+	</distinfo>
+	<metainfo>
+		<metd>20170607</metd>
+		<metc>
+			<cntinfo>
+				<cntperp>
+					<cntper>Lisa A Mckeon</cntper>
+					<cntorg>U.S. Geological Survey</cntorg>
+				</cntperp>
+				<cntpos>Physical Scientist</cntpos>
+				<cntaddr>
+					<addrtype>Mailing</addrtype>
+					<address>PO Box 169</address>
+					<city>West Glacier</city>
+					<state>MT</state>
+					<postal>59936</postal>
+					<country>USA</country>
+				</cntaddr>
+				<cntvoice>406-888-7924</cntvoice>
+				<cntfax>406-888-7923</cntfax>
+				<cntemail>lisa_mckeon@usgs.gov</cntemail>
+			</cntinfo>
+		</metc>
+		<metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+		<metstdv>FGDC-STD-001-1998</metstdv>
+	</metainfo>
+</metadata>

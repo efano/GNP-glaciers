@@ -387,6 +387,16 @@
                 attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
                 opacity: 0.8
             });
+        const voyagerCARTO = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        });
+        const darkCARTO = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        });
 
         const options = {
             center: [48.75, -114],
@@ -403,6 +413,8 @@
             "USGS Topo": topoUSGS,
             "USGS Imagery": imageryUSGS,
             "USGS Imagery Topo": imageryTopoUSGS,
+            "CARTO Voyager": voyagerCARTO,
+            "CARTO Dark": darkCARTO,
         };
 
         // basemap legend
@@ -477,14 +489,14 @@
                 var zoomlevel = map.getZoom();
                 if (zoomlevel >= 12) {
                     $('#dropdown-list .dropdown-item').removeClass('highlight');
-                    $(".glacierPtLegend").hide();
+                    $(".glacierPtLegend").fadeOut();
                     if (map.hasLayer(glaciersLayerGroup)) {
                         map.removeLayer(glaciersLayerGroup);
                     }
                 }
                 if (zoomlevel < 12) {
                     $("#btn-dropdown").text("Select Glacier");
-                    $(".glacierPtLegend").show();
+                    $(".glacierPtLegend").fadeIn();
                     map.addLayer(glaciersLayerGroup);
                     glaciersLayerGroup.setStyle({
                         radius: 7
@@ -516,14 +528,15 @@
                             radius: 7
                         })
                 } else if (type === "y") {
-                    layer.setStyle({
-                        shape: "diamond",
-                        color: '#484848',
-                        fillColor: colorize(props.pctD),
-                        weight: 1,
-                        fillOpacity: 0.8,
-                        radius: 7,
-                    })
+                    layer.bringToBack(),
+                        layer.setStyle({
+                            shape: "diamond",
+                            color: '#484848',
+                            fillColor: colorize(props.pctD),
+                            weight: 1,
+                            fillOpacity: 0.9,
+                            radius: 7,
+                        })
                 };
 
                 // tooltip
@@ -534,7 +547,7 @@
                     layer.bringToFront();
                     // provide a visual affordance
                     layer.setStyle({
-                        radius: 12
+                        radius: 14
                     });
                     // select the cooresponding list item and add the highlight class to make bold
                     $('#glacierList-' + props.num).addClass('highlight');
@@ -626,7 +639,7 @@
                     if (layer.feature.properties.num === glacierNum) {
                         // change the layer style
                         layer.setStyle({
-                            radius: 12
+                            radius: 14
                         }).bringToFront();
                     };
                     // deselects layer highlight on legend mouseout
