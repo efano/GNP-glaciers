@@ -32,7 +32,7 @@
         }
 
         .navbar {
-            z-index: 900;
+            z-index: 1001;
             box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
             height: 50px;
         }
@@ -112,7 +112,7 @@
         }
 
         #dropdown-list {
-            line-height: .8;
+            line-height: .7;
             overflow-y: auto;
             border: none;
             border-radius: 4px;
@@ -121,8 +121,9 @@
             font-size: 11px;
             background-color: white;
             padding-top: 10px;
-            padding-bottom: 10px;
-            padding-right: 10px;
+            max-width: 100px;
+            
+            /* z-index: 1001; */
         }
 
         .dropdown-item {
@@ -137,10 +138,6 @@
         .highlight {
             font-weight: 600;
             color: #484848;
-        }
-
-        .leaflet-left .leaflet-control-scale {
-            margin-left: 12px;
         }
 
         .leaflet-control-scale-line {
@@ -177,7 +174,7 @@
             background-color: rgba(255, 255, 255, .85);
             box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
             border-radius: 3px;
-            bottom: 34px;
+            bottom: 12px;
             width: 196px;
             position: absolute;
             left: 12px;
@@ -302,7 +299,7 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Select Glacier&thinsp;
             </button>
-            <ul class="dropdown-menu" id="dropdown-list">
+            <ul class="dropdown-menu dropdown-menu-right" id="dropdown-list">
             </ul>
         </div>
 
@@ -422,8 +419,9 @@
             collapsed: false,
         }).addTo(map);
 
-        // call the getContainer routine
+        // move baselayer control icon to navbar
         let htmlObject = control.getContainer();
+        console.log(htmlObject);
         // get the desired parent node
         let newParent = document.getElementById('baselayerDropdown');
         // append the node to the new parent, recursively searching out and re-parenting nodes
@@ -438,7 +436,7 @@
 
         // create scalebar
         L.control.scale({
-            position: 'bottomleft',
+            position: 'bottomright',
             metric: true,
             maxWidth: 120,
         }).addTo(map);
