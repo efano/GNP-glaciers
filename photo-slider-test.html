@@ -12,17 +12,58 @@
     <link rel="stylesheet" href="css/BeerSlider.css">
 
     <style>
+        .modal-body {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #attributionLeft {
+            font-size: 8px;
+        }
+
+        #attributionRight {
+            font-size: 8px;
+            text-align: right;
+            margin-top: -15px;
+        }
     </style>
-    
+
 </head>
 
 <body>
-    <div id="beer-slider" class="beer-slider" data-beer-label="2005">
-        <img src="photos/Agassiz-2.png" alt="glacier new">
-        <div class="beer-reveal" data-beer-label="1913">
-          <img src="photos/Agassiz-1.png" alt="">
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <div id="beer-slider" class="beer-slider" data-beer-label="yearRight">
+                            <img src="photos/Grinnell2.jpg" alt="imageRight">
+                            <div class="beer-reveal" data-beer-label="yearLeft">
+                                <img src="photos/Grinnell1.jpg" alt="imageLeft">
+                            </div>
+                        </div>
+                        <div class="attribution" id="attributionLeft" value="attributionLeft">Photo Left: </div>
+                        <div class="attribution" id="attributionRight" value="attributionRight">Photo Right: </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -38,7 +79,7 @@
     <script src="js/BeerSlider.js"></script>
 
     <script>
-        var slider = new BeerSlider( document.getElementById( "beer-slider" ) );
+        var slider = new BeerSlider(document.getElementById("beer-slider"));
     </script>
 
 </body>
