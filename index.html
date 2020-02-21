@@ -420,7 +420,6 @@
 
         // move baselayer control icon to navbar
         let htmlObject = control.getContainer();
-        console.log(htmlObject);
         // get the desired parent node
         let newParent = document.getElementById('baselayerDropdown');
         // append the node to the new parent, recursively searching out and re-parenting nodes
@@ -495,9 +494,10 @@
                     $("#btn-dropdown").text("Select Glacier");
                     $(".glacierPtLegend").fadeIn();
                     map.addLayer(glaciersLayerGroup);
-                    glaciersLayerGroup.setStyle({
-                        radius: 7
-                    });
+                    drawPts(glaciersLayerGroup);
+                    // glaciersLayerGroup.setStyle({
+                    //     radius: 7
+                    // });
                 }
             });
 
@@ -515,25 +515,25 @@
                 let props = layer.feature.properties;
                 let type = props[status];
 
-                if (type === "n") {
-                    layer.bringToFront(),
-                        layer.setStyle({
-                            shape: "x",
-                            color: colorize(props.pctD),
-                            weight: 3,
-                            fillOpacity: 1,
-                            radius: 7
-                        })
-                } else if (type === "y") {
-                    layer.bringToBack(),
-                        layer.setStyle({
-                            shape: "diamond",
-                            color: '#484848',
-                            fillColor: colorize(props.pctD),
-                            weight: 1,
-                            fillOpacity: 0.9,
-                            radius: 7,
-                        })
+                if (type === "y") {
+                    layer.bringToBack();
+                    layer.setStyle({
+                        shape: "diamond",
+                        color: '#484848',
+                        fillColor: colorize(props.pctD),
+                        weight: 1,
+                        fillOpacity: 0.9,
+                        radius: 7,
+                    })
+                } else if (type === "n") {
+                    layer.bringToFront();
+                    layer.setStyle({
+                        shape: "x",
+                        color: colorize(props.pctD),
+                        weight: 3,
+                        fillOpacity: 1,
+                        radius: 7
+                    })
                 };
 
                 // tooltip
