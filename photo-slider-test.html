@@ -18,11 +18,11 @@
             margin-right: auto;
         }
 
-        #attributionLeft {
+        .attributionL {
             font-size: 8px;
         }
 
-        #attributionRight {
+        .attributionR {
             font-size: 8px;
             text-align: right;
             margin-top: -15px;
@@ -34,17 +34,20 @@
 <body>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photo-slider-modal">
+        Slider Modal
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photo-side2side-modal">
+        Side-by-Side Modal
     </button>
 
     <!-- Modal -->
-    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="photo-slider-modal" tabindex="-1" role="dialog"
+        aria-labelledby="photo-slider-label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="photo-slider-label">Modal title</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -57,13 +60,34 @@
                                 <img src="photos/Grinnell1.jpg" alt="imageLeft">
                             </div>
                         </div>
-                        <div class="attribution" id="attributionLeft" value="attributionLeft">Photo Left: </div>
-                        <div class="attribution" id="attributionRight" value="attributionRight">Photo Right: </div>
+                        <div class="attributionL" value="attributionLeft">Photo Left: </div>
+                        <div class="attributionR" value="attributionRight">Photo Right: </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade bd-example-modal-lg" id="photo-side2side-modal" tabindex="-1" role="dialog"
+        aria-labelledby="photo-side2side-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="photo-side2side-label">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <!-- <div class="attributionL" value="attributionLeft">Photo Left: </div>
+                        <div class="attributionR" value="attributionRight">Photo Right: </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
