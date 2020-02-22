@@ -96,7 +96,7 @@
   top: 1.5rem;
   line-height: 1;
   padding: 0.5rem;
-  border-radius: 0.125rem;
+  border-radius: 5px;
   background: rgba(255, 255, 255, 0.75); }
 
 .beer-slider[data-beer-label]:after {

@@ -228,13 +228,13 @@
             margin-top: -5px;
         }
 
-        #active {
+        #symbolActive {
             color: #484848;
             font-size: 20px;
             margin-left: -2px;
         }
 
-        #xStangnant {
+        #symbolStangnant {
             font-family: 'Nunito', sans-serif;
             font-weight: 900;
             font-size: 16px;
@@ -247,8 +247,8 @@
         }
 
         .toggle-group {
-            margin-left: 24px;
             margin-bottom: 12px;
+            margin-top: 6px;
         }
 
         .toggle {
@@ -320,24 +320,26 @@
             <h6>(0.1 km&sup2; or ~25 acres)</h6>
             <ul id="sizeCrit">
                 <li>
-                    <span class="glacierPtLegendText" id="active">&#x25C6;</span>
-                    <span class="glacierPtLegendText">Active ( &gt; 0.1 km&sup2;)</span>
+                    <span class="glacierPtLegendText" id="symbolActive">&#x25C6;</span>
+                    <span class="glacierPtLegendText" id="active">Active ( &gt; 0.1 km&sup2;)</span>
                 </li>
                 <li>
-                    <span class="glacierPtLegendText" id="xStangnant">x</span>
+                    <span class="glacierPtLegendText" id="symbolStangnant">x</span>
                     <span class="glacierPtLegendText" id="stangnant">Stagnant ( &lt; 0.1 km&sup2;)</span>
                 </li>
+                <li>
+                    <div class="toggle-group mr18" id="ui-pt-control">
+                        <label class="toggle-container">
+                            <input checked name="toggle-small pt-radio" type="radio" id="1966" value="active1966" />
+                            <div class="toggle toggle--darken75 toggle--s">1966</div>
+                        </label>
+                        <label class="toggle-container">
+                            <input name="toggle-small pt-radio" type="radio" id="2015" value="active2015" />
+                            <div class="toggle toggle--darken75 toggle--s">2015</div>
+                        </label>
+                    </div>
+                </li>
             </ul>
-            <div class="toggle-group mr18" id="ui-pt-control">
-                <label class="toggle-container">
-                    <input checked name="toggle-small pt-radio" type="radio" id="1966" value="active1966" />
-                    <div class="toggle toggle--darken75 toggle--s">1966</div>
-                </label>
-                <label class="toggle-container">
-                    <input name="toggle-small pt-radio" type="radio" id="2015" value="active2015" />
-                    <div class="toggle toggle--darken75 toggle--s">2015</div>
-                </label>
-            </div>
         </div>
     </div>
 

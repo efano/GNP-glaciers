@@ -29,6 +29,34 @@
             text-align: right;
             float: right;
         }
+
+        .modal-body-container {
+            position: relative;
+            text-align: center;
+            color: #333;
+        }
+
+        .side-left[left-year]:after{
+            content: attr(left-year);
+            position: absolute;
+            top: 2.3rem;
+            left: 2.3rem;
+            line-height: 1;
+            padding: 0.5rem;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.75);
+        }
+
+        .side-right[right-year]:after {
+            content: attr(right-year);
+            position: absolute;
+            top: 2.3rem;
+            right: 2.3rem;
+            line-height: 1;
+            padding: 0.5rem;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.75);
+        }
     </style>
 
 </head>
@@ -82,16 +110,18 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="modal-body">
-                        <!-- <div class="attributionL" value="attributionLeft">Photo Left: </div>
-                        <div class="attributionR" value="attributionRight">Photo Right: </div> -->
+                <div class="modal-body modal-body-container">
+                    <img src="photos/Red_Eagle3.jpg" alt="">
+                    <div class="side-left" left-year="yearLeft"></div>
+                    <div class="side-right" right-year="yearRight"></div>
+                    <div>
+                        <div class="attributionL" value="attributionLeft">Photo Left: </div>
+                        <div class="attributionR" value="attributionRight">Photo Right: </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
