@@ -6,8 +6,6 @@
     <meta charset="utf-8">
 
     <title>Glacier Retreat in Glacier National Park</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:900&display=swap" rel="stylesheet" />
@@ -18,11 +16,6 @@
             font-family: 'Istok Web', 'Open Sans', sans-serif;
         }
 
-        /* @font-face {
-            font-family: BellTopoSans;
-            src: url("fonts/BellTopoSans.otf") format("opentype");
-        } */
-
         body {
             margin: 0;
         }
@@ -30,43 +23,39 @@
         #map {
             position: absolute;
             width: 100%;
-            top: 48px;
+            top: 51px;
             bottom: 0;
             background-color: whitesmoke;
         }
 
         .navbar {
             z-index: 1001;
-            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
             height: 50px;
-        }
-
-        .navbar-nav-scroll {
-            color: #484848;
             font-size: 24px;
             font-weight: 600;
         }
 
+        .navbar-title {
+            color: #484848;
+            padding-left: 16px;
+            padding-top: 14px;
+        }
+
         #icon-group {
-            margin-top: 25px;
+            float: right;
+            padding-right: 16px;
+            padding-top: 12px;
         }
 
         .navbar-icon {
             color: #888;
             font-size: 26px;
-            padding-right: 32px;
+            padding-top: 1px;
         }
 
         .navbar-icon:hover {
-            opacity: 1;
             color: #484848;
-        }
-
-        .leaflet-control-layers {
-            box-shadow: 0 0px 0px rgba(255, 255, 255, 0);
-            background: white;
-            min-width: 8.5rem;
-            padding: 10px 8px 10px 16px;
         }
 
         .leaflet-bar {
@@ -74,21 +63,43 @@
             border-radius: 5px;
         }
 
-        .leaflet-control-layers-expanded .leaflet-control-layers-list {
-            line-height: 1.5;
-            color: #484848;
+        #layers-icon:active {
+            pointer-events: none;
+        }
+
+        #baselayer-btn-dropdown {
+            padding: 0px;
+        }
+
+        .dropdown-content1 {
+            display: none;
+            position: absolute;
+            background-color: transparent;
+            padding-top: 8px;
+            z-index: 1001;
+        }
+
+        .leaflet-control-layers {
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            background: white;
+            min-width: 8rem;
+            padding: 8px 0px 8px 14px;
         }
 
         #baselayerDropdown {
-            margin-top: -20px;
-            color: #484848;
+            margin-top: -3px;
             font-size: 11px;
-            background-color: white;
-            min-width: 8.5rem;
-            border: none;
-            border-radius: 5px;
-            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-            padding: 0px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .leaflet-control-layers-list {
+            color: #484848;
+        }
+
+        .show1 {
+            display: block;
         }
 
         #baselayerDropdown .leaflet-control-layers-selector {
@@ -98,44 +109,60 @@
 
         #radioText:hover {
             font-weight: 600;
+            color: #484848;
         }
 
         .leaflet-control-layers-selector:checked~#radioText {
             font-weight: 600;
+            color: #484848;
             text-decoration: underline;
         }
 
-        #btn-dropdown {
-            opacity: 0.8;
-            margin-left: 2px;
+        #extent-icon {
+            margin-right: 2px;
         }
 
-        #btn-dropdown:hover,
-        #btn-dropdown.is-active {
-            background-color: #eee;
+        #glacier-btn-dropdown {
+            padding: 3px 16px 2px 16px;
         }
 
-        #dropdown-list {
-            line-height: .7;
-            overflow-y: auto;
-            border: none;
-            border-radius: 5px;
-            color: #484848;
+        .glacierDropdown {
+            margin-top: -2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content2 {
+            display: none;
+            position: absolute;
+            background-color: white;
+            right: 0px;
+            margin-top: 6px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            width: 140px;
             box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            border-radius: 5px;
+        }
+
+        #dropdown-list2 {
+            text-decoration: none;
+            display: block;
+            color: #484848;
+            font-weight: 500;
             font-size: 11px;
-            background-color: white;
-            margin-top: 4px;
-            padding-top: 10px;
-            max-width: 100px;
+            line-height: 1.45;
+            padding: 0px 4px 0px 16px;
         }
 
-        .dropdown-item {
-            margin-left: -6px;
-        }
-
-        .dropdown-item:hover {
-            background-color: white;
+        #dropdown-list2 :hover {
             font-weight: 600;
+            color: #484848;
+        }
+
+        .show2 {
+            display: block;
         }
 
         .highlight {
@@ -171,71 +198,73 @@
             color: #484848;
             font-size: 12px;
             font-weight: bold;
+            margin-bottom: -3px;
         }
 
         .glacierPtLegend {
             background-color: rgba(255, 255, 255, .85);
             box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
-            left: 14px;
-            bottom: 14px;
-            width: 196px;
+            left: 16px;
+            bottom: 16px;
+            width: 200px;
             position: absolute;
             z-index: 950;
             color: #484848;
         }
 
         .glacierPtLegend h4 {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
-            margin-top: 12px;
+            margin-top: 16px;
             margin-left: 16px;
         }
 
         .glacierPtLegend h6 {
-            font-size: 10px;
+            font-size: 12px;
             font-weight: bold;
             margin-left: 16px;
-            margin-bottom: 10px;
-        }
-
-        .glacierPtLegendText {
-            font-size: 10px;
-            font-weight: bold;
-            color: #888;
+            margin-top: -6px;
         }
 
         #gradient {
             display: inline-block;
             height: 10px;
-            width: 156px;
+            width: 164px;
             margin-left: 16px;
-            margin-bottom: 6px;
-            background-color: #5D0081;
-            background-image: linear-gradient(to right, yellow, #fd7731, #e31060, #5D0081);
+            background-image: linear-gradient(to right, #fffc74, #ffbf51, #ff803e, #ff2c15, #fa000e, #cb0032, #6b008d);
         }
 
         #gradientGreatest {
             font-size: 10px;
             font-weight: bold;
-            color: #888;
-            margin-top: -16px;
-            margin-left: 16px;
-            margin-bottom: 16px;
+            color: #777;
+            margin-left: 20px;
+            margin-top: -10px;
         }
 
         #sizeCrit {
             margin-left: 24px;
+            margin-top: 2px;
             list-style: none;
-            line-height: 1;
+            line-height: .95;
             color: #484848;
-            margin-top: -5px;
+        }
+
+        .glacierPtLegendText {
+            font-size: 10px;
+            font-weight: bold;
+            color: #777;
+        }
+
+        #secondLegendGroup {
+            padding-bottom: 4px;
         }
 
         #symbolActive {
-            color: #484848;
+            color: #777;
             font-size: 20px;
-            margin-left: -2px;
+            margin-left: -1px;
         }
 
         #symbolStangnant {
@@ -243,7 +272,7 @@
             font-weight: 900;
             font-size: 16px;
             margin-left: 1px;
-            color: #484848;
+            color: #777;
         }
 
         #stangnant {
@@ -255,8 +284,8 @@
             margin-top: 6px;
         }
 
-        .toggle {
-            color: #999;
+        .toggle-group :hover {
+            color: #484848;
         }
 
         .toggle--s {
@@ -268,47 +297,46 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand navbar-light flex-column flex-md-row bd-navbar" style="background-color: #fafafa;">
-        <span class="navbar-nav-scroll">The Vanishing Glaciers of Glacier National Park, Montana</span>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <ul class="navbar-nav ml-md-auto" id="icon-group">
-            <li class="nav-item">
-                <a class="navbar-icon" href="#" id="info-icon" title="Project Information">
-                    <svg class="icon">
-                        <use xlink:href="#icon-info" /></svg>
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="navbar-icon" href="#" id="navbarDropdown layers-icon" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false" title="Select Basemap">
-                    <svg class="icon">
-                        <use xlink:href="#icon-layers" /></svg>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="baselayerDropdown"></div>
-            </li>
-            <li class="nav-item">
-                <a class="navbar-icon" href="#" id="extent-icon" title="Zoom to Park Extent">
-                    <svg class="icon">
-                        <use xlink:href="#icon-fullscreen" /></svg>
-                </a>
-            </li>
-        </ul>
-
-        <div class="btn-group">
-            <button type="button" class="btn btnNavbar btn--stroke btn--darken75 dropdown-toggle" id="btn-dropdown"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select Glacier&thinsp;
-            </button>
-            <ul class="dropdown-menu dropdown-menu-right" id="dropdown-list">
-            </ul>
+    <nav class="navbar">
+        <div class="flex-parent-inline">
+            <span class="navbar-title">The Vanishing Glaciers of Glacier National Park</span>
         </div>
-
+        <div class="flex-parent-inline" id="icon-group">
+            <a class="navbar-icon" href="#" id="info-icon" title="Project Information">
+                <svg class="icon mr6">
+                    <use xlink:href="#icon-info" />
+                </svg>
+            </a>
+            <div class="baselayerDropdown">
+                <button class="btn btn--white" id="baselayer-btn-dropdown" onclick="baselayerDropdownFunction()"
+                    title="Select Basemap">
+                    <div class="navbar-icon" id="layers-icon">
+                        <svg class="icon mr6">
+                            <use xlink:href="#icon-layers" />
+                        </svg>
+                    </div>
+                </button>
+                <div id="baselayerDropdownList" class="dropdown-content1">
+                    <div id="baselayerDropdown"></div>
+                </div>
+            </div>
+            <a class="navbar-icon" href="#" id="extent-icon" title="Zoom to Park Extent">
+                <svg class="icon mr6">
+                    <use xlink:href="#icon-fullscreen" />
+                </svg>
+            </a>
+            <div class="glacierDropdown">
+                <button onclick="glacierDropdownFunction()" class="btn btn--stroke btn--darken50"
+                    id="glacier-btn-dropdown">Select Glacier &#9662;</button>
+                <div id="glacierDropdownList" class="dropdown-content2">
+                    <ul id="dropdown-list2"></ul>
+                </div>
+            </div>
+        </div>
     </nav>
 
     <div id="map"></div>
+
     <div id="glacierPtLegend" class="glacierPtLegend">
         <div>
             <h4>Glacier Area Loss</h4>
@@ -319,7 +347,7 @@
                     Greatest</div>
             </div>
         </div>
-        <div>
+        <div id="secondLegendGroup">
             <h4>Minimum Size Criterion</h4>
             <h6>(0.1 km&sup2; or ~25 acres)</h6>
             <ul id="sizeCrit">
@@ -335,11 +363,11 @@
                     <div class="toggle-group mr18" id="ui-pt-control">
                         <label class="toggle-container">
                             <input checked name="toggle-small pt-radio" type="radio" id="1966" value="active1966" />
-                            <div class="toggle toggle--darken75 toggle--s">1966</div>
+                            <div class="toggle toggle--darken50 toggle--s">1966</div>
                         </label>
                         <label class="toggle-container">
                             <input name="toggle-small pt-radio" type="radio" id="2015" value="active2015" />
-                            <div class="toggle toggle--darken75 toggle--s">2015</div>
+                            <div class="toggle toggle--darken50 toggle--s">2015</div>
                         </label>
                     </div>
                 </li>
@@ -352,17 +380,46 @@
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.6/chroma.min.js"></script>
     <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet-src.js"></script>
     <script src="js/leaflet-svg-shape-markers.js"></script>
 
-
     <script>
+        // navbar dropdowns
+
+        // baselayer dropdown menu
+        function baselayerDropdownFunction() {
+            document.getElementById("baselayerDropdownList").classList.toggle("show1");
+        }
+        window.addEventListener('click', function (event) {
+            if (!event.target.matches('#baselayer-btn-dropdown')) {
+                const dropdown1 = document.getElementsByClassName("dropdown-content1");
+                let i;
+                for (i = 0; i < dropdown1.length; i++) {
+                    const openDropdown1 = dropdown1[i];
+                    if (openDropdown1.classList.contains('show1')) {
+                        openDropdown1.classList.remove('show1');
+                    }
+                }
+            }
+        });
+
+        // glaciers dropdown menu
+        function glacierDropdownFunction() {
+            document.getElementById("glacierDropdownList").classList.toggle("show2");
+        }
+        window.addEventListener('click', function (event) {
+            if (!event.target.matches('#glacier-btn-dropdown')) {
+                const dropdown2 = document.getElementsByClassName("dropdown-content2");
+                let i;
+                for (i = 0; i < dropdown2.length; i++) {
+                    const openDropdown2 = dropdown2[i];
+                    if (openDropdown2.classList.contains('show2')) {
+                        openDropdown2.classList.remove('show2');
+                    }
+                }
+            }
+        });
+
         // basemaps
         const topoESRI = L.tileLayer(
             'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
@@ -490,14 +547,14 @@
             map.on('zoomend', function () {
                 var zoomlevel = map.getZoom();
                 if (zoomlevel >= 12) {
-                    $('#dropdown-list .dropdown-item').removeClass('highlight');
+                    $('#dropdown-list2 .dropdown-item2').removeClass('highlight');
                     $(".glacierPtLegend").fadeOut();
                     if (map.hasLayer(glaciersLayerGroup)) {
                         map.removeLayer(glaciersLayerGroup);
                     }
                 }
                 if (zoomlevel < 12) {
-                    $("#btn-dropdown").text("Select Glacier");
+                    $("#glacier-btn-dropdown").html("Select Glacier &#9662;").text();
                     $(".glacierPtLegend").fadeIn();
                     map.addLayer(glaciersLayerGroup);
                     drawPts(glaciersLayerGroup);
@@ -562,10 +619,10 @@
                 layer.on('mousedown', function () {
                     map.removeLayer(glaciersLayerGroup);
                     // change 'Select Glacier' button to glacier name
-                    btnObj = $("#btn-dropdown");
+                    btnObj = $("#glacier-btn-dropdown");
                     $(btnObj).text($(".highlight").text());
                     $(btnObj).val($(".highlight").text());
-                    $('[id="dropdown-list"]').removeClass('show');
+                    $('[id="glacierDropdownList"]').removeClass('show');
 
                     // zoom to layer on click
                     map.flyTo(this.getLatLng(), 14);
@@ -594,7 +651,7 @@
             const breaks = chroma.limits(glacierLoss, 'q', 7);
             // build a colorize function
             let colorize = chroma
-                .scale(['yellow', '#5D0081'])
+                .scale(["#fffc74", "#ffbf51", "#ff803e", "#ff2c15", "#fa000e", "#cb0032", "#6b008d"])
                 .domain(breaks)
                 .mode('lch');
             return colorize;
@@ -602,7 +659,7 @@
 
         function drawDropDownList(ptData) {
             // store a reference to the glacier dropdown list
-            const legendList = $('#dropdown-list');
+            const legendList = $('#dropdown-list2');
             const legendNameList = [];
             for (names in ptData.features) {
                 const props = ptData.features[names].properties;
@@ -616,7 +673,7 @@
             // add glacier names to the glacier dropdown list
             for (let i = 1; i <= ptData.features.length; i++) {
                 const legendNames = [legendNameList[i - 1].GLACNAME];
-                legendList.append('<li><a class="dropdown-item" id="glacierList-' + i + '" value=' + i + '>' +
+                legendList.append('<li><a class="dropdown-item2" id="glacierList-' + i + '" value=' + i + '>' +
                     legendNames + '</a></li>');
             };
         };
@@ -625,7 +682,7 @@
         function highlightGlacier(glaciersLayerGroup) {
 
             // select list items and on mouseover
-            $('.dropdown-item').on('mouseover', function () {
+            $('.dropdown-item2').on('mouseover', function () {
                 // extract the specific number from the specific item being moused over
                 let num = this.id.replace('glacierList-', '');
                 glacierNum = parseInt(num);
@@ -640,7 +697,7 @@
                         }).bringToFront();
                     };
                     // deselects layer highlight on legend mouseout
-                    $('.dropdown-item').on('mouseout', function () {
+                    $('.dropdown-item2').on('mouseout', function () {
                         layer.setStyle({
                             radius: 7
                         });
@@ -653,14 +710,14 @@
         function zoomToGlacier(glaciersLayerGroup) {
 
             // select list items and on mouseover
-            $('.dropdown-item').on('click', function () {
+            $('.dropdown-item2').on('click', function () {
                 map.removeLayer(glaciersLayerGroup);
                 // extract the specific number from the specific item being moused over
                 let num = this.id.replace('glacierList-', '');
                 glacierNum = parseInt(num);
 
                 // change 'Select Glacier' button to glacier name
-                btnObj = $(this).parent().parent().siblings('button');
+                btnObj = $(this).parent().parent().parent().siblings('button');
                 $(btnObj).text($(this).text());
                 $(btnObj).val($(this).text());
 
