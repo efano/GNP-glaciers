@@ -50,7 +50,7 @@
 
         .navbar-icon {
             color: #888;
-            font-size: 24px;
+            font-size: 26px;
             padding-top: 1px;
         }
 
@@ -58,7 +58,7 @@
             color: #484848;
         }
 
-        .leaflet-control-layers {
+        /* .leaflet-control-layers {
             box-shadow: 0 0px 0px rgba(255, 255, 255, 0);
             background: white;
             min-width: 8.5rem;
@@ -73,9 +73,9 @@
         .leaflet-control-layers-expanded .leaflet-control-layers-list {
             line-height: 1.5;
             color: #484848;
-        }
+        } */
 
-        #baselayerDropdown {
+        /* #baselayerDropdown {
             margin-top: -20px;
             color: #484848;
             font-size: 11px;
@@ -90,7 +90,7 @@
         #baselayerDropdown .leaflet-control-layers-selector {
             position: absolute;
             left: -100vw;
-        }
+        } */
 
         #radioText:hover {
             font-weight: 600;
@@ -105,17 +105,21 @@
             margin-right: 2px;
         }
 
-        #glacier-btn-dropdown {
-            padding: 3px 16px 2px 16px;
+        #layers-icon:active {
+            pointer-events:none;
         }
 
-        .glacierDropdown {
+        #baselayer-btn-dropdown {
+            padding: 3px 0px 0px 0px;
+        }
+
+        .baselayerDropdown {
             margin-top: -2px;
             position: relative;
             display: inline-block;
         }
 
-        .dropdown-content {
+        .dropdown-content1 {
             display: none;
             position: absolute;
             background-color: white;
@@ -129,7 +133,7 @@
             border-radius: 5px;
         }
 
-        #dropdown-list {
+        #dropdown-list1 {
             text-decoration: none;
             display: block;
             color: #484848;
@@ -139,12 +143,55 @@
             padding: 0px 4px 0px 16px;
         }
 
-        #dropdown-list :hover {
+        #dropdown-list1 :hover {
             font-weight: 600;
             color: #484848;
         }
 
-        .show {
+        .show1 {
+            display: block;
+        }
+
+        #glacier-btn-dropdown {
+            padding: 3px 16px 2px 16px;
+        }
+
+        .glacierDropdown {
+            margin-top: -2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content2 {
+            display: none;
+            position: absolute;
+            background-color: white;
+            right: 0px;
+            margin-top: 6px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            width: 140px;
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            border-radius: 5px;
+        }
+
+        #dropdown-list2 {
+            text-decoration: none;
+            display: block;
+            color: #484848;
+            font-weight: 500;
+            font-size: 11px;
+            line-height: 1.45;
+            padding: 0px 4px 0px 16px;
+        }
+
+        #dropdown-list2 :hover {
+            font-weight: 600;
+            color: #484848;
+        }
+
+        .show2 {
             display: block;
         }
 
@@ -199,7 +246,7 @@
         .glacierPtLegend h4 {
             font-size: 16px;
             font-weight: bold;
-            margin-top: 12px;
+            margin-top: 16px;
             margin-left: 16px;
         }
 
@@ -215,7 +262,7 @@
             height: 10px;
             width: 164px;
             margin-left: 16px;
-            background-image: linear-gradient(to right, #ffff00, #ff7100, #ff3900, #d50621, #aa0b43, #551785);
+            background-image: linear-gradient(to right, #fffc74, #ffbf51, #ff803e, #ff2c15, #fa000e, #cb0032, #6b008d);
         }
 
         #gradientGreatest {
@@ -241,7 +288,6 @@
         }
 
         #secondLegendGroup {
-            padding-top: 4px;
             padding-bottom: 4px;
         }
 
@@ -277,31 +323,35 @@
             line-height: 12px;
             padding: 3px 12px;
         }
-
     </style>
 </head>
 
 <body>
-
     <nav class="navbar">
         <div class="flex-parent-inline">
             <span class="navbar-title">The Vanishing Glaciers of Glacier National Park</span>
         </div>
         <div class="flex-parent-inline" id="icon-group">
+
             <a class="navbar-icon" href="#" id="info-icon" title="Project Information">
                 <svg class="icon mr6">
                     <use xlink:href="#icon-info" />
                 </svg>
             </a>
 
-            <div class="nav-item dropdown navbar-icon">
-                <a href="#" id="navbarDropdown layers-icon" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false" title="Select Basemap">
-                    <svg class="icon mr6">
-                        <use xlink:href="#icon-layers" />
-                    </svg>
-                </a>
-                <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="baselayerDropdown"></div> -->
+            <div class="baselayerDropdown">
+                <button class="btn btn--white" id="baselayer-btn-dropdown" onclick="baselayerDropdownFunction()"
+                    title="Select Basemap">
+                    <div class="navbar-icon" id="layers-icon">
+                        <svg class="icon mr6">
+                            <use xlink:href="#icon-layers" />
+                        </svg>
+                    </div>
+                </button>
+                <div id="baselayerDropdownList" class="dropdown-content1">
+                    <ul id="dropdown-list1">hi2</ul>
+                </div>
+                <!-- <div class="dropdown-content dropdown-menu" aria-labelledby="dropdownMenuButton" id="baselayerDropdown"></div> -->
             </div>
 
             <a class="navbar-icon" href="#" id="extent-icon" title="Zoom to Park Extent">
@@ -311,9 +361,10 @@
             </a>
 
             <div class="glacierDropdown">
-                <button onclick="glacierDropdownFunction()" class="btn btn--stroke btn--darken50" id="glacier-btn-dropdown">Select Glacier &#9662;</button>
-                <div id="glacierDropdownList" class="dropdown-content">
-                    <ul id="dropdown-list"></ul>
+                <button onclick="glacierDropdownFunction()" class="btn btn--stroke btn--darken50"
+                    id="glacier-btn-dropdown">Select Glacier &#9662;</button>
+                <div id="glacierDropdownList" class="dropdown-content2">
+                    <ul id="dropdown-list2"></ul>
                 </div>
             </div>
 
@@ -388,7 +439,7 @@
                 </li>
             </ul>
         </div>
-    </div> 
+    </div>
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -400,27 +451,43 @@
 
 
     <script>
-
         // navbar dropdowns
 
-        // glaciers dropdown menu
-        function glacierDropdownFunction() {
-            document.getElementById("glacierDropdownList").classList.toggle("show");
+        // baselayer dropdown menu
+        function baselayerDropdownFunction() {
+            document.getElementById("baselayerDropdownList").classList.toggle("show1");
         }
-        window.onclick = function (event) {
-        
-            if (!event.target.matches('#glacier-btn-dropdown')) {
-                const dropdowns = document.getElementsByClassName("dropdown-content");
+        window.addEventListener('click', function (event) {
+            if (!event.target.matches('#baselayer-btn-dropdown')) {
+                const dropdown1 = document.getElementsByClassName("dropdown-content1");
                 let i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    const openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
+                for (i = 0; i < dropdown1.length; i++) {
+                    const openDropdown1 = dropdown1[i];
+                    if (openDropdown1.classList.contains('show1')) {
+                        openDropdown1.classList.remove('show1');
                     }
                 }
             }
+        });
+
+        // glaciers dropdown menu
+        function glacierDropdownFunction() {
+            document.getElementById("glacierDropdownList").classList.toggle("show2");
         }
-        
+        window.addEventListener('click', function (event) {
+
+            if (!event.target.matches('#glacier-btn-dropdown')) {
+                const dropdown2 = document.getElementsByClassName("dropdown-content2");
+                let i;
+                for (i = 0; i < dropdown2.length; i++) {
+                    const openDropdown2 = dropdown2[i];
+                    if (openDropdown2.classList.contains('show2')) {
+                        openDropdown2.classList.remove('show2');
+                    }
+                }
+            }
+        });
+
         // basemaps
         const topoESRI = L.tileLayer(
             'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
@@ -548,7 +615,7 @@
             map.on('zoomend', function () {
                 var zoomlevel = map.getZoom();
                 if (zoomlevel >= 12) {
-                    $('#dropdown-list .dropdown-item').removeClass('highlight');
+                    $('#dropdown-list2 .dropdown-item2').removeClass('highlight');
                     $(".glacierPtLegend").fadeOut();
                     if (map.hasLayer(glaciersLayerGroup)) {
                         map.removeLayer(glaciersLayerGroup);
@@ -652,7 +719,7 @@
             const breaks = chroma.limits(glacierLoss, 'q', 7);
             // build a colorize function
             let colorize = chroma
-                .scale([ "#ffff00", "#ff7100", "#ff3900", "#ff0000", "#d50621", "#aa0b43","#551785"])
+                .scale(["#fffc74", "#ffbf51", "#ff803e", "#ff2c15", "#fa000e", "#cb0032", "#6b008d"])
                 .domain(breaks)
                 .mode('lch');
             return colorize;
@@ -660,7 +727,7 @@
 
         function drawDropDownList(ptData) {
             // store a reference to the glacier dropdown list
-            const legendList = $('#dropdown-list');
+            const legendList = $('#dropdown-list2');
             const legendNameList = [];
             for (names in ptData.features) {
                 const props = ptData.features[names].properties;
@@ -674,7 +741,7 @@
             // add glacier names to the glacier dropdown list
             for (let i = 1; i <= ptData.features.length; i++) {
                 const legendNames = [legendNameList[i - 1].GLACNAME];
-                legendList.append('<li><a class="dropdown-item" id="glacierList-' + i + '" value=' + i + '>' +
+                legendList.append('<li><a class="dropdown-item2" id="glacierList-' + i + '" value=' + i + '>' +
                     legendNames + '</a></li>');
             };
         };
@@ -683,7 +750,7 @@
         function highlightGlacier(glaciersLayerGroup) {
 
             // select list items and on mouseover
-            $('.dropdown-item').on('mouseover', function () {
+            $('.dropdown-item2').on('mouseover', function () {
                 // extract the specific number from the specific item being moused over
                 let num = this.id.replace('glacierList-', '');
                 glacierNum = parseInt(num);
@@ -698,7 +765,7 @@
                         }).bringToFront();
                     };
                     // deselects layer highlight on legend mouseout
-                    $('.dropdown-item').on('mouseout', function () {
+                    $('.dropdown-item2').on('mouseout', function () {
                         layer.setStyle({
                             radius: 7
                         });
@@ -711,7 +778,7 @@
         function zoomToGlacier(glaciersLayerGroup) {
 
             // select list items and on mouseover
-            $('.dropdown-item').on('click', function () {
+            $('.dropdown-item2').on('click', function () {
                 map.removeLayer(glaciersLayerGroup);
                 // extract the specific number from the specific item being moused over
                 let num = this.id.replace('glacierList-', '');
