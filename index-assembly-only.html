@@ -96,7 +96,6 @@
 
         .leaflet-control-layers-list {
             color: #484848;
-            
         }
 
         .show1 {
@@ -303,13 +302,11 @@
             <span class="navbar-title">The Vanishing Glaciers of Glacier National Park</span>
         </div>
         <div class="flex-parent-inline" id="icon-group">
-
             <a class="navbar-icon" href="#" id="info-icon" title="Project Information">
                 <svg class="icon mr6">
                     <use xlink:href="#icon-info" />
                 </svg>
             </a>
-
             <div class="baselayerDropdown">
                 <button class="btn btn--white" id="baselayer-btn-dropdown" onclick="baselayerDropdownFunction()"
                     title="Select Basemap">
@@ -322,15 +319,12 @@
                 <div id="baselayerDropdownList" class="dropdown-content1">
                     <div id="baselayerDropdown"></div>
                 </div>
-                
             </div>
-
             <a class="navbar-icon" href="#" id="extent-icon" title="Zoom to Park Extent">
                 <svg class="icon mr6">
                     <use xlink:href="#icon-fullscreen" />
                 </svg>
             </a>
-
             <div class="glacierDropdown">
                 <button onclick="glacierDropdownFunction()" class="btn btn--stroke btn--darken50"
                     id="glacier-btn-dropdown">Select Glacier &#9662;</button>
@@ -338,11 +332,11 @@
                     <ul id="dropdown-list2"></ul>
                 </div>
             </div>
-
         </div>
     </nav>
 
     <div id="map"></div>
+
     <div id="glacierPtLegend" class="glacierPtLegend">
         <div>
             <h4>Glacier Area Loss</h4>
@@ -388,7 +382,6 @@
     <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet-src.js"></script>
     <script src="js/leaflet-svg-shape-markers.js"></script>
-
 
     <script>
         // navbar dropdowns
@@ -744,6 +737,7 @@
                 map.flyToBounds(parkBounds.getBounds());
             });
         };
+        
     </script>
 </body>
 
