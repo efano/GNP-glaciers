@@ -75,8 +75,10 @@
             display: none;
             position: absolute;
             background-color: transparent;
-            padding-top: 8px;
+            padding-top: 6px;
+            right: 100px;
             z-index: 1001;
+
         }
 
         .leaflet-control-layers {
@@ -258,7 +260,7 @@
         }
 
         #secondLegendGroup {
-            padding-bottom: 4px;
+            padding-bottom: 16px;
         }
 
         #symbolActive {
@@ -280,8 +282,8 @@
         }
 
         .toggle-group {
-            margin-bottom: 12px;
-            margin-top: 6px;
+            margin-bottom: 3px;
+            margin-top: 4px;
             background-color: #e2e2e2;
         }
 
@@ -292,7 +294,7 @@
         .toggle--s {
             font-size: 10px;
             line-height: 16px;
-            padding: 2px 8px;
+            padding: 1px 6px;
         }
     </style>
 </head>
@@ -353,14 +355,6 @@
             <h6>(0.1 km&sup2; or ~25 acres)</h6>
             <ul id="sizeCrit">
                 <li>
-                    <span class="glacierPtLegendText" id="symbolActive">&#x25C6;</span>
-                    <span class="glacierPtLegendText" id="active">Active ( &gt; 0.1 km&sup2;)</span>
-                </li>
-                <li>
-                    <span class="glacierPtLegendText" id="symbolStangnant">x</span>
-                    <span class="glacierPtLegendText" id="stangnant">Stagnant ( &lt; 0.1 km&sup2;)</span>
-                </li>
-                <li>
                     <div class="toggle-group mr18" id="ui-pt-control">
                         <label class="toggle-container">
                             <input checked name="toggle-small pt-radio" type="radio" id="1966" value="active1966" />
@@ -371,6 +365,14 @@
                             <div class="toggle toggle--darken50 toggle--s">2015</div>
                         </label>
                     </div>
+                </li>
+                <li>
+                    <span class="glacierPtLegendText" id="symbolActive">&#x25C6;</span>
+                    <span class="glacierPtLegendText" id="active">Active ( &gt; 0.1 km&sup2;)</span>
+                </li>
+                <li>
+                    <span class="glacierPtLegendText" id="symbolStangnant">x</span>
+                    <span class="glacierPtLegendText" id="stangnant">Stagnant ( &lt; 0.1 km&sup2;)</span>
                 </li>
             </ul>
         </div>
