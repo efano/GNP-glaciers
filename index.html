@@ -425,27 +425,22 @@
         const topoESRI = L.tileLayer(
             'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
-                opacity: 0.9,
             });
         const imageryESRI = L.tileLayer(
             'https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
-                opacity: 0.8
             });
         const topoUSGS = L.tileLayer(
             'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
-                opacity: 0.8
             });
         const imageryUSGS = L.tileLayer(
             'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
-                opacity: 0.8
             });
         const imageryTopoUSGS = L.tileLayer(
             'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
-                opacity: 0.8
             });
         const voyagerCARTO = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -623,7 +618,7 @@
                     btnObj = $("#glacier-btn-dropdown");
                     $(btnObj).text($(".highlight").text());
                     $(btnObj).val($(".highlight").text());
-                    $('[id="glacierDropdownList"]').removeClass('show');
+                    $('[id="glacierDropdownList"]').removeClass('show2');
 
                     // zoom to layer on click
                     map.flyTo(this.getLatLng(), 14);
