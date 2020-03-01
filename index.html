@@ -195,17 +195,36 @@
             border-bottom: 1px solid #444;
         }
 
-        .pt-tooltip {
+        /* hr {
+            border: 1px solid red;
+        } */
+
+        .leaflet-tooltip {
+            border-radius: 5px;
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .tooltipTitle {
             white-space: nowrap;
             color: #444;
             font-size: 12px;
             font-weight: bold;
-            margin-bottom: -3px;
+            margin-top: -2px;
+        }
+
+        .tooltipText {
+            font-size: 10px;
+            margin-top: -20px;
+            margin-bottom: -4px;
+        }
+
+        .tooltipPct {
+            font-weight: 600;
         }
 
         .glacierPtLegend {
             background-color: rgba(255, 255, 255, .85);
-            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
             left: 16px;
             bottom: 16px;
@@ -234,7 +253,7 @@
             height: 10px;
             width: 164px;
             margin-left: 16px;
-            background-image: linear-gradient(to right, #fffc74, #ffbf51, #ff803e, #ff2c15, #fa000e, #cb0032, #6b008d);
+            background-image: linear-gradient(to right, #ffbf51, #ff803e, #ff2c15, #fa000e, #cb0032, #8d0069, #6b008d);
         }
 
         #gradientGreatest {
@@ -242,7 +261,7 @@
             font-weight: bold;
             color: #777;
             margin-left: 20px;
-            margin-top: -10px;
+            margin-top: -11px;
         }
 
         #sizeCrit {
@@ -368,11 +387,11 @@
                 </li>
                 <li>
                     <span class="glacierPtLegendText" id="symbolActive">&#x25C6;</span>
-                    <span class="glacierPtLegendText" id="active">Active ( &gt; 0.1 km&sup2;)</span>
+                    <span class="glacierPtLegendText" id="active">Active (&#8239;&gt; 0.1 km&sup2;&#8239;)</span>
                 </li>
                 <li>
                     <span class="glacierPtLegendText" id="symbolStangnant">x</span>
-                    <span class="glacierPtLegendText" id="stangnant">Stagnant ( &lt; 0.1 km&sup2;)</span>
+                    <span class="glacierPtLegendText" id="stangnant">Stagnant (&#8239;&lt; 0.1 km&sup2;&#8239;)</span>
                 </li>
             </ul>
         </div>
@@ -593,14 +612,21 @@
                 };
 
                 // tooltip
-                layer.bindTooltip("<div class=pt-tooltip><b>" + props["GLACNAME"] + "</b><br></div>");
+                layer.bindTooltip("<div class=tooltipTitle><b>" + props["GLACNAME"] + "</b></div><br>" +
+                    "<div class=tooltipText>" + "Area Loss: " +
+                    '<a class="tooltipPct" style="color:' + colorize(props.pctD) + '"> ' + (parseFloat(
+                            props["pctD"]) *
+                        100).toFixed(0) + "%" + '</a>', {
+                        opacity: .95,
+                    }
+                );
 
                 //when mousing over a glacier point
                 layer.on('mouseover', function () {
                     layer.bringToFront();
                     // provide a visual affordance
                     layer.setStyle({
-                        radius: 14
+                        radius: 16
                     });
                     // select the cooresponding list item and add the highlight class to make bold
                     $('#glacierList-' + props.num).addClass('highlight');
@@ -649,7 +675,7 @@
             const breaks = chroma.limits(glacierLoss, 'q', 7);
             // build a colorize function
             let colorize = chroma
-                .scale(["#fffc74", "#ffbf51", "#ff803e", "#ff2c15", "#fa000e", "#cb0032", "#6b008d"])
+                .scale(["#ffbf51", "#ff803e", "#ff2c15", "#fa000e", "#cb0032", "#8d0069", "#6b008d", ])
                 .domain(breaks)
                 .mode('lch');
             return colorize;
@@ -691,16 +717,18 @@
                     if (layer.feature.properties.num === glacierNum) {
                         // change the layer style
                         layer.setStyle({
-                            radius: 14
-                        }).bringToFront();
+                            radius: 16
+                        }).bringToFront().openTooltip();
                     };
+
                     // deselects layer highlight on legend mouseout
                     $('.dropdown-item2').on('mouseout', function () {
                         layer.setStyle({
                             radius: 7
-                        });
+                        }).closeTooltip();
                     });
                 });
+
             })
         };
 
