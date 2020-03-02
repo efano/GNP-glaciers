@@ -50,7 +50,7 @@
 
         .navbar-title {
             color: #444;
-            margin-left: 4px;
+            margin-left: 3px;
             margin-top: 14px;
             font-size: 24px;
             font-weight: 600;
@@ -225,10 +225,6 @@
             border-bottom: 1px solid #444;
         }
 
-        /* hr {
-            border: 1px solid red;
-        } */
-
         .leaflet-tooltip {
             border-radius: 5px;
             box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
@@ -357,7 +353,8 @@
                 <use xlink:href="#icon-mountain" /></svg>
             <h1 class="navbar-title">Our Vanishing Glaciers </h1>
             <div class="vl"></div>
-            <h3 class="navbar-subtitle">Visualizing a Half-Century of Glacier Loss in Glacier National Park, Montana </h3>
+            <h3 class="navbar-subtitle">Visualizing a Half-Century of Glacier Loss in Glacier National Park, Montana
+            </h3>
         </div>
         <div class="flex-parent-inline" id="icon-group">
             <a class="navbar-icon" href="#" id="info-icon" title="Project Information">
@@ -594,7 +591,7 @@
             }).addTo(map);
             // fit map bounds to feature extent
             map.fitBounds(glaciersLayerGroup.getBounds(), {
-                padding: [10, 10]
+                padding: [20, 20]
             });
 
             map.on('zoomend', function () {
@@ -653,7 +650,7 @@
                     '<a class="tooltipPct" style="color:' + colorize(props.pctD) + '"> ' + (parseFloat(
                             props["pctD"]) *
                         100).toFixed(0) + "%" + '</a>', {
-                        opacity: .95,
+                        opacity: .95
                     }
                 );
 
