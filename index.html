@@ -12,9 +12,6 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Istok+Web|Open+Sans&display=swap" rel="stylesheet">
 
-
-
-
     <style>
         * {
             cursor: default !important;
@@ -252,7 +249,7 @@
 
         .glacierPtLegend {
             background-color: rgba(255, 255, 255, .95);
-            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
             left: 16px;
             bottom: 16px;
@@ -441,7 +438,7 @@
     <script>
         // navbar dropdowns
 
-        // baselayer dropdown menu
+        // show baselayer dropdown menu
         function baselayerDropdownFunction() {
             document.getElementById("baselayerDropdownList").classList.toggle("show1");
         }
@@ -458,7 +455,7 @@
             }
         });
 
-        // glaciers dropdown menu
+        // show glaciers dropdown menu
         function glacierDropdownFunction() {
             document.getElementById("glacierDropdownList").classList.toggle("show2");
         }
@@ -616,6 +613,7 @@
             drawDropDownList(ptData);
             highlightGlacier(glaciersLayerGroup);
             zoomToGlacier(glaciersLayerGroup);
+            removeLists();
         });
 
         // draw glacier points
@@ -793,8 +791,17 @@
 
         // extent button on click
         function extentIcon(parkBounds) {
-            $('#extent-icon').click(function () {
+            $('#extent-icon').click(function() {
                 map.flyToBounds(parkBounds.getBounds());
+            });
+        };
+
+        // hide dropdown lists on zoom-click
+        function removeLists() {
+            $('.leaflet-control-zoom-in, .leaflet-control-zoom-out').click(function() {
+                console.log("hey");
+                $('[id="glacierDropdownList"]').removeClass('show2');
+                $('[id="baselayerDropdownList"]').removeClass('show1');
             });
         };
     </script>
