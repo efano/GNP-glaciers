@@ -4,12 +4,17 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="icon" type="image/svg+xml" href="icons/mountain.svg">
 
-    <title>Glacier Retreat in Glacier National Park</title>
+    <title>Vanishing Glaciers</title>
     <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Istok+Web|Open+Sans&display=swap" rel="stylesheet">
+
+
+
+
     <style>
         * {
             cursor: default !important;
@@ -32,14 +37,39 @@
             z-index: 1001;
             box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
             height: 50px;
-            font-size: 24px;
-            font-weight: 600;
+        }
+
+        #mountain-icon {
+            margin-top: 2px;
+            margin-left: 9px;
+            color: #444;
+            width: 42px;
+            height: 42px;
+
         }
 
         .navbar-title {
             color: #444;
-            padding-left: 16px;
-            padding-top: 14px;
+            margin-left: 2px;
+            margin-top: 14px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .vl {
+            border-left: 1.25px solid #777;
+            height: 28px;
+            margin-top: 11px;
+            margin-left: 17px;
+            top: 0;
+        }
+
+        .navbar-subtitle {
+            color: #777;
+            font-size: 16px;
+            font-weight: 600;
+            margin-left: 17px;
+            margin-top: 16px;
         }
 
         #icon-group {
@@ -49,7 +79,7 @@
         }
 
         .navbar-icon {
-            color: #999;
+            color: #777;
             font-size: 26px;
             padding-top: 1px;
         }
@@ -323,7 +353,11 @@
 <body>
     <nav class="navbar">
         <div class="flex-parent-inline">
-            <span class="navbar-title">The Vanishing Glaciers of Glacier National Park</span>
+            <svg class="icon" id="mountain-icon">
+                <use xlink:href="#icon-mountain" /></svg>
+            <h1 class="navbar-title">Our Vanishing Glaciers </h1>
+            <div class="vl"></div>
+            <h3 class="navbar-subtitle">Visualizing Half a Century of Glacier Loss in Glacier National Park, Montana </h3>
         </div>
         <div class="flex-parent-inline" id="icon-group">
             <a class="navbar-icon" href="#" id="info-icon" title="Project Information">
