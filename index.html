@@ -307,6 +307,22 @@
             padding-bottom: 16px;
         }
 
+        .toggle-group {
+            margin-bottom: 3px;
+            margin-top: 4px;
+            background-color: #e2e2e2;
+        }
+
+        .toggle-group :hover {
+            color: #444;
+        }
+
+        .toggle--s {
+            font-size: 10px;
+            line-height: 16px;
+            padding: 1px 6px;
+        }
+
         #symbolActive {
             color: #777;
             font-size: 20px;
@@ -323,22 +339,6 @@
 
         #stangnant {
             margin-left: 2px;
-        }
-
-        .toggle-group {
-            margin-bottom: 3px;
-            margin-top: 4px;
-            background-color: #e2e2e2;
-        }
-
-        .toggle-group :hover {
-            color: #444;
-        }
-
-        .toggle--s {
-            font-size: 10px;
-            line-height: 16px;
-            padding: 1px 6px;
         }
     </style>
 </head>
@@ -600,12 +600,21 @@
                         map.removeLayer(glaciersLayerGroup);
                     }
                 }
-                if (zoomlevel < 12) {
+                if (zoomlevel < 12 && zoomlevel > 8) {
                     $("#glacier-btn-dropdown").html("Select Glacier &#9662;").text();
                     $(".glacierPtLegend").fadeIn();
                     map.addLayer(glaciersLayerGroup);
                     drawPts(glaciersLayerGroup);
                 }
+                if (zoomlevel <= 8) {
+                    $('#dropdown-list2 .dropdown-item2').removeClass('highlight');
+                    $(".glacierPtLegend").fadeOut();
+                    if (map.hasLayer(glaciersLayerGroup)) {
+                        map.removeLayer(glaciersLayerGroup);
+                    }
+                }
+               
+                
             });
 
             drawPts(glaciersLayerGroup);
@@ -799,7 +808,6 @@
         // hide dropdown lists on zoom-click
         function removeLists() {
             $('.leaflet-control-zoom-in, .leaflet-control-zoom-out').click(function() {
-                console.log("hey");
                 $('[id="glacierDropdownList"]').removeClass('show2');
                 $('[id="baselayerDropdownList"]').removeClass('show1');
             });
