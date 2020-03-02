@@ -680,6 +680,7 @@
                     $(btnObj).text($(".highlight").text());
                     $(btnObj).val($(".highlight").text());
                     $('[id="glacierDropdownList"]').removeClass('show2');
+                    $('[id="baselayerDropdownList"]').removeClass('show1');
 
                     // zoom to layer on click
                     map.flyTo(this.getLatLng(), 14);
