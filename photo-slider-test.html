@@ -70,9 +70,12 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photo-side2side-modal">
         Side-by-Side Modal
     </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photo-single-modal">
+        Single Modal
+    </button>
 
     <!-- Modal -->
-    <div class="modal fade bd-example-modal-lg" id="photo-slider-modal" tabindex="-1" role="dialog"
+    <div class="modal fade" id="photo-slider-modal" tabindex="-1" role="dialog"
         aria-labelledby="photo-slider-label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -100,7 +103,7 @@
         </div>
     </div>
 
-    <div class="modal fade bd-example-modal-lg" id="photo-side2side-modal" tabindex="-1" role="dialog"
+    <div class="modal fade" id="photo-side2side-modal" tabindex="-1" role="dialog"
         aria-labelledby="photo-side2side-label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -111,12 +114,32 @@
                     </button>
                 </div>
                 <div class="modal-body modal-body-container">
-                    <img src="photos/Ipasha3.jpg" alt="">
+                    <img src="photos/Siyeh3.jpg" alt="">
                     <div class="side-left" left-year="yearLeft"></div>
                     <div class="side-right" right-year="yearRight"></div>
                     <div>
                         <div class="attributionL" value="attributionLeft">Photo Left: </div>
                         <div class="attributionR" value="attributionRight">Photo Right: </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="photo-single-modal" tabindex="-1" role="dialog"
+        aria-labelledby="photo-single-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="photo-single-label">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body modal-body-container">
+                    <img src="photos/Stanton5.jpg" alt="">
+                    <div class="side-right" right-year="yearRight"></div>
+                    <div>
+                        <div class="attributionR" value="attributionRight">Photo: </div>
                     </div>
                 </div>
             </div>
