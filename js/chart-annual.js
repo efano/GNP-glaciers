@@ -26,7 +26,7 @@ async function drawLineChart() {
 
   // Draw canvas
 
-  const wrapper = d3.select("#wrapper")
+  const wrapper = d3.select("#wrapper2")
     .append("svg")
     .attr("width", dimensions.width)
     .attr("height", dimensions.height)
