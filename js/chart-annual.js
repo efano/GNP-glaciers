@@ -1,10 +1,9 @@
 async function drawLineChart() {
-  const dataset = await d3.json("./../data/climate-G1.json")
-  //const dataset = await d3.csv("./../data/climate-G1.csv")
+  const dataset = await d3.csv("./../data/climate-G1-annual.csv")
   console.table(dataset[0]);
   const yAccessor = d => d.TMEANF;
-  const dateParser = d3.timeParse("%Y-%m");
-  const xAccessor = d => dateParser(d.DATE);
+  const dateParser = d3.timeParse("%Y");
+  const xAccessor = d => dateParser(d.YEAR);
   console.log(xAccessor(dataset[0]));
 
   let dimensions = {
@@ -25,7 +24,7 @@ async function drawLineChart() {
     dimensions.margin.top -
     dimensions.margin.bottom
 
-  // 3. Draw canvas
+  // Draw canvas
 
   const wrapper = d3.select("#wrapper")
     .append("svg")
@@ -39,7 +38,7 @@ async function drawLineChart() {
         dimensions.margin.top
       }px)`)
 
-  // 4. Create scales
+  // Create scales
 
   const yScale = d3.scaleLinear()
     .domain(d3.extent(dataset, yAccessor))
@@ -65,7 +64,7 @@ async function drawLineChart() {
   const yAxis = bounds.append("g")
     .call(yAxisGenerator)
 
-  //Add label to Y axis
+  // Add label to Y axis
   yAxis.append("text")
     .attr("fill", "#000")
     .attr("transform", "rotate(-90)")
@@ -83,7 +82,7 @@ async function drawLineChart() {
         dimensions.boundedHeight
       }px)`)
 
-  //Add label to X axis
+  // Add label to X axis
   xAxis.append("text")
     .attr("fill", "#000")
     .attr("x", 165)
