@@ -1,5 +1,5 @@
 async function drawLineChart() {
-  const dataset = await d3.csv("./../data/climate-G1-annual.csv")
+  const dataset = await d3.csv("../data/climate-G1-annual.csv")
   console.table(dataset[0]);
   const yAccessor = d => d.TMEANF;
   const dateParser = d3.timeParse("%Y");
