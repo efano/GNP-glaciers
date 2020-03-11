@@ -23,7 +23,6 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
 
     <script>
-
         // ******* Monthly Temperature Chart ***********
 
         async function drawLineChart1() {
@@ -99,7 +98,7 @@
                 .attr("y", -35)
                 .attr("x", -95)
                 .attr("text-anchor", "middle")
-                .html("Mean Monthly Temperature (&#8239;&#8457;&#8239;)");
+                .html("Temperature (&#8239;&#8457;&#8239;)");
 
             const xAxisGenerator = d3.axisBottom()
                 .scale(xScale)
@@ -133,8 +132,8 @@
             console.log(xAccessor(dataset[0]));
 
             let dimensions = {
-                width: window.innerWidth * 0.3,
-                height: 200,
+                width: window.innerWidth * 0.24,
+                height: 160,
                 margin: {
                     top: 15,
                     right: 15,
@@ -165,7 +164,6 @@
                 }px)`)
 
             // Create scales
-
             const yScale = d3.scaleLinear()
                 .domain(d3.extent(dataset, yAccessor))
                 .range([dimensions.boundedHeight, 0])
@@ -197,9 +195,9 @@
                 .attr("fill", "#000")
                 .attr("transform", "rotate(-90)")
                 .attr("y", -35)
-                .attr("x", -70)
+                .attr("x", -60)
                 .attr("text-anchor", "middle")
-                .html("Mean Annual Temperature (&#8239;&#8457;&#8239;)");
+                .html("Temperature (&#8239;&#8457;&#8239;)");
 
             const xAxisGenerator = d3.axisBottom()
                 .scale(xScale)
@@ -209,6 +207,12 @@
                 .style("transform", `translateY(${
                     dimensions.boundedHeight
                 }px)`)
+                .selectAll("text")
+                .style("text-anchor", "end")
+                .attr("dx", "-.8em")
+                .attr("dy", ".15em")
+                .attr("transform", "rotate(-55)");
+
 
             // Add label to X axis
             xAxis.append("text")
@@ -221,7 +225,6 @@
 
         };
         drawLineChart2()
-
     </script>
 
 
