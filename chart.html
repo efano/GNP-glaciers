@@ -27,7 +27,7 @@
         // ******* Monthly Temperature Chart ***********
 
         async function drawLineChart1() {
-            const dataset = await d3.json("../data/climate-G1-monthly.json")
+            const dataset = await d3.json("data/climate-G1-monthly.json")
             console.table(dataset[0]);
             const yAccessor = d => d.TMEANF;
             const dateParser = d3.timeParse("%Y-%m");
@@ -125,7 +125,7 @@
         // ******* Annual Temperature Chart ***********
 
         async function drawLineChart2() {
-            const dataset = await d3.csv("../data/climate-G1-annual.csv")
+            const dataset = await d3.csv("data/climate-G1-annual.csv")
             console.table(dataset[0]);
             const yAccessor = d => d.TMEANF;
             const dateParser = d3.timeParse("%Y");
