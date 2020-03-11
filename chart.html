@@ -99,7 +99,7 @@
                 .attr("y", -35)
                 .attr("x", -95)
                 .attr("text-anchor", "middle")
-                .html("Temperature (&#8239;&#8457;&#8239;)");
+                .html("Mean Monthly Temperature (&#8239;&#8457;&#8239;)");
 
             const xAxisGenerator = d3.axisBottom()
                 .scale(xScale)
@@ -134,7 +134,7 @@
 
             let dimensions = {
                 width: window.innerWidth * 0.3,
-                height: 250,
+                height: 200,
                 margin: {
                     top: 15,
                     right: 15,
@@ -177,15 +177,17 @@
             const lineGenerator = d3.line()
                 .x(d => xScale(xAccessor(d)))
                 .y(d => yScale(yAccessor(d)))
+                .curve(d3.curveBasis);
 
             const line = bounds.append("path")
                 .attr("d", lineGenerator(dataset))
                 .attr("fill", "none")
                 .attr("stroke", "#c8c8c8")
-                .attr("stroke-width", 1)
+                .attr("stroke-width", 2)
 
             const yAxisGenerator = d3.axisLeft()
                 .scale(yScale)
+                .ticks(5)
 
             const yAxis = bounds.append("g")
                 .call(yAxisGenerator)
@@ -195,9 +197,9 @@
                 .attr("fill", "#000")
                 .attr("transform", "rotate(-90)")
                 .attr("y", -35)
-                .attr("x", -95)
+                .attr("x", -70)
                 .attr("text-anchor", "middle")
-                .html("Temperature (&#8239;&#8457;&#8239;)");
+                .html("Mean Annual Temperature (&#8239;&#8457;&#8239;)");
 
             const xAxisGenerator = d3.axisBottom()
                 .scale(xScale)
