@@ -43,7 +43,7 @@
             transition: all 0.1s ease-out;
             pointer-events: none;
             border-radius: 5px;
-            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
         }
 
         .tooltip:before {
@@ -94,14 +94,14 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
 
     <script>
-        // ******* Annual Temperature Chart ***********
+        // ******* Annual Mean Temperature Chart ***********
 
         async function drawLineChart() {
 
             // access data
 
             const dataset = await d3.csv("data/climate-G1-annual.csv")
-            const yAccessor = d => d.TMEANF;
+            const yAccessor = d => +d.TMEANF;
             const dateParser = d3.timeParse("%Y");
             const xAccessor = d => dateParser(d.YEAR);
 
@@ -155,7 +155,7 @@
             const lineGenerator = d3.line()
                 .x(d => xScale(xAccessor(d)))
                 .y(d => yScale(yAccessor(d)))
-                .curve(d3.curveCatmullRom.alpha(.1));
+                .curve(d3.curveMonotoneX);
 
             const line = bounds.append("path")
                 .attr("d", lineGenerator(dataset))
@@ -163,6 +163,18 @@
                 .attr("stroke", "#444")
                 .attr("stroke-width", 1.5)
                 .attr("class", "line")
+                
+            // animation
+
+            const totalLength = line.node().getTotalLength();
+
+            line
+                .attr("stroke-dasharray", totalLength + " " + totalLength)
+                .attr("stroke-dashoffset", totalLength)
+                .transition()
+                .duration(1500)
+                .ease(d3.easeLinear)
+                .attr("stroke-dashoffset", 0);
 
             // draw peripherals
 
@@ -196,7 +208,7 @@
                 .attr("y", ".15em")
                 .attr("transform", "rotate(-55)");
 
-            // set up interactions
+            // hover interactions
 
             const listeningRect = bounds.append("rect")
                 .attr("class", "listening-rect")
