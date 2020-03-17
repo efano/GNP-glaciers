@@ -7,15 +7,54 @@
     <link href="https://fonts.googleapis.com/css?family=Istok+Web|Open+Sans&display=swap" rel="stylesheet">
 
     <style>
-        .wrapper {
-            position: relative;
-        }
-
         body {
             font-family: 'Istok Web', 'Open Sans', sans-serif;
             color: #999;
             display: flex;
-            padding: 5em 1em;
+        }
+
+        h4 {
+            color: #444;
+            font-size: 16px;
+            font-weight: bold;
+            margin-left: 16px;
+        }
+
+        h6 {
+            color: #444;
+            font-size: 13px;
+            font-weight: bold;
+            margin-left: 16px;
+            margin-top: -24px;
+            margin-bottom: 6px;
+        }
+
+        #legendLine1 {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 16px;
+        }
+
+        #legendLineText1 {
+            font-size: 11px;
+            display: inline-block;
+        }
+
+        #legendLine2 {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 16px;
+            margin-top: -12px;
+        }
+
+        #legendLineText2 {
+            font-size: 11px;
+            display: inline-block;
+        }
+
+        #wrapper {
+            position: relative;
+            margin-top: -8px;
         }
 
         .listening-rect {
@@ -31,8 +70,8 @@
         .tooltip {
             opacity: 0;
             position: absolute;
-            top: 60px;
-            left: 23px;
+            top: -16px;
+            left: 0;
             padding: 0.6em 1em;
             background: #fff;
             border: .5px solid #f5f5f5;
@@ -65,7 +104,7 @@
         .tooltip-date {
             margin-bottom: 0.3em;
             color: #444;
-            font-size: 1.3em;
+            font-size: 1.2em;
             font-weight: bold;
             padding-top: 4px;
         }
@@ -74,27 +113,64 @@
             color: #1791FF;
             font-weight: 600;
         }
+
+        .year {
+            fill: #fff;
+        }
+
+        .year.group1,
+        .year.group3 {
+            fill: #f2f2f2;
+            fill-opacity: .9;
+        }
+
+        .year-group-mean {
+            fill: none;
+            stroke: #1791FF;
+            stroke-width: 1.25;
+            opacity: 0.8;
+        }
     </style>
 </head>
 
 <body>
-
-    <div id="wrapper">
-        <div id="tooltip" class="tooltip">
-            <div class="tooltip-date">
-                <span id="date"></span>
-            </div>
-            <div class="tooltip-temperature">
-                Annual Mean<br>Temperature: <span id="temperature"></span>
+    <div class="climateChartAll">
+        <h4>Mean Air Temperatures</h4>
+        <h6>(1966 &ndash; 2015)</h6>
+        <div>
+            <div class="legendLines" id="legendLine1">
+                <svg height="10" width="10">
+                    <line x1="0" y1="0" x2="50" y2="50" style="stroke:#444;stroke-width:2" />
+                </svg>
+                <div class="legendLineText" id="legendLineText1">Mean Annual Temperature</div>
             </div>
         </div>
 
+        <div>
+            <div class="legendLines" id="legendLine2">
+                <svg height="10" width="10">
+                    <line x1="0" y1="0" x2="50" y2="50" style="stroke:#1791FF;stroke-width:1.25" />
+                </svg>
+                <div class="legendLineText" id="legendLineText2">Mean Temperature Between Measurements</div>
+            </div>
+        </div>
+
+        <div id="wrapper">
+            <div id="tooltip" class="tooltip">
+                <div class="tooltip-date">
+                    <span id="date"></span>
+                </div>
+                <div class="tooltip-temperature">
+                    Mean Annual<br>Temperature: <span id="temperature"></span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
 
     <script>
-        // ******* Annual Mean Temperature Chart ***********
+        // ******* Mean Annual Temperature Chart ***********
 
         async function drawLineChart() {
 
@@ -105,10 +181,11 @@
             const dateParser = d3.timeParse("%Y");
             const xAccessor = d => dateParser(d.YEAR);
 
+
             // ceate chart dimensions
 
             let dimensions = {
-                width: window.innerWidth * 0.24,
+                width: window.innerWidth * 0.22,
                 height: 160,
                 margin: {
                     top: 15,
@@ -150,7 +227,62 @@
                 .domain(d3.extent(dataset, xAccessor))
                 .range([0, dimensions.boundedWidth])
 
-            // draw data
+            // group data to get group mean
+
+            const yearNames = ["1966-1997", "1998-2004", "2005-2015"]
+
+            let yearsData = []
+
+            const startDate1 = xAccessor(dataset[0])
+            const endDate1 = xAccessor(dataset[32])
+            const startDate2 = xAccessor(dataset[32])
+            const endDate2 = xAccessor(dataset[39])
+            const startDate3 = xAccessor(dataset[39])
+            const endDate3 = xAccessor(dataset[49])
+
+            const group1 = d3.timeYears(startDate1, endDate1)
+            const yearsFilter1 = dataset.filter(d => xAccessor(d) >= startDate1 && xAccessor(d) < endDate1)
+            if (!yearsFilter1.length) return
+            yearsData.push({
+                start: startDate1,
+                end: endDate1,
+                id: "group1",
+                name: yearNames[0],
+                mean: d3.mean(yearsFilter1, yAccessor),
+            })
+            const group2 = d3.timeYears(startDate2, endDate2)
+            const yearsFilter2 = dataset.filter(d => xAccessor(d) >= startDate2 && xAccessor(d) < endDate2)
+            if (!yearsFilter2.length) return
+            yearsData.push({
+                start: startDate2,
+                end: endDate2,
+                id: "group2",
+                name: yearNames[1],
+                mean: d3.mean(yearsFilter2, yAccessor),
+            })
+            const group3 = d3.timeYears(startDate3, endDate3)
+            const yearsFilter3 = dataset.filter(d => xAccessor(d) >= startDate3 && xAccessor(d) <= endDate3)
+            if (!yearsFilter3.length) return
+            yearsData.push({
+                start: startDate3,
+                end: endDate3,
+                id: "group3",
+                name: yearNames[2],
+                mean: d3.mean(yearsFilter3, yAccessor),
+            })
+            console.log('yearData: ', yearsData)
+
+            const yearOffset = 10
+            const yearArea = bounds.selectAll(".yearArea")
+                .data(yearsData)
+                .enter().append("rect")
+                .attr("x", d => xScale(d.start))
+                .attr("width", d => xScale(d.end) - xScale(d.start))
+                .attr("y", yearOffset)
+                .attr("height", dimensions.boundedHeight - yearOffset)
+                .attr("class", d => `year ${d.id}`)
+
+            // draw annual line 
 
             const lineGenerator = d3.line()
                 .x(d => xScale(xAccessor(d)))
@@ -163,20 +295,17 @@
                 .attr("stroke", "#444")
                 .attr("stroke-width", 1.5)
                 .attr("class", "line")
-                
-            // animation
-
-            const totalLength = line.node().getTotalLength();
-
-            line
-                .attr("stroke-dasharray", totalLength + " " + totalLength)
-                .attr("stroke-dashoffset", totalLength)
-                .transition()
-                .duration(1500)
-                .ease(d3.easeLinear)
-                .attr("stroke-dashoffset", 0);
 
             // draw peripherals
+
+            const yearGroupMeans = bounds.selectAll(".year-group-mean")
+                .data(yearsData)
+                .enter().append("line")
+                .attr("x1", d => xScale(d.start))
+                .attr("x2", d => xScale(d.end))
+                .attr("y1", d => yScale(d.mean))
+                .attr("y2", d => yScale(d.mean))
+                .attr("class", "year-group-mean")
 
             const yAxisGenerator = d3.axisLeft()
                 .scale(yScale)
@@ -194,19 +323,25 @@
                 .attr("text-anchor", "middle")
                 .html("Temperature (&#8239;&#8457;&#8239;)");
 
+            const yearValues = [startDate1, startDate2, startDate3, endDate3]
+
             const xAxisGenerator = d3.axisBottom()
                 .scale(xScale)
+                .tickValues(yearValues)
 
             const xAxis = bounds.append("g")
                 .call(xAxisGenerator)
                 .style("transform", `translateY(${
                     (dimensions.boundedHeight)
                 }px)`)
-                .selectAll("text")
-                .style("text-anchor", "end")
-                .attr("x", "-.8em")
-                .attr("y", ".15em")
-                .attr("transform", "rotate(-55)");
+                
+            const xAxisLabel = xAxis.append("text")
+                .attr("class", "x-axis-label")
+                .attr("fill", "#999")
+                .attr("x", dimensions.boundedWidth / 2)
+                .attr("y", dimensions.margin.bottom - 10)
+                .attr("text-anchor", "middle")
+                .text("Year")
 
             // hover interactions
 
@@ -270,6 +405,18 @@
 
                 tooltipCircle.style("opacity", 0)
             }
+
+            // animation
+
+            // const totalLength = line.node().getTotalLength();
+
+            // line
+            //     .attr("stroke-dasharray", totalLength + " " + totalLength)
+            //     .attr("stroke-dashoffset", totalLength)
+            //     .transition()
+            //     .duration(1500)
+            //     .ease(d3.easeLinear)
+            //     .attr("stroke-dashoffset", 0);
         };
         drawLineChart()
     </script>
