@@ -270,7 +270,6 @@
                 name: yearNames[2],
                 mean: d3.mean(yearsFilter3, yAccessor),
             })
-            console.log('yearData: ', yearsData)
 
             const yearOffset = 10
             const yearArea = bounds.selectAll(".yearArea")
@@ -334,7 +333,7 @@
                 .style("transform", `translateY(${
                     (dimensions.boundedHeight)
                 }px)`)
-                
+
             const xAxisLabel = xAxis.append("text")
                 .attr("class", "x-axis-label")
                 .attr("fill", "#999")
@@ -408,15 +407,28 @@
 
             // animation
 
-            // const totalLength = line.node().getTotalLength();
+            const totalLineLength = line.node().getTotalLength();
 
-            // line
-            //     .attr("stroke-dasharray", totalLength + " " + totalLength)
-            //     .attr("stroke-dashoffset", totalLength)
-            //     .transition()
-            //     .duration(1500)
-            //     .ease(d3.easeLinear)
-            //     .attr("stroke-dashoffset", 0);
+            line
+                .attr("stroke-dasharray", totalLineLength + " " + totalLineLength)
+                .attr("stroke-dashoffset", totalLineLength)
+                .transition()
+                .duration(1500)
+                .ease(d3.easeLinear)
+                .attr("stroke-dashoffset", 0);
+
+            const totalBlueLineLength = yearGroupMeans.node().getTotalLength();
+
+            yearGroupMeans
+                .attr("stroke-dasharray", totalBlueLineLength + " " + totalBlueLineLength)
+                .attr("stroke-dashoffset", totalBlueLineLength)
+                .transition()
+                .delay(1700)
+                .duration(50)
+                .ease(d3.easeLinear)
+                .attr("stroke-dashoffset", 0);
+
+
         };
         drawLineChart()
     </script>
