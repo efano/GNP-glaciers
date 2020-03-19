@@ -2,8 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>Average Air Temperature Chart</title>
+    <title>Climate Charts</title>
 
+    <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Istok+Web|Open+Sans&display=swap" rel="stylesheet">
 
     <style>
@@ -14,45 +15,45 @@
         }
 
         h4 {
-            color: #444;
+            color: #333;
             font-size: 16px;
             font-weight: bold;
+            margin-top: 16px;
             margin-left: 16px;
         }
 
         h6 {
-            color: #444;
+            color: #333;
             font-size: 13px;
             font-weight: bold;
             margin-left: 16px;
-            margin-top: -24px;
+            margin-top: -4px;
             margin-bottom: 6px;
         }
 
-        #legendLine1 {
+        #legendLine1,
+        #legendLine3 {
             display: inline-block;
             vertical-align: middle;
             margin-left: 16px;
         }
 
-        #legendLineText1 {
-            font-size: 11px;
-            display: inline-block;
-        }
-
-        #legendLine2 {
+        #legendLine2,
+        #legendLine4 {
             display: inline-block;
             vertical-align: middle;
             margin-left: 16px;
             margin-top: -12px;
         }
 
-        #legendLineText2 {
+        .legendLineText {
             font-size: 11px;
+            font-weight: 600;
             display: inline-block;
         }
 
-        #wrapper {
+        #wrapper1,
+        #wrapper2 {
             position: relative;
             margin-top: -8px;
         }
@@ -63,7 +64,7 @@
 
         .line {
             fill: none;
-            stroke: #444;
+            stroke: #333;
             stroke-width: 2;
         }
 
@@ -76,8 +77,9 @@
             background: #fff;
             border: .5px solid #f5f5f5;
             text-align: left;
-            line-height: 1.1em;
+            line-height: 1.3em;
             font-size: .7em;
+            font-weight: 600;
             z-index: 10;
             transition: all 0.1s ease-out;
             pointer-events: none;
@@ -103,14 +105,19 @@
 
         .tooltip-date {
             margin-bottom: 0.3em;
-            color: #444;
+            color: #333;
             font-size: 1.2em;
             font-weight: bold;
             padding-top: 4px;
         }
 
-        #temperature {
-            color: #1791FF;
+        #temp {
+            color: #FF3A30;
+            font-weight: 600;
+        }
+
+        #precip {
+            color: #1793FF;
             font-weight: 600;
         }
 
@@ -124,53 +131,97 @@
             fill-opacity: .9;
         }
 
-        .year-group-mean {
+        .year-group-mean1 {
             fill: none;
-            stroke: #1791FF;
-            stroke-width: 1.25;
+            stroke: #FF3A30;
+            stroke-width: 1.5;
+            opacity: 0.8;
+        }
+
+        .year-group-mean2 {
+            fill: none;
+            stroke: #1793FF;
+            stroke-width: 1.5;
             opacity: 0.8;
         }
     </style>
 </head>
 
 <body>
-    <div class="climateChartAll">
-        <h4>Average Air Temperature</h4>
-        <h6>(1966 &ndash; 2015)</h6>
-        <div>
-            <div class="legendLines" id="legendLine1">
-                <svg height="10" width="10">
-                    <line x1="0" y1="0" x2="50" y2="50" style="stroke:#444;stroke-width:2" />
-                </svg>
-                <div class="legendLineText" id="legendLineText1">Average Annual Temperature</div>
-            </div>
-        </div>
-
-        <div>
-            <div class="legendLines" id="legendLine2">
-                <svg height="10" width="10">
-                    <line x1="0" y1="0" x2="50" y2="50" style="stroke:#1791FF;stroke-width:1.25" />
-                </svg>
-                <div class="legendLineText" id="legendLineText2">Average Temperature Between Measurements</div>
-            </div>
-        </div>
-
-        <div id="wrapper">
-            <div id="tooltip" class="tooltip">
-                <div class="tooltip-date">
-                    <span id="date"></span>
+    <div class="climateChartsAll">
+        <div class="tempTitle">
+            <h4>Average Air Temperature</h4>
+            <h6>(1966 &ndash; 2015)</h6>
+            <div>
+                <div class="legendLines" id="legendLine1">
+                    <svg height="10" width="10">
+                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#333;stroke-width:2" />
+                    </svg>
+                    <div class="legendLineText" id="legendLineText1">Average Annual Temperature</div>
                 </div>
-                <div class="tooltip-temperature">
-                    Average<br>Temperature: <span id="temperature"></span>
+            </div>
+
+            <div>
+                <div class="legendLines" id="legendLine2">
+                    <svg height="10" width="10">
+                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#FF3A30;stroke-width:1.5" />
+                    </svg>
+                    <div class="legendLineText" id="legendLineText2">Average Temperature Between Measurements</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="wrapper1">
+            <div id="tooltip1" class="tooltip">
+                <div class="tooltip-date">
+                    <span class="date"></span>
+                </div>
+                <div class="tooltip-text">
+                    Average Annual<br>Temperature: <span id="temp"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="precipTitle">
+            <h4>Total Precipitation</h4>
+            <h6>(1966 &ndash; 2015)</h6>
+            <div>
+                <div class="legendLines" id="legendLine3">
+                    <svg height="10" width="10">
+                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#333;stroke-width:2" />
+                    </svg>
+                    <div class="legendLineText" id="legendLineText3">Total Annual Precipitation</div>
+                </div>
+            </div>
+
+            <div>
+                <div class="legendLines" id="legendLine4">
+                    <svg height="10" width="10">
+                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#1793FF;stroke-width:1.5" />
+                    </svg>
+                    <div class="legendLineText" id="legendLineText4">Average Precipitation Between Measurements</div>
+                </div>
+            </div>
+
+            <div id="wrapper2">
+                <div id="tooltip2" class="tooltip">
+                    <div class="tooltip-date">
+                        <span class="date"></span>
+                    </div>
+                    <div class="tooltip-text">
+                        Total Annual<br>Precipitation: <span id="precip"></span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
 
     <script>
-        // ******* Mean Annual Temperature Chart ***********
+        // ******* Mean Temperature Chart ***********
 
         async function drawLineChart() {
 
@@ -204,12 +255,12 @@
 
             // draw canvas
 
-            const wrapper = d3.select("#wrapper")
+            const wrapper1 = d3.select("#wrapper1")
                 .append("svg")
                 .attr("width", dimensions.width)
                 .attr("height", dimensions.height)
 
-            const bounds = wrapper.append("g")
+            const bounds = wrapper1.append("g")
                 .style("transform", `translate(${
                     dimensions.margin.left
                 }px, ${
@@ -291,20 +342,20 @@
             const line = bounds.append("path")
                 .attr("d", lineGenerator(dataset))
                 .attr("fill", "none")
-                .attr("stroke", "#444")
+                .attr("stroke", "#333")
                 .attr("stroke-width", 1.5)
                 .attr("class", "line")
 
             // draw peripherals
 
-            const yearGroupMeans = bounds.selectAll(".year-group-mean")
+            const yearGroupMeans = bounds.selectAll(".year-group-mean1")
                 .data(yearsData)
                 .enter().append("line")
                 .attr("x1", d => xScale(d.start))
                 .attr("x2", d => xScale(d.end))
                 .attr("y1", d => yScale(d.mean))
                 .attr("y2", d => yScale(d.mean))
-                .attr("class", "year-group-mean")
+                .attr("class", "year-group-mean1")
 
             const yAxisGenerator = d3.axisLeft()
                 .scale(yScale)
@@ -351,12 +402,12 @@
                 .on("mousemove", onMouseMove)
                 .on("mouseleave", onMouseLeave)
 
-            const tooltip = d3.select("#tooltip")
+            const tooltip = d3.select("#tooltip1")
             const tooltipCircle = bounds.append("circle")
                 .attr("class", "tooltip-circle")
                 .attr("r", 3.5)
-                .attr("stroke", "#444")
-                .attr("fill", "#1791FF")
+                .attr("stroke", "#333")
+                .attr("fill", "#FF3A30")
                 .attr("stroke-width", 2)
                 .style("opacity", 0)
 
@@ -374,11 +425,11 @@
                 const closestYValue = yAccessor(closestDataPoint)
 
                 const formatDate = d3.timeFormat("%Y")
-                tooltip.select("#date")
+                tooltip.select(".date")
                     .text(formatDate(closestXValue))
 
                 const formatTemperature = d => `${d3.format(".1f")(d)}°F`
-                tooltip.select("#temperature")
+                tooltip.select("#temp")
                     .text(formatTemperature(closestYValue))
 
                 const x = xScale(closestXValue) +
@@ -429,6 +480,266 @@
                 .attr("stroke-dashoffset", 0);
         };
         drawLineChart()
+
+        // ******* Precipitation Chart ***********
+
+        async function drawPrecipChart() {
+
+            // access data
+
+            const dataset = await d3.csv("data/climate-G1-annual.csv")
+            const yAccessor = d => +d.PPTIN;
+            const dateParser = d3.timeParse("%Y");
+            const xAccessor = d => dateParser(d.YEAR);
+
+
+            // ceate chart dimensions
+
+            let dimensions = {
+                width: window.innerWidth * 0.22,
+                height: 160,
+                margin: {
+                    top: 15,
+                    right: 15,
+                    bottom: 40,
+                    left: 60,
+                },
+            }
+
+            dimensions.boundedWidth = dimensions.width -
+                dimensions.margin.left -
+                dimensions.margin.right
+            dimensions.boundedHeight = dimensions.height -
+                dimensions.margin.top -
+                dimensions.margin.bottom
+
+            // draw canvas
+
+            const wrapper2 = d3.select("#wrapper2")
+                .append("svg")
+                .attr("width", dimensions.width)
+                .attr("height", dimensions.height)
+
+            const bounds = wrapper2.append("g")
+                .style("transform", `translate(${
+                    dimensions.margin.left
+                }px, ${
+                    dimensions.margin.top
+                }px)`)
+
+            // create scales
+
+            const yScale = d3.scaleLinear()
+                .domain(d3.extent(dataset, yAccessor))
+                .range([dimensions.boundedHeight, 0])
+                .nice(5)
+
+            const xScale = d3.scaleTime()
+                .domain(d3.extent(dataset, xAccessor))
+                .range([0, dimensions.boundedWidth])
+
+            // group data to get group mean
+
+            const yearNames = ["1966-1997", "1998-2004", "2005-2015"]
+
+            let yearsData = []
+
+            const startDate1 = xAccessor(dataset[0])
+            const endDate1 = xAccessor(dataset[32])
+            const startDate2 = xAccessor(dataset[32])
+            const endDate2 = xAccessor(dataset[39])
+            const startDate3 = xAccessor(dataset[39])
+            const endDate3 = xAccessor(dataset[49])
+
+            const group1 = d3.timeYears(startDate1, endDate1)
+            const yearsFilter1 = dataset.filter(d => xAccessor(d) >= startDate1 && xAccessor(d) < endDate1)
+            if (!yearsFilter1.length) return
+            yearsData.push({
+                start: startDate1,
+                end: endDate1,
+                id: "group1",
+                name: yearNames[0],
+                mean: d3.mean(yearsFilter1, yAccessor),
+            })
+            const group2 = d3.timeYears(startDate2, endDate2)
+            const yearsFilter2 = dataset.filter(d => xAccessor(d) >= startDate2 && xAccessor(d) < endDate2)
+            if (!yearsFilter2.length) return
+            yearsData.push({
+                start: startDate2,
+                end: endDate2,
+                id: "group2",
+                name: yearNames[1],
+                mean: d3.mean(yearsFilter2, yAccessor),
+            })
+            const group3 = d3.timeYears(startDate3, endDate3)
+            const yearsFilter3 = dataset.filter(d => xAccessor(d) >= startDate3 && xAccessor(d) <= endDate3)
+            if (!yearsFilter3.length) return
+            yearsData.push({
+                start: startDate3,
+                end: endDate3,
+                id: "group3",
+                name: yearNames[2],
+                mean: d3.mean(yearsFilter3, yAccessor),
+            })
+
+            const yearOffset = 10
+            const yearArea = bounds.selectAll(".yearArea")
+                .data(yearsData)
+                .enter().append("rect")
+                .attr("x", d => xScale(d.start))
+                .attr("width", d => xScale(d.end) - xScale(d.start))
+                .attr("y", yearOffset)
+                .attr("height", dimensions.boundedHeight - yearOffset)
+                .attr("class", d => `year ${d.id}`)
+
+            // draw annual line 
+
+            const lineGenerator = d3.line()
+                .x(d => xScale(xAccessor(d)))
+                .y(d => yScale(yAccessor(d)))
+                .curve(d3.curveMonotoneX);
+
+            const line = bounds.append("path")
+                .attr("d", lineGenerator(dataset))
+                .attr("fill", "none")
+                .attr("stroke", "#333")
+                .attr("stroke-width", 1.5)
+                .attr("class", "line")
+
+            // draw peripherals
+
+            const yearGroupMeans = bounds.selectAll(".year-group-mean2")
+                .data(yearsData)
+                .enter().append("line")
+                .attr("x1", d => xScale(d.start))
+                .attr("x2", d => xScale(d.end))
+                .attr("y1", d => yScale(d.mean))
+                .attr("y2", d => yScale(d.mean))
+                .attr("class", "year-group-mean2")
+
+            const yAxisGenerator = d3.axisLeft()
+                .scale(yScale)
+                .ticks(5)
+
+            const yAxis = bounds.append("g")
+                .call(yAxisGenerator)
+
+            const yAxisLabel = yAxis.append("text")
+                .attr("class", "y-axis-label")
+                .attr("fill", "#999")
+                .attr("transform", "rotate(-90)")
+                .attr("x", -dimensions.boundedHeight / 2)
+                .attr("y", -dimensions.margin.left + 26)
+                .attr("text-anchor", "middle")
+                .html("Precipitation (&#8239;in&#8239;)");
+
+            const yearValues = [startDate1, startDate2, startDate3, endDate3]
+
+            const xAxisGenerator = d3.axisBottom()
+                .scale(xScale)
+                .tickValues(yearValues)
+
+            const xAxis = bounds.append("g")
+                .call(xAxisGenerator)
+                .style("transform", `translateY(${
+                    (dimensions.boundedHeight)
+                }px)`)
+
+            // const xAxisLabel = xAxis.append("text")
+            //     .attr("class", "x-axis-label")
+            //     .attr("fill", "#999")
+            //     .attr("x", dimensions.boundedWidth / 2)
+            //     .attr("y", dimensions.margin.bottom - 10)
+            //     .attr("text-anchor", "middle")
+            //     .text("Year")
+
+            // hover interactions
+
+            const listeningRect = bounds.append("rect")
+                .attr("class", "listening-rect")
+                .attr("width", dimensions.boundedWidth)
+                .attr("height", dimensions.boundedHeight)
+                .on("mousemove", onMouseMove)
+                .on("mouseleave", onMouseLeave)
+
+            const tooltip = d3.select("#tooltip2")
+            const tooltipCircle = bounds.append("circle")
+                .attr("class", "tooltip-circle")
+                .attr("r", 3.5)
+                .attr("stroke", "#333")
+                .attr("fill", "#1791FF")
+                .attr("stroke-width", 2)
+                .style("opacity", 0)
+
+            function onMouseMove() {
+                const mousePosition = d3.mouse(this)
+                const hoveredDate = xScale.invert(mousePosition[0])
+
+                const getDistanceFromHoveredDate = d => Math.abs(xAccessor(d) - hoveredDate)
+                const closestIndex = d3.scan(dataset, (a, b) => (
+                    getDistanceFromHoveredDate(a) - getDistanceFromHoveredDate(b)
+                ))
+                const closestDataPoint = dataset[closestIndex]
+
+                const closestXValue = xAccessor(closestDataPoint)
+                const closestYValue = yAccessor(closestDataPoint)
+
+                const formatDate = d3.timeFormat("%Y")
+                tooltip.select(".date")
+                    .text(formatDate(closestXValue))
+
+                const formatTemperature = d => `${d3.format(".1f")(d)} in`
+                tooltip.select("#precip")
+                    .text(formatTemperature(closestYValue))
+
+                const x = xScale(closestXValue) +
+                    dimensions.margin.left
+                const y = yScale(closestYValue) +
+                    dimensions.margin.top
+
+                tooltip.style("transform", `translate(` +
+                    `calc( -50% + ${x}px),` +
+                    `calc(-100% + ${y}px)` +
+                    `)`)
+
+                tooltip.style("opacity", 1)
+
+                tooltipCircle
+                    .attr("cx", xScale(closestXValue))
+                    .attr("cy", yScale(closestYValue))
+                    .style("opacity", 1)
+            }
+
+            function onMouseLeave() {
+                tooltip.style("opacity", 0)
+
+                tooltipCircle.style("opacity", 0)
+            }
+
+            // animation
+
+            const totalLineLength = line.node().getTotalLength();
+
+            line
+                .attr("stroke-dasharray", totalLineLength + " " + totalLineLength)
+                .attr("stroke-dashoffset", totalLineLength)
+                .transition()
+                .duration(1500)
+                .ease(d3.easeLinear)
+                .attr("stroke-dashoffset", 0);
+
+            const totalBlueLineLength = yearGroupMeans.node().getTotalLength();
+
+            yearGroupMeans
+                .attr("stroke-dasharray", totalBlueLineLength + " " + totalBlueLineLength)
+                .attr("stroke-dashoffset", totalBlueLineLength)
+                .transition()
+                .delay(1700)
+                .duration(50)
+                .ease(d3.easeLinear)
+                .attr("stroke-dashoffset", 0);
+        };
+        drawPrecipChart()
     </script>
 </body>
 
