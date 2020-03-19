@@ -31,6 +31,23 @@
             margin-bottom: 6px;
         }
 
+        #ui-lineCharts-control {
+            margin-bottom: 0px;
+            margin-left: 16px;
+            margin-top: 16px;
+            /* background-color: #e2e2e2; */
+        }
+
+        .toggle-group :hover {
+            color: #333;
+        }
+
+        #ui-lineCharts-control .toggle--s {
+            font-size: 10px;
+            line-height: 16px;
+            padding: 1px 6px;
+        }
+
         #legendLine1,
         #legendLine3 {
             display: inline-block;
@@ -52,15 +69,15 @@
             display: inline-block;
         }
 
-        .radioBtns {
-            margin-left: 16px;
-        }
-
         #wrapper1,
         #wrapper2 {
             position: relative;
             margin-top: -8px;
         }
+
+        /* #wrapper2 {
+            display: none;
+        } */
 
         .listening-rect {
             fill: transparent;
@@ -153,47 +170,40 @@
 
 <body>
     <div class="climateChartsAll">
-
-        <div class="radioBtns">
-            <label class="radio-container">
-                <input name="radio-gray" type="radio" value="radio-gray">
-                <div class="radio mr6 radio--gray"></div>
-                Temperature
+        <div class="toggle-group mr18" id="ui-lineCharts-control">
+            <label class="toggle-container">
+                <input checked name="toggle-small line-radio" type="radio" id="tempToggle" value="temperature" />
+                <div class="toggle toggle--darken50 toggle--s">Temperature</div>
             </label>
-            <label class="radio-container">
-                <input name="radio-gray" type="radio" value="radio-gray">
-                <div class="radio mr6 radio--gray"></div>
-                Precipitation
+            <label class="toggle-container">
+                <input name="toggle-small line-radio" type="radio" id="precipToggle" value="precipitation" />
+                <div class="toggle toggle--darken50 toggle--s">Precipitation</div>
             </label>
-            <label class="switch-container">
-                <input type="checkbox" />
-                <div class="switch"></div>
-              </label>
         </div>
-
-        <div class="tempTitle">
-            <h4>Average Air Temperature</h4>
-            <h6>(1966 &ndash; 2015)</h6>
-            <div>
-                <div class="legendLines" id="legendLine1">
-                    <svg height="10" width="10">
-                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#333;stroke-width:2" />
-                    </svg>
-                    <div class="legendLineText" id="legendLineText1">Average Annual Temperature</div>
-                </div>
-            </div>
-
-            <div>
-                <div class="legendLines" id="legendLine2">
-                    <svg height="10" width="10">
-                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#FF3A30;stroke-width:1.5" />
-                    </svg>
-                    <div class="legendLineText" id="legendLineText2">Average Temperature Between Measurements</div>
-                </div>
-            </div>
-        </div>
-
         <div id="wrapper1">
+            <div class="tempTitle">
+                <h4>Average Air Temperature</h4>
+                <h6>(1966 &ndash; 2015)</h6>
+                <div>
+                    <div class="legendLines" id="legendLine1">
+                        <svg height="10" width="10">
+                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#333;stroke-width:2" />
+                        </svg>
+                        <div class="legendLineText" id="legendLineText1">Average Annual Temperature</div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="legendLines" id="legendLine2">
+                        <svg height="10" width="10">
+                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#FF3A30;stroke-width:1.5" />
+                        </svg>
+                        <div class="legendLineText" id="legendLineText2">Average Temperature Between Measurements</div>
+                    </div>
+                </div>
+            </div>
+
+
             <div id="tooltip1" class="tooltip">
                 <div class="tooltip-date">
                     <span class="date"></span>
@@ -204,29 +214,28 @@
             </div>
         </div>
 
-
-        <div class="precipTitle">
-            <h4>Total Precipitation</h4>
-            <h6>(1966 &ndash; 2015)</h6>
-            <div>
-                <div class="legendLines" id="legendLine3">
-                    <svg height="10" width="10">
-                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#333;stroke-width:2" />
-                    </svg>
-                    <div class="legendLineText" id="legendLineText3">Total Annual Precipitation</div>
+        <div id="wrapper2">
+            <div class="precipTitle">
+                <h4>Total Precipitation</h4>
+                <h6>(1966 &ndash; 2015)</h6>
+                <div>
+                    <div class="legendLines" id="legendLine3">
+                        <svg height="10" width="10">
+                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#333;stroke-width:2" />
+                        </svg>
+                        <div class="legendLineText" id="legendLineText3">Total Annual Precipitation</div>
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <div class="legendLines" id="legendLine4">
-                    <svg height="10" width="10">
-                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#1793FF;stroke-width:1.5" />
-                    </svg>
-                    <div class="legendLineText" id="legendLineText4">Average Precipitation Between Measurements</div>
+                <div>
+                    <div class="legendLines" id="legendLine4">
+                        <svg height="10" width="10">
+                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#1793FF;stroke-width:1.5" />
+                        </svg>
+                        <div class="legendLineText" id="legendLineText4">Average Precipitation Between Measurements
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div id="wrapper2">
                 <div id="tooltip2" class="tooltip">
                     <div class="tooltip-date">
                         <span class="date"></span>
@@ -238,12 +247,26 @@
             </div>
         </div>
     </div>
-    
+
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
 
     <script>
+        // switch between charts
+        $('#wrapper2').hide();
+        buildLineSwitch();
+
+        function buildLineSwitch() {
+            $("input[name='toggle-small line-radio']").change(function () {
+                $("#wrapper1, #wrapper2").toggle()
+            });
+
+        };
+
         // ******* Mean Temperature Chart ***********
 
         async function drawLineChart() {
@@ -506,6 +529,7 @@
 
         // ******* Precipitation Chart ***********
 
+
         async function drawPrecipChart() {
 
             // access data
@@ -741,26 +765,29 @@
 
             // animation
 
-            const totalLineLength = line.node().getTotalLength();
+            if ($('#wrapper2').is(':visible')) {
 
-            line
-                .attr("stroke-dasharray", totalLineLength + " " + totalLineLength)
-                .attr("stroke-dashoffset", totalLineLength)
-                .transition()
-                .duration(1500)
-                .ease(d3.easeLinear)
-                .attr("stroke-dashoffset", 0);
+                const totalLineLength = line.node().getTotalLength();
 
-            const totalBlueLineLength = yearGroupMeans.node().getTotalLength();
+                line
+                    .attr("stroke-dasharray", totalLineLength + " " + totalLineLength)
+                    .attr("stroke-dashoffset", totalLineLength)
+                    .transition()
+                    .duration(1500)
+                    .ease(d3.easeLinear)
+                    .attr("stroke-dashoffset", 0);
 
-            yearGroupMeans
-                .attr("stroke-dasharray", totalBlueLineLength + " " + totalBlueLineLength)
-                .attr("stroke-dashoffset", totalBlueLineLength)
-                .transition()
-                .delay(1700)
-                .duration(50)
-                .ease(d3.easeLinear)
-                .attr("stroke-dashoffset", 0);
+                const totalBlueLineLength = yearGroupMeans.node().getTotalLength()
+
+                yearGroupMeans
+                    .attr("stroke-dasharray", totalBlueLineLength + " " + totalBlueLineLength)
+                    .attr("stroke-dashoffset", totalBlueLineLength)
+                    .transition()
+                    .delay(1700)
+                    .duration(50)
+                    .ease(d3.easeLinear)
+                    .attr("stroke-dashoffset", 0);
+            };
         };
         drawPrecipChart()
     </script>

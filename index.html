@@ -308,17 +308,17 @@
             padding-bottom: 16px;
         }
 
-        .toggle-group {
+        #ui-pt-control {
             margin-bottom: 3px;
             margin-top: 4px;
-            background-color: #e2e2e2;
+            /* background-color: #e2e2e2; */
         }
 
         .toggle-group :hover {
             color: #333;
         }
 
-        .toggle--s {
+        #ui-pt-control .toggle--s {
             font-size: 10px;
             line-height: 16px;
             padding: 1px 6px;
@@ -799,14 +799,14 @@
 
         // extent button on click
         function extentIcon(parkBounds) {
-            $('#extent-icon').click(function() {
+            $('#extent-icon').click(function () {
                 map.flyToBounds(parkBounds.getBounds());
             });
         };
 
         // hide dropdown lists on zoom-click
         function removeLists() {
-            $('.leaflet-control-zoom-in, .leaflet-control-zoom-out').click(function() {
+            $('.leaflet-control-zoom-in, .leaflet-control-zoom-out').click(function () {
                 $('[id="glacierDropdownList"]').removeClass('show2');
                 $('[id="baselayerDropdownList"]').removeClass('show1');
             });
