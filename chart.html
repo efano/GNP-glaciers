@@ -177,65 +177,68 @@
                 <div class="toggle toggle--darken50 toggle--s">Precipitation</div>
             </label>
         </div>
-
-        <div class="tempTitle">
-            <h4>Average Air Temperature</h4>
-            <h6>(1966 &ndash; 2015)</h6>
-            <div>
-                <div class="legendLines" id="legendLine1">
-                    <svg height="10" width="10">
-                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#333;stroke-width:2" />
-                    </svg>
-                    <div class="legendLineText" id="legendLineText1">Average Annual Temperature</div>
+        <div>
+            <div class="tempTitle">
+                <h4>Average Air Temperature</h4>
+                <h6>(1966 &ndash; 2015)</h6>
+                <div>
+                    <div class="legendLines" id="legendLine1">
+                        <svg height="10" width="10">
+                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#333;stroke-width:2" />
+                        </svg>
+                        <div class="legendLineText" id="legendLineText1">Average Annual Temperature</div>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div class="legendLines" id="legendLine2">
-                    <svg height="10" width="10">
-                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#FF3A30;stroke-width:1.5" />
-                    </svg>
-                    <div class="legendLineText" id="legendLineText2">Average Temperature Between Measurements</div>
-                </div>
-            </div>
-        </div>
-        <div class="wrapper" id="wrapper1"></div>
-        <div id="tooltip1" class="tooltip">
-            <div class="tooltip-date">
-                <span class="date"></span>
-            </div>
-            <div class="tooltip-text">
-                Average Annual<br>Temperature: <span id="temp"></span>
-            </div>
-        </div>
-
-        <div class="precipTitle">
-            <h4>Total Precipitation</h4>
-            <h6>(1966 &ndash; 2015)</h6>
-            <div>
-                <div class="legendLines" id="legendLine3">
-                    <svg height="10" width="10">
-                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#333;stroke-width:2" />
-                    </svg>
-                    <div class="legendLineText" id="legendLineText3">Total Annual Precipitation</div>
-                </div>
-            </div>
-            <div>
-                <div class="legendLines" id="legendLine4">
-                    <svg height="10" width="10">
-                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#1793FF;stroke-width:1.5" />
-                    </svg>
-                    <div class="legendLineText" id="legendLineText4">Average Precipitation Between Measurements
+                <div>
+                    <div class="legendLines" id="legendLine2">
+                        <svg height="10" width="10">
+                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#FF3A30;stroke-width:1.5" />
+                        </svg>
+                        <div class="legendLineText" id="legendLineText2">Average Temperature Between Measurements</div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="wrapper" id="wrapper2"></div>
-        <div id="tooltip2" class="tooltip">
-            <div class="tooltip-date">
-                <span class="date"></span>
+            <div class="wrapper" id="wrapper1"></div>
+            <div id="tooltip1" class="tooltip">
+                <div class="tooltip-date">
+                    <span class="date"></span>
+                </div>
+                <div class="tooltip-text">
+                    Average Annual<br>Temperature: <span id="temp"></span>
+                </div>
             </div>
-            <div class="tooltip-text">
-                Total Annual<br>Precipitation: <span id="precip"></span>
+        </div>
+
+        <div>
+            <div class="precipTitle">
+                <h4>Total Precipitation</h4>
+                <h6>(1966 &ndash; 2015)</h6>
+                <div>
+                    <div class="legendLines" id="legendLine3">
+                        <svg height="10" width="10">
+                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#333;stroke-width:2" />
+                        </svg>
+                        <div class="legendLineText" id="legendLineText3">Total Annual Precipitation</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="legendLines" id="legendLine4">
+                        <svg height="10" width="10">
+                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#1793FF;stroke-width:1.5" />
+                        </svg>
+                        <div class="legendLineText" id="legendLineText4">Average Precipitation Between Measurements
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper" id="wrapper2"></div>
+            <div id="tooltip2" class="tooltip">
+                <div class="tooltip-date">
+                    <span class="date"></span>
+                </div>
+                <div class="tooltip-text">
+                    Total Annual<br>Precipitation: <span id="precip"></span>
+                </div>
             </div>
         </div>
     </div>
@@ -247,7 +250,6 @@
 
 
     <script>
-
         // switch between charts
 
         $(".precipTitle").hide();
@@ -255,22 +257,24 @@
         $("#tempToggle").prop('checked', true);
 
         buildLineSwitch();
+        drawTempChart();
+        drawPrecipChart();
 
         function buildLineSwitch() {
             $("input[name='toggle-small line-radio']").change(function () {
                 $("#wrapper1, #wrapper2").toggle()
-            });
-            $("#precipToggle").click(function () {
-                $("#wrapper2").empty();
-                $(".tempTitle").hide();
-                $(".precipTitle").show();
-                drawPrecipChart()
             });
             $("#tempToggle").click(function () {
                 $("#wrapper1").empty();
                 $(".precipTitle").hide();
                 $(".tempTitle").show();
                 drawTempChart()
+            });
+            $("#precipToggle").click(function () {
+                $("#wrapper2").empty();
+                $(".tempTitle").hide();
+                $(".precipTitle").show();
+                drawPrecipChart()
             });
         };
 
@@ -532,12 +536,11 @@
                 .ease(d3.easeLinear)
                 .attr("stroke-dashoffset", 0);
         };
-        drawTempChart()
-        
+
         // ******* Precipitation Chart ***********
 
         async function drawPrecipChart() {
-            
+
             // access data
 
             const dataset = await d3.csv("data/climate-G1-annual.csv")
@@ -785,9 +788,8 @@
                     .ease(d3.easeLinear)
                     .attr("stroke-dashoffset", 0);
             };
-
         };
-        drawPrecipChart()
+        
     </script>
 </body>
 
