@@ -252,6 +252,7 @@
 
         $(".precipTitle").hide();
         $('#wrapper2').hide();
+        $("#tempToggle").prop('checked', true);
 
         buildLineSwitch();
 
@@ -532,11 +533,11 @@
                 .attr("stroke-dashoffset", 0);
         };
         drawTempChart()
-
+        
         // ******* Precipitation Chart ***********
 
         async function drawPrecipChart() {
-
+            
             // access data
 
             const dataset = await d3.csv("data/climate-G1-annual.csv")
@@ -784,6 +785,7 @@
                     .ease(d3.easeLinear)
                     .attr("stroke-dashoffset", 0);
             };
+
         };
         drawPrecipChart()
     </script>
