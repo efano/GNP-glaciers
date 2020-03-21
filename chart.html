@@ -248,17 +248,17 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
-
     <script>
+
+        buildLineSwitch();
+        drawTempChart();
+        drawPrecipChart();
+
         // switch between charts
 
         $(".precipTitle").hide();
         $('#wrapper2').hide();
         $("#tempToggle").prop('checked', true);
-
-        buildLineSwitch();
-        drawTempChart();
-        drawPrecipChart();
 
         function buildLineSwitch() {
             $("input[name='toggle-small line-radio']").change(function () {
@@ -789,7 +789,6 @@
                     .attr("stroke-dashoffset", 0);
             };
         };
-        
     </script>
 </body>
 
