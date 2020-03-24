@@ -280,7 +280,7 @@
             height: 10px;
             width: 164px;
             margin-left: 16px;
-            background-image: linear-gradient(to right, #fcbba1,#fc9272,#fb6a4a,#ef3b2c,#cb181d,#a50f15,#67000d);
+            background-image: linear-gradient(to right, #fcbba1, #fc9272, #fb6a4a, #ef3b2c, #cb181d, #a50f15, #67000d);
         }
 
         #gradientGreatest {
@@ -343,6 +343,12 @@
         #stangnant {
             margin-left: 2px;
         }
+
+        /* glacier polygon css */
+
+        .optionsLIA {
+            stroke-dasharray: 3, 3;
+        }
     </style>
 </head>
 
@@ -398,7 +404,8 @@
             <h6>(1966 &ndash; 2015)</h6>
             <div id="areaGradient">
                 <div id="gradient"></div>
-                <div id="gradientGreatest"> &#8594; &emsp; &ensp; &ensp;&#8594; &emsp; &ensp; &ensp;&#8594; &emsp; &ensp; &ensp;
+                <div id="gradientGreatest"> &#8594; &emsp; &ensp; &ensp;&#8594; &emsp; &ensp; &ensp;&#8594; &emsp;
+                    &ensp; &ensp;
                     Greatest</div>
             </div>
         </div>
@@ -427,6 +434,12 @@
                     <span class="glacierPtLegendText" id="stangnant">Stagnant (&#8239;&lt; 0.1 km&sup2;&#8239;)</span>
                 </li>
             </ul>
+        </div>
+    </div>
+
+    <div id="glacierPolyLegend" class="glacierPolyLegend">
+        <div id="ui">
+            <ul id="legend-list-poly"></ul>
         </div>
     </div>
 
@@ -551,16 +564,78 @@
             maxWidth: 120,
         }).addTo(map);
 
-        // global variable
+        // global variables
         let status = "active1966"
 
-        // use d3-fetch to boundary.json
-        const parkBounds = d3.json("data/boundary.json").then(function (boundsData) {
-            drawParkBounds(boundsData); // send data out of callback to a new function
-        });
-        // draw park boundary
-        function drawParkBounds(boundsData) {
-            // add to the map
+        // store a reference to the HTML list
+        const legendPolyList = $('#legend-list-poly');
+
+        // style options
+        const optionsLIA = {
+            color: "#38A3C0",
+            fillColor: "white",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.7,
+            className: "optionsLIA"
+        };
+
+        // const options66 = {
+        // color: "#38A3C0",
+        // fillColor: "white",
+        // weight: 1,
+        // opacity: 1,
+        // fillOpacity: 0.7,
+        // };
+
+        // const options98 = {
+        // color: "#38A3C0",
+        // fillColor: "white",
+        // weight: 1,
+        // opacity: 1,
+        // fillOpacity: 0.7,
+        // };
+
+        // const options05 = {
+        // color: "#38A3C0",
+        // fillColor: "white",
+        // weight: 1,
+        // opacity: 1,
+        // fillOpacity: 0.7,
+        // };
+
+        // const options15 = {
+        // color: "#38A3C0",
+        // fillColor: "white",
+        // weight: 1,
+        // opacity: 1,
+        // fillOpacity: 0.7,
+        // };
+
+        // const optionsOther = {
+        //     color: "transparent"
+        // };
+
+        // use D3 fetch to request data with async requests
+        const parkBoundary = d3.json('data/boundary.json');
+        const lia = d3.json('data/lia-poly.json');
+        const allYearsPoly = d3.json('data/all-years-poly.json');
+        const allPoints = d3.json('data/glacier-pts.json');
+        const climateCSV = d3.csv('data/climate-all.csv')
+
+        // use Promise to wait until data is all loaded
+        Promise.all([parkBoundary, lia, allYearsPoly, allPoints, climateCSV]).then(drawMap);
+
+        function drawMap(data) {
+
+            // pull out separate data arrays and assign to variables
+            const boundsData = data[0];
+            const liaData = data[1];
+            const allPolyYearData = data[2];
+            const ptData = data[3];
+            const climateData = data[4];
+
+            // create a park boundary layer with the geojson data
             const parkBounds = L.geoJson(boundsData, {
                 style: function (feature, layer) {
                     return {
@@ -572,10 +647,30 @@
                 }
             }).addTo(map);
             extentIcon(parkBounds);
-        };
 
-        // use d3-fetch to request glacier-pts.json
-        const glacierPts = d3.json("data/glacier-pts.json").then(function (ptData) {
+            // extent button on click
+            function extentIcon(parkBounds) {
+                $('#extent-icon').click(function () {
+                    map.flyToBounds(parkBounds.getBounds());
+                });
+            };
+
+            // create a LIA layer with the geojson data
+            const liaLayer = L.geoJson(liaData, {
+                style: optionsLIA
+            });
+
+            map.on('zoomend', function () {
+                const zoomlevel = map.getZoom();
+                if (zoomlevel >= 12) {
+                    map.addLayer(liaLayer);
+                }
+                if (zoomlevel < 12) {
+                    map.removeLayer(liaLayer);
+                }
+            });
+
+            // create a point layer with the geojson data
             const glaciersLayerGroup = L.geoJson(ptData, {
                 pointToLayer: function (feature, latlng) {
                     return L.shapeMarker(latlng, {
@@ -588,13 +683,14 @@
                     })
                 }
             }).addTo(map);
+
             // fit map bounds to feature extent
             map.fitBounds(glaciersLayerGroup.getBounds(), {
                 padding: [20, 20]
             });
 
             map.on('zoomend', function () {
-                var zoomlevel = map.getZoom();
+                const zoomlevel = map.getZoom();
                 if (zoomlevel >= 12) {
                     $('#dropdown-list2 .dropdown-item2').removeClass('highlight');
                     $(".glacierPtLegend").fadeOut();
@@ -623,196 +719,192 @@
             highlightGlacier(glaciersLayerGroup);
             zoomToGlacier(glaciersLayerGroup);
             removeLists();
-        });
 
-        // draw glacier points
-        function drawPts(glaciersLayerGroup) {
-            colorize = getColors(glaciersLayerGroup);
-            glaciersLayerGroup.eachLayer(function (layer) {
-                let props = layer.feature.properties;
-                let type = props[status];
-
-                if (type === "y") {
-                    layer.bringToBack();
-                    layer.setStyle({
-                        shape: "diamond",
-                        color: '#333',
-                        fillColor: colorize(props.pctD),
-                        weight: 1,
-                        radius: 7,
-                    })
-                } else if (type === "n") {
-                    layer.bringToFront();
-                    layer.setStyle({
-                        shape: "x",
-                        color: colorize(props.pctD),
-                        weight: 3,
-                        radius: 7
-                    })
-                };
-
-                // tooltip
-                layer.bindTooltip("<div class=tooltipTitle><b>" + props["GLACNAME"] + "</b></div><br>" +
-                    "<div class=tooltipText>" + "Area Loss: " +
-                    '<a class="tooltipPct" style="color:' + colorize(props.pctD) + '"> ' + (parseFloat(
-                            props["pctD"]) *
-                        100).toFixed(0) + "%" + '</a>', {
-                        opacity: .95
-                    }
-                );
-
-                //when mousing over a glacier point
-                layer.on('mouseover', function () {
-                    layer.bringToFront();
-                    // provide a visual affordance
-                    layer.setStyle({
-                        radius: 16
-                    });
-                    // select the cooresponding list item and add the highlight class to make bold
-                    $('#glacierList-' + props.num).addClass('highlight');
-                });
-
-                layer.on('mouseout', function () {
-                    // reset back to our base styling opacity
-                    layer.setStyle({
-                        radius: 7
-                    });
-                    $('#glacierList-' + props.num).removeClass('highlight');
-                });
-
-                layer.on('mousedown', function () {
-                    map.removeLayer(glaciersLayerGroup);
-                    // change 'Select Glacier' button to glacier name
-                    btnObj = $("#glacier-btn-dropdown");
-                    $(btnObj).text($(".highlight").text());
-                    $(btnObj).val($(".highlight").text());
-                    $('[id="glacierDropdownList"]').removeClass('show2');
-                    $('[id="baselayerDropdownList"]').removeClass('show1');
-
-                    // zoom to layer on click
-                    map.flyTo(this.getLatLng(), 14);
-                });
-            })
-        };
-
-        function buildPtUI(glaciersLayerGroup) {
-            $("input[name='toggle-small pt-radio']").change(function () {
-                let activeTxt = this.value;
-                status = activeTxt;
-                drawPts(glaciersLayerGroup);
-            });
-        };
-
-        function getColors(glaciersLayerGroup) {
-            // create chroma.js color scheme
-            const glacierLoss = [];
-
-            // loop through the glacier points
-            glaciersLayerGroup.eachLayer(function (layer) {
-                glacierLoss.push(layer.feature.properties.pctD);
-            });
-
-            // use chroma.limits to determine
-            const breaks = chroma.limits(glacierLoss, 'q', 7);
-            // build a colorize function
-            let colorize = chroma
-                //.scale(["#ffbf51", "#ff803e", "#ff2c15", "#fa000e", "#cb0032", "#8d0069", "#6b008d" ])
-                //.scale(["#fcde9c","#faa476","#f0746e","#e34f6f","#dc3977","#b9257a","#7c1d6f"])
-                .scale(['#fcbba1','#fc9272','#fb6a4a','#ef3b2c','#cb181d','#a50f15','#67000d'])
-                .domain(breaks)
-                .mode('lch');
-            return colorize;
-        };
-
-        function drawDropDownList(ptData) {
-            // store a reference to the glacier dropdown list
-            const legendList = $('#dropdown-list2');
-            const legendNameList = [];
-            for (names in ptData.features) {
-                const props = ptData.features[names].properties;
-                legendNameList.push(props);
-            };
-
-            // alphabetize glacier dropdown list
-            legendNameList.sort(function (a, b) {
-                return a.GLACNAME - b.GLACNAME
-            });
-            // add glacier names to the glacier dropdown list
-            for (let i = 1; i <= ptData.features.length; i++) {
-                const legendNames = [legendNameList[i - 1].GLACNAME];
-                legendList.append('<li><a class="dropdown-item2" id="glacierList-' + i + '" value=' + i + '>' +
-                    legendNames + '</a></li>');
-            };
-        };
-
-        // hightlight pt layer from dropdown list
-        function highlightGlacier(glaciersLayerGroup) {
-
-            // select list items and on mouseover
-            $('.dropdown-item2').on('mouseover', function () {
-                // extract the specific number from the specific item being moused over
-                let num = this.id.replace('glacierList-', '');
-                glacierNum = parseInt(num);
-
-                // loop through the glacier points
+            // draw glacier points
+            function drawPts(glaciersLayerGroup) {
+                colorize = getColors(glaciersLayerGroup);
                 glaciersLayerGroup.eachLayer(function (layer) {
-                    // if the glacier id matches...
-                    if (layer.feature.properties.num === glacierNum) {
-                        // change the layer style
+                    let props = layer.feature.properties;
+                    let type = props[status];
+
+                    if (type === "y") {
+                        layer.bringToBack();
+                        layer.setStyle({
+                            shape: "diamond",
+                            color: '#333',
+                            fillColor: colorize(props.pctD),
+                            weight: 1,
+                            radius: 7,
+                        })
+                    } else if (type === "n") {
+                        layer.bringToFront();
+                        layer.setStyle({
+                            shape: "x",
+                            color: colorize(props.pctD),
+                            weight: 3,
+                            radius: 7
+                        })
+                    };
+
+                    // tooltip
+                    layer.bindTooltip("<div class=tooltipTitle><b>" + props["GLACNAME"] + "</b></div><br>" +
+                        "<div class=tooltipText>" + "Area Loss: " +
+                        '<a class="tooltipPct" style="color:' + colorize(props.pctD) + '"> ' + (parseFloat(
+                                props["pctD"]) *
+                            100).toFixed(0) + "%" + '</a>', {
+                            opacity: .95
+                        }
+                    );
+
+                    //when mousing over a glacier point
+                    layer.on('mouseover', function () {
+                        layer.bringToFront();
+                        // provide a visual affordance
                         layer.setStyle({
                             radius: 16
-                        }).bringToFront().openTooltip();
-                    };
+                        });
+                        // select the cooresponding list item and add the highlight class to make bold
+                        $('#glacierList-' + props.num).addClass('highlight');
+                    });
 
-                    // deselects layer highlight on legend mouseout
-                    $('.dropdown-item2').on('mouseout', function () {
+                    layer.on('mouseout', function () {
+                        // reset back to our base styling opacity
                         layer.setStyle({
                             radius: 7
-                        }).closeTooltip();
+                        });
+                        $('#glacierList-' + props.num).removeClass('highlight');
                     });
+
+                    layer.on('mousedown', function () {
+                        map.removeLayer(glaciersLayerGroup);
+                        // change 'Select Glacier' button to glacier name
+                        btnObj = $("#glacier-btn-dropdown");
+                        $(btnObj).text($(".highlight").text());
+                        $(btnObj).val($(".highlight").text());
+                        $('[id="glacierDropdownList"]').removeClass('show2');
+                        $('[id="baselayerDropdownList"]').removeClass('show1');
+
+                        // zoom to layer on click
+                        map.flyTo(this.getLatLng(), 14);
+                    });
+                })
+            };
+
+            function buildPtUI(glaciersLayerGroup) {
+                $("input[name='toggle-small pt-radio']").change(function () {
+                    let activeTxt = this.value;
+                    status = activeTxt;
+                    drawPts(glaciersLayerGroup);
                 });
+            };
 
-            })
-        };
-
-        // hightlight pt layer from dropdown list
-        function zoomToGlacier(glaciersLayerGroup) {
-
-            // select list items and on mouseover
-            $('.dropdown-item2').on('click', function () {
-                map.removeLayer(glaciersLayerGroup);
-                // extract the specific number from the specific item being moused over
-                let num = this.id.replace('glacierList-', '');
-                glacierNum = parseInt(num);
-
-                // change 'Select Glacier' button to glacier name
-                btnObj = $(this).parent().parent().parent().siblings('button');
-                $(btnObj).text($(this).text());
-                $(btnObj).val($(this).text());
+            function getColors(glaciersLayerGroup) {
+                // create chroma.js color scheme
+                const glacierLoss = [];
 
                 // loop through the glacier points
                 glaciersLayerGroup.eachLayer(function (layer) {
-                    // if the glacier id matches...
-                    if (layer.feature.properties.num === glacierNum) {
-                        map.flyTo(layer.getLatLng(), 14);
-                    };
+                    glacierLoss.push(layer.feature.properties.pctD);
                 });
-            })
-        };
 
-        // extent button on click
-        function extentIcon(parkBounds) {
-            $('#extent-icon').click(function () {
-                map.flyToBounds(parkBounds.getBounds());
-            });
-        };
+                // use chroma.limits to determine
+                const breaks = chroma.limits(glacierLoss, 'q', 7);
+                // build a colorize function
+                let colorize = chroma
+                    //.scale(["#ffbf51", "#ff803e", "#ff2c15", "#fa000e", "#cb0032", "#8d0069", "#6b008d" ])
+                    .scale(['#fcbba1', '#fc9272', '#fb6a4a', '#ef3b2c', '#cb181d', '#a50f15', '#67000d'])
+                    .domain(breaks)
+                    .mode('lch');
+                return colorize;
+            };
 
-        // hide dropdown lists on zoom-click
-        function removeLists() {
-            $('.leaflet-control-zoom-in, .leaflet-control-zoom-out').click(function () {
-                $('[id="glacierDropdownList"]').removeClass('show2');
-                $('[id="baselayerDropdownList"]').removeClass('show1');
-            });
+            function drawDropDownList(ptData) {
+                // store a reference to the glacier dropdown list
+                const legendList = $('#dropdown-list2');
+                const legendNameList = [];
+                for (names in ptData.features) {
+                    const props = ptData.features[names].properties;
+                    legendNameList.push(props);
+                };
+
+                // alphabetize glacier dropdown list
+                legendNameList.sort(function (a, b) {
+                    return a.GLACNAME - b.GLACNAME
+                });
+                // add glacier names to the glacier dropdown list
+                for (let i = 1; i <= ptData.features.length; i++) {
+                    const legendNames = [legendNameList[i - 1].GLACNAME];
+                    legendList.append('<li><a class="dropdown-item2" id="glacierList-' + i + '" value=' + i + '>' +
+                        legendNames + '</a></li>');
+                };
+            };
+
+            // hightlight pt layer from dropdown list
+            function highlightGlacier(glaciersLayerGroup) {
+
+                // select list items and on mouseover
+                $('.dropdown-item2').on('mouseover', function () {
+                    // extract the specific number from the specific item being moused over
+                    let num = this.id.replace('glacierList-', '');
+                    glacierNum = parseInt(num);
+
+                    // loop through the glacier points
+                    glaciersLayerGroup.eachLayer(function (layer) {
+                        // if the glacier id matches...
+                        if (layer.feature.properties.num === glacierNum) {
+                            // change the layer style
+                            layer.setStyle({
+                                radius: 16
+                            }).bringToFront().openTooltip();
+                        };
+
+                        // deselects layer highlight on legend mouseout
+                        $('.dropdown-item2').on('mouseout', function () {
+                            layer.setStyle({
+                                radius: 7
+                            }).closeTooltip();
+                        });
+                    });
+
+                })
+            };
+
+            // hightlight pt layer from dropdown list
+            function zoomToGlacier(glaciersLayerGroup) {
+
+                // select list items and on mouseover
+                $('.dropdown-item2').on('click', function () {
+                    map.removeLayer(glaciersLayerGroup);
+                    // extract the specific number from the specific item being moused over
+                    let num = this.id.replace('glacierList-', '');
+                    glacierNum = parseInt(num);
+
+                    // change 'Select Glacier' button to glacier name
+                    btnObj = $(this).parent().parent().parent().siblings('button');
+                    $(btnObj).text($(this).text());
+                    $(btnObj).val($(this).text());
+
+                    // loop through the glacier points
+                    glaciersLayerGroup.eachLayer(function (layer) {
+                        // if the glacier id matches...
+                        if (layer.feature.properties.num === glacierNum) {
+                            map.flyTo(layer.getLatLng(), 14);
+                            // map.flyTo(layer.getLatLng(), 14);
+                            // map.fitBounds(glaciersLayerGroup.getBounds(), {
+                            //     padding: [20, 20]
+                            // });
+                        };
+                    });
+                })
+            };
+
+            // hide dropdown lists on zoom-click
+            function removeLists() {
+                $('.leaflet-control-zoom-in, .leaflet-control-zoom-out').click(function () {
+                    $('[id="glacierDropdownList"]').removeClass('show2');
+                    $('[id="baselayerDropdownList"]').removeClass('show1');
+                });
+            };
         };
     </script>
 </body>
