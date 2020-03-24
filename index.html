@@ -573,10 +573,10 @@
         // style options
         const optionsLIA = {
             color: "#38A3C0",
-            fillColor: "white",
+            fillColor: "#38A3C0",
             weight: 1,
             opacity: 1,
-            fillOpacity: 0.7,
+            fillOpacity: 0.15,
             className: "optionsLIA"
         };
 
@@ -776,6 +776,7 @@
                     });
 
                     layer.on('mousedown', function () {
+                        let num = layer.feature.properties.num
                         map.removeLayer(glaciersLayerGroup);
                         // change 'Select Glacier' button to glacier name
                         btnObj = $("#glacier-btn-dropdown");
@@ -784,8 +785,17 @@
                         $('[id="glacierDropdownList"]').removeClass('show2');
                         $('[id="baselayerDropdownList"]').removeClass('show1');
 
-                        // zoom to layer on click
-                        map.flyTo(this.getLatLng(), 14);
+                        // loop through the glacier lia polygons
+                        liaLayer.eachLayer(function (layer) {
+                            let glacierNum = parseInt(num);
+                            let liaProps = layer.feature.properties.num;
+                            // if the glacier id matches...
+                            if (liaProps === glacierNum) {
+                                map.flyToBounds(layer.getBounds(), {
+                                    padding: [100, 100]
+                                });
+                            }
+                        });
                     });
                 })
             };
@@ -884,16 +894,15 @@
                     $(btnObj).text($(this).text());
                     $(btnObj).val($(this).text());
 
-                    // loop through the glacier points
-                    glaciersLayerGroup.eachLayer(function (layer) {
+                    // loop through the glacier lia polygons
+                    liaLayer.eachLayer(function (layer) {
+                        let props = layer.feature.properties.num;
                         // if the glacier id matches...
-                        if (layer.feature.properties.num === glacierNum) {
-                            map.flyTo(layer.getLatLng(), 14);
-                            // map.flyTo(layer.getLatLng(), 14);
-                            // map.fitBounds(glaciersLayerGroup.getBounds(), {
-                            //     padding: [20, 20]
-                            // });
-                        };
+                        if (props === glacierNum) {
+                            map.flyToBounds(layer.getBounds(), {
+                                padding: [100, 100]
+                            });
+                        }
                     });
                 })
             };
