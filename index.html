@@ -232,13 +232,13 @@
         .tooltipTitle {
             white-space: nowrap;
             color: #333;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             margin-top: -2px;
         }
 
         .tooltipText {
-            font-size: .9em;
+            font-size: 10px;
             font-weight: 600;
             color: #999;
             margin-top: -20px;
@@ -280,7 +280,7 @@
             height: 10px;
             width: 164px;
             margin-left: 16px;
-            background-image: linear-gradient(to right, #fcbba1, #fc9272, #fb6a4a, #ef3b2c, #cb181d, #a50f15, #67000d);
+            background-image: linear-gradient(to right, #feb24c, #fd8d3c, #fc4e2a, #e31a1c, #bd0026, #800026);
         }
 
         #gradientGreatest {
@@ -576,7 +576,7 @@
             fillColor: "#38A3C0",
             weight: 1,
             opacity: 1,
-            fillOpacity: 0.15,
+            fillOpacity: 0.2,
             className: "optionsLIA"
         };
 
@@ -670,17 +670,50 @@
                 }
             });
 
+            // add lia poly interactions
+            function interactLIA(liaLayer) {
+                liaLayer.eachLayer(function (layer) {
+                    let polyProps = layer.feature.properties;
+
+                    //when mousing over a glacier point
+                    layer.on('mouseover', function () {
+                        layer.bringToFront();
+                        // provide a visual affordance
+                        layer.setStyle({
+                            fillOpacity: 0.4,
+                            color: "#308CA6",
+
+                        });
+                    })
+
+                    layer.on('mouseout', function () {
+                        // reset back to our base styling opacity
+                        layer.setStyle({
+                            fillOpacity: 0.2,
+                            color: "#38A3C0",
+                        });
+                    })
+
+                    // tooltip
+                    layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] + "</b></div><br>" +
+                        "<div class=tooltipText>" + "Mid-19th Century Extent", {
+                            opacity: 1,
+                            sticky: true
+                        }
+                    )
+
+                    layer.on('mousedown', function () {
+                        map.flyToBounds(layer.getBounds(), {
+                            padding: [100, 100]
+                        });
+                    });
+                });
+            };
+
             // create a point layer with the geojson data
             const glaciersLayerGroup = L.geoJson(ptData, {
                 pointToLayer: function (feature, latlng) {
-                    return L.shapeMarker(latlng, {
-                        shape: "triangle",
-                        color: '#333',
-                        weight: 1,
-                        fillColor: "#fff",
-                        fillOpacity: 1,
-                        radius: 7
-                    })
+                    return L.shapeMarker(latlng)
                 }
             }).addTo(map);
 
@@ -719,6 +752,7 @@
             highlightGlacier(glaciersLayerGroup);
             zoomToGlacier(glaciersLayerGroup);
             removeLists();
+            interactLIA(liaLayer);
 
             // draw glacier points
             function drawPts(glaciersLayerGroup) {
@@ -733,6 +767,7 @@
                             shape: "diamond",
                             color: '#333',
                             fillColor: colorize(props.pctD),
+                            fillOpacity: 1,
                             weight: 1,
                             radius: 7,
                         })
@@ -752,7 +787,7 @@
                         '<a class="tooltipPct" style="color:' + colorize(props.pctD) + '"> ' + (parseFloat(
                                 props["pctD"]) *
                             100).toFixed(0) + "%" + '</a>', {
-                            opacity: .95
+                            opacity: 1
                         }
                     );
 
@@ -821,8 +856,7 @@
                 const breaks = chroma.limits(glacierLoss, 'q', 7);
                 // build a colorize function
                 let colorize = chroma
-                    //.scale(["#ffbf51", "#ff803e", "#ff2c15", "#fa000e", "#cb0032", "#8d0069", "#6b008d" ])
-                    .scale(['#fcbba1', '#fc9272', '#fb6a4a', '#ef3b2c', '#cb181d', '#a50f15', '#67000d'])
+                    .scale(['#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c', '#bd0026', '#800026'])
                     .domain(breaks)
                     .mode('lch');
                 return colorize;
