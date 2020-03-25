@@ -682,8 +682,9 @@
                         layer.setStyle({
                             fillOpacity: 0.4,
                             color: "#308CA6",
-
                         });
+                        // select the corresponding list item and add the highlight class to make bold
+                        $('#glacierList-' + polyProps.num).addClass('highlight');
                     })
 
                     layer.on('mouseout', function () {
@@ -692,6 +693,7 @@
                             fillOpacity: 0.2,
                             color: "#38A3C0",
                         });
+                        $('#glacierList-' + polyProps.num).removeClass('highlight');
                     })
 
                     // tooltip
@@ -703,6 +705,11 @@
                     )
 
                     layer.on('mousedown', function () {
+                        // change 'Select Glacier' button to glacier name
+                        btnObj = $("#glacier-btn-dropdown");
+                        $(btnObj).text($(".highlight").text());
+                        $(btnObj).val($(".highlight").text());
+
                         map.flyToBounds(layer.getBounds(), {
                             padding: [100, 100]
                         });
