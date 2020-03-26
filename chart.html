@@ -131,12 +131,12 @@
         }
 
         #temp {
-            color: #ef3b2c;
+            color: #e31a1c;
             font-weight: 600;
         }
 
         #precip {
-            color: #1793FF;
+            color: #3BADCC;
             font-weight: 600;
         }
 
@@ -152,14 +152,14 @@
 
         .year-group-mean1 {
             fill: none;
-            stroke: #ef3b2c;
+            stroke: #e31a1c;
             stroke-width: 1.5;
             opacity: 0.8;
         }
 
         .year-group-mean2 {
             fill: none;
-            stroke: #1793FF;
+            stroke: #3BADCC;
             stroke-width: 1.5;
             opacity: 0.8;
         }
@@ -180,7 +180,7 @@
             </label>
         </div>
         <div>
-            <div class="tempTitle">
+            <div class="tempDiv">
                 <h4>Average Air Temperature</h4>
                 <h6>(1966 &ndash; 2015)</h6>
                 <div>
@@ -194,7 +194,7 @@
                 <div>
                     <div class="legendLines" id="legendLine2">
                         <svg height="10" width="10">
-                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#ef3b2c;stroke-width:1.5" />
+                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#e31a1c;stroke-width:1.5" />
                         </svg>
                         <div class="legendLineText" id="legendLineText2">Average Temperature Between Measurements</div>
                     </div>
@@ -212,7 +212,7 @@
         </div>
 
         <div>
-            <div class="precipTitle">
+            <div class="precipDiv">
                 <h4>Total Precipitation</h4>
                 <h6>(1966 &ndash; 2015)</h6>
                 <div>
@@ -226,7 +226,7 @@
                 <div>
                     <div class="legendLines" id="legendLine4">
                         <svg height="10" width="10">
-                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#1793FF;stroke-width:1.5" />
+                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#3BADCC;stroke-width:1.5" />
                         </svg>
                         <div class="legendLineText" id="legendLineText4">Average Precipitation Between Measurements
                         </div>
@@ -251,7 +251,6 @@
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
     <script>
-
         buildLineSwitch();
         drawTempChart();
         drawPrecipChart();
@@ -268,14 +267,14 @@
             });
             $("#tempToggle").click(function () {
                 $("#wrapper1").empty();
-                $(".precipTitle").hide();
-                $(".tempTitle").show();
+                $(".precipDiv").hide();
+                $(".tempDiv").show();
                 drawTempChart()
             });
             $("#precipToggle").click(function () {
                 $("#wrapper2").empty();
-                $(".tempTitle").hide();
-                $(".precipTitle").show();
+                $(".tempDiv").hide();
+                $(".precipDiv").show();
                 drawPrecipChart()
             });
         };
@@ -466,7 +465,7 @@
                 .attr("class", "tooltip-circle")
                 .attr("r", 3.5)
                 .attr("stroke", "#333")
-                .attr("fill", "#ef3b2c")
+                .attr("fill", "#e31a1c")
                 .attr("stroke-width", 2)
                 .style("opacity", 0)
 
@@ -716,7 +715,7 @@
                 .attr("class", "tooltip-circle")
                 .attr("r", 3.5)
                 .attr("stroke", "#333")
-                .attr("fill", "#1791FF")
+                .attr("fill", "#3BADCC")
                 .attr("stroke-width", 2)
                 .style("opacity", 0)
 
