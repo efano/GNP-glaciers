@@ -272,7 +272,7 @@
             font-size: 11px;
             font-weight: 600;
             margin-left: 16px;
-            margin-top: -5px;
+            margin-top: -6px;
         }
 
         #gradient {
@@ -280,6 +280,7 @@
             height: 10px;
             width: 164px;
             margin-left: 16px;
+            border-radius: 5px;
             background-image: linear-gradient(to right, #feb24c, #fd8d3c, #fc4e2a, #e31a1c, #bd0026, #800026);
         }
 
@@ -287,7 +288,7 @@
             font-size: 10px;
             font-weight: 600;
             color: #999;
-            margin-left: 20px;
+            margin-left: 23px;
             margin-top: -11px;
             margin-bottom: -8px;
         }
@@ -349,6 +350,31 @@
         .optionsLIA {
             stroke-dasharray: 3, 3;
         }
+
+        /* .glacierPolyLegend {
+            left: 16px;
+            top: 130px;
+            width: 300px;
+            position: absolute;
+            z-index: 999;
+            color: #333;
+        } */
+
+        .legendPolyList {
+            font-size: 10px;
+            background-color: rgba(255, 255, 255, .95);
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            text-align: left;
+            width: 300px;
+        }
+
+        .polyLegendTitle {
+            font-size: 17px;
+            font-weight: 600;
+            margin-top: 12px;
+            margin-left: 16px;
+        }
     </style>
 </head>
 
@@ -404,8 +430,8 @@
             <h6>(1966 &ndash; 2015)</h6>
             <div id="areaGradient">
                 <div id="gradient"></div>
-                <div id="gradientGreatest"> &#8594; &emsp; &ensp; &ensp;&#8594; &emsp; &ensp; &ensp;&#8594; &emsp;
-                    &ensp; &ensp;
+                <div id="gradientGreatest"> &ensp; &ensp; &#8594; &emsp; &ensp; &#8594; &emsp; &ensp;&#8594; &emsp;
+                    &ensp;
                     Greatest</div>
             </div>
         </div>
@@ -437,11 +463,13 @@
         </div>
     </div>
 
-    <div id="glacierPolyLegend" class="glacierPolyLegend">
+    <!-- <div id="glacierPolyLegend" class="glacierPolyLegend">
         <div id="ui">
-            <ul id="legend-list-poly"></ul>
+            <ul id="legend-list-poly">
+                <h4>Glacier Area Loss</h4>
+            </ul>
         </div>
-    </div>
+    </div> -->
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -567,9 +595,6 @@
         // global variables
         let status = "active1966"
 
-        // store a reference to the HTML list
-        const legendPolyList = $('#legend-list-poly');
-
         // style options
         const optionsLIA = {
             color: "#38A3C0",
@@ -666,12 +691,13 @@
                     map.addLayer(liaLayer);
                 }
                 if (zoomlevel < 12) {
+                    $(".legendPolyList").fadeOut();
                     map.removeLayer(liaLayer);
                 }
             });
 
             // add lia poly interactions
-            function interactLIA(liaLayer) {
+            function addInteractionsLIA(liaLayer) {
                 liaLayer.eachLayer(function (layer) {
                     let polyProps = layer.feature.properties;
 
@@ -705,14 +731,19 @@
                     )
 
                     layer.on('mousedown', function () {
+
                         // change 'Select Glacier' button to glacier name
                         btnObj = $("#glacier-btn-dropdown");
                         $(btnObj).text($(".highlight").text());
                         $(btnObj).val($(".highlight").text());
 
+                        updatePolyLegend(layer);
+                        
                         map.flyToBounds(layer.getBounds(), {
                             padding: [100, 100]
                         });
+
+                        $(".legendPolyList").fadeIn(1600);
                     });
                 });
             };
@@ -729,11 +760,14 @@
                 padding: [20, 20]
             });
 
+            map.on('zoomstart', function () {
+                $(".glacierPtLegend").fadeOut("fast");
+            });
+
             map.on('zoomend', function () {
                 const zoomlevel = map.getZoom();
                 if (zoomlevel >= 12) {
                     $('#dropdown-list2 .dropdown-item2').removeClass('highlight');
-                    $(".glacierPtLegend").fadeOut();
                     if (map.hasLayer(glaciersLayerGroup)) {
                         map.removeLayer(glaciersLayerGroup);
                     }
@@ -752,14 +786,15 @@
                     }
                 }
             });
-
             drawPts(glaciersLayerGroup);
             buildPtUI(glaciersLayerGroup);
             drawDropDownList(ptData);
             highlightGlacier(glaciersLayerGroup);
             zoomToGlacier(glaciersLayerGroup);
             removeLists();
-            interactLIA(liaLayer);
+            drawPolyLegend();
+            addInteractionsLIA(liaLayer);
+
 
             // draw glacier points
             function drawPts(glaciersLayerGroup) {
@@ -833,11 +868,13 @@
                             let liaProps = layer.feature.properties.num;
                             // if the glacier id matches...
                             if (liaProps === glacierNum) {
+                                updatePolyLegend(layer);
                                 map.flyToBounds(layer.getBounds(), {
                                     padding: [100, 100]
                                 });
                             }
                         });
+                        $(".legendPolyList").fadeIn(1600);
                     });
                 })
             };
@@ -926,6 +963,7 @@
                 // select list items and on mouseover
                 $('.dropdown-item2').on('click', function () {
                     map.removeLayer(glaciersLayerGroup);
+
                     // extract the specific number from the specific item being moused over
                     let num = this.id.replace('glacierList-', '');
                     glacierNum = parseInt(num);
@@ -937,14 +975,16 @@
 
                     // loop through the glacier lia polygons
                     liaLayer.eachLayer(function (layer) {
-                        let props = layer.feature.properties.num;
+                        let polyProps = layer.feature.properties.num;
                         // if the glacier id matches...
-                        if (props === glacierNum) {
+                        if (polyProps === glacierNum) {
+                            updatePolyLegend(layer);
                             map.flyToBounds(layer.getBounds(), {
                                 padding: [100, 100]
                             });
                         }
                     });
+                    $(".legendPolyList").fadeIn(1600);
                 })
             };
 
@@ -955,6 +995,24 @@
                     $('[id="baselayerDropdownList"]').removeClass('show1');
                 });
             };
+
+            function drawPolyLegend() {
+                const legendPolyList = L.control({
+                    position: 'topleft'
+                });
+                legendPolyList.onAdd = function (map) {
+                    div = L.DomUtil.create('div', 'legendPolyList');
+                    return div;
+                }
+                legendPolyList.addTo(map);
+                $(".legendPolyList").hide();
+            }
+
+            function updatePolyLegend(layer) {
+                const html = "<h4 class='polyLegendTitle'>" + layer.feature.properties['GLACNAME'] + "</h4>"
+                $(".legendPolyList").html(html);
+            }
+
         };
     </script>
 </body>
