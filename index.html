@@ -11,13 +11,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:900&display=swap" rel="stylesheet" />
     <!-- <link href="https://fonts.googleapis.com/css?family=Istok+Web|Open+Sans&display=swap" rel="stylesheet"> -->
-    <link href="https://fonts.googleapis.com/css?family=Gotu|Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gotu&display=swap" rel="stylesheet">
 
     <style>
         * {
             cursor: default !important;
             /* font-family: 'Istok Web', 'Open Sans', sans-serif; */
-            font-family: 'Gotu', 'Roboto', sans-serif;
+            font-family: 'Gotu', sans-serif;
         }
 
         body {
@@ -369,15 +369,6 @@
             stroke-dasharray: 3, 3;
         }
 
-        /* .glacierPolyLegend {
-            left: 16px;
-            top: 130px;
-            width: 300px;
-            position: absolute;
-            z-index: 999;
-            color: #333;
-        } */
-
         .legendPolyList {
             font-size: 10px;
             background-color: rgba(255, 255, 255, .95);
@@ -392,7 +383,21 @@
             font-weight: 600;
             margin-top: 12px;
             margin-left: 16px;
+
         }
+
+        .legend-icon {
+            float: right;
+            margin-top: -25px;
+            margin-bottom: 12px;
+            color: #999;
+            font-size: 20px;
+        }
+
+        .legend-icon:hover {
+            color: #333;
+        }
+
     </style>
 </head>
 
@@ -484,6 +489,13 @@
                 </li>
             </ul>
         </div>
+    </div>
+    <div>
+        <a hidden href="#" id="picture-icon" title="Photograph">
+            <svg class="icon mr6 legend-icon">
+                <use xlink:href="#icon-instagram" />
+            </svg>
+        </a>
     </div>
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -1029,7 +1041,9 @@
             }
 
             function updatePolyLegend(layer) {
-                const html = "<h4 class='polyLegendTitle'>" + layer.feature.properties['GLACNAME'] + "</h4>"
+                const html = "<h4 class='polyLegendTitle'>" + layer.feature.properties['GLACNAME'] + "</h4>" +
+                    document.getElementById('picture-icon').innerHTML
+
                 $(".legendPolyList").html(html);
             }
 
