@@ -10,13 +10,11 @@
     <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:900&display=swap" rel="stylesheet" />
-    <!-- <link href="https://fonts.googleapis.com/css?family=Istok+Web|Open+Sans&display=swap" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Gotu&display=swap" rel="stylesheet">
 
     <style>
         * {
             cursor: default !important;
-            /* font-family: 'Istok Web', 'Open Sans', sans-serif; */
             font-family: 'Gotu', sans-serif;
         }
 
@@ -818,6 +816,8 @@
                     }
                 }
             });
+
+            // call functions
             drawPts(glacierPoints);
             buildPtUI(glacierPoints);
             drawDropDownList(ptData);
@@ -826,7 +826,6 @@
             removeLists();
             drawPolyLegend();
             addInteractionsLIA(liaLayer);
-
 
             // draw glacier points
             function drawPts(glacierPoints) {
@@ -912,6 +911,7 @@
                 })
             };
 
+            // build active/static toggle ui
             function buildPtUI(glacierPoints) {
                 $("input[name='toggle-small pt-radio']").change(function () {
                     let activeTxt = this.value;
@@ -920,6 +920,7 @@
                 });
             };
 
+            // create color scheme for point layer
             function getColors(glacierPoints) {
                 // create chroma.js color scheme
                 const glacierLoss = [];
@@ -939,6 +940,7 @@
                 return colorize;
             };
 
+            // create Select Glacier dropdown list
             function drawDropDownList(ptData) {
                 // store a reference to the glacier dropdown list
                 const legendList = $('#dropdown-list2');
@@ -990,7 +992,7 @@
                 })
             };
 
-            // hightlight pt layer from dropdown list
+            // zoom to glacier from dropdown list and change selected glacier name in button
             function zoomToGlacier(glacierPoints) {
 
                 // select list items and on mouseover
@@ -1029,6 +1031,7 @@
                 });
             };
 
+            // create polygon legend
             function drawPolyLegend() {
                 const legendPolyList = L.control({
                     position: 'topleft'
@@ -1041,6 +1044,7 @@
                 $(".legendPolyList").hide();
             }
 
+            // add legend content
             function updatePolyLegend(layer) {
                 const html = "<h4 class='polyLegendTitle'>" + layer.feature.properties['GLACNAME'] + "</h4>" +
                     $("#picture-icon").html();
