@@ -32,6 +32,24 @@
             background-color: whitesmoke;
         }
 
+        #loader {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(245, 245, 245, 0.7);
+            z-index: 200;
+        }
+
+        #loader img {
+            width: 66px;
+            height: 66px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -33px 0 0 -33px;
+        }
+
         .navbar {
             z-index: 1001;
             box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
@@ -422,7 +440,11 @@
         </div>
     </nav>
 
-    <div id="map"></div>
+    <div id="map">
+        <div id="loader">
+            <img src="icons/loader.gif" alt="loader" />
+        </div>
+    </div>
 
     <div id="glacierPtLegend" class="glacierPtLegend">
         <div>
@@ -457,19 +479,12 @@
                 </li>
                 <li>
                     <span class="glacierPtLegendText" id="symbolStangnant">x</span>
-                    <span class="glacierPtLegendText" id="stangnant">Stagnant (&#8239;&lt; 0.1 km&sup2;&#8239;)</span>
+                    <span class="glacierPtLegendText" id="stangnant">Stagnant (&#8239;&lt; 0.1
+                        km&sup2;&#8239;)</span>
                 </li>
             </ul>
         </div>
     </div>
-
-    <!-- <div id="glacierPolyLegend" class="glacierPolyLegend">
-        <div id="ui">
-            <ul id="legend-list-poly">
-                <h4>Glacier Area Loss</h4>
-            </ul>
-        </div>
-    </div> -->
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -536,11 +551,12 @@
             'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
             });
-        const voyagerCARTO = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-            subdomains: 'abcd',
-            maxZoom: 19
-        });
+        const voyagerCARTO = L.tileLayer(
+            'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 19
+            });
         const darkCARTO = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
@@ -653,6 +669,8 @@
 
         function drawMap(data) {
 
+            $('#loader').remove();
+
             // pull out separate data arrays and assign to variables
             const boundsData = data[0];
             const liaData = data[1];
@@ -723,7 +741,8 @@
                     })
 
                     // tooltip
-                    layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] + "</b></div><br>" +
+                    layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
+                        "</b></div><br>" +
                         "<div class=tooltipText>" + "Mid-19th Century Extent", {
                             opacity: 1,
                             sticky: true
@@ -738,9 +757,9 @@
                         $(btnObj).val($(".highlight").text());
 
                         updatePolyLegend(layer);
-                        
+
                         map.flyToBounds(layer.getBounds(), {
-                            padding: [100, 100]
+                            padding: [20, 20]
                         });
 
                         $(".legendPolyList").fadeIn(1600);
@@ -826,7 +845,8 @@
                     // tooltip
                     layer.bindTooltip("<div class=tooltipTitle><b>" + props["GLACNAME"] + "</b></div><br>" +
                         "<div class=tooltipText>" + "Area Loss: " +
-                        '<a class="tooltipPct" style="color:' + colorize(props.pctD) + '"> ' + (parseFloat(
+                        '<a class="tooltipPct" style="color:' + colorize(props.pctD) + '"> ' + (
+                            parseFloat(
                                 props["pctD"]) *
                             100).toFixed(0) + "%" + '</a>', {
                             opacity: 1
@@ -870,7 +890,7 @@
                             if (liaProps === glacierNum) {
                                 updatePolyLegend(layer);
                                 map.flyToBounds(layer.getBounds(), {
-                                    padding: [100, 100]
+                                    padding: [20, 20]
                                 });
                             }
                         });
@@ -980,7 +1000,7 @@
                         if (polyProps === glacierNum) {
                             updatePolyLegend(layer);
                             map.flyToBounds(layer.getBounds(), {
-                                padding: [100, 100]
+                                padding: [20, 20]
                             });
                         }
                     });
