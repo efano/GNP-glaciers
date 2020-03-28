@@ -123,7 +123,7 @@
             position: absolute;
             background-color: transparent;
             padding-top: 6px;
-            right: 100px;
+            right: 120px;
             z-index: 1001;
 
         }
@@ -781,14 +781,14 @@
             };
 
             // create a point layer with the geojson data
-            const glaciersLayerGroup = L.geoJson(ptData, {
+            const glacierPoints = L.geoJson(ptData, {
                 pointToLayer: function (feature, latlng) {
                     return L.shapeMarker(latlng)
                 }
             }).addTo(map);
 
             // fit map bounds to feature extent
-            map.fitBounds(glaciersLayerGroup.getBounds(), {
+            map.fitBounds(glacierPoints.getBounds(), {
                 padding: [20, 20]
             });
 
@@ -800,38 +800,38 @@
                 const zoomlevel = map.getZoom();
                 if (zoomlevel >= 12) {
                     $('#dropdown-list2 .dropdown-item2').removeClass('highlight');
-                    if (map.hasLayer(glaciersLayerGroup)) {
-                        map.removeLayer(glaciersLayerGroup);
+                    if (map.hasLayer(glacierPoints)) {
+                        map.removeLayer(glacierPoints);
                     }
                 }
                 if (zoomlevel < 12 && zoomlevel > 8) {
                     $("#glacier-btn-dropdown").html("Select Glacier &#9662;").text();
                     $(".glacierPtLegend").fadeIn();
-                    map.addLayer(glaciersLayerGroup);
-                    drawPts(glaciersLayerGroup);
+                    map.addLayer(glacierPoints);
+                    drawPts(glacierPoints);
                 }
                 if (zoomlevel <= 8) {
                     $('#dropdown-list2 .dropdown-item2').removeClass('highlight');
                     $(".glacierPtLegend").fadeOut();
-                    if (map.hasLayer(glaciersLayerGroup)) {
-                        map.removeLayer(glaciersLayerGroup);
+                    if (map.hasLayer(glacierPoints)) {
+                        map.removeLayer(glacierPoints);
                     }
                 }
             });
-            drawPts(glaciersLayerGroup);
-            buildPtUI(glaciersLayerGroup);
+            drawPts(glacierPoints);
+            buildPtUI(glacierPoints);
             drawDropDownList(ptData);
-            highlightGlacier(glaciersLayerGroup);
-            zoomToGlacier(glaciersLayerGroup);
+            highlightGlacier(glacierPoints);
+            zoomToGlacier(glacierPoints);
             removeLists();
             drawPolyLegend();
             addInteractionsLIA(liaLayer);
 
 
             // draw glacier points
-            function drawPts(glaciersLayerGroup) {
-                colorize = getColors(glaciersLayerGroup);
-                glaciersLayerGroup.eachLayer(function (layer) {
+            function drawPts(glacierPoints) {
+                colorize = getColors(glacierPoints);
+                glacierPoints.eachLayer(function (layer) {
                     let props = layer.feature.properties;
                     let type = props[status];
 
@@ -887,7 +887,7 @@
 
                     layer.on('mousedown', function () {
                         let num = layer.feature.properties.num
-                        map.removeLayer(glaciersLayerGroup);
+                        map.removeLayer(glacierPoints);
                         // change 'Select Glacier' button to glacier name
                         btnObj = $("#glacier-btn-dropdown");
                         $(btnObj).text($(".highlight").text());
@@ -912,20 +912,20 @@
                 })
             };
 
-            function buildPtUI(glaciersLayerGroup) {
+            function buildPtUI(glacierPoints) {
                 $("input[name='toggle-small pt-radio']").change(function () {
                     let activeTxt = this.value;
                     status = activeTxt;
-                    drawPts(glaciersLayerGroup);
+                    drawPts(glacierPoints);
                 });
             };
 
-            function getColors(glaciersLayerGroup) {
+            function getColors(glacierPoints) {
                 // create chroma.js color scheme
                 const glacierLoss = [];
 
                 // loop through the glacier points
-                glaciersLayerGroup.eachLayer(function (layer) {
+                glacierPoints.eachLayer(function (layer) {
                     glacierLoss.push(layer.feature.properties.pctD);
                 });
 
@@ -961,7 +961,7 @@
             };
 
             // hightlight pt layer from dropdown list
-            function highlightGlacier(glaciersLayerGroup) {
+            function highlightGlacier(glacierPoints) {
 
                 // select list items and on mouseover
                 $('.dropdown-item2').on('mouseover', function () {
@@ -970,7 +970,7 @@
                     glacierNum = parseInt(num);
 
                     // loop through the glacier points
-                    glaciersLayerGroup.eachLayer(function (layer) {
+                    glacierPoints.eachLayer(function (layer) {
                         // if the glacier id matches...
                         if (layer.feature.properties.num === glacierNum) {
                             // change the layer style
@@ -991,11 +991,11 @@
             };
 
             // hightlight pt layer from dropdown list
-            function zoomToGlacier(glaciersLayerGroup) {
+            function zoomToGlacier(glacierPoints) {
 
                 // select list items and on mouseover
                 $('.dropdown-item2').on('click', function () {
-                    map.removeLayer(glaciersLayerGroup);
+                    map.removeLayer(glacierPoints);
 
                     // extract the specific number from the specific item being moused over
                     let num = this.id.replace('glacierList-', '');
@@ -1043,7 +1043,7 @@
 
             function updatePolyLegend(layer) {
                 const html = "<h4 class='polyLegendTitle'>" + layer.feature.properties['GLACNAME'] + "</h4>" +
-                    document.getElementById('picture-icon').innerHTML
+                    $("#picture-icon").html();
 
                 $(".legendPolyList").html(html);
             }
