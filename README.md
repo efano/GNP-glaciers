@@ -48,7 +48,7 @@ The user will engage with the mapping application by initially selecting a glaci
 
 #### F. Aesthetics and design considerations
 
-The basemaps and base imagery used in the application are colorful and information-rich by design. The data therefore will also be color-saturated to stand out against the background maps. The legends and navigation bar will be a minimalistic, light-colored, grayscale motif, to not compete with the basemaps and data. A combination of flat and Material Design, and a sans serif font will be used.
+The basemaps and base imagery used in the application are colorful and information-rich by design. The data therefore will also be color-saturated to stand out against the background maps. The legends and navigation bar will be a minimalistic, light-colored, grayscale motif, to not compete with the basemaps and data. A combination of flat and Material Design, and a sans-serif typeface will be used.
 
 #### G. Conclusion
 
