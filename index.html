@@ -4,30 +4,43 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
     <link rel="icon" type="image/svg+xml" href="icons/mountain.svg">
-
     <title>Our Vanishing Glaciers</title>
     <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css" />
-    <link href="https://fonts.googleapis.com/css?family=Nunito:900&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Gotu&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gotu&family=Nunito:wght@900&display=swap" rel="stylesheet">
 
     <style>
         * {
+            box-sizing: border-box;
             cursor: default !important;
-            font-family: 'Gotu', sans-serif;
+            font-family: 'Gotu', 'Open Sans', sans-serif;
         }
 
+        ::-moz-selection {
+            color: #FFF;
+        }
+
+        ::selection {
+            color: #FFF;
+        }
+
+        html,
         body {
             margin: 0;
+            padding: 0;
+            color: whitesmoke;
+            background: whitesmoke;
         }
 
         #map {
             position: absolute;
             width: 100%;
-            top: 51px;
+            top: 50px;
             bottom: 0;
             background-color: whitesmoke;
+            z-index: -1;
         }
 
         #loader {
@@ -40,51 +53,47 @@
         }
 
         #loader img {
-            width: 66px;
-            height: 66px;
+            width: 33px;
+            height: 33px;
             position: absolute;
             top: 50%;
             left: 50%;
             margin: -33px 0 0 -33px;
         }
 
-        .navbar {
-            z-index: 1001;
-            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
-            height: 50px;
+        .main-header {
+            background: white;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, .1);
         }
 
         #mountain-icon {
-            margin-top: 2px;
-            margin-left: 9px;
-            color: #333;
-            width: 42px;
-            height: 42px;
+            margin-left: 12px;
+            width: 32px;
+            height: 32px;
+        }
 
+        .fullTitle {
+            margin-top: -25px;
+            margin-left: 48px;
         }
 
         .navbar-title {
-            color: #333;
-            margin-left: 2px;
-            margin-top: 14px;
+            color: #343434;
             font-size: 24px;
             font-weight: 600;
+            margin-left: 3px;
+            margin-right: 8px;
         }
 
         .vl {
             border-left: 1.25px solid #999;
-            height: 28px;
-            margin-top: 11px;
-            margin-left: 17px;
-            top: 0;
         }
 
         .navbar-subtitle {
             color: #999;
             font-size: 16px;
             font-weight: 600;
-            margin-left: 15px;
-            margin-top: 15px;
+            margin: 0 10px 0 10px;
         }
 
         #icon-group {
@@ -96,11 +105,64 @@
         .navbar-icon {
             color: #999;
             font-size: 26px;
-            padding-top: 1px;
         }
 
         .navbar-icon:hover {
-            color: #333;
+            color: #343434;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 2px;
+            margin: 0 auto;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        @media (min-width: 1183px) {
+            .main-header .container {
+                justify-content: space-between;
+            }
+        }
+
+        @media (max-width: 1183px) {
+            #map {
+                top: 80px;
+            }
+        }
+
+        @media (max-width: 945px) {
+            #map {
+                top: 50px;
+            }
+            .vl {
+                display: none;
+            }
+            .navbar-subtitle {
+                display: none;
+            }
+        }
+
+        @media (max-width: 512px) {
+            #map {
+                top: 80px;
+            }
+            .vl {
+                display: none;
+            }
+            .navbar-subtitle {
+                display: none;
+            }
         }
 
         .leaflet-bar {
@@ -121,9 +183,7 @@
             position: absolute;
             background-color: transparent;
             padding-top: 6px;
-            right: 120px;
             z-index: 1001;
-
         }
 
         .leaflet-control-layers {
@@ -142,7 +202,7 @@
         }
 
         .leaflet-control-layers-list {
-            color: #333;
+            color: #343434;
         }
 
         .show1 {
@@ -156,12 +216,12 @@
 
         #radioText:hover {
             font-weight: 600;
-            color: #333;
+            color: #343434;
         }
 
         .leaflet-control-layers-selector:checked~#radioText {
             font-weight: 600;
-            color: #333;
+            color: #343434;
             text-decoration: underline;
         }
 
@@ -196,7 +256,7 @@
         #dropdown-list2 {
             text-decoration: none;
             display: block;
-            color: #333;
+            color: #343434;
             font-weight: 400;
             font-size: 11px;
             line-height: 1.45;
@@ -205,7 +265,7 @@
 
         #dropdown-list2 :hover {
             font-weight: 600;
-            color: #333;
+            color: #343434;
         }
 
         .show2 {
@@ -214,11 +274,11 @@
 
         .highlight {
             font-weight: 600;
-            color: #333;
+            color: #343434;
         }
 
         .leaflet-control-scale-line {
-            border: 1px solid #333;
+            border: 1px solid #343434;
             border-top: none;
             line-height: .7;
             padding: 2px 5px 1px;
@@ -231,13 +291,13 @@
         }
 
         .leaflet-control-scale-line:not(:first-child) {
-            border-top: 1px solid #333;
+            border-top: 1px solid #343434;
             border-bottom: none;
             margin-top: 1px;
         }
 
         .leaflet-control-scale-line:not(:first-child):not(:last-child) {
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid #343434;
         }
 
         .leaflet-tooltip {
@@ -247,7 +307,7 @@
 
         .tooltipTitle {
             white-space: nowrap;
-            color: #333;
+            color: #343434;
             font-size: 12px;
             font-weight: 600;
             margin-top: -2px;
@@ -274,7 +334,7 @@
             width: 200px;
             position: absolute;
             z-index: 950;
-            color: #333;
+            color: #343434;
         }
 
         .glacierPtLegend h4 {
@@ -314,7 +374,7 @@
             margin-top: 2px;
             list-style: none;
             line-height: .95;
-            color: #333;
+            color: #343434;
         }
 
         .glacierPtLegendText {
@@ -334,7 +394,7 @@
         }
 
         .toggle-group :hover {
-            color: #333;
+            color: #343434;
         }
 
         #ui-pt-control .toggle--s {
@@ -377,11 +437,11 @@
         }
 
         .polyLegendTitle {
+            color: #343434;
             font-size: 17px;
             font-weight: 600;
             margin-top: 12px;
             margin-left: 16px;
-
         }
 
         .legend-icon {
@@ -395,54 +455,64 @@
         }
 
         .legend-icon:hover {
-            color: #333;
+            color: #343434;
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="flex-parent-inline">
-            <svg class="icon" id="mountain-icon">
-                <use xlink:href="#icon-mountain" /></svg>
-            <h1 class="navbar-title">Our Vanishing Glaciers </h1>
-            <div class="vl"></div>
-            <h3 class="navbar-subtitle">Visualizing a Half-Century of Glacier Loss in Glacier National Park, Montana
-            </h3>
-        </div>
-        <div class="flex-parent-inline" id="icon-group">
-            <a class="navbar-icon" href="#" id="info-icon" title="Project Information">
-                <svg class="icon mr6">
-                    <use xlink:href="#icon-info" />
-                </svg>
-            </a>
-            <div class="baselayerDropdown">
-                <button class="btn btn--white" id="baselayer-btn-dropdown" onclick="baselayerDropdownFunction()"
-                    title="Select Basemap">
-                    <div class="navbar-icon" id="layers-icon">
+    <header class="main-header">
+        <div class="container">
+            <div>
+                <img id="mountain-icon" src="icons/mountain.svg">
+                <div class="fullTitle">
+                    <span class="navbar-title">Our Vanishing Glaciers</span>
+                    <span class="vl"></span>
+                    <span class="navbar-subtitle">Visualizing a Half-Century of Glacier Loss in Glacier National Park,
+                        Montana</span>
+                </div>
+            </div>
+
+            <nav class="main-nav">
+                <div class="flex-parent-inline" id="icon-group">
+
+                    <div class="navbar-icon" href="#" id="info-icon" title="Project Information">
                         <svg class="icon mr6">
-                            <use xlink:href="#icon-grid" />
+                            <use xlink:href="#icon-info" />
                         </svg>
                     </div>
-                </button>
-                <div id="baselayerDropdownList" class="dropdown-content1">
-                    <div id="baselayerDropdown"></div>
+
+                    <div class="baselayerDropdown">
+                        <button class="btn btn--white" id="baselayer-btn-dropdown" onclick="baselayerDropdownFunction()"
+                            title="Select Basemap">
+                            <div class="navbar-icon" id="layers-icon">
+                                <svg class="icon mr6">
+                                    <use xlink:href="#icon-grid" />
+                                </svg>
+                            </div>
+                        </button>
+                        <div id="baselayerDropdownList" class="dropdown-content1">
+                            <div id="baselayerDropdown"></div>
+                        </div>
+                    </div>
+
+                    <div class="navbar-icon" href="#" id="extent-icon" title="Zoom to Park Extent">
+                        <svg class="icon mr6">
+                            <use xlink:href="#icon-fullscreen" />
+                        </svg>
+                    </div>
+
+                    <div class="glacierDropdown">
+                        <button onclick="glacierDropdownFunction()" class="btn btn--stroke btn--darken50"
+                            id="glacier-btn-dropdown">Select Glacier &#9662;</button>
+                        <div id="glacierDropdownList" class="dropdown-content2">
+                            <ul id="dropdown-list2"></ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <a class="navbar-icon" href="#" id="extent-icon" title="Zoom to Park Extent">
-                <svg class="icon mr6">
-                    <use xlink:href="#icon-fullscreen" />
-                </svg>
-            </a>
-            <div class="glacierDropdown">
-                <button onclick="glacierDropdownFunction()" class="btn btn--stroke btn--darken50"
-                    id="glacier-btn-dropdown">Select Glacier &#9662;</button>
-                <div id="glacierDropdownList" class="dropdown-content2">
-                    <ul id="dropdown-list2"></ul>
-                </div>
-            </div>
+            </nav>
         </div>
-    </nav>
+    </header>
 
     <div id="map">
         <div id="loader">
@@ -839,7 +909,7 @@
                         layer.bringToBack();
                         layer.setStyle({
                             shape: "diamond",
-                            color: '#333',
+                            color: '#343434',
                             fillColor: colorize(props.pctD),
                             fillOpacity: 1,
                             weight: 1,
