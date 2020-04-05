@@ -1,172 +1,230 @@
 <!doctype html>
-
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-
-    <title>Glacier Change of GNP</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/BeerSlider.css">
-
-    <style>
-        .modal-body {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .attributionL {
-            font-size: 8px;
-            text-align: left;
-            float: left;
-        }
-
-        .attributionR {
-            font-size: 8px;
-            text-align: right;
-            float: right;
-        }
-
-        .modal-body-container {
-            position: relative;
-            text-align: center;
-            color: #333;
-        }
-
-        .side-left[left-year]:after {
-            content: attr(left-year);
-            position: absolute;
-            top: 2.3rem;
-            left: 2.3rem;
-            line-height: 1;
-            padding: 0.5rem;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.75);
-        }
-
-        .side-right[right-year]:after {
-            content: attr(right-year);
-            position: absolute;
-            top: 2.3rem;
-            right: 2.3rem;
-            line-height: 1;
-            padding: 0.5rem;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.75);
-        }
-
-        #photoSingle {
-            height: 98%;
-            width: 98%;
-        }
-    </style>
-
+  <meta charset="utf-8">
+  <title>Site Title</title>
+  <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gotu&family=Nunito:wght@900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/BeerSlider.css">
 </head>
+
+<style>
+  .popup_content {
+    font-family: "Gotu", sans-serif;
+    margin: 10px;
+    padding: 10px 20px;
+    max-width: 60%;
+    background: white;
+    border-radius: 5px;
+  }
+
+  .modalTitle {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .attributionL {
+    font-size: 8px;
+    text-align: left;
+    float: left;
+  }
+
+  .attributionR {
+    font-size: 8px;
+    text-align: right;
+    float: right;
+  }
+
+  .side-left[left-year]:after {
+    content: attr(left-year);
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    line-height: 1;
+    padding: 0.5rem;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.75);
+  }
+
+  .side-right[right-year]:after {
+    content: attr(right-year);
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    line-height: 1;
+    padding: 0.5rem;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.75);
+  }
+
+  .modal-body {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .modal-body-container {
+    position: relative;
+    text-align: center;
+    color: #333;
+  }
+
+  #closeIcon1,
+  #closeIcon2,
+  #closeIcon3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #999;
+  }
+
+  #closeIcon1 :hover,
+  #closeIcon2 :hover,
+  #closeIcon3 :hover {
+    font-weight: 600;
+    color: #343434;
+  }
+
+  .image {
+    border-radius: 5px;
+  }
+
+  #modal1,
+  #modal2,
+  #modal3 {
+  transform: scale(0.8);
+}
+.popup_visible #modal1,
+.popup_visible #modal2,
+.popup_visible #modal3 {
+  transform: scale(1);
+}
+</style>
 
 <body>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photo-slider-modal">
+  <!-- Wrap all page content in a page container (optional, but recommended for screen readers and iOS*) -->
+  <div id="page">
+    <main>
+      <!-- Button trigger modal -->
+      <button class="modal1_open">
         Slider Modal
-    </button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photo-side2side-modal">
+      </button>
+      <br>
+      <button class="modal2_open">
         Side-by-Side Modal
-    </button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photo-single-modal">
+      </button>
+      <br>
+      <button class="modal3_open">
         Single Modal
-    </button>
+      </button>
+    </main>
+  </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="photo-slider-modal" tabindex="-1" role="dialog" aria-labelledby="photo-slider-label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="photo-slider-label">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="modal-body">
-                        <div id="beer-slider" class="beer-slider" data-beer-label="yearRight">
-                            <img src="photos/Grinnell2.jpg" alt="imageRight">
-                            <div class="beer-reveal" data-beer-label="yearLeft">
-                                <img src="photos/Grinnell1.jpg" alt="imageLeft">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="attributionL" value="attributionLeft">Photo Left: </div>
-                            <div class="attributionR" value="attributionRight">Photo Right: </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- modal1 -->
+  <div class="modal" id="modal1">
+    <div class="modalHeader">
+      <div class="modalTitle" id="photo-slider-label">Modal title</div>
+      <button class="absolute top right px12 py12">
+        <svg class="icon link color-darken50 modal1_close" id="closeIcon1">
+          <use xlink:href="#icon-close"></use>
+        </svg>
+      </button>
     </div>
-
-    <div class="modal fade" id="photo-side2side-modal" tabindex="-1" role="dialog"
-        aria-labelledby="photo-side2side-label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="photo-side2side-label">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body modal-body-container">
-                    <img src="photos/Ipasha3.jpg" alt="">
-                    <div class="side-left" left-year="yearLeft"></div>
-                    <div class="side-right" right-year="yearRight"></div>
-                    <div>
-                        <div class="attributionL" value="attributionLeft">Photo Left: </div>
-                        <div class="attributionR" value="attributionRight">Photo Right: </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="beer-slider1" class="beer-slider" data-beer-label="yearRight">
+      <img src="photos/Grinnell2.jpg" class="image" alt="imageRight">
+      <div class="beer-reveal" data-beer-label="yearLeft">
+        <img src="photos/Grinnell1.jpg" class="image" alt="imageLeft">
+      </div>
     </div>
-    <div class="modal fade" id="photo-single-modal" tabindex="-1" role="dialog" aria-labelledby="photo-single-label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered " role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="photo-single-label">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body modal-body-container">
-                    <img id="photoSingle" src="photos/Whitecrow5.jpg" alt="">
-                    <div class="side-right" right-year="yearRight"></div>
-                    <div>
-                        <div class="attributionR" value="attributionRight">Photo: </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div>
+      <div class="attributionL" value="attributionLeft">Photo Left: </div>
+      <div class="attributionR" value="attributionRight">Photo Right: </div>
     </div>
+  </div>
 
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.6/chroma.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
-    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
-    <script src="js/BeerSlider.js"></script>
+  <!-- modal2 -->
+  <div class="modal" id="modal2">
+    <div class="modalHeader">
+      <div class="modalTitle" id="photo-side2side-label">Modal title</div>
+      <button class="absolute top right px12 py12">
+        <svg class="icon link color-darken50 modal2_close" id="closeIcon2">
+          <use xlink:href="#icon-close"></use>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body modal-body-container">
+      <img src="photos/Ipasha3.jpg" class="image" alt="">
+      <div class="side-left" left-year="yearLeft"></div>
+      <div class="side-right" right-year="yearRight"></div>
+      <div>
+        <div class="attributionL" value="attributionLeft">Photo Left: </div>
+        <div class="attributionR" value="attributionRight">Photo Right: </div>
+      </div>
+    </div>
+  </div>
 
-    <script>
-        var slider = new BeerSlider(document.getElementById("beer-slider"));
-    </script>
+  <!-- modal3 -->
+  <div class="modal" id="modal3">
+    <div class="modalHeader">
+      <div class="modalTitle" id="photo-single-label">Modal title</div>
+      <button class="absolute top right px12 py12">
+        <svg class="icon link color-darken50 modal3_close" id="closeIcon3">
+          <use xlink:href="#icon-close"></use>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body modal-body-container">
+      <img id="photoSingle" src="photos/Whitecrow5.jpg" class="image" alt="">
+      <div class="side-right" right-year="yearRight"></div>
+      <div>
+        <div class="attributionR" value="attributionRight">Photo: </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="js/jquery.popupoverlay.js"></script>
+  <script src="js/BeerSlider.js"></script>
+  <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $.fn.BeerSlider = function (options) {
+        options = options || {};
+        return this.each(function () {
+          new BeerSlider(this, options);
+        });
+      };
+      $('.beer-slider').BeerSlider();
+
+      // Set default `pagecontainer` for all popups (optional, but recommended for screen readers and iOS*)
+      $.fn.popup.defaults.pagecontainer = '#page'
+
+      // Initialize the plugin
+      $('#modal1').popup({
+        escape: false,
+        blur: false,
+        scrolllock: true,
+        transition: 'all 0.3s'
+      });
+      $('#modal2').popup({
+        escape: false,
+        blur: false,
+        scrolllock: true,
+        transition: 'all 0.3s'
+      });
+      $('#modal3').popup({
+        escape: false,
+        blur: false,
+        scrolllock: true,
+        transition: 'all 0.3s'
+      });
+
+    });
+  </script>
 
 </body>
 
