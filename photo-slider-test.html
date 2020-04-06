@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Site Title</title>
+  <title>Modal Test</title>
   <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Gotu&family=Nunito:wght@900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/BeerSlider.css">
@@ -91,16 +91,13 @@
     border-radius: 5px;
   }
 
-  #modal1,
-  #modal2,
-  #modal3 {
-  transform: scale(0.8);
-}
-.popup_visible #modal1,
-.popup_visible #modal2,
-.popup_visible #modal3 {
-  transform: scale(1);
-}
+  .photoModals {
+    transform: scale(0.8);
+  }
+
+  .popup_visible .photoModals {
+    transform: scale(1);
+  }
 </style>
 
 <body>
@@ -124,7 +121,7 @@
   </div>
 
   <!-- modal1 -->
-  <div class="modal" id="modal1">
+  <div class="modal photoModals" id="modal1">
     <div class="modalHeader">
       <div class="modalTitle" id="photo-slider-label">Modal title</div>
       <button class="absolute top right px12 py12">
@@ -146,7 +143,7 @@
   </div>
 
   <!-- modal2 -->
-  <div class="modal" id="modal2">
+  <div class="modal photoModals" id="modal2">
     <div class="modalHeader">
       <div class="modalTitle" id="photo-side2side-label">Modal title</div>
       <button class="absolute top right px12 py12">
@@ -167,7 +164,7 @@
   </div>
 
   <!-- modal3 -->
-  <div class="modal" id="modal3">
+  <div class="modal photoModals" id="modal3">
     <div class="modalHeader">
       <div class="modalTitle" id="photo-single-label">Modal title</div>
       <button class="absolute top right px12 py12">
@@ -192,6 +189,16 @@
 
   <script>
     $(document).ready(function () {
+      // set default `pagecontainer` for all popups (optional, but recommended for screen readers and iOS*)
+      $.fn.popup.defaults.pagecontainer = '#page'
+
+      // initialize the modal plugin
+      $('.photoModals').popup({
+        scrolllock: true,
+        transition: 'all 0.3s'
+      });
+
+      // initialize photo slider
       $.fn.BeerSlider = function (options) {
         options = options || {};
         return this.each(function () {
@@ -199,24 +206,6 @@
         });
       };
       $('.beer-slider').BeerSlider();
-
-      // Set default `pagecontainer` for all popups (optional, but recommended for screen readers and iOS*)
-      $.fn.popup.defaults.pagecontainer = '#page'
-
-      // Initialize the plugin
-      $('#modal1').popup({
-        scrolllock: true,
-        transition: 'all 0.3s'
-      });
-      $('#modal2').popup({
-        scrolllock: true,
-        transition: 'all 0.3s'
-      });
-      $('#modal3').popup({
-        scrolllock: true,
-        transition: 'all 0.3s'
-      });
-
     });
   </script>
 
