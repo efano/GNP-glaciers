@@ -145,9 +145,11 @@
             #map {
                 top: 50px;
             }
+
             .vl {
                 display: none;
             }
+
             .navbar-subtitle {
                 display: none;
             }
@@ -157,9 +159,11 @@
             #map {
                 top: 80px;
             }
+
             .vl {
                 display: none;
             }
+
             .navbar-subtitle {
                 display: none;
             }
@@ -169,15 +173,19 @@
             #map {
                 top: 50px;
             }
+
             #mountain-icon {
                 display: none;
             }
+
             .navbar-title {
                 display: none;
             }
+
             .vl {
                 display: none;
             }
+
             .navbar-subtitle {
                 display: none;
             }
@@ -463,18 +471,16 @@
             margin-left: 16px;
         }
 
-        .legend-icon {
+        #camera-icon {
             float: right;
+            opacity: 0.5;
             margin-top: -25px;
-            margin-bottom: 12px;
-            color: #999;
-            font-size: 20px;
-            -webkit-transform: scaleX(-1);
-            transform: scaleX(-1);
+            margin-bottom: 8px;
+            margin-right: 8px;
         }
 
-        .legend-icon:hover {
-            color: #343434;
+        #camera-icon:hover {
+            opacity: 1.0;
         }
     </style>
 </head>
@@ -579,10 +585,8 @@
         </div>
     </div>
     <div>
-        <a hidden href="#" id="picture-icon" title="Photograph">
-            <svg class="icon mr6 legend-icon">
-                <use xlink:href="#icon-instagram" />
-            </svg>
+        <a hidden href="#" id="photoIcon">
+            <img id="camera-icon" src="icons/camera.svg">
         </a>
     </div>
 
@@ -1136,12 +1140,20 @@
 
             // add legend content
             function updatePolyLegend(layer) {
-                const html = "<h4 class='polyLegendTitle'>" + layer.feature.properties['GLACNAME'] + "</h4>" +
-                    $("#picture-icon").html();
+                const legendPolyName = layer.feature.properties['GLACNAME'];
+                const html = "<h4 class='polyLegendTitle'>" + legendPolyName + "</h4>" +
+                    $("#photoIcon").html();
 
                 $(".legendPolyList").html(html);
-            }
 
+                // get modal on icon click
+                $("#camera-icon").click(function () {
+                    //const legendPolyName = $("#camera-icon").siblings("h4").html();
+                    console.log(legendPolyName);
+                    const modalType = layer.feature.properties['P_TYPE'];
+                    console.log(modalType);
+                });
+            }
         };
     </script>
 </body>
