@@ -6,10 +6,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width">
     <link rel="icon" type="image/svg+xml" href="icons/mountain.svg">
+
     <title>Our Vanishing Glaciers</title>
+
     <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css" />
     <link href="https://fonts.googleapis.com/css2?family=Gotu&family=Nunito:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/BeerSlider.css">
 
     <style>
         * {
@@ -474,13 +477,105 @@
         #camera-icon {
             float: right;
             opacity: 0.5;
-            margin-top: -25px;
+            margin-top: -24px;
             margin-bottom: 8px;
             margin-right: 8px;
         }
 
         #camera-icon:hover {
             opacity: 1.0;
+        }
+
+        /* modal css */
+
+        .popup_content {
+            font-family: "Gotu", sans-serif;
+            margin: 10px;
+            padding: 10px 20px;
+            max-width: 60%;
+            background: white;
+            color: #343434;
+            border-radius: 5px;
+        }
+
+        .modalTitle {
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .attributionL {
+            font-size: 8px;
+            text-align: left;
+            float: left;
+        }
+
+        .attributionR {
+            font-size: 8px;
+            text-align: right;
+            float: right;
+        }
+
+        .side-left[left-year]:after {
+            content: attr(left-year);
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            line-height: 1;
+            padding: 0.5rem;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.75);
+        }
+
+        .side-right[right-year]:after {
+            content: attr(right-year);
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            line-height: 1;
+            padding: 0.5rem;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.75);
+        }
+
+        .modal-body {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .modal-body-container {
+            position: relative;
+            text-align: center;
+            color: #333;
+        }
+
+        #closeIcon1,
+        #closeIcon2,
+        #closeIcon3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #999;
+        }
+
+        #closeIcon1 :hover,
+        #closeIcon2 :hover,
+        #closeIcon3 :hover {
+            font-weight: 600;
+            color: #343434;
+        }
+
+        .image {
+            border-radius: 5px;
+        }
+
+        .photoModals {
+            transform: scale(0.8);
+        }
+
+        .popup_visible .photoModals {
+            transform: scale(1);
         }
     </style>
 </head>
@@ -545,6 +640,7 @@
         </div>
     </div>
 
+    <!-- point legend elements -->
     <div id="glacierPtLegend" class="glacierPtLegend">
         <div>
             <h4>Glacier Area Loss</h4>
@@ -584,10 +680,75 @@
             </ul>
         </div>
     </div>
+
+    <!-- polygon legend elements -->
     <div>
         <a hidden href="#" id="photoIcon">
             <img id="camera-icon" src="icons/camera.svg">
         </a>
+    </div>
+
+    <!-- modal1 -->
+    <div hidden id="page"></div>
+    <div class="modal photoModals" id="modal1">
+        <div class="modalHeader">
+            <div class="modalTitle" id="photo-slider-label"></div>
+            <button class="absolute top right px12 py12 modal_close">
+                <svg class="icon link color-darken50 modal1_close" id="closeIcon1">
+                    <use xlink:href="#icon-close"></use>
+                </svg>
+            </button>
+        </div>
+        <div id="beer-slider1" class="beer-slider" data-beer-label="yearRight">
+            <img src="photos/Grinnell2.jpg" class="image" alt="imageRight">
+            <div class="beer-reveal" data-beer-label="yearLeft">
+                <img src="photos/Grinnell1.jpg" class="image" alt="imageLeft">
+            </div>
+        </div>
+        <div>
+            <div class="attributionL" value="attributionLeft">Photo Left: </div>
+            <div class="attributionR" value="attributionRight">Photo Right: </div>
+        </div>
+    </div>
+
+    <!-- modal2 -->
+    <div hidden class="modal photoModals" id="modal2">
+        <div class="modalHeader">
+            <div class="modalTitle" id="photo-side2side-label"></div>
+            <button class="absolute top right px12 py12  modal_close">
+                <svg class="icon link color-darken50 modal2_close" id="closeIcon2">
+                    <use xlink:href="#icon-close"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body modal-body-container">
+            <img src="photos/Ipasha3.jpg" class="image" alt="">
+            <div class="side-left" left-year="yearLeft"></div>
+            <div class="side-right" right-year="yearRight"></div>
+            <div>
+                <div class="attributionL" value="attributionLeft">Photo Left: </div>
+                <div class="attributionR" value="attributionRight">Photo Right: </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal3 -->
+    <div hidden class="modal photoModals" id="modal3">
+        <div class="modalHeader">
+            <div class="modalTitle" id="photo-single-label"></div>
+            <button class="absolute top right px12 py12  modal_close">
+                <svg class="icon link color-darken50 modal3_close" id="closeIcon3">
+                    <use xlink:href="#icon-close"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body modal-body-container">
+            <img id="photoSingle" src="photos/Whitecrow5.jpg" class="image" alt="">
+            <div class="side-right" right-year="yearRight"></div>
+            <div>
+                <div class="attributionR" value="attributionRight">Photo: </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -597,6 +758,8 @@
     <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet-src.js"></script>
     <script src="js/leaflet-svg-shape-markers.js"></script>
+    <script src="js/jquery.popupoverlay.js"></script>
+    <script src="js/BeerSlider.js"></script>
 
     <script>
         // navbar dropdowns
@@ -633,6 +796,24 @@
                 }
             }
         });
+
+        // set default `pagecontainer` for all popups (optional, but recommended for screen readers and iOS*)
+        $.fn.popup.defaults.pagecontainer = '#page'
+
+        // initialize the modal plugin
+        $('.photoModals').popup({
+            scrolllock: true,
+            transition: 'all 0.3s'
+        });
+
+        // initialize photo slider
+        $.fn.BeerSlider = function (options) {
+            options = options || {};
+            return this.each(function () {
+                new BeerSlider(this, options);
+            });
+        };
+        $('.beer-slider').BeerSlider();
 
         // basemaps
         const topoESRI = L.tileLayer(
@@ -949,7 +1130,8 @@
                     };
 
                     // tooltip
-                    layer.bindTooltip("<div class=tooltipTitle><b>" + props["GLACNAME"] + "</b></div><br>" +
+                    layer.bindTooltip("<div class=tooltipTitle><b>" + props["GLACNAME"] +
+                        "</b></div><br>" +
                         "<div class=tooltipText>" + "Area Loss: " +
                         '<a class="tooltipPct" style="color:' + colorize(props.pctD) + '"> ' + (
                             parseFloat(
@@ -1051,7 +1233,8 @@
                 // add glacier names to the glacier dropdown list
                 for (let i = 1; i <= ptData.features.length; i++) {
                     const legendNames = [legendNameList[i - 1].GLACNAME];
-                    legendList.append('<li><a class="dropdown-item2" id="glacierList-' + i + '" value=' + i + '>' +
+                    legendList.append('<li><a class="dropdown-item2" id="glacierList-' + i + '" value=' +
+                        i + '>' +
                         legendNames + '</a></li>');
                 };
             };
@@ -1141,17 +1324,28 @@
             // add legend content
             function updatePolyLegend(layer) {
                 const legendPolyName = layer.feature.properties['GLACNAME'];
-                const html = "<h4 class='polyLegendTitle'>" + legendPolyName + "</h4>" +
+                const legendPolyTitle = "<h4 class='polyLegendTitle'>" + legendPolyName + "</h4>" +
                     $("#photoIcon").html();
 
-                $(".legendPolyList").html(html);
+                $(".legendPolyList").html(legendPolyTitle);
 
-                // get modal on icon click
+                // get modal type on icon click
                 $("#camera-icon").click(function () {
-                    //const legendPolyName = $("#camera-icon").siblings("h4").html();
-                    console.log(legendPolyName);
                     const modalType = layer.feature.properties['P_TYPE'];
-                    console.log(modalType);
+                    $(".modalTitle").append(legendPolyName);
+    
+
+                    if (modalType === "1") {
+                        $("#camera-icon").addClass("modal1_open");
+                    } else if (modalType === "3") {
+                        $("#camera-icon").addClass("modal2_open");
+                    } else if (modalType === "5") {
+                        $("#camera-icon").addClass("modal3_open");
+                    }
+                });
+
+                $(".modal_close").click(function () { 
+                    $(".modalTitle").empty();
                 });
             }
         };
