@@ -832,7 +832,7 @@
         // initialize the modal plugin
         $('.photoModals').popup({
             transition: 'all 0.6s',
-            focusdelay: 100,
+            focusdelay: 300,
             blur: false
         });
 
@@ -1371,17 +1371,18 @@
                     $(".modalTitle").append(legendPolyName);
 
                     if (modalType === "1") {
-                        function modal1Interactions() {
+                        //function modal1Interactions() {
                             $("#imageLeftM1").attr("src", imageLeftM1);
                             $("#imageRightM1").attr("src", imageRightM1);
                             $(".attributionLM1").text("Photo Left: " + attributionLM1);
                             $(".attributionRM1").text("Photo Right: " + attributionRM1);
                             $(".yearLM1").attr("data-beer-label", yearLM1);
                             $(".yearRM1").attr("data-beer-label", yearRM1);
-                        }
-                        $.when(modal1Interactions()).done(function () {
                             $("#camera-icon").addClass("modal1_open");
-                        });
+                        // }
+                        // $.when(modal1Interactions()).done(function () {
+                            
+                        // });
 
                     } else if (modalType === "3") {
                         function modal2Interactions() {
@@ -1390,21 +1391,14 @@
                             $(".attributionRM2").text("Photo Right: " + attributionRM2);
                             $(".yearLM2").attr("year-left", yearLM2);
                             $(".yearRM2").attr("year-right", yearRM2);
-                        }
-                        $.when(modal2Interactions()).done(function () {
                             $("#camera-icon").addClass("modal2_open");
-                        });
+                        }
 
                     } else if (modalType === "5") {
-                        //function modal3Interactions() {
                             $("#imageM3").attr("src", imageM3);
                             $(".attributionRM3").text("Photo: " + attributionRM3);
                             $(".yearRM3").attr("year-right", yearRM3);
                             $("#camera-icon").addClass("modal3_open");
-                        //}
-                        // $.when(modal3Interactions()).done(function () {
-                            
-                        // });
                     }
                 });
 
