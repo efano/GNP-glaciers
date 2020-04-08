@@ -1343,15 +1343,23 @@
                     $(".modalTitle").append(legendPolyName);
 
                     if (modalType === "1") {
+                        //const openModal1 = $.Deferred();
+
                         //$("#camera-icon").addClass("modal1_open");
                         const imageLeftM1 = layer.feature.properties['P_S1'];
                         const imageRightM1 = layer.feature.properties['P_S2'];
-                        $("#imageLeftM1").attr("src", imageLeftM1);
-                        //$("#imageRightM1").attr("src", imageRightM1);
 
-                        $.when( $("#imageRightM1").attr("src", imageRightM1) ).done(function() {
+                        function modal1Interactions() {
+                            $("#imageLeftM1").attr("src", imageLeftM1);
+                            $("#imageRightM1").attr("src", imageRightM1);
+                        }
+
+                        $.when(modal1Interactions()).done(function () {
                             $("#camera-icon").addClass("modal1_open");
                         });
+
+
+
 
                     } else if (modalType === "3") {
                         $("#camera-icon").addClass("modal2_open");
