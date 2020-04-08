@@ -819,15 +819,6 @@
 
         $(document).ready(function () {
 
-            // initialize photo slider
-            $.fn.BeerSlider = function (options) {
-                options = options || {};
-                return this.each(function () {
-                    new BeerSlider(this, options);
-                });
-            };
-            $('.beer-slider').BeerSlider();
-
             // set default `pagecontainer` for all popups (optional, but recommended for screen readers and iOS*)
             $.fn.popup.defaults.pagecontainer = '#page'
 
@@ -836,6 +827,15 @@
                 transition: 'all 0.6s',
                 blur: false
             });
+
+            // initialize photo slider
+            $.fn.BeerSlider = function (options) {
+                options = options || {};
+                return this.each(function () {
+                    new BeerSlider(this, options);
+                });
+            };
+            $('.beer-slider').BeerSlider();
 
             // basemaps
             const topoESRI = L.tileLayer(
