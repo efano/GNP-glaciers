@@ -505,20 +505,40 @@
             margin-bottom: 10px;
         }
 
-        .attributionL {
+        .attributionLM1 {
+            font-size: 8px;
+            text-align: left;
+            float: left;
+            margin-top: -10px;
+        }
+
+        .attributionRM1 {
+            font-size: 8px;
+            text-align: right;
+            float: right;
+            margin-top: -10px;
+        }
+
+        .attributionLM2 {
             font-size: 8px;
             text-align: left;
             float: left;
         }
 
-        .attributionR {
+        .attributionRM2 {
             font-size: 8px;
             text-align: right;
             float: right;
         }
 
-        .side-left[left-year]:after {
-            content: attr(left-year);
+        .attributionRM3 {
+            font-size: 8px;
+            text-align: right;
+            float: right;
+        }
+
+        .side-left[year-left]:after {
+            content: attr(year-left);
             position: absolute;
             top: 12px;
             left: 12px;
@@ -528,8 +548,8 @@
             background: rgba(255, 255, 255, 0.75);
         }
 
-        .side-right[right-year]:after {
-            content: attr(right-year);
+        .side-right[year-right]:after {
+            content: attr(year-right);
             position: absolute;
             top: 12px;
             right: 12px;
@@ -705,15 +725,15 @@
                     </svg>
                 </button>
             </div>
-            <div id="beer-slider1" class="beer-slider" data-beer-label="yearRight">
+            <div id="beer-slider1" class="beer-slider yearRM1" data-beer-label=" ">
                 <img src="photos/placeholder.jpg" class="image" id="imageRightM1" alt="imageRight">
-                <div class="beer-reveal" data-beer-label="yearLeft">
+                <div class="beer-reveal yearLM1" data-beer-label=" ">
                     <img src="photos/placeholder.jpg" class="image" id="imageLeftM1" alt="imageLeft">
                 </div>
             </div>
             <div>
-                <div class="attributionL" value="attributionLeft">Photo Left: </div>
-                <div class="attributionR" value="attributionRight">Photo Right: </div>
+                <div class="attributionLM1" value="attributionLeft"></div>
+                <div class="attributionRM1" value="attributionRight"></div>
             </div>
         </div>
 
@@ -729,11 +749,11 @@
             </div>
             <div class="modal-body modal-body-container">
                 <img src="photos/placeholder.jpg" class="image" alt="" id="imageM2">
-                <div class="side-left" left-year="yearLeft"></div>
-                <div class="side-right" right-year="yearRight"></div>
+                <div class="side-left yearLM2" year-left=" "></div>
+                <div class="side-right yearRM2" year-right=" "></div>
                 <div>
-                    <div class="attributionL" value="attributionLeft">Photo Left: </div>
-                    <div class="attributionR" value="attributionRight">Photo Right: </div>
+                    <div class="attributionLM2" value="attributionLeft"></div>
+                    <div class="attributionRM2" value="attributionRight"></div>
                 </div>
             </div>
         </div>
@@ -750,9 +770,9 @@
             </div>
             <div class="modal-body modal-body-container">
                 <img id="imageM3" src="photos/placeholder.jpg" class="image" alt="">
-                <div class="side-right" right-year="yearRight"></div>
+                <div class="side-right yearRM3" year-right=" "></div>
                 <div>
-                    <div class="attributionR" value="attributionRight">Photo: </div>
+                    <div class="attributionRM3" value="attributionRight"></div>
                 </div>
             </div>
         </div>
@@ -1337,6 +1357,16 @@
                 const imageRightM1 = layer.feature.properties['P_S2'];
                 const imageM2 = layer.feature.properties['P_S3'];
                 const imageM3 = layer.feature.properties['P_S5'];
+                const attributionLM1 = layer.feature.properties['P1_ATTR_L'];
+                const attributionRM1 = layer.feature.properties['P2_ATTR_R'];
+                const attributionLM2 = layer.feature.properties['P3_ATTR_L'];
+                const attributionRM2 = layer.feature.properties['P4_ATTR_R'];
+                const attributionRM3 = layer.feature.properties['P5_ATTR_R'];
+                const yearLM1 = layer.feature.properties['P1_YR_L'];
+                const yearRM1 = layer.feature.properties['P2_YR_R'];
+                const yearLM2 = layer.feature.properties['P3_YR_L'];
+                const yearRM2 = layer.feature.properties['P4_YR_R'];
+                const yearRM3 = layer.feature.properties['P5_YR_R'];
 
                 const legendPolyTitle = "<h4 class='polyLegendTitle'>" + legendPolyName + "</h4>" +
                     $("#photoIcon").html();
@@ -1351,34 +1381,49 @@
                         function modal1Interactions() {
                             $("#imageLeftM1").attr("src", imageLeftM1);
                             $("#imageRightM1").attr("src", imageRightM1);
+                            $(".attributionLM1").text("Photo Left: " + attributionLM1);
+                            $(".attributionRM1").text("Photo Right: " + attributionRM1);
+                            $(".yearLM1").attr("data-beer-label", yearLM1);
+                            $(".yearRM1").attr("data-beer-label", yearRM1);
                         }
-
                         $.when(modal1Interactions()).done(function () {
                             $("#camera-icon").addClass("modal1_open");
                         });
 
                     } else if (modalType === "3") {
                         function modal2Interactions() {
-                            $("#camera-icon").addClass("modal2_open");
-                        }
-
-                        $.when(modal2Interactions()).done(function () {
                             $("#imageM2").attr("src", imageM2);
+                            $(".attributionLM2").text("Photo Left: " + attributionLM2);
+                            $(".attributionRM2").text("Photo Right: " + attributionRM2);
+                            $(".yearLM2").attr("year-left", yearLM2);
+                            $(".yearRM2").attr("year-right", yearRM2);
+                        }
+                        $.when(modal2Interactions()).done(function () {
+                            $("#camera-icon").addClass("modal2_open");
                         });
 
                     } else if (modalType === "5") {
                         function modal3Interactions() {
-                            $("#camera-icon").addClass("modal3_open");
-                        }
-
-                        $.when(modal3Interactions()).done(function () {
                             $("#imageM3").attr("src", imageM3);
+                            $(".attributionRM3").text("Photo: " + attributionRM3);
+                            $(".yearRM3").attr("year-right", yearRM3);
+                        }
+                        $.when(modal3Interactions()).done(function () {
+                            $("#camera-icon").addClass("modal3_open");
                         });
                     }
                 });
 
                 $(".modal_close").click(function () {
                     $(".modalTitle").empty();
+                    $(".attributionLM1").empty();
+                    $(".attributionRM1").empty();
+                    $(".attributionLM2").empty();
+                    $(".attributionRM2").empty();
+                    $(".attributionRM3").empty();
+                    $("input[data-beer-label]").empty();
+                    $("input[year-left]").empty();
+                    $("input[year-right]").empty();
                 });
             }
         };
