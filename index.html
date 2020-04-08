@@ -1388,7 +1388,7 @@
                             $(".yearRM1").attr("data-beer-label", yearRM1);
                         }
                         $.when(modal1Interactions()).done(function () {
-                            $("#camera-icon").addClass("modal1_open");
+                            $("#camera-icon").addClass("modal1_open").delay( 800 );
                         });
 
                     } else if (modalType === "3") {
@@ -1400,7 +1400,7 @@
                             $(".yearRM2").attr("year-right", yearRM2);
                         }
                         $.when(modal2Interactions()).done(function () {
-                            $("#camera-icon").addClass("modal2_open");
+                            $("#camera-icon").addClass("modal2_open").delay( 800 );
                         });
 
                     } else if (modalType === "5") {
@@ -1410,7 +1410,7 @@
                             $(".yearRM3").attr("year-right", yearRM3);
                         }
                         $.when(modal3Interactions()).done(function () {
-                            $("#camera-icon").addClass("modal3_open");
+                            $("#camera-icon").addClass("modal3_open").delay( 800 );
                         });
                     }
                 });
