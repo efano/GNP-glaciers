@@ -1332,6 +1332,12 @@
             // add legend content
             function updatePolyLegend(layer) {
                 const legendPolyName = layer.feature.properties['GLACNAME'];
+                const modalType = layer.feature.properties['P_TYPE'];
+                const imageLeftM1 = layer.feature.properties['P_S1'];
+                const imageRightM1 = layer.feature.properties['P_S2'];
+                const imageM2 = layer.feature.properties['P_S3'];
+                const imageM3 = layer.feature.properties['P_S5'];
+
                 const legendPolyTitle = "<h4 class='polyLegendTitle'>" + legendPolyName + "</h4>" +
                     $("#photoIcon").html();
 
@@ -1339,16 +1345,9 @@
 
                 // get modal type on icon click
                 $("#camera-icon").click(function () {
-                    const modalType = layer.feature.properties['P_TYPE'];
                     $(".modalTitle").append(legendPolyName);
 
                     if (modalType === "1") {
-                        //const openModal1 = $.Deferred();
-
-                        //$("#camera-icon").addClass("modal1_open");
-                        const imageLeftM1 = layer.feature.properties['P_S1'];
-                        const imageRightM1 = layer.feature.properties['P_S2'];
-
                         function modal1Interactions() {
                             $("#imageLeftM1").attr("src", imageLeftM1);
                             $("#imageRightM1").attr("src", imageRightM1);
@@ -1358,18 +1357,23 @@
                             $("#camera-icon").addClass("modal1_open");
                         });
 
-
-
-
                     } else if (modalType === "3") {
-                        $("#camera-icon").addClass("modal2_open");
-                        const imageM2 = layer.feature.properties['P_S3'];
-                        $("#imageM2").attr("src", imageM2);
+                        function modal2Interactions() {
+                            $("#camera-icon").addClass("modal2_open");
+                        }
+
+                        $.when(modal2Interactions()).done(function () {
+                            $("#imageM2").attr("src", imageM2);
+                        });
 
                     } else if (modalType === "5") {
-                        $("#camera-icon").addClass("modal3_open");
-                        const imageM3 = layer.feature.properties['P_S5'];
-                        $("#imageM3").attr("src", imageM3);
+                        function modal3Interactions() {
+                            $("#camera-icon").addClass("modal3_open");
+                        }
+
+                        $.when(modal3Interactions()).done(function () {
+                            $("#imageM3").attr("src", imageM3);
+                        });
                     }
                 });
 
