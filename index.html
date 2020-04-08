@@ -1372,25 +1372,37 @@
                         $(".modalTitle").append(legendPolyName);
 
                         if (modalType === "1") {
-                            $("#imageLeftM1").attr("src", imageLeftM1);
-                            $("#imageRightM1").attr("src", imageRightM1);
-                            $(".attributionLM1").text("Photo Left: " + attributionLM1);
-                            $(".attributionRM1").text("Photo Right: " + attributionRM1);
-                            $(".yearLM1").attr("data-beer-label", yearLM1);
-                            $(".yearRM1").attr("data-beer-label", yearRM1);
-                            $("#camera-icon").addClass("modal1_open");
+                            function loadModal1Image() {
+                                $("#imageLeftM1").attr("src", imageLeftM1);
+                                $("#imageRightM1").attr("src", imageRightM1);
+                            }
+                            $.when(loadModal1Image()).done(function () {
+                                $(".attributionLM1").text("Photo Left: " + attributionLM1);
+                                $(".attributionRM1").text("Photo Right: " + attributionRM1);
+                                $(".yearLM1").attr("data-beer-label", yearLM1);
+                                $(".yearRM1").attr("data-beer-label", yearRM1);
+                                $("#camera-icon").addClass("modal1_open");
+                            });
                         } else if (modalType === "3") {
-                            $("#imageM2").attr("src", imageM2);
-                            $(".attributionLM2").text("Photo Left: " + attributionLM2);
-                            $(".attributionRM2").text("Photo Right: " + attributionRM2);
-                            $(".yearLM2").attr("year-left", yearLM2);
-                            $(".yearRM2").attr("year-right", yearRM2);
-                            $("#camera-icon").addClass("modal2_open");
+                            function loadModal2Image() {
+                                $("#imageM2").attr("src", imageM2);
+                            }
+                            $.when(loadModal2Image()).done(function () {
+                                $(".attributionLM2").text("Photo Left: " + attributionLM2);
+                                $(".attributionRM2").text("Photo Right: " + attributionRM2);
+                                $(".yearLM2").attr("year-left", yearLM2);
+                                $(".yearRM2").attr("year-right", yearRM2);
+                                $("#camera-icon").addClass("modal2_open");
+                            });
                         } else if (modalType === "5") {
-                            $("#imageM3").attr("src", imageM3);
-                            $(".attributionRM3").text("Photo: " + attributionRM3);
-                            $(".yearRM3").attr("year-right", yearRM3);
-                            $("#camera-icon").addClass("modal3_open");
+                            function loadModal3Image() {
+                                $("#imageM3").attr("src", imageM3);
+                            }
+                            $.when(loadModal3Image()).done(function () {
+                                $(".attributionRM3").text("Photo: " + attributionRM3);
+                                $(".yearRM3").attr("year-right", yearRM3);
+                                $("#camera-icon").addClass("modal3_open");
+                            });
                         }
                     });
 
