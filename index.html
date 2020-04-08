@@ -825,6 +825,15 @@
             }
         });
 
+        // initialize photo slider
+        $.fn.BeerSlider = function (options) {
+            options = options || {};
+            return this.each(function () {
+                new BeerSlider(this, options);
+            });
+        };
+        $('.beer-slider').BeerSlider();
+
         // set default `pagecontainer` for all popups (optional, but recommended for screen readers and iOS*)
         $.fn.popup.defaults.pagecontainer = '#page'
 
@@ -834,15 +843,6 @@
             transition: 'all 0.3s',
             blur: false
         });
-
-        // initialize photo slider
-        $.fn.BeerSlider = function (options) {
-            options = options || {};
-            return this.each(function () {
-                new BeerSlider(this, options);
-            });
-        };
-        $('.beer-slider').BeerSlider();
 
         // basemaps
         const topoESRI = L.tileLayer(
@@ -1388,7 +1388,7 @@
                             $(".yearRM1").attr("data-beer-label", yearRM1);
                         }
                         $.when(modal1Interactions()).done(function () {
-                            $("#camera-icon").addClass("modal1_open").delay( 800 );
+                            $("#camera-icon").addClass("modal1_open");
                         });
 
                     } else if (modalType === "3") {
@@ -1400,7 +1400,7 @@
                             $(".yearRM2").attr("year-right", yearRM2);
                         }
                         $.when(modal2Interactions()).done(function () {
-                            $("#camera-icon").addClass("modal2_open").delay( 800 );
+                            $("#camera-icon").addClass("modal2_open");
                         });
 
                     } else if (modalType === "5") {
@@ -1410,7 +1410,7 @@
                             $(".yearRM3").attr("year-right", yearRM3);
                         }
                         $.when(modal3Interactions()).done(function () {
-                            $("#camera-icon").addClass("modal3_open").delay( 800 );
+                            $("#camera-icon").addClass("modal3_open");
                         });
                     }
                 });
