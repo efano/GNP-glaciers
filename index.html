@@ -590,14 +590,6 @@
             border-radius: 5px;
         }
 
-        /* .photoModals {
-            transform: scale(0.8);
-        }
-
-        .popup_visible .photoModals {
-            transform: scale(1);
-        } */
-
         #modal3 {
             width: 35%;
             height: auto;
@@ -840,6 +832,7 @@
         // initialize the modal plugin
         $('.photoModals').popup({
             transition: 'all 0.6s',
+            focusdelay: 100,
             blur: false
         });
 
