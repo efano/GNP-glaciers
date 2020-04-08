@@ -554,7 +554,7 @@
         #closeIcon1,
         #closeIcon2,
         #closeIcon3 {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 600;
             color: #999;
         }
@@ -577,6 +577,12 @@
         .popup_visible .photoModals {
             transform: scale(1);
         }
+
+        #modal3 {
+            width: 35%;
+            height: auto;
+        }
+
     </style>
 </head>
 
@@ -688,65 +694,67 @@
         </a>
     </div>
 
-    <!-- modal1 -->
-    <div hidden id="page"></div>
-    <div class="modal photoModals" id="modal1">
-        <div class="modalHeader">
-            <div class="modalTitle" id="photo-slider-label"></div>
-            <button class="absolute top right px12 py12 modal_close">
-                <svg class="icon link color-darken50 modal1_close" id="closeIcon1">
-                    <use xlink:href="#icon-close"></use>
-                </svg>
-            </button>
-        </div>
-        <div id="beer-slider1" class="beer-slider" data-beer-label="yearRight">
-            <img src="photos/Grinnell2.jpg" class="image" alt="imageRight">
-            <div class="beer-reveal" data-beer-label="yearLeft">
-                <img src="photos/Grinnell1.jpg" class="image" alt="imageLeft">
-            </div>
-        </div>
-        <div>
-            <div class="attributionL" value="attributionLeft">Photo Left: </div>
-            <div class="attributionR" value="attributionRight">Photo Right: </div>
-        </div>
-    </div>
+    <div hidden class="modalsAll" id="page">
 
-    <!-- modal2 -->
-    <div hidden class="modal photoModals" id="modal2">
-        <div class="modalHeader">
-            <div class="modalTitle" id="photo-side2side-label"></div>
-            <button class="absolute top right px12 py12  modal_close">
-                <svg class="icon link color-darken50 modal2_close" id="closeIcon2">
-                    <use xlink:href="#icon-close"></use>
-                </svg>
-            </button>
-        </div>
-        <div class="modal-body modal-body-container">
-            <img src="photos/Ipasha3.jpg" class="image" alt="">
-            <div class="side-left" left-year="yearLeft"></div>
-            <div class="side-right" right-year="yearRight"></div>
+        <!-- modal1 -->
+        <div class="modal photoModals" id="modal1">
+            <div class="modalHeader">
+                <div class="modalTitle" id="photo-slider-label"></div>
+                <button class="absolute top right px12 py12 modal_close">
+                    <svg class="icon link color-darken50 modal1_close" id="closeIcon1">
+                        <use xlink:href="#icon-close"></use>
+                    </svg>
+                </button>
+            </div>
+            <div id="beer-slider1" class="beer-slider" data-beer-label="yearRight">
+                <img src="photos/placeholder.jpg" class="image" id="imageRightM1" alt="imageRight">
+                <div class="beer-reveal" data-beer-label="yearLeft">
+                    <img src="photos/placeholder.jpg" class="image" id="imageLeftM1" alt="imageLeft">
+                </div>
+            </div>
             <div>
                 <div class="attributionL" value="attributionLeft">Photo Left: </div>
                 <div class="attributionR" value="attributionRight">Photo Right: </div>
             </div>
         </div>
-    </div>
 
-    <!-- modal3 -->
-    <div hidden class="modal photoModals" id="modal3">
-        <div class="modalHeader">
-            <div class="modalTitle" id="photo-single-label"></div>
-            <button class="absolute top right px12 py12  modal_close">
-                <svg class="icon link color-darken50 modal3_close" id="closeIcon3">
-                    <use xlink:href="#icon-close"></use>
-                </svg>
-            </button>
+        <!-- modal2 -->
+        <div hidden class="modal photoModals" id="modal2">
+            <div class="modalHeader">
+                <div class="modalTitle" id="photo-side2side-label"></div>
+                <button class="absolute top right px12 py12  modal_close">
+                    <svg class="icon link color-darken50 modal2_close" id="closeIcon2">
+                        <use xlink:href="#icon-close"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body modal-body-container">
+                <img src="photos/placeholder.jpg" class="image" alt="" id="imageM2">
+                <div class="side-left" left-year="yearLeft"></div>
+                <div class="side-right" right-year="yearRight"></div>
+                <div>
+                    <div class="attributionL" value="attributionLeft">Photo Left: </div>
+                    <div class="attributionR" value="attributionRight">Photo Right: </div>
+                </div>
+            </div>
         </div>
-        <div class="modal-body modal-body-container">
-            <img id="photoSingle" src="photos/Whitecrow5.jpg" class="image" alt="">
-            <div class="side-right" right-year="yearRight"></div>
-            <div>
-                <div class="attributionR" value="attributionRight">Photo: </div>
+
+        <!-- modal3 -->
+        <div hidden class="modal photoModals" id="modal3">
+            <div class="modalHeader">
+                <div class="modalTitle" id="photo-single-label"></div>
+                <button class="absolute top right px12 py12  modal_close">
+                    <svg class="icon link color-darken50 modal3_close" id="closeIcon3">
+                        <use xlink:href="#icon-close"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body modal-body-container">
+                <img id="imageM3" src="photos/placeholder.jpg" class="image" alt="">
+                <div class="side-right" right-year="yearRight"></div>
+                <div>
+                    <div class="attributionR" value="attributionRight">Photo: </div>
+                </div>
             </div>
         </div>
     </div>
@@ -803,7 +811,8 @@
         // initialize the modal plugin
         $('.photoModals').popup({
             scrolllock: true,
-            transition: 'all 0.3s'
+            transition: 'all 0.3s',
+            blur: false
         });
 
         // initialize photo slider
@@ -1333,18 +1342,32 @@
                 $("#camera-icon").click(function () {
                     const modalType = layer.feature.properties['P_TYPE'];
                     $(".modalTitle").append(legendPolyName);
-    
 
                     if (modalType === "1") {
+                        const imageLeftM1 = layer.feature.properties['P_S1'];
+                        const imageRightM1 = layer.feature.properties['P_S2'];
+
+                        $("#imageLeftM1").attr("src", imageLeftM1);
+                        $("#imageRightM1").attr("src", imageRightM1);
+
                         $("#camera-icon").addClass("modal1_open");
                     } else if (modalType === "3") {
+                        const imageM2 = layer.feature.properties['P_S3'];
+
+                        $("#imageM2").attr("src", imageM2);
+
                         $("#camera-icon").addClass("modal2_open");
                     } else if (modalType === "5") {
+
+                        const imageM3 = layer.feature.properties['P_S5'];
+
+                        $("#imageM3").attr("src", imageM3);
+
                         $("#camera-icon").addClass("modal3_open");
                     }
                 });
 
-                $(".modal_close").click(function () { 
+                $(".modal_close").click(function () {
                     $(".modalTitle").empty();
                 });
             }
