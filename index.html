@@ -1373,7 +1373,6 @@
 
                         if (modalType === "1") {
                             function loadModal1Image() {
-                                $("#camera-icon").addClass("modal1_open");
                                 $("#imageLeftM1").attr("src", imageLeftM1);
                                 $("#imageRightM1").attr("src", imageRightM1);
                             }
@@ -1382,10 +1381,10 @@
                                 $(".attributionRM1").text("Photo Right: " + attributionRM1);
                                 $(".yearLM1").attr("data-beer-label", yearLM1);
                                 $(".yearRM1").attr("data-beer-label", yearRM1);
+                                $("#camera-icon").addClass("modal1_open");
                             });
                         } else if (modalType === "3") {
                             function loadModal2Image() {
-                                $("#camera-icon").addClass("modal2_open");
                                 $("#imageM2").attr("src", imageM2);
                             }
                             $.when(loadModal2Image()).done(function () {
@@ -1393,15 +1392,16 @@
                                 $(".attributionRM2").text("Photo Right: " + attributionRM2);
                                 $(".yearLM2").attr("year-left", yearLM2);
                                 $(".yearRM2").attr("year-right", yearRM2);
+                                $("#camera-icon").addClass("modal2_open");
                             });
                         } else if (modalType === "5") {
                             function loadModal3Image() {
-                                $("#camera-icon").addClass("modal3_open");
                                 $("#imageM3").attr("src", imageM3);
                             }
                             $.when(loadModal3Image()).done(function () {
                                 $(".attributionRM3").text("Photo: " + attributionRM3);
                                 $(".yearRM3").attr("year-right", yearRM3);
+                                $("#camera-icon").addClass("modal3_open");
                             });
                         }
                     });
