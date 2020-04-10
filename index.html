@@ -66,7 +66,7 @@
 
         .main-header {
             background: white;
-            box-shadow: 0 1px 6px rgba(0, 0, 0, .1);
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         #mountain-icon {
@@ -453,10 +453,6 @@
 
         /* glacier polygon css */
 
-        .optionsLIA {
-            stroke-dasharray: 3, 3;
-        }
-
         .legendPolyList {
             font-size: 10px;
             background-color: rgba(255, 255, 255, .95);
@@ -474,16 +470,48 @@
             margin-left: 16px;
         }
 
+        .optionsLIA {
+            stroke-dasharray: 3, 3;
+        }
+
         #camera-icon {
             float: right;
             opacity: 0.5;
             margin-top: -24px;
             margin-bottom: 8px;
-            margin-right: 8px;
+            margin-right: 10px;
         }
 
         #camera-icon:hover {
             opacity: 1.0;
+        }
+
+        #liaContainer {
+            margin-top: 4px;
+            margin-left: 16px;
+            margin-bottom: 8px;
+        }    
+
+        #liaCheckbox {
+            height: 13px;
+            width: 13px;
+            border-radius: 3px;
+        }
+
+        #checkboxIcon {
+            height: 13px;
+            width: 13px;
+            border-radius: 3px;
+            color: white;
+            background-color: #999;
+        }
+
+        .liaLabelText {
+            font-size: 11px;
+            font-weight: 600;
+            color: #999;
+            margin-left: 6px;
+            margin-top: 3px;
         }
 
         /* modal css */
@@ -705,6 +733,7 @@
         </a>
     </div>
 
+    <!-- modals -->
     <div hidden class="modalsAll" id="page">
 
         <!-- modal1 -->
@@ -1013,9 +1042,9 @@
 
                 map.on('zoomend', function () {
                     const zoomlevel = map.getZoom();
-                    if (zoomlevel >= 12) {
-                        map.addLayer(liaLayer);
-                    }
+                    // if (zoomlevel >= 12) {
+                    //     map.addLayer(liaLayer);
+                    // }
                     if (zoomlevel < 12) {
                         $(".legendPolyList").fadeOut("fast");
                         map.removeLayer(liaLayer);
@@ -1362,12 +1391,13 @@
                     const yearRM2 = layer.feature.properties['P4_YR_R'];
                     const yearRM3 = layer.feature.properties['P5_YR_R'];
 
-                    const legendPolyTitle = "<h4 class='polyLegendTitle'>" + legendPolyName + "</h4>" +
+
+                    const legendPoly = "<h4 class='polyLegendTitle'>" + legendPolyName + "</h4>" +
                         $("#photoIcon").html();
 
-                    $(".legendPolyList").html(legendPolyTitle);
+                    $(".legendPolyList").html(legendPoly);
 
-                    // get modal type on icon click
+                    // get modal type on camera icon click
                     $("#camera-icon").click(function () {
                         $(".modalTitle").append(legendPolyName);
 
@@ -1377,8 +1407,10 @@
                                 $("#imageRightM1").attr("src", imageRightM1);
                             }
                             $.when(loadModal1Image()).done(function () {
-                                $(".attributionLM1").text("Photo Left: " + attributionLM1);
-                                $(".attributionRM1").text("Photo Right: " + attributionRM1);
+                                $(".attributionLM1").text("Photo Left: " +
+                                    attributionLM1);
+                                $(".attributionRM1").text("Photo Right: " +
+                                    attributionRM1);
                                 $(".yearLM1").attr("data-beer-label", yearLM1);
                                 $(".yearRM1").attr("data-beer-label", yearRM1);
                                 $("#camera-icon").addClass("modal1_open");
@@ -1388,8 +1420,10 @@
                                 $("#imageM2").attr("src", imageM2);
                             }
                             $.when(loadModal2Image()).done(function () {
-                                $(".attributionLM2").text("Photo Left: " + attributionLM2);
-                                $(".attributionRM2").text("Photo Right: " + attributionRM2);
+                                $(".attributionLM2").text("Photo Left: " +
+                                    attributionLM2);
+                                $(".attributionRM2").text("Photo Right: " +
+                                    attributionRM2);
                                 $(".yearLM2").attr("year-left", yearLM2);
                                 $(".yearRM2").attr("year-right", yearRM2);
                                 $("#camera-icon").addClass("modal2_open");
@@ -1399,13 +1433,15 @@
                                 $("#imageM3").attr("src", imageM3);
                             }
                             $.when(loadModal3Image()).done(function () {
-                                $(".attributionRM3").text("Photo: " + attributionRM3);
+                                $(".attributionRM3").text("Photo: " +
+                                    attributionRM3);
                                 $(".yearRM3").attr("year-right", yearRM3);
                                 $("#camera-icon").addClass("modal3_open");
                             });
                         }
                     });
 
+                    // clear modal components on modal close
                     $(".modal_close").click(function () {
                         $(".modalTitle").empty();
                         $(".attributionLM1").empty();
@@ -1416,9 +1452,33 @@
                         $("input[data-beer-label]").empty();
                         $("input[year-left]").empty();
                         $("input[year-right]").empty();
-                    })
+                    });
 
-                }
+                    // create LIA checkbox and add to legend
+                    $('<div id="liaLayerToggle"><label class="checkbox-container" id="liaContainer"><input id="checkboxInput" type="checkbox"><div class="checkbox" id="liaCheckbox"><svg id="checkboxIcon" class="icon"><use xlink:href="#icon-check" /></svg></div><span class="liaLabelText">Mid-19th Century Extents</span></label></div>'
+                    ).insertAfter("#camera-icon");
+
+                    $('#liaLayerToggle input[type="checkbox"]').on('change', function () {
+                        var checkbox = $(this);
+                        if ($(this).is(':checked')) {
+                            map.addLayer(liaLayer);
+                        } else {
+                            map.removeLayer(liaLayer);
+                        }
+                    });
+
+                };
+
+
+
+
+
+
+
+
+
+
+
             };
         });
     </script>
