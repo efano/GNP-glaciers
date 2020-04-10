@@ -1040,16 +1040,16 @@
                     style: optionsLIA
                 });
 
-                map.on('zoomend', function () {
-                    const zoomlevel = map.getZoom();
-                    // if (zoomlevel >= 12) {
-                    //     map.addLayer(liaLayer);
-                    // }
-                    if (zoomlevel < 12) {
-                        $(".legendPolyList").fadeOut("fast");
-                        map.removeLayer(liaLayer);
-                    }
-                });
+                // map.on('zoomend', function () {
+                //     const zoomlevel = map.getZoom();
+                //     // if (zoomlevel >= 12) {
+                //     //     map.addLayer(liaLayer);
+                //     // }
+                //     if (zoomlevel < 12) {
+                //         $(".legendPolyList").fadeOut("fast");
+                //         map.removeLayer(liaLayer);
+                //     }
+                // });
 
                 // add lia poly interactions
                 function addInteractionsLIA(liaLayer) {
@@ -1094,6 +1094,7 @@
                             $(btnObj).val($(".highlight").text());
 
                             updatePolyLegend(layer);
+                            $('#checkboxInput').prop('checked', true);
 
                             map.flyToBounds(layer.getBounds(), {
                                 padding: [20, 20]
@@ -1342,9 +1343,13 @@
                             // if the glacier id matches...
                             if (polyProps === glacierNum) {
                                 updatePolyLegend(layer);
+
                                 map.flyToBounds(layer.getBounds(), {
                                     padding: [20, 20]
                                 });
+
+                                $('#checkboxInput').prop('checked', false);
+                                map.removeLayer(liaLayer);
                             }
                         });
                         $(".legendPolyList").fadeIn(1600);
@@ -1459,7 +1464,7 @@
                     ).insertAfter("#camera-icon");
 
                     $('#liaLayerToggle input[type="checkbox"]').on('change', function () {
-                        var checkbox = $(this);
+                        $(this);
                         if ($(this).is(':checked')) {
                             map.addLayer(liaLayer);
                         } else {
