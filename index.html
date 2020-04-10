@@ -1040,16 +1040,16 @@
                     style: optionsLIA
                 });
 
-                // map.on('zoomend', function () {
-                //     const zoomlevel = map.getZoom();
-                //     // if (zoomlevel >= 12) {
-                //     //     map.addLayer(liaLayer);
-                //     // }
-                //     if (zoomlevel < 12) {
-                //         $(".legendPolyList").fadeOut("fast");
-                //         map.removeLayer(liaLayer);
-                //     }
-                // });
+                map.on('zoomend', function () {
+                    const zoomlevel = map.getZoom();
+                    // if (zoomlevel >= 12) {
+                    //     map.addLayer(liaLayer);
+                    // }
+                    if (zoomlevel < 12) {
+                        $(".legendPolyList").fadeOut("fast");
+                        map.removeLayer(liaLayer);
+                    }
+                });
 
                 // add lia poly interactions
                 function addInteractionsLIA(liaLayer) {
