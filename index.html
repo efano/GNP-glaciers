@@ -82,7 +82,7 @@
 
         .navbar-title {
             color: #222;
-            font-size: 24px;
+            font-size: 25px;
             font-weight: 600;
             margin-left: 3px;
             margin-right: 8px;
@@ -470,7 +470,7 @@
 
         .polyLegendTitle {
             color: #222;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
             margin-top: 12px;
             margin-left: 16px;
@@ -483,7 +483,7 @@
         #camera-icon {
             float: right;
             opacity: 0.5;
-            margin-top: -26px;
+            margin-top: -28px;
             margin-bottom: 8px;
             margin-right: 10px;
         }
@@ -603,7 +603,7 @@
 
         #ui-poly-control {
             margin-bottom: 2px;
-            margin-top: 6px;
+            margin-top: 7px;
             /* background-color: #e2e2e2; */
             margin-left: 16px;
         }
@@ -632,6 +632,7 @@
             border-radius: 3px;
             color: white;
             background-color: #7E7E7E;
+            
         }
 
         .liaLabelText {
@@ -1511,7 +1512,7 @@
                     $(polygonYearsGroup).insertAfter("#camera-icon");
 
                     // create LIA checkbox and add to legend
-                    const liaLayerToggle = $('<div id="liaLayerToggle"><label class="checkbox-container" id="liaContainer"><input id="checkboxInput" type="checkbox"><div class="checkbox" id="liaCheckbox"><svg id="checkboxIcon" class="icon"><use xlink:href="#icon-check" /></svg></div><span class="liaLabelText">Mid-19th Century Extents</span></label></div>');
+                    const liaLayerToggle = $('<div id="liaLayerToggle"><label class="checkbox-container" id="liaContainer"><input id="checkboxInput" type="checkbox"><div class="checkbox checkbox--gray" id="liaCheckbox"><svg id="checkboxIcon" class="icon"><use xlink:href="#icon-check" /></svg></div><span class="liaLabelText">Mid-19th Century Extents</span></label></div>');
                     $(liaLayerToggle).insertAfter("#polygonYears");
                         
                     $('#liaLayerToggle input[type="checkbox"]').on('change', function () {
