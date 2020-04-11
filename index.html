@@ -442,14 +442,14 @@
         #symbolActive {
             color: #7E7E7E;
             font-size: 20px;
-            margin-left: -1px;
+            margin-left: 2px;
         }
 
         #symbolStangnant {
             font-family: 'Nunito', sans-serif;
             font-weight: 900;
             font-size: 16px;
-            margin-left: 1px;
+            margin-left: 3px;
             color: #7E7E7E;
         }
 
@@ -601,9 +601,52 @@
             height: auto;
         }
 
-        #ui-poly-control {
-            margin-bottom: 2px;
+        .polyLegendAreaTitle {
+            font-size: 14px;
+            color: #222;
+            font-weight: 600;
             margin-top: 7px;
+            margin-left: 16px;
+            margin-bottom: 5px;
+        }
+
+        #liaContainer {
+            margin-left: 22px;
+        }
+
+        #liaCheckbox {
+            height: 13px;
+            width: 13px;
+            border-radius: 3px;
+        }
+
+        #liaCheckbox:hover {
+            background-color: #e7e7e7;
+        }
+
+        #checkboxIcon {
+            height: 13px;
+            width: 13px;
+            border-radius: 3px;
+            color: white;
+            background-color: #7E7E7E;
+        }
+
+        .liaLabelText {
+            font-size: 10px;
+            font-weight: 600;
+            color: #7E7E7E;
+            margin-left: 6px;
+            margin-top: 3px;
+        }
+
+        .liaLabelText:hover {
+            color: #222;
+        }
+
+        #ui-poly-control {
+            margin-bottom: 16px;
+            margin-top: 5px;
             /* background-color: #e2e2e2; */
             margin-left: 16px;
         }
@@ -613,35 +656,6 @@
             line-height: 16px;
             padding: 2px 7px;
         }
-
-        #liaContainer {
-            margin-left: 18px;
-            margin-bottom: 8px;
-        }
-
-        #liaCheckbox {
-            height: 13px;
-            width: 13px;
-            border-radius: 3px;
-        }
-
-        #checkboxIcon {
-            height: 13px;
-            width: 13px;
-            border-radius: 3px;
-            color: white;
-            background-color: #7E7E7E;
-            
-        }
-
-        .liaLabelText {
-            font-size: 10px;
-            font-weight: 600;
-            color: #7E7E7E;
-            margin-left: 6px;
-            margin-top: 4px;
-        }
-
     </style>
 </head>
 
@@ -1444,10 +1458,10 @@
                     const yearRM3 = layer.feature.properties['P5_YR_R'];
 
 
-                    const legendPoly = "<h4 class='polyLegendTitle'>" + legendPolyName + "</h4>" +
+                    const legendPolyTitle = "<h4 class='polyLegendTitle'>" + legendPolyName + "</h4>" +
                         $("#photoIcon").html();
 
-                    $(".legendPolyList").html(legendPoly);
+                    $(".legendPolyList").html(legendPolyTitle);
 
                     // get modal type on camera icon click
                     $("#camera-icon").click(function () {
@@ -1506,14 +1520,20 @@
                         $("input[year-right]").empty();
                     });
 
-                    // get polygon years toggle buttons
-                    const polygonYearsGroup = $("#polygonYearsGroup").html();
-                    $(polygonYearsGroup).insertAfter("#camera-icon");
+                    const legendPolyAreaTitle = "<h4 class='polyLegendAreaTitle'>" + "Glacier Area" + "</h4>"
+                    $(legendPolyAreaTitle).insertAfter("#camera-icon");
+
+// <label class='switch-container'>
+//   <input type='checkbox' />
+//   <div class='switch'></div>
+// </label>
 
                     // create LIA checkbox and add to legend
-                    const liaLayerToggle = $('<div id="liaLayerToggle"><label class="checkbox-container" id="liaContainer"><input id="checkboxInput" type="checkbox"><div class="checkbox checkbox--gray" id="liaCheckbox"><svg id="checkboxIcon" class="icon"><use xlink:href="#icon-check" /></svg></div><span class="liaLabelText">Mid-19th Century Extents</span></label></div>');
-                    $(liaLayerToggle).insertAfter("#polygonYears");
-                        
+                    const liaLayerToggle = $(
+                        '<div id="liaLayerToggle"><label class="checkbox-container" id="liaContainer"><input id="checkboxInput" type="checkbox"><div class="checkbox checkbox--gray" id="liaCheckbox"><svg id="checkboxIcon" class="icon"><use xlink:href="#icon-check" /></svg></div><span class="liaLabelText">Mid-19th Century Extents</span></label></div>'
+                        );
+                    $(liaLayerToggle).insertAfter(".polyLegendAreaTitle");
+
                     $('#liaLayerToggle input[type="checkbox"]').on('change', function () {
                         $(this);
                         if ($(this).is(':checked')) {
@@ -1522,6 +1542,11 @@
                             map.removeLayer(liaLayer);
                         }
                     });
+
+                    // get polygon years toggle buttons
+                    const polygonYearsGroup = $("#polygonYearsGroup").html();
+                    $(polygonYearsGroup).insertAfter("#liaLayerToggle");
+                    
 
 
                 };
