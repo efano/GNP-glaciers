@@ -81,7 +81,7 @@
         }
 
         .navbar-title {
-            color: #343434;
+            color: #222;
             font-size: 24px;
             font-weight: 600;
             margin-left: 3px;
@@ -89,11 +89,11 @@
         }
 
         .vl {
-            border-left: 1.25px solid #999;
+            border-left: 1.25px solid #7E7E7E;
         }
 
         .navbar-subtitle {
-            color: #999;
+            color: #7E7E7E;
             font-size: 16px;
             font-weight: 600;
             margin: 0 10px 0 10px;
@@ -106,12 +106,12 @@
         }
 
         .navbar-icon {
-            color: #999;
+            color: #7E7E7E;
             font-size: 26px;
         }
 
         .navbar-icon:hover {
-            color: #343434;
+            color: #222;
         }
 
         img {
@@ -232,7 +232,7 @@
         }
 
         .leaflet-control-layers-list {
-            color: #343434;
+            color: #222;
         }
 
         .show1 {
@@ -246,12 +246,12 @@
 
         #radioText:hover {
             font-weight: 600;
-            color: #343434;
+            color: #222;
         }
 
         .leaflet-control-layers-selector:checked~#radioText {
             font-weight: 600;
-            color: #343434;
+            color: #222;
             text-decoration: underline;
         }
 
@@ -286,7 +286,7 @@
         #dropdown-list2 {
             text-decoration: none;
             display: block;
-            color: #343434;
+            color: #222;
             font-weight: 400;
             font-size: 11px;
             line-height: 1.45;
@@ -295,7 +295,7 @@
 
         #dropdown-list2 :hover {
             font-weight: 600;
-            color: #343434;
+            color: #222;
         }
 
         .show2 {
@@ -304,11 +304,11 @@
 
         .highlight {
             font-weight: 600;
-            color: #343434;
+            color: #222;
         }
 
         .leaflet-control-scale-line {
-            border: 1px solid #343434;
+            border: 1px solid #222;
             border-top: none;
             line-height: .7;
             padding: 2px 5px 1px;
@@ -321,13 +321,13 @@
         }
 
         .leaflet-control-scale-line:not(:first-child) {
-            border-top: 1px solid #343434;
+            border-top: 1px solid #222;
             border-bottom: none;
             margin-top: 1px;
         }
 
         .leaflet-control-scale-line:not(:first-child):not(:last-child) {
-            border-bottom: 1px solid #343434;
+            border-bottom: 1px solid #222;
         }
 
         .leaflet-tooltip {
@@ -337,7 +337,7 @@
 
         .tooltipTitle {
             white-space: nowrap;
-            color: #343434;
+            color: #222;
             font-size: 12px;
             font-weight: 600;
             margin-top: -2px;
@@ -346,7 +346,7 @@
         .tooltipText {
             font-size: 10px;
             font-weight: 600;
-            color: #999;
+            color: #7E7E7E;
             margin-top: -20px;
             margin-bottom: -4px;
         }
@@ -364,7 +364,7 @@
             width: 200px;
             position: absolute;
             z-index: 950;
-            color: #343434;
+            color: #222;
         }
 
         .glacierPtLegend h4 {
@@ -393,7 +393,7 @@
         #gradientGreatest {
             font-size: 10px;
             font-weight: 600;
-            color: #999;
+            color: #7E7E7E;
             margin-left: 23px;
             margin-top: -11px;
             margin-bottom: -8px;
@@ -404,13 +404,13 @@
             margin-top: 2px;
             list-style: none;
             line-height: .95;
-            color: #343434;
+            color: #222;
         }
 
         .glacierPtLegendText {
             font-size: 10px;
             font-weight: 600;
-            color: #999;
+            color: #7E7E7E;
         }
 
         #secondLegendGroup {
@@ -424,17 +424,23 @@
         }
 
         .toggle-group :hover {
-            color: #343434;
+            color: #222;
         }
 
         #ui-pt-control .toggle--s {
+            font-size: 10px;
+            line-height: 16px;
+            padding: 2px 7px;
+        }
+
+        #ui-poly-control .toggle--s {
             font-size: 10px;
             line-height: 16px;
             padding: 1px 6px;
         }
 
         #symbolActive {
-            color: #999;
+            color: #7E7E7E;
             font-size: 20px;
             margin-left: -1px;
         }
@@ -444,7 +450,7 @@
             font-weight: 900;
             font-size: 16px;
             margin-left: 1px;
-            color: #999;
+            color: #7E7E7E;
         }
 
         #stangnant {
@@ -463,8 +469,8 @@
         }
 
         .polyLegendTitle {
-            color: #343434;
-            font-size: 17px;
+            color: #222;
+            font-size: 18px;
             font-weight: 600;
             margin-top: 12px;
             margin-left: 16px;
@@ -477,41 +483,13 @@
         #camera-icon {
             float: right;
             opacity: 0.5;
-            margin-top: -24px;
+            margin-top: -26px;
             margin-bottom: 8px;
             margin-right: 10px;
         }
 
         #camera-icon:hover {
             opacity: 1.0;
-        }
-
-        #liaContainer {
-            margin-top: 4px;
-            margin-left: 16px;
-            margin-bottom: 8px;
-        }    
-
-        #liaCheckbox {
-            height: 13px;
-            width: 13px;
-            border-radius: 3px;
-        }
-
-        #checkboxIcon {
-            height: 13px;
-            width: 13px;
-            border-radius: 3px;
-            color: white;
-            background-color: #999;
-        }
-
-        .liaLabelText {
-            font-size: 11px;
-            font-weight: 600;
-            color: #999;
-            margin-left: 6px;
-            margin-top: 3px;
         }
 
         /* modal css */
@@ -522,7 +500,7 @@
             padding: 10px 20px;
             max-width: 60%;
             background: white;
-            color: #343434;
+            color: #222;
             border-radius: 5px;
         }
 
@@ -604,14 +582,14 @@
         #closeIcon3 {
             font-size: 24px;
             font-weight: 600;
-            color: #999;
+            color: #7E7E7E;
         }
 
         #closeIcon1 :hover,
         #closeIcon2 :hover,
         #closeIcon3 :hover {
             font-weight: 600;
-            color: #343434;
+            color: #222;
         }
 
         .image {
@@ -622,6 +600,48 @@
             width: 35%;
             height: auto;
         }
+
+        #ui-poly-control {
+            margin-bottom: 2px;
+            margin-top: 6px;
+            /* background-color: #e2e2e2; */
+            margin-left: 16px;
+        }
+
+        #ui-poly-control .toggle--s {
+            font-size: 10px;
+            line-height: 16px;
+            padding: 2px 7px;
+        }
+
+        #liaContainer {
+            margin-top: 2px;
+            margin-left: 18px;
+            margin-bottom: 8px;
+        }
+
+        #liaCheckbox {
+            height: 13px;
+            width: 13px;
+            border-radius: 3px;
+        }
+
+        #checkboxIcon {
+            height: 12px;
+            width: 12px;
+            border-radius: 3px;
+            color: white;
+            background-color: #7E7E7E;
+        }
+
+        .liaLabelText {
+            font-size: 10px;
+            font-weight: 600;
+            color: #7E7E7E;
+            margin-left: 6px;
+            margin-top: 3px;
+        }
+
     </style>
 </head>
 
@@ -702,7 +722,7 @@
             <h6>(0.1 km&sup2; or ~25 acres)</h6>
             <ul id="sizeCrit">
                 <li>
-                    <div class="toggle-group mr18" id="ui-pt-control">
+                    <div class="toggle-group" id="ui-pt-control">
                         <label class="toggle-container">
                             <input checked name="toggle-small pt-radio" type="radio" id="1966" value="active1966" />
                             <div class="toggle toggle--darken50 toggle--s">1966</div>
@@ -798,6 +818,33 @@
             </div>
         </div>
     </div>
+
+    <!-- polygon years button group -->
+    <div hidden id="polygonYearsGroup">
+        <ul id="polygonYears">
+            <li>
+                <div class="toggle-group" id="ui-poly-control">
+                    <label class="toggle-container">
+                        <input checked name="toggle-small poly-radio" type="radio" id="poly-66" value="activePoly66" />
+                        <div class="toggle toggle--darken50 toggle--s">1966</div>
+                    </label>
+                    <label class="toggle-container">
+                        <input name="toggle-small poly-radio" type="radio" id="poly-98" value="activePoly98" />
+                        <div class="toggle toggle--darken50 toggle--s">1998</div>
+                    </label>
+                    <label class="toggle-container">
+                        <input name="toggle-small poly-radio" type="radio" id="poly-05" value="activePoly05" />
+                        <div class="toggle toggle--darken50 toggle--s">2005</div>
+                    </label>
+                    <label class="toggle-container">
+                        <input name="toggle-small poly-radio" type="radio" id="poly-15" value="activePoly15" />
+                        <div class="toggle toggle--darken50 toggle--s">2015</div>
+                    </label>
+                </div>
+            </li>
+        </ul>
+    </div>
+
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -1019,7 +1066,7 @@
                 const parkBounds = L.geoJson(boundsData, {
                     style: function (feature, layer) {
                         return {
-                            color: '#999',
+                            color: '#7E7E7E',
                             weight: 1,
                             lineJoin: 'round',
                             dashArray: '2,4'
@@ -1165,7 +1212,7 @@
                             layer.bringToBack();
                             layer.setStyle({
                                 shape: "diamond",
-                                color: '#343434',
+                                color: '#222',
                                 fillColor: colorize(props.pctD),
                                 fillOpacity: 1,
                                 weight: 1,
@@ -1459,10 +1506,14 @@
                         $("input[year-right]").empty();
                     });
 
-                    // create LIA checkbox and add to legend
-                    $('<div id="liaLayerToggle"><label class="checkbox-container" id="liaContainer"><input id="checkboxInput" type="checkbox"><div class="checkbox" id="liaCheckbox"><svg id="checkboxIcon" class="icon"><use xlink:href="#icon-check" /></svg></div><span class="liaLabelText">Mid-19th Century Extents</span></label></div>'
-                    ).insertAfter("#camera-icon");
+                    // get polygon years toggle buttons
+                    const polygonYearsGroup = $("#polygonYearsGroup").html();
+                    $(polygonYearsGroup).insertAfter("#camera-icon");
 
+                    // create LIA checkbox and add to legend
+                    const liaLayerToggle = $('<div id="liaLayerToggle"><label class="checkbox-container" id="liaContainer"><input id="checkboxInput" type="checkbox"><div class="checkbox" id="liaCheckbox"><svg id="checkboxIcon" class="icon"><use xlink:href="#icon-check" /></svg></div><span class="liaLabelText">Mid-19th Century Extents</span></label></div>');
+                    $(liaLayerToggle).insertAfter("#polygonYears");
+                        
                     $('#liaLayerToggle input[type="checkbox"]').on('change', function () {
                         $(this);
                         if ($(this).is(':checked')) {
@@ -1471,6 +1522,7 @@
                             map.removeLayer(liaLayer);
                         }
                     });
+
 
                 };
 

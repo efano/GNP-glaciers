@@ -12,12 +12,12 @@
         body {
             font-family: 'Gotu', 'Roboto', sans-serif;
             /* font-family: 'Istok Web', 'Open Sans', sans-serif; */
-            color: #999;
+            color: #7E7E7E;
             display: flex;
         }
 
         h4 {
-            color: #333;
+            color: #222;
             font-size: 14px;
             font-weight: 600;
             margin-top: 16px;
@@ -25,7 +25,7 @@
         }
 
         h6 {
-            color: #333;
+            color: #222;
             font-size: 11px;
             font-weight: 600;
             margin-left: 16px;
@@ -41,7 +41,7 @@
         }
 
         .toggle-group :hover {
-            color: #333;
+            color: #222;
         }
 
         #ui-lineCharts-control .toggle--s {
@@ -82,7 +82,7 @@
 
         .line {
             fill: none;
-            stroke: #333;
+            stroke: #222;
             stroke-width: 2;
         }
 
@@ -124,7 +124,7 @@
 
         .tooltip-date {
             margin-bottom: 0.3em;
-            color: #333;
+            color: #222;
             font-size: 1.2em;
             font-weight: 600;
             padding-top: 4px;
@@ -186,7 +186,7 @@
                 <div>
                     <div class="legendLines" id="legendLine1">
                         <svg height="10" width="10">
-                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#333;stroke-width:2" />
+                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#222;stroke-width:2" />
                         </svg>
                         <div class="legendLineText" id="legendLineText1">Average Annual Temperature</div>
                     </div>
@@ -218,7 +218,7 @@
                 <div>
                     <div class="legendLines" id="legendLine3">
                         <svg height="10" width="10">
-                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#333;stroke-width:2" />
+                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#222;stroke-width:2" />
                         </svg>
                         <div class="legendLineText" id="legendLineText3">Total Annual Precipitation</div>
                     </div>
@@ -400,7 +400,7 @@
             const line = bounds.append("path")
                 .attr("d", lineGenerator(dataset))
                 .attr("fill", "none")
-                .attr("stroke", "#333")
+                .attr("stroke", "#222")
                 .attr("stroke-width", 1.5)
                 .attr("class", "line")
 
@@ -424,7 +424,7 @@
 
             const yAxisLabel = yAxis.append("text")
                 .attr("class", "y-axis-label")
-                .attr("fill", "#999")
+                .attr("fill", "#7E7E7E")
                 .attr("transform", "rotate(-90)")
                 .attr("x", -dimensions.boundedHeight / 2)
                 .attr("y", -dimensions.margin.left + 26)
@@ -445,7 +445,7 @@
 
             // const xAxisLabel = xAxis.append("text")
             //     .attr("class", "x-axis-label")
-            //     .attr("fill", "#999")
+            //     .attr("fill", "#7E7E7E")
             //     .attr("x", dimensions.boundedWidth / 2)
             //     .attr("y", dimensions.margin.bottom - 10)
             //     .attr("text-anchor", "middle")
@@ -464,7 +464,7 @@
             const tooltipCircle = bounds.append("circle")
                 .attr("class", "tooltip-circle")
                 .attr("r", 3.5)
-                .attr("stroke", "#333")
+                .attr("stroke", "#222")
                 .attr("fill", "#e31a1c")
                 .attr("stroke-width", 2)
                 .style("opacity", 0)
@@ -658,7 +658,7 @@
             const line = bounds.append("path")
                 .attr("d", lineGenerator(dataset))
                 .attr("fill", "none")
-                .attr("stroke", "#333")
+                .attr("stroke", "#222")
                 .attr("stroke-width", 1.5)
                 .attr("class", "line")
 
@@ -682,7 +682,7 @@
 
             const yAxisLabel = yAxis.append("text")
                 .attr("class", "y-axis-label")
-                .attr("fill", "#999")
+                .attr("fill", "#7E7E7E")
                 .attr("transform", "rotate(-90)")
                 .attr("x", -dimensions.boundedHeight / 2)
                 .attr("y", -dimensions.margin.left + 26)
@@ -714,7 +714,7 @@
             const tooltipCircle = bounds.append("circle")
                 .attr("class", "tooltip-circle")
                 .attr("r", 3.5)
-                .attr("stroke", "#333")
+                .attr("stroke", "#222")
                 .attr("fill", "#3BADCC")
                 .attr("stroke-width", 2)
                 .style("opacity", 0)
