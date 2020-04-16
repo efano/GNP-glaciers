@@ -400,7 +400,7 @@
         }
 
         #sizeCrit {
-            margin-left: 24px;
+            margin-left: 20px;
             margin-top: 2px;
             list-style: none;
             line-height: .95;
@@ -420,7 +420,6 @@
         #ui-pt-control {
             margin-bottom: 3px;
             margin-top: 4px;
-            /* background-color: #e2e2e2; */
         }
 
         .toggle-group :hover {
@@ -436,13 +435,13 @@
         #symbolActive {
             color: #7E7E7E;
             font-size: 20px;
-            margin-left: 4px;
+            margin-left: 2px;
         }
 
         #symbolStangnant {
             font-family: 'Nunito', sans-serif;
             font-weight: 900;
-            font-size: 16px;
+            font-size: 17px;
             margin-left: 5px;
             color: #7E7E7E;
         }
@@ -602,40 +601,6 @@
             margin-bottom: 4px;
         }
 
-        /* #liaContainer {
-            margin-left: 23px;
-        }
-
-        #liaCheckbox {
-            height: 13px;
-            width: 13px;
-            border-radius: 3px;
-        }
-
-        #liaCheckbox:hover {
-            background-color: #e7e7e7;
-        }
-
-        #checkboxIcon {
-            height: 13px;
-            width: 13px;
-            border-radius: 3px;
-            color: white;
-            background-color: #7E7E7E;
-        } */
-
-        /* .liaLabelText {
-            font-size: 10px;
-            font-weight: 600;
-            color: #7E7E7E;
-            margin-left: 6px;
-            margin-top: 3px;
-        }
-
-        .liaLabelText:hover {
-            color: #222;
-        } */
-
         #switchGroup1 {
             margin-left: 16px;
             margin-bottom: 4px;
@@ -646,6 +611,7 @@
             margin-left: 16px;
         }
 
+        #switchGroup1 :hover,
         #switchGroup2 :hover {
             color: #222;
         }
@@ -672,11 +638,6 @@
             margin-right: 16px;
         }
 
-        /* #ui-poly-control .toggle--s {
-            font-size: 10px;
-            line-height: 16px;
-            padding: 2px 7px;
-        } */
     </style>
 </head>
 
@@ -853,32 +814,6 @@
             </div>
         </div>
     </div>
-
-    <!-- polygon years button group
-    <div hidden id="polygonYearsGroup">
-        <ul id="polygonYears">
-            <li>
-                <div class="toggle-group" id="ui-poly-control">
-                    <label class="toggle-container">
-                        <input name="toggle-small poly-radio" type="radio" id="poly66" value="1966" />
-                        <div class="toggle toggle--darken50 toggle--s">1966</div>
-                    </label>
-                    <label class="toggle-container">
-                        <input name="toggle-small poly-radio" type="radio" id="poly98" value="1998" />
-                        <div class="toggle toggle--darken50 toggle--s">1998</div>
-                    </label>
-                    <label class="toggle-container">
-                        <input name="toggle-small poly-radio" type="radio" id="poly05" value="2005" />
-                        <div class="toggle toggle--darken50 toggle--s">2005</div>
-                    </label>
-                    <label class="toggle-container">
-                        <input checked name="toggle-small poly-radio" type="radio" id="poly15" value="2015" />
-                        <div class="toggle toggle--darken50 toggle--s">2015</div>
-                    </label>
-                </div>
-            </li>
-        </ul>
-    </div> -->
 
     <!-- polygon years button group -->
     <div hidden id="polygonYearsGroup">
@@ -1070,7 +1005,7 @@
             const optionsLIA = {
                 color: "#bcbabe",
                 fillColor: "#f1f1f2",
-                weight: 1.25,
+                weight: 1,
                 opacity: 1,
                 fillOpacity: 0.6,
                 lineJoin: 'round',
@@ -1125,6 +1060,17 @@
                     });
                 };
 
+                map.createPane("liaLayer");
+                map.getPane("liaLayer").style.zIndex = 446;
+                map.createPane("layer66");
+                map.getPane("layer66").style.zIndex = 447;
+                map.createPane("layer98");
+                map.getPane("layer98").style.zIndex = 448;
+                map.createPane("layer05");
+                map.getPane("layer05").style.zIndex = 449;
+                map.createPane("layer15");
+                map.getPane("layer15").style.zIndex = 450;
+
                 // create a LIA layer with the geojson data
                 const liaLayer = L.geoJson(liaData, {
                     style: optionsLIA
@@ -1133,13 +1079,14 @@
                 const layer66 = L.geoJson(polys66Data, {
                     style: function (feature, layer) {
                         return {
-                            color: "#47afc6",
-                            fillColor: "#add6e0",
-                            weight: 1.25,
-                            opacity: 0.7,
+                            color: "#93cfe0",
+                            fillColor: "#b2dce9",
+                            weight: 1,
+                            opacity: 1,
                             fillOpacity: 0.5,
                             lineJoin: 'round',
                             dashArray: '3,3',
+                            pane: "layer66",
                         };
                     }
                 });
@@ -1147,13 +1094,14 @@
                 const layer98 = L.geoJson(polys98Data, {
                     style: function (feature, layer) {
                         return {
-                            color: "#47afc6",
-                            fillColor: "#8bc9d7",
-                            weight: 1.25,
-                            opacity: 0.8,
+                            color: "#75c1d7",
+                            fillColor: "#93cfe0",
+                            weight: 1,
+                            opacity: 1,
                             fillOpacity: 0.5,
                             lineJoin: 'round',
                             dashArray: '3,3',
+                            pane: "layer98",
                         };
                     }
                 });
@@ -1161,13 +1109,14 @@
                 const layer05 = L.geoJson(polys05Data, {
                     style: function (feature, layer) {
                         return {
-                            color: "#47afc6",
-                            fillColor: "#69bcce",
-                            weight: 1.25,
-                            opacity: 0.9,
+                            color: "#56b4ce",
+                            fillColor: "#75c1d7",
+                            weight: 1,
+                            opacity: 1,
                             fillOpacity: 0.5,
                             lineJoin: 'round',
                             dashArray: '3,3',
+                            pane: "layer05",
                         };
                     }
                 });
@@ -1175,125 +1124,17 @@
                 const layer15 = L.geoJson(polys15Data, {
                     style: function (feature, layer) {
                         return {
-                            color: "#47afc6",
-                            fillColor: "#47afc6",
-                            weight: 1.25,
+                            color: "#3499b5",
+                            fillColor: "#39a6c4",
+                            weight: 1,
                             opacity: 1,
                             fillOpacity: 0.5,
                             lineJoin: 'round',
                             dashArray: '3,3',
+                            pane: "layer15",
                         };
                     }
                 });
-
-                // // create a polygon extent layer with the geojson data
-                // const allPolyYears = L.geoJson(allPolyYearData, {
-                //     color: "yellow",
-                //     fillColor: "transparent",
-                //     weight: 1,
-                //     opacity: 1,
-                //     fillOpacity: 0,
-                // });
-
-                // drawAllYearPolys(allPolyYears)
-                // // draw glacier polys
-                // function drawAllYearPolys(allPolyYears) {
-                //     allPolyYears.eachLayer(function (layer) {
-                //         let props = layer.feature.properties;
-                //         let year = props[polyStatus];
-
-                //         if (year === "1966") {
-                //             layer.setStyle({
-                //                 color: "#38A3C0",
-                //                 fillColor: "white",
-                //                 weight: 1,
-                //                 opacity: 1,
-                //                 fillOpacity: 0.2,
-                //                 lineJoin: 'round',
-                //                 dashArray: '3,3',
-                //             })
-                //         } else if (year === "1998") {
-                //             layer.setStyle({
-                //                 color: "red",
-                //                 fillColor: "white",
-                //                 weight: 1,
-                //                 opacity: 1,
-                //                 fillOpacity: 0.2,
-                //                 lineJoin: 'round',
-                //                 dashArray: '3,3',
-                //             })
-                //         } else if (year === "2005") {
-                //             layer.setStyle({
-                //                 color: "green",
-                //                 fillColor: "white",
-                //                 weight: 1,
-                //                 opacity: 1,
-                //                 fillOpacity: 0.2,
-                //                 lineJoin: 'round',
-                //                 dashArray: '3,3',
-                //             })
-                //         } else if (year=== "2015") {
-                //             layer.setStyle({
-                //                 color: "orange",
-                //                 fillColor: "white",
-                //                 weight: 1,
-                //                 opacity: 1,
-                //                 fillOpacity: 0.2,
-                //                 lineJoin: 'round',
-                //                 dashArray: '3,3',
-                //             })
-                //         }
-                //     }).addTo(map);
-                // };
-
-                // const layerInfo = {
-                //     layer1966: {
-                //         Year: "1966",
-                //     },
-                //     layer1998: {
-                //         Year: "1998",
-                //     },
-                //     layer2005: {
-                //         Year: "2005",
-                //     },
-                //     layer2015: {
-                //         Year: "2015",
-                //     }
-                // };
-
-                // const allPolyYears = {};
-                // for (layer in layerInfo) {
-                //     allPolyYears[layer] = L.geoJson(allPolyYearData, {
-
-                //         filter: function (feature) {
-                //             if (feature.properties.Year == [layerInfo[layer].Year]) {
-                //                 return feature;
-                //             } 
-                //         },
-                //         style: function (feature) {
-                //             return {
-                //                 color: "#38A3C0",
-                //                 fillColor: "#38A3C0",
-                //                 weight: 1,
-                //                 opacity: 1,
-                //                 fillOpacity: 0.4,
-                //                 lineJoin: 'round',
-                //                 dashArray: '3,3',
-                //             }
-                //         },
-                //     });
-                // }
-
-                // const sourcesLabels = {
-                //     "1966": allPolyYears.layer1966,
-                //     "1998": allPolyYears.layer1998,
-                //     "2005": allPolyYears.layer2005,
-                //     "2015": allPolyYears.layer2015
-                // }
-
-                // L.control.layers(null, sourcesLabels, {
-                //     collapsed: false
-                // }).addTo(map);
 
                 map.on('zoomend', function () {
                     const zoomlevel = map.getZoom();
@@ -1303,63 +1144,67 @@
                     // }
                     if (zoomlevel < 12) {
                         $(".legendPolyList").fadeOut("fast");
-                        //map.removeLayer(liaLayer, layer66, layer98, layer05, layer15);
+                        map.removeLayer(liaLayer);
+                        map.removeLayer(layer66);
+                        map.removeLayer(layer98);
+                        map.removeLayer(layer05);
+                        map.removeLayer(layer15);
                     }
                 });
 
-                // add lia poly interactions
-                function addInteractionsLIA(liaLayer) {
-                    liaLayer.eachLayer(function (layer) {
-                        let polyProps = layer.feature.properties;
+                // // add lia poly interactions
+                // function addInteractionsLIA(liaLayer) {
+                //     liaLayer.eachLayer(function (layer) {
+                //         let polyProps = layer.feature.properties;
 
-                        //when mousing over a glacier point
-                        layer.on('mouseover', function () {
-                            // layer.bringToFront();
-                            // // provide a visual affordance
-                            // layer.setStyle({
-                            //     fillOpacity: 0.4,
-                            //     color: "#308CA6",
-                            // });
-                            // select the corresponding list item and add the highlight class to make bold
-                            $('#glacierList-' + polyProps.num).addClass('highlight');
-                        })
+                //         //when mousing over a glacier point
+                //         layer.on('mouseover', function () {
+                //             // layer.bringToFront();
+                //             // // provide a visual affordance
+                //             // layer.setStyle({
+                //             //     fillOpacity: 0.4,
+                //             //     color: "#308CA6",
+                //             // });
+                //             // select the corresponding list item and add the highlight class to make bold
+                //             $('#glacierList-' + polyProps.num).addClass('highlight');
+                //         })
 
-                        layer.on('mouseout', function () {
-                            // // reset back to our base styling opacity
-                            // layer.setStyle({
-                            //     fillOpacity: 0.2,
-                            //     color: "#38A3C0",
-                            // });
-                            $('#glacierList-' + polyProps.num).removeClass('highlight');
-                        })
+                //         layer.on('mouseout', function () {
+                //             // // reset back to our base styling opacity
+                //             // layer.setStyle({
+                //             //     fillOpacity: 0.2,
+                //             //     color: "#38A3C0",
+                //             // });
+                //             $('#glacierList-' + polyProps.num).removeClass('highlight');
+                //         })
 
-                        // // tooltip
-                        // layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
-                        //     "</b></div><br>" +
-                        //     "<div class=tooltipText>" + "Mid-19th Century Extent", {
-                        //         opacity: 1,
-                        //         sticky: true
-                        //     }
-                        // )
+                //         // // tooltip
+                //         // layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
+                //         //     "</b></div><br>" +
+                //         //     "<div class=tooltipText>" + "Mid-19th Century Extent", {
+                //         //         opacity: 1,
+                //         //         sticky: true
+                //         //     }
+                //         // )
 
-                        layer.on('mousedown', function () {
+                //         layer.on('mousedown', function () {
 
-                            // change 'Select Glacier' button to glacier name
-                            btnObj = $("#glacier-btn-dropdown");
-                            $(btnObj).text($(".highlight").text());
-                            $(btnObj).val($(".highlight").text());
+                //             // change 'Select Glacier' button to glacier name
+                //             btnObj = $("#glacier-btn-dropdown");
+                //             $(btnObj).text($(".highlight").text());
+                //             $(btnObj).val($(".highlight").text());
 
-                            updatePolyLegend(layer);
-                            $('#checkboxInput').prop('checked', true);
+                //             updatePolyLegend(layer);
+                //             //$('#checkboxInput').prop('checked', true);
 
-                            map.flyToBounds(layer.getBounds(), {
-                                padding: [20, 20]
-                            });
+                //             map.flyToBounds(layer.getBounds(), {
+                //                 padding: [20, 20]
+                //             });
 
-                            $(".legendPolyList").fadeIn(1600);
-                        });
-                    });
-                };
+                //             $(".legendPolyList").fadeIn(1600);
+                //         });
+                //     });
+                // };
 
                 // create a point layer with the geojson data
                 const glacierPoints = L.geoJson(ptData, {
@@ -1408,7 +1253,7 @@
                 zoomToGlacier(glacierPoints);
                 removeLists();
                 drawPolyLegend();
-                addInteractionsLIA(liaLayer);
+                //addInteractionsLIA(liaLayer);
 
                 // draw glacier points
                 function drawPts(glacierPoints) {
@@ -1573,7 +1418,6 @@
                                 }).closeTooltip();
                             });
                         });
-
                     })
                 };
 
@@ -1583,6 +1427,11 @@
                     // select list items and on mouseover
                     $('.dropdown-item2').on('click', function () {
                         map.removeLayer(glacierPoints);
+                        map.removeLayer(liaLayer);
+                        map.removeLayer(layer66);
+                        map.removeLayer(layer98);
+                        map.removeLayer(layer05);
+                        map.removeLayer(layer15);
 
                         // extract the specific number from the specific item being moused over
                         let num = this.id.replace('glacierList-', '');
@@ -1604,7 +1453,7 @@
                                     padding: [20, 20]
                                 });
 
-                                $('#checkboxInput').prop('checked', false);
+                                //$('#checkboxInput').prop('checked', false);
                                 map.removeLayer(liaLayer);
                             }
                         });
@@ -1632,6 +1481,57 @@
                     legendPolyList.addTo(map);
                     $(".legendPolyList").hide();
                 }
+
+                // toggle polygon layers on poygon legend
+                function togglePolys() {
+
+                    $("#polyLIA").on('change', function () {
+                        $(this);
+                        if ($(this).is(':checked')) {
+                            map.addLayer(liaLayer);
+                            liaLayer.bringToBack();
+                        } else {
+                            map.removeLayer(liaLayer);
+                        }
+                    });
+
+                    $("#poly66").on('change', function () {
+                        $(this);
+                        if ($(this).is(':checked')) {
+                            map.addLayer(layer66);
+                        } else {
+                            map.removeLayer(layer66);
+                        }
+                    });
+
+                    $("#poly98").on('change', function () {
+                        $(this);
+                        if ($(this).is(':checked')) {
+                            map.addLayer(layer98);
+                        } else {
+                            map.removeLayer(layer98);
+                        }
+                    });
+
+                    $("#poly05").on('change', function () {
+                        $(this);
+                        if ($(this).is(':checked')) {
+                            map.addLayer(layer05);
+                        } else {
+                            map.removeLayer(layer05);
+                        }
+                    });
+
+                    $("#poly15").on('change', function () {
+                        $(this);
+                        if ($(this).is(':checked')) {
+                            map.addLayer(layer15);
+                            layer15.bringToFront();
+                        } else {
+                            map.removeLayer(layer15);
+                        }
+                    });
+                };
 
                 // add legend content
                 function updatePolyLegend(layer) {
@@ -1719,69 +1619,18 @@
                         "</h4>"
                     $(legendPolyAreaTitle).insertAfter("#camera-icon");
 
-                    // // create LIA checkbox and add to legend
-                    // const liaLayerToggle = $(
-                    //     '<div id="liaLayerToggle"><label class="checkbox-container" id="liaContainer"><input id="checkboxInput" type="checkbox"><div class="checkbox checkbox--gray" id="liaCheckbox"><svg id="checkboxIcon" class="icon"><use xlink:href="#icon-check" /></svg></div><span class="liaLabelText">Mid-19th Century Extent</span></label></div>'
-                    // );
-                    // $(liaLayerToggle).insertAfter(".polyLegendAreaTitle");
-
                     // get polygon years toggle buttons
                     const polygonYearsGroup = $("#polygonYearsGroup").html();
                     $(polygonYearsGroup).insertAfter(".polyLegendAreaTitle");
+                    togglePolys();
 
-                    $("#polyLIA").on('change', function () {
-                        $(this);
-                        if ($(this).is(':checked')) {
-                            map.addLayer(liaLayer);
-                            liaLayer.bringToBack();
-                        } else {
-                            map.removeLayer(liaLayer);
-                        }
-                    });
 
-                    $("#poly66").on('change', function () {
-                        $(this);
-                        if ($(this).is(':checked')) {
-                            map.addLayer(layer66);
-                        } else {
-                            map.removeLayer(layer66);
-                        }
-                    });
 
-                    $("#poly98").on('change', function () {
-                        $(this);
-                        if ($(this).is(':checked')) {
-                            map.addLayer(layer98);
-                        } else {
-                            map.removeLayer(layer98);
-                        }
-                    });
 
-                    $("#poly05").on('change', function () {
-                        $(this);
-                        if ($(this).is(':checked')) {
-                            map.addLayer(layer05);
-                        } else {
-                            map.removeLayer(layer05);
-                        }
-                    });
-
-                    $("#poly15").on('change', function () {
-                        $(this);
-                        if ($(this).is(':checked')) {
-                            map.addLayer(layer15);
-                            layer15.bringToFront();
-                        } else {
-                            map.removeLayer(layer15);
-                        }
-                    });
-
-                    
 
 
 
                 };
-
 
 
 
