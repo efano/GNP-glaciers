@@ -433,23 +433,17 @@
             padding: 2px 7px;
         }
 
-        #ui-poly-control .toggle--s {
-            font-size: 10px;
-            line-height: 16px;
-            padding: 1px 6px;
-        }
-
         #symbolActive {
             color: #7E7E7E;
             font-size: 20px;
-            margin-left: 2px;
+            margin-left: 4px;
         }
 
         #symbolStangnant {
             font-family: 'Nunito', sans-serif;
             font-weight: 900;
             font-size: 16px;
-            margin-left: 3px;
+            margin-left: 5px;
             color: #7E7E7E;
         }
 
@@ -474,10 +468,6 @@
             font-weight: 600;
             margin-top: 12px;
             margin-left: 16px;
-        }
-
-        .optionsLIA {
-            stroke-dasharray: 3, 3;
         }
 
         #camera-icon {
@@ -601,17 +591,19 @@
             height: auto;
         }
 
+        /* poly legend css */
+
         .polyLegendAreaTitle {
             font-size: 14px;
             color: #222;
             font-weight: 600;
             margin-top: 7px;
             margin-left: 16px;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
-        #liaContainer {
-            margin-left: 22px;
+        /* #liaContainer {
+            margin-left: 23px;
         }
 
         #liaCheckbox {
@@ -630,9 +622,9 @@
             border-radius: 3px;
             color: white;
             background-color: #7E7E7E;
-        }
+        } */
 
-        .liaLabelText {
+        /* .liaLabelText {
             font-size: 10px;
             font-weight: 600;
             color: #7E7E7E;
@@ -642,20 +634,49 @@
 
         .liaLabelText:hover {
             color: #222;
+        } */
+
+        #switchGroup1 {
+            margin-left: 16px;
+            margin-bottom: 4px;
         }
 
-        #ui-poly-control {
+        #switchGroup2 {
             margin-bottom: 16px;
-            margin-top: 5px;
-            /* background-color: #e2e2e2; */
             margin-left: 16px;
         }
 
-        #ui-poly-control .toggle--s {
+        #switchGroup2 :hover {
+            color: #222;
+        }
+
+        #switchGroup2 li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: inline-flex
+        }
+
+        .switchInner {
+            height: 13px;
+            width: 21px;
+            border-width: 1px;
+        }
+
+        .switchText {
+            font-size: 10px;
+            font-weight: 600;
+            color: #7E7E7E;
+            margin-top: 3px;
+            margin-left: 3px;
+            margin-right: 16px;
+        }
+
+        /* #ui-poly-control .toggle--s {
             font-size: 10px;
             line-height: 16px;
             padding: 2px 7px;
-        }
+        } */
     </style>
 </head>
 
@@ -833,32 +854,68 @@
         </div>
     </div>
 
-    <!-- polygon years button group -->
+    <!-- polygon years button group
     <div hidden id="polygonYearsGroup">
         <ul id="polygonYears">
             <li>
                 <div class="toggle-group" id="ui-poly-control">
                     <label class="toggle-container">
-                        <input checked name="toggle-small poly-radio" type="radio" id="poly-66" value="activePoly66" />
+                        <input name="toggle-small poly-radio" type="radio" id="poly66" value="1966" />
                         <div class="toggle toggle--darken50 toggle--s">1966</div>
                     </label>
                     <label class="toggle-container">
-                        <input name="toggle-small poly-radio" type="radio" id="poly-98" value="activePoly98" />
+                        <input name="toggle-small poly-radio" type="radio" id="poly98" value="1998" />
                         <div class="toggle toggle--darken50 toggle--s">1998</div>
                     </label>
                     <label class="toggle-container">
-                        <input name="toggle-small poly-radio" type="radio" id="poly-05" value="activePoly05" />
+                        <input name="toggle-small poly-radio" type="radio" id="poly05" value="2005" />
                         <div class="toggle toggle--darken50 toggle--s">2005</div>
                     </label>
                     <label class="toggle-container">
-                        <input name="toggle-small poly-radio" type="radio" id="poly-15" value="activePoly15" />
+                        <input checked name="toggle-small poly-radio" type="radio" id="poly15" value="2015" />
                         <div class="toggle toggle--darken50 toggle--s">2015</div>
                     </label>
                 </div>
             </li>
         </ul>
-    </div>
+    </div> -->
 
+    <!-- polygon years button group -->
+    <div hidden id="polygonYearsGroup">
+        <ul id="switchGroup1">
+            <li>
+                <label class="switch-container">
+                    <input type="checkbox" id="polyLIA" />
+                    <div class="switch switch--darken50 switchInner"></div>
+                    <span class="switchText">Mid-19th Century</span>
+                </label>
+            </li>
+        </ul>
+        <ul id="switchGroup2">
+            <li>
+                <label class="switch-container">
+                    <input type="checkbox" id="poly66" />
+                    <div class="switch switch--darken50 switchInner"></div>
+                    <span class="switchText">1966</span>
+                </label>
+                <label class="switch-container">
+                    <input type="checkbox" id="poly98" />
+                    <div class="switch switch--darken50 switchInner"></div>
+                    <span class="switchText">1998</span>
+                </label>
+                <label class="switch-container">
+                    <input type="checkbox" id="poly05" />
+                    <div class="switch switch--darken50 switchInner"></div>
+                    <span class="switchText">2005</span>
+                </label>
+                <label class="switch-container">
+                    <input type="checkbox" id="poly15" />
+                    <div class="switch switch--darken50 switchInner"></div>
+                    <span class="switchText">2015</span>
+                </label>
+            </li>
+        </ul>
+    </div>
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -869,7 +926,6 @@
     <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet-src.js"></script>
     <script src="js/leaflet-svg-shape-markers.js"></script>
-
 
     <script>
         // navbar dropdowns
@@ -1007,63 +1063,33 @@
             }).addTo(map);
 
             // global variables
-            let status = "active1966"
+            let status = "active1966";
+            let polyStatus = "Year";
 
             // style options
             const optionsLIA = {
-                color: "#38A3C0",
-                fillColor: "#38A3C0",
-                weight: 1,
+                color: "#bcbabe",
+                fillColor: "#f1f1f2",
+                weight: 1.25,
                 opacity: 1,
-                fillOpacity: 0.2,
-                className: "optionsLIA"
+                fillOpacity: 0.6,
+                lineJoin: 'round',
+                dashArray: '3,3',
             };
-
-            // const options66 = {
-            // color: "#38A3C0",
-            // fillColor: "white",
-            // weight: 1,
-            // opacity: 1,
-            // fillOpacity: 0.7,
-            // };
-
-            // const options98 = {
-            // color: "#38A3C0",
-            // fillColor: "white",
-            // weight: 1,
-            // opacity: 1,
-            // fillOpacity: 0.7,
-            // };
-
-            // const options05 = {
-            // color: "#38A3C0",
-            // fillColor: "white",
-            // weight: 1,
-            // opacity: 1,
-            // fillOpacity: 0.7,
-            // };
-
-            // const options15 = {
-            // color: "#38A3C0",
-            // fillColor: "white",
-            // weight: 1,
-            // opacity: 1,
-            // fillOpacity: 0.7,
-            // };
-
-            // const optionsOther = {
-            //     color: "transparent"
-            // };
 
             // use D3 fetch to request data with async requests
             const parkBoundary = d3.json('data/boundary.json');
             const lia = d3.json('data/lia-poly.json');
-            const allYearsPoly = d3.json('data/all-years-poly.json');
+            const polys66 = d3.json('data/polys66.json');
+            const polys98 = d3.json('data/polys98.json');
+            const polys05 = d3.json('data/polys05.json');
+            const polys15 = d3.json('data/polys15.json');
             const allPoints = d3.json('data/glacier-pts.json');
             const climateCSV = d3.csv('data/climate-all.csv')
 
             // use Promise to wait until data is all loaded
-            Promise.all([parkBoundary, lia, allYearsPoly, allPoints, climateCSV]).then(drawMap);
+            Promise.all([parkBoundary, lia, polys66, polys98, polys05, polys15, allPoints, climateCSV]).then(
+                drawMap);
 
             function drawMap(data) {
 
@@ -1072,9 +1098,12 @@
                 // pull out separate data arrays and assign to variables
                 const boundsData = data[0];
                 const liaData = data[1];
-                const allPolyYearData = data[2];
-                const ptData = data[3];
-                const climateData = data[4];
+                const polys66Data = data[2];
+                const polys98Data = data[3];
+                const polys05Data = data[4];
+                const polys15Data = data[5];
+                const ptData = data[6];
+                const climateData = data[7];
 
                 // create a park boundary layer with the geojson data
                 const parkBounds = L.geoJson(boundsData, {
@@ -1101,14 +1130,180 @@
                     style: optionsLIA
                 });
 
+                const layer66 = L.geoJson(polys66Data, {
+                    style: function (feature, layer) {
+                        return {
+                            color: "#47afc6",
+                            fillColor: "#add6e0",
+                            weight: 1.25,
+                            opacity: 0.7,
+                            fillOpacity: 0.5,
+                            lineJoin: 'round',
+                            dashArray: '3,3',
+                        };
+                    }
+                });
+
+                const layer98 = L.geoJson(polys98Data, {
+                    style: function (feature, layer) {
+                        return {
+                            color: "#47afc6",
+                            fillColor: "#8bc9d7",
+                            weight: 1.25,
+                            opacity: 0.8,
+                            fillOpacity: 0.5,
+                            lineJoin: 'round',
+                            dashArray: '3,3',
+                        };
+                    }
+                });
+
+                const layer05 = L.geoJson(polys05Data, {
+                    style: function (feature, layer) {
+                        return {
+                            color: "#47afc6",
+                            fillColor: "#69bcce",
+                            weight: 1.25,
+                            opacity: 0.9,
+                            fillOpacity: 0.5,
+                            lineJoin: 'round',
+                            dashArray: '3,3',
+                        };
+                    }
+                });
+
+                const layer15 = L.geoJson(polys15Data, {
+                    style: function (feature, layer) {
+                        return {
+                            color: "#47afc6",
+                            fillColor: "#47afc6",
+                            weight: 1.25,
+                            opacity: 1,
+                            fillOpacity: 0.5,
+                            lineJoin: 'round',
+                            dashArray: '3,3',
+                        };
+                    }
+                });
+
+                // // create a polygon extent layer with the geojson data
+                // const allPolyYears = L.geoJson(allPolyYearData, {
+                //     color: "yellow",
+                //     fillColor: "transparent",
+                //     weight: 1,
+                //     opacity: 1,
+                //     fillOpacity: 0,
+                // });
+
+                // drawAllYearPolys(allPolyYears)
+                // // draw glacier polys
+                // function drawAllYearPolys(allPolyYears) {
+                //     allPolyYears.eachLayer(function (layer) {
+                //         let props = layer.feature.properties;
+                //         let year = props[polyStatus];
+
+                //         if (year === "1966") {
+                //             layer.setStyle({
+                //                 color: "#38A3C0",
+                //                 fillColor: "white",
+                //                 weight: 1,
+                //                 opacity: 1,
+                //                 fillOpacity: 0.2,
+                //                 lineJoin: 'round',
+                //                 dashArray: '3,3',
+                //             })
+                //         } else if (year === "1998") {
+                //             layer.setStyle({
+                //                 color: "red",
+                //                 fillColor: "white",
+                //                 weight: 1,
+                //                 opacity: 1,
+                //                 fillOpacity: 0.2,
+                //                 lineJoin: 'round',
+                //                 dashArray: '3,3',
+                //             })
+                //         } else if (year === "2005") {
+                //             layer.setStyle({
+                //                 color: "green",
+                //                 fillColor: "white",
+                //                 weight: 1,
+                //                 opacity: 1,
+                //                 fillOpacity: 0.2,
+                //                 lineJoin: 'round',
+                //                 dashArray: '3,3',
+                //             })
+                //         } else if (year=== "2015") {
+                //             layer.setStyle({
+                //                 color: "orange",
+                //                 fillColor: "white",
+                //                 weight: 1,
+                //                 opacity: 1,
+                //                 fillOpacity: 0.2,
+                //                 lineJoin: 'round',
+                //                 dashArray: '3,3',
+                //             })
+                //         }
+                //     }).addTo(map);
+                // };
+
+                // const layerInfo = {
+                //     layer1966: {
+                //         Year: "1966",
+                //     },
+                //     layer1998: {
+                //         Year: "1998",
+                //     },
+                //     layer2005: {
+                //         Year: "2005",
+                //     },
+                //     layer2015: {
+                //         Year: "2015",
+                //     }
+                // };
+
+                // const allPolyYears = {};
+                // for (layer in layerInfo) {
+                //     allPolyYears[layer] = L.geoJson(allPolyYearData, {
+
+                //         filter: function (feature) {
+                //             if (feature.properties.Year == [layerInfo[layer].Year]) {
+                //                 return feature;
+                //             } 
+                //         },
+                //         style: function (feature) {
+                //             return {
+                //                 color: "#38A3C0",
+                //                 fillColor: "#38A3C0",
+                //                 weight: 1,
+                //                 opacity: 1,
+                //                 fillOpacity: 0.4,
+                //                 lineJoin: 'round',
+                //                 dashArray: '3,3',
+                //             }
+                //         },
+                //     });
+                // }
+
+                // const sourcesLabels = {
+                //     "1966": allPolyYears.layer1966,
+                //     "1998": allPolyYears.layer1998,
+                //     "2005": allPolyYears.layer2005,
+                //     "2015": allPolyYears.layer2015
+                // }
+
+                // L.control.layers(null, sourcesLabels, {
+                //     collapsed: false
+                // }).addTo(map);
+
                 map.on('zoomend', function () {
                     const zoomlevel = map.getZoom();
                     // if (zoomlevel >= 12) {
-                    //     map.addLayer(liaLayer);
+                    //     map.addLayer(layer15);
+                    //     layer15.bringToFront();
                     // }
                     if (zoomlevel < 12) {
                         $(".legendPolyList").fadeOut("fast");
-                        map.removeLayer(liaLayer);
+                        //map.removeLayer(liaLayer, layer66, layer98, layer05, layer15);
                     }
                 });
 
@@ -1119,33 +1314,33 @@
 
                         //when mousing over a glacier point
                         layer.on('mouseover', function () {
-                            layer.bringToFront();
-                            // provide a visual affordance
-                            layer.setStyle({
-                                fillOpacity: 0.4,
-                                color: "#308CA6",
-                            });
+                            // layer.bringToFront();
+                            // // provide a visual affordance
+                            // layer.setStyle({
+                            //     fillOpacity: 0.4,
+                            //     color: "#308CA6",
+                            // });
                             // select the corresponding list item and add the highlight class to make bold
                             $('#glacierList-' + polyProps.num).addClass('highlight');
                         })
 
                         layer.on('mouseout', function () {
-                            // reset back to our base styling opacity
-                            layer.setStyle({
-                                fillOpacity: 0.2,
-                                color: "#38A3C0",
-                            });
+                            // // reset back to our base styling opacity
+                            // layer.setStyle({
+                            //     fillOpacity: 0.2,
+                            //     color: "#38A3C0",
+                            // });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
                         })
 
-                        // tooltip
-                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
-                            "</b></div><br>" +
-                            "<div class=tooltipText>" + "Mid-19th Century Extent", {
-                                opacity: 1,
-                                sticky: true
-                            }
-                        )
+                        // // tooltip
+                        // layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
+                        //     "</b></div><br>" +
+                        //     "<div class=tooltipText>" + "Mid-19th Century Extent", {
+                        //         opacity: 1,
+                        //         sticky: true
+                        //     }
+                        // )
 
                         layer.on('mousedown', function () {
 
@@ -1520,41 +1715,72 @@
                         $("input[year-right]").empty();
                     });
 
-                    const legendPolyAreaTitle = "<h4 class='polyLegendAreaTitle'>" + "Glacier Area" + "</h4>"
+                    const legendPolyAreaTitle = "<h4 class='polyLegendAreaTitle'>" + "Glacier Area Extent" +
+                        "</h4>"
                     $(legendPolyAreaTitle).insertAfter("#camera-icon");
 
-// <label class='switch-container'>
-//   <input type='checkbox' />
-//   <div class='switch'></div>
-// </label>
+                    // // create LIA checkbox and add to legend
+                    // const liaLayerToggle = $(
+                    //     '<div id="liaLayerToggle"><label class="checkbox-container" id="liaContainer"><input id="checkboxInput" type="checkbox"><div class="checkbox checkbox--gray" id="liaCheckbox"><svg id="checkboxIcon" class="icon"><use xlink:href="#icon-check" /></svg></div><span class="liaLabelText">Mid-19th Century Extent</span></label></div>'
+                    // );
+                    // $(liaLayerToggle).insertAfter(".polyLegendAreaTitle");
 
-                    // create LIA checkbox and add to legend
-                    const liaLayerToggle = $(
-                        '<div id="liaLayerToggle"><label class="checkbox-container" id="liaContainer"><input id="checkboxInput" type="checkbox"><div class="checkbox checkbox--gray" id="liaCheckbox"><svg id="checkboxIcon" class="icon"><use xlink:href="#icon-check" /></svg></div><span class="liaLabelText">Mid-19th Century Extents</span></label></div>'
-                        );
-                    $(liaLayerToggle).insertAfter(".polyLegendAreaTitle");
+                    // get polygon years toggle buttons
+                    const polygonYearsGroup = $("#polygonYearsGroup").html();
+                    $(polygonYearsGroup).insertAfter(".polyLegendAreaTitle");
 
-                    $('#liaLayerToggle input[type="checkbox"]').on('change', function () {
+                    $("#polyLIA").on('change', function () {
                         $(this);
                         if ($(this).is(':checked')) {
                             map.addLayer(liaLayer);
+                            liaLayer.bringToBack();
                         } else {
                             map.removeLayer(liaLayer);
                         }
                     });
 
-                    // get polygon years toggle buttons
-                    const polygonYearsGroup = $("#polygonYearsGroup").html();
-                    $(polygonYearsGroup).insertAfter("#liaLayerToggle");
+                    $("#poly66").on('change', function () {
+                        $(this);
+                        if ($(this).is(':checked')) {
+                            map.addLayer(layer66);
+                        } else {
+                            map.removeLayer(layer66);
+                        }
+                    });
+
+                    $("#poly98").on('change', function () {
+                        $(this);
+                        if ($(this).is(':checked')) {
+                            map.addLayer(layer98);
+                        } else {
+                            map.removeLayer(layer98);
+                        }
+                    });
+
+                    $("#poly05").on('change', function () {
+                        $(this);
+                        if ($(this).is(':checked')) {
+                            map.addLayer(layer05);
+                        } else {
+                            map.removeLayer(layer05);
+                        }
+                    });
+
+                    $("#poly15").on('change', function () {
+                        $(this);
+                        if ($(this).is(':checked')) {
+                            map.addLayer(layer15);
+                            layer15.bringToFront();
+                        } else {
+                            map.removeLayer(layer15);
+                        }
+                    });
+
                     
 
 
+
                 };
-
-
-
-
-
 
 
 
