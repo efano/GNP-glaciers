@@ -637,7 +637,6 @@
             margin-left: 3px;
             margin-right: 16px;
         }
-
     </style>
 </head>
 
@@ -999,18 +998,6 @@
 
             // global variables
             let status = "active1966";
-            let polyStatus = "Year";
-
-            // style options
-            const optionsLIA = {
-                color: "#bcbabe",
-                fillColor: "#f1f1f2",
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.6,
-                lineJoin: 'round',
-                dashArray: '3,3',
-            };
 
             // use D3 fetch to request data with async requests
             const parkBoundary = d3.json('data/boundary.json');
@@ -1073,7 +1060,17 @@
 
                 // create a LIA layer with the geojson data
                 const liaLayer = L.geoJson(liaData, {
-                    style: optionsLIA
+                    style: function (feature, layer) {
+                        return {
+                            color: "#bcbabe",
+                            fillColor: "#f1f1f2",
+                            weight: 1,
+                            opacity: 1,
+                            fillOpacity: 0.5,
+                            lineJoin: 'round',
+                            dashArray: '3,3',
+                        };
+                    },
                 });
 
                 const layer66 = L.geoJson(polys66Data, {
@@ -1152,59 +1149,186 @@
                     }
                 });
 
-                // // add lia poly interactions
-                // function addInteractionsLIA(liaLayer) {
-                //     liaLayer.eachLayer(function (layer) {
-                //         let polyProps = layer.feature.properties;
+                // add lia poly interactions
+                function addInteractionsLIA(liaLayer) {
+                    liaLayer.eachLayer(function (layer) {
+                        let polyProps = layer.feature.properties;
 
-                //         //when mousing over a glacier point
-                //         layer.on('mouseover', function () {
-                //             // layer.bringToFront();
-                //             // // provide a visual affordance
-                //             // layer.setStyle({
-                //             //     fillOpacity: 0.4,
-                //             //     color: "#308CA6",
-                //             // });
-                //             // select the corresponding list item and add the highlight class to make bold
-                //             $('#glacierList-' + polyProps.num).addClass('highlight');
-                //         })
+                        layer.on('mouseover', function () {
+                            layer.setStyle({
+                                color: "#e31a1c",
+                                weight: 1.5,
+                                fillOpacity: 0.7,
+                            });
+                            // select the corresponding list item and add the highlight class to make bold
+                            //$('#glacierList-' + polyProps.num).addClass('highlight');
+                        });
 
-                //         layer.on('mouseout', function () {
-                //             // // reset back to our base styling opacity
-                //             // layer.setStyle({
-                //             //     fillOpacity: 0.2,
-                //             //     color: "#38A3C0",
-                //             // });
-                //             $('#glacierList-' + polyProps.num).removeClass('highlight');
-                //         })
+                        layer.on('mouseout', function () {
+                            layer.setStyle({
+                                color: "#bcbabe",
+                                weight: 1,
+                                fillOpacity: 0.5,
+                                
+                            });
+                            //$('#glacierList-' + polyProps.num).removeClass('highlight');
+                        });
 
-                //         // // tooltip
-                //         // layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
-                //         //     "</b></div><br>" +
-                //         //     "<div class=tooltipText>" + "Mid-19th Century Extent", {
-                //         //         opacity: 1,
-                //         //         sticky: true
-                //         //     }
-                //         // )
+                        // tooltip
+                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
+                            "</b></div><br>" +
+                            "<div class=tooltipText>" + "Mid-19th Century Extent", {
+                                opacity: 1,
+                                sticky: true
+                            }
+                        );
 
-                //         layer.on('mousedown', function () {
+                        // layer.on('mousedown', function () {
 
-                //             // change 'Select Glacier' button to glacier name
-                //             btnObj = $("#glacier-btn-dropdown");
-                //             $(btnObj).text($(".highlight").text());
-                //             $(btnObj).val($(".highlight").text());
+                        //     // change 'Select Glacier' button to glacier name
+                        //     btnObj = $("#glacier-btn-dropdown");
+                        //     $(btnObj).text($(".highlight").text());
+                        //     $(btnObj).val($(".highlight").text());
 
-                //             updatePolyLegend(layer);
-                //             //$('#checkboxInput').prop('checked', true);
+                        //     updatePolyLegend(layer);
+                        //     //$('#checkboxInput').prop('checked', true);
 
-                //             map.flyToBounds(layer.getBounds(), {
-                //                 padding: [20, 20]
-                //             });
+                        //     map.flyToBounds(layer.getBounds(), {
+                        //         padding: [20, 20]
+                        //     });
 
-                //             $(".legendPolyList").fadeIn(1600);
-                //         });
-                //     });
-                // };
+                        //     $(".legendPolyList").fadeIn(1600);
+                        // });
+                    });
+                };
+
+                // add poly66 interactions
+                function addInteractions66(layer66) {
+                    layer66.eachLayer(function (layer) {
+                        let polyProps = layer.feature.properties;
+
+                        layer.on('mouseover', function () {
+                            layer.setStyle({
+                                color: "#e31a1c",
+                                weight: 1.5,
+                                fillOpacity: 0.7,
+                            });
+                        });
+
+                        layer.on('mouseout', function () {
+                            layer.setStyle({
+                                color: "#93cfe0",
+                                weight: 1,
+                                fillOpacity: 0.5,
+                            });
+                        });
+
+                        // tooltip
+                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
+                            "</b></div><br>" +
+                            "<div class=tooltipText>" + "1966 Extent", {
+                                opacity: 1,
+                                sticky: true
+                            }
+                        );
+                    });
+                };
+
+                // add poly98 interactions
+                function addInteractions98(layer98) {
+                    layer98.eachLayer(function (layer) {
+                        let polyProps = layer.feature.properties;
+
+                        layer.on('mouseover', function () {
+                            layer.setStyle({
+                                color: "#e31a1c",
+                                weight: 1.5,
+                                fillOpacity: 0.7,
+                            });
+                        });
+
+                        layer.on('mouseout', function () {
+                            layer.setStyle({
+                                color: "#75c1d7",
+                                weight: 1,
+                                fillOpacity: 0.5,
+                            });
+                        });
+
+                        // tooltip
+                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
+                            "</b></div><br>" +
+                            "<div class=tooltipText>" + "1998 Extent", {
+                                opacity: 1,
+                                sticky: true
+                            }
+                        );
+                    });
+                };
+
+                // add poly05 interactions
+                function addInteractions05(layer05) {
+                    layer05.eachLayer(function (layer) {
+                        let polyProps = layer.feature.properties;
+
+                        layer.on('mouseover', function () {
+                            layer.setStyle({
+                                color: "#e31a1c",
+                                weight: 1.5,
+                                fillOpacity: 0.7,
+                            });
+                        });
+
+                        layer.on('mouseout', function () {
+                            layer.setStyle({
+                                color: "#56b4ce",
+                                weight: 1,
+                                fillOpacity: 0.5,
+                            });
+                        });
+
+                        // tooltip
+                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
+                            "</b></div><br>" +
+                            "<div class=tooltipText>" + "2005 Extent", {
+                                opacity: 1,
+                                sticky: true
+                            }
+                        );
+                    });
+                };
+
+                // add poly15 interactions
+                function addInteractions15(layer15) {
+                    layer15.eachLayer(function (layer) {
+                        let polyProps = layer.feature.properties;
+
+                        layer.on('mouseover', function () {
+                            layer.setStyle({
+                                color: "#e31a1c",
+                                weight: 1.5,
+                                fillOpacity: 0.7,
+                            });
+                        });
+
+                        layer.on('mouseout', function () {
+                            layer.setStyle({
+                                color: "#3499b5",
+                                weight: 1,
+                                fillOpacity: 0.5,
+                            });
+                        });
+
+                        // tooltip
+                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
+                            "</b></div><br>" +
+                            "<div class=tooltipText>" + "2015 Extent", {
+                                opacity: 1,
+                                sticky: true
+                            }
+                        );
+                    });
+                };
 
                 // create a point layer with the geojson data
                 const glacierPoints = L.geoJson(ptData, {
@@ -1253,7 +1377,6 @@
                 zoomToGlacier(glacierPoints);
                 removeLists();
                 drawPolyLegend();
-                //addInteractionsLIA(liaLayer);
 
                 // draw glacier points
                 function drawPts(glacierPoints) {
@@ -1484,49 +1607,49 @@
 
                 // toggle polygon layers on poygon legend
                 function togglePolys() {
-
                     $("#polyLIA").on('change', function () {
                         $(this);
                         if ($(this).is(':checked')) {
                             map.addLayer(liaLayer);
                             liaLayer.bringToBack();
+                            addInteractionsLIA(liaLayer);
                         } else {
                             map.removeLayer(liaLayer);
                         }
                     });
-
                     $("#poly66").on('change', function () {
                         $(this);
                         if ($(this).is(':checked')) {
                             map.addLayer(layer66);
+                            addInteractions66(layer66);
                         } else {
                             map.removeLayer(layer66);
                         }
                     });
-
                     $("#poly98").on('change', function () {
                         $(this);
                         if ($(this).is(':checked')) {
                             map.addLayer(layer98);
+                            addInteractions98(layer98);
                         } else {
                             map.removeLayer(layer98);
                         }
                     });
-
                     $("#poly05").on('change', function () {
                         $(this);
                         if ($(this).is(':checked')) {
                             map.addLayer(layer05);
+                            addInteractions05(layer05);
                         } else {
                             map.removeLayer(layer05);
                         }
                     });
-
                     $("#poly15").on('change', function () {
                         $(this);
                         if ($(this).is(':checked')) {
                             map.addLayer(layer15);
                             layer15.bringToFront();
+                            addInteractions15(layer15);
                         } else {
                             map.removeLayer(layer15);
                         }
