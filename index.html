@@ -819,7 +819,7 @@
         <ul id="switchGroup1">
             <li>
                 <label class="switch-container">
-                    <input checked type="checkbox" id="polyLIA" />
+                    <input checked type="checkbox" id="polyLIA" class="switchInput"/>
                     <div class="switch switch--darken50 switchInner"></div>
                     <span class="switchText">Mid-19th Century</span>
                 </label>
@@ -828,22 +828,22 @@
         <ul id="switchGroup2">
             <li>
                 <label class="switch-container">
-                    <input checked type="checkbox" id="poly66" />
+                    <input checked type="checkbox" id="poly66" class="switchInput"/>
                     <div class="switch switch--darken50 switchInner"></div>
                     <span class="switchText">1966</span>
                 </label>
                 <label class="switch-container">
-                    <input checked type="checkbox" id="poly98" />
+                    <input checked type="checkbox" id="poly98" class="switchInput"/>
                     <div class="switch switch--darken50 switchInner"></div>
                     <span class="switchText">1998</span>
                 </label>
                 <label class="switch-container">
-                    <input checked type="checkbox" id="poly05" />
+                    <input checked type="checkbox" id="poly05" class="switchInput" />
                     <div class="switch switch--darken50 switchInner"></div>
                     <span class="switchText">2005</span>
                 </label>
                 <label class="switch-container">
-                    <input checked type="checkbox" id="poly15" />
+                    <input checked type="checkbox" id="poly15" class="switchInput"/>
                     <div class="switch switch--darken50 switchInner"></div>
                     <span class="switchText">2015</span>
                 </label>
@@ -1136,6 +1136,7 @@
                 map.on('zoomend', function () {
                     const zoomlevel = map.getZoom();
                     if (zoomlevel >= 12) {
+                        $('.switch-container .switchInput').prop('checked', true);
                         map.addLayer(liaLayer);
                         addInteractionsLIA(liaLayer);
                         map.addLayer(layer66);
