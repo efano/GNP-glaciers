@@ -1137,6 +1137,7 @@
                     const zoomlevel = map.getZoom();
                     if (zoomlevel >= 12) {
                         $('.switch-container .switchInput').prop('checked', true);
+                        $(".leaflet-tooltip-pane").empty();
                         map.addLayer(liaLayer);
                         addInteractionsLIA(liaLayer);
                         map.addLayer(layer66);
