@@ -819,7 +819,7 @@
         <ul id="switchGroup1">
             <li>
                 <label class="switch-container">
-                    <input checked type="checkbox" id="polyLIA" class="switchInput"/>
+                    <input checked type="checkbox" id="polyLIA" class="switchInput" />
                     <div class="switch switch--darken50 switchInner"></div>
                     <span class="switchText">Mid-19th Century</span>
                 </label>
@@ -828,12 +828,12 @@
         <ul id="switchGroup2">
             <li>
                 <label class="switch-container">
-                    <input checked type="checkbox" id="poly66" class="switchInput"/>
+                    <input checked type="checkbox" id="poly66" class="switchInput" />
                     <div class="switch switch--darken50 switchInner"></div>
                     <span class="switchText">1966</span>
                 </label>
                 <label class="switch-container">
-                    <input checked type="checkbox" id="poly98" class="switchInput"/>
+                    <input checked type="checkbox" id="poly98" class="switchInput" />
                     <div class="switch switch--darken50 switchInner"></div>
                     <span class="switchText">1998</span>
                 </label>
@@ -843,7 +843,7 @@
                     <span class="switchText">2005</span>
                 </label>
                 <label class="switch-container">
-                    <input checked type="checkbox" id="poly15" class="switchInput"/>
+                    <input checked type="checkbox" id="poly15" class="switchInput" />
                     <div class="switch switch--darken50 switchInner"></div>
                     <span class="switchText">2015</span>
                 </label>
@@ -1085,7 +1085,7 @@
                             dashArray: '3,3',
                             pane: "layer66",
                         };
-                    }
+                    },
                 });
 
                 const layer98 = L.geoJson(polys98Data, {
@@ -1150,6 +1150,7 @@
                     }
                     if (zoomlevel < 12) {
                         $(".legendPolyList").fadeOut("fast");
+                        $(".leaflet-tooltip-pane").empty();
                         map.removeLayer(liaLayer);
                         map.removeLayer(layer66);
                         map.removeLayer(layer98);
@@ -1176,17 +1177,18 @@
                             layer.setStyle({
                                 color: "#4490A4",
                                 weight: 1,
-                                
+
                             });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
                         });
 
                         // tooltip
+
                         layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
                             "</b></div><br>" +
                             "<div class=tooltipText>" + "Mid-19th Century Extent", {
                                 opacity: 1,
-                                sticky: true
+                                sticky: true,
                             }
                         );
 
@@ -1542,7 +1544,7 @@
                                 // change the layer style
                                 layer.setStyle({
                                     radius: 16
-                                //}).bringToFront().openTooltip();
+                                    //}).bringToFront().openTooltip();
                                 }).bringToFront();
                             };
 
@@ -1550,7 +1552,7 @@
                             $('.dropdown-item2').on('mouseout', function () {
                                 layer.setStyle({
                                     radius: 7
-                                //}).closeTooltip();
+                                    //}).closeTooltip();
                                 });
                             });
                         });
