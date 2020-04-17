@@ -1062,8 +1062,8 @@
                 const liaLayer = L.geoJson(liaData, {
                     style: function (feature, layer) {
                         return {
-                            color: "#bcbabe",
-                            fillColor: "#f1f1f2",
+                            color: "#4490A4",
+                            fillColor: "#4490A4",
                             weight: 1,
                             opacity: 1,
                             fillOpacity: 0.5,
@@ -1076,8 +1076,8 @@
                 const layer66 = L.geoJson(polys66Data, {
                     style: function (feature, layer) {
                         return {
-                            color: "#93cfe0",
-                            fillColor: "#b2dce9",
+                            color: "#4490A4",
+                            fillColor: "#99D2E1",
                             weight: 1,
                             opacity: 1,
                             fillOpacity: 0.5,
@@ -1091,11 +1091,11 @@
                 const layer98 = L.geoJson(polys98Data, {
                     style: function (feature, layer) {
                         return {
-                            color: "#75c1d7",
-                            fillColor: "#93cfe0",
+                            color: "#4490A4",
+                            fillColor: "#BBE1EB",
                             weight: 1,
                             opacity: 1,
-                            fillOpacity: 0.5,
+                            fillOpacity: 0.6,
                             lineJoin: 'round',
                             dashArray: '3,3',
                             pane: "layer98",
@@ -1106,11 +1106,11 @@
                 const layer05 = L.geoJson(polys05Data, {
                     style: function (feature, layer) {
                         return {
-                            color: "#56b4ce",
-                            fillColor: "#75c1d7",
+                            color: "#4490A4",
+                            fillColor: "#DDF0F5",
                             weight: 1,
                             opacity: 1,
-                            fillOpacity: 0.5,
+                            fillOpacity: 0.7,
                             lineJoin: 'round',
                             dashArray: '3,3',
                             pane: "layer05",
@@ -1121,11 +1121,11 @@
                 const layer15 = L.geoJson(polys15Data, {
                     style: function (feature, layer) {
                         return {
-                            color: "#3499b5",
-                            fillColor: "#39a6c4",
+                            color: "#4490A4",
+                            fillColor: "white",
                             weight: 1,
                             opacity: 1,
-                            fillOpacity: 0.5,
+                            fillOpacity: 0.8,
                             lineJoin: 'round',
                             dashArray: '3,3',
                             pane: "layer15",
@@ -1146,7 +1146,6 @@
                         map.addLayer(layer05);
                         addInteractions05(layer05);
                         map.addLayer(layer15);
-                        layer15.bringToFront();
                         addInteractions15(layer15);
                     }
                     if (zoomlevel < 12) {
@@ -1168,7 +1167,6 @@
                             layer.setStyle({
                                 color: "#e31a1c",
                                 weight: 1.5,
-                                fillOpacity: 0.7,
                             });
                             // select the corresponding list item and add the highlight class to make bold
                             $('#glacierList-' + polyProps.num).addClass('highlight');
@@ -1176,9 +1174,8 @@
 
                         layer.on('mouseout', function () {
                             layer.setStyle({
-                                color: "#bcbabe",
+                                color: "#4490A4",
                                 weight: 1,
-                                fillOpacity: 0.5,
                                 
                             });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
@@ -1221,7 +1218,6 @@
                             layer.setStyle({
                                 color: "#e31a1c",
                                 weight: 1.5,
-                                fillOpacity: 0.7,
                             });
                             // select the corresponding list item and add the highlight class to make bold
                             $('#glacierList-' + polyProps.num).addClass('highlight');
@@ -1229,9 +1225,8 @@
 
                         layer.on('mouseout', function () {
                             layer.setStyle({
-                                color: "#93cfe0",
+                                color: "#4490A4",
                                 weight: 1,
-                                fillOpacity: 0.5,
                             });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
                         });
@@ -1256,7 +1251,6 @@
                             layer.setStyle({
                                 color: "#e31a1c",
                                 weight: 1.5,
-                                fillOpacity: 0.7,
                             });
                             // select the corresponding list item and add the highlight class to make bold
                             $('#glacierList-' + polyProps.num).addClass('highlight');
@@ -1264,9 +1258,8 @@
 
                         layer.on('mouseout', function () {
                             layer.setStyle({
-                                color: "#75c1d7",
+                                color: "#4490A4",
                                 weight: 1,
-                                fillOpacity: 0.5,
                             });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
                         });
@@ -1291,7 +1284,6 @@
                             layer.setStyle({
                                 color: "#e31a1c",
                                 weight: 1.5,
-                                fillOpacity: 0.7,
                             });
                             // select the corresponding list item and add the highlight class to make bold
                             $('#glacierList-' + polyProps.num).addClass('highlight');
@@ -1299,9 +1291,8 @@
 
                         layer.on('mouseout', function () {
                             layer.setStyle({
-                                color: "#56b4ce",
+                                color: "#4490A4",
                                 weight: 1,
-                                fillOpacity: 0.5,
                             });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
                         });
@@ -1326,7 +1317,6 @@
                             layer.setStyle({
                                 color: "#e31a1c",
                                 weight: 1.5,
-                                fillOpacity: 0.7,
                             });
                             // select the corresponding list item and add the highlight class to make bold
                             $('#glacierList-' + polyProps.num).addClass('highlight');
@@ -1334,9 +1324,8 @@
 
                         layer.on('mouseout', function () {
                             layer.setStyle({
-                                color: "#3499b5",
+                                color: "#4490A4",
                                 weight: 1,
-                                fillOpacity: 0.5,
                             });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
                         });
