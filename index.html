@@ -1143,30 +1143,24 @@
                     }
                 });
 
+                const allPolys = L.layerGroup([liaLayer, layer66, layer98, layer05, layer15]);
+
                 map.on('zoomend', function () {
                     const zoomlevel = map.getZoom();
                     if (zoomlevel >= 12) {
-                        $('.switch-container .switchInput').prop('checked', true);
                         $(".leaflet-tooltip-pane").empty();
-                        map.addLayer(liaLayer);
+                        map.addLayer(allPolys);
                         addInteractionsLIA(liaLayer);
-                        map.addLayer(layer66);
                         addInteractions66(layer66);
-                        map.addLayer(layer98);
                         addInteractions98(layer98);
-                        map.addLayer(layer05);
                         addInteractions05(layer05);
-                        map.addLayer(layer15);
                         addInteractions15(layer15);
+                        togglePolys();
                     }
                     if (zoomlevel < 12) {
                         $(".legendPolyList").fadeOut("fast");
                         $(".leaflet-tooltip-pane").empty();
-                        map.removeLayer(liaLayer);
-                        map.removeLayer(layer66);
-                        map.removeLayer(layer98);
-                        map.removeLayer(layer05);
-                        map.removeLayer(layer15);
+                        map.removeLayer(allPolys);
                     }
                 });
 
@@ -1201,23 +1195,6 @@
                                 sticky: true,
                             }
                         );
-
-                        // layer.on('mousedown', function () {
-
-                        //     // change 'Select Glacier' button to glacier name
-                        //     btnObj = $("#glacier-btn-dropdown");
-                        //     $(btnObj).text($(".highlight").text());
-                        //     $(btnObj).val($(".highlight").text());
-
-                        //     updatePolyLegend(layer);
-                        //     //$('#checkboxInput').prop('checked', true);
-
-                        //     map.flyToBounds(layer.getBounds(), {
-                        //         padding: [20, 20]
-                        //     });
-
-                        //     $(".legendPolyList").fadeIn(1600);
-                        // });
                     });
                 };
 
@@ -1554,7 +1531,6 @@
                                 // change the layer style
                                 layer.setStyle({
                                     radius: 16
-                                    //}).bringToFront().openTooltip();
                                 }).bringToFront();
                             };
 
@@ -1562,7 +1538,6 @@
                             $('.dropdown-item2').on('mouseout', function () {
                                 layer.setStyle({
                                     radius: 7
-                                    //}).closeTooltip();
                                 });
                             });
                         });
@@ -1575,11 +1550,7 @@
                     // select list items and on mouseover
                     $('.dropdown-item2').on('click', function () {
                         map.removeLayer(glacierPoints);
-                        map.removeLayer(liaLayer);
-                        map.removeLayer(layer66);
-                        map.removeLayer(layer98);
-                        map.removeLayer(layer05);
-                        map.removeLayer(layer15);
+                        map.removeLayer(allPolys);
 
                         // extract the specific number from the specific item being moused over
                         let num = this.id.replace('glacierList-', '');
@@ -1600,9 +1571,6 @@
                                 map.flyToBounds(layer.getBounds(), {
                                     padding: [20, 20]
                                 });
-
-                                //$('#checkboxInput').prop('checked', false);
-                                map.removeLayer(liaLayer);
                             }
                         });
                         $(".legendPolyList").fadeIn(1600);
@@ -1636,7 +1604,6 @@
                     $("#polyLIA").on('change', function () {
                         if ($(this).is(':checked')) {
                             map.addLayer(liaLayer);
-                            liaLayer.bringToBack();
                             addInteractionsLIA(liaLayer);
                         } else {
                             map.removeLayer(liaLayer);
@@ -1669,7 +1636,6 @@
                     $("#poly15").on('change', function () {
                         if ($(this).is(':checked')) {
                             map.addLayer(layer15);
-                            layer15.bringToFront();
                             addInteractions15(layer15);
                         } else {
                             map.removeLayer(layer15);
@@ -1766,18 +1732,8 @@
                     // get polygon years toggle buttons
                     const polygonYearsGroup = $("#polygonYearsGroup").html();
                     $(polygonYearsGroup).insertAfter(".polyLegendAreaTitle");
-                    togglePolys();
-
-
-
-
-
-
 
                 };
-
-
-
 
 
             };
