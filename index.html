@@ -17,6 +17,8 @@
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             cursor: default !important;
             font-family: 'Gotu', 'Open Sans', sans-serif;
         }
@@ -64,44 +66,63 @@
             margin: -33px 0 0 -33px;
         }
 
-        .main-header {
+        .navbarParent {
             background: white;
             box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            margin: auto;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            height: 50px;
+        }
+
+        .fullTitle {
+            padding-top: 8px;
+            padding-left: 12px;
         }
 
         #mountain-icon {
-            margin-left: 12px;
             width: 32px;
             height: 32px;
         }
 
-        .fullTitle {
-            margin-top: -25px;
-            margin-left: 48px;
+        .fullTitleText {
+            margin-top: -26px;
+            margin-left: 40px;
+            align-content: center;
         }
 
         .navbar-title {
             color: #222;
             font-size: 25px;
             font-weight: 600;
-            margin-left: 3px;
-            margin-right: 8px;
         }
 
         .vl {
-            border-left: 1.25px solid #7E7E7E;
+            color: #7E7E7E;
+            font-size: 20px;
+            font-weight: 500;
+            margin-right: 6px;
+            margin-left: 6px;
         }
 
         .navbar-subtitle {
             color: #7E7E7E;
             font-size: 16px;
             font-weight: 600;
-            margin: 0 10px 0 10px;
-        }
+        } 
 
         #icon-group {
             float: right;
-            padding-right: 16px;
+            align-content: center;
+            white-space: nowrap;
+            padding-right: 12px;
             padding-top: 12px;
         }
 
@@ -119,36 +140,7 @@
             height: auto;
         }
 
-        .container {
-            max-width: 100%;
-            padding: 2px;
-            margin: 0 auto;
-        }
-
-        .main-header .container {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        @media (min-width: 1184px) {
-            .main-header .container {
-                justify-content: space-between;
-            }
-        }
-
-        @media (max-width: 1183px) {
-            #map {
-                top: 80px;
-            }
-        }
-
-        @media (max-width: 945px) {
-            #map {
-                top: 50px;
-            }
-
+        @media (max-width: 1195px) {
             .vl {
                 display: none;
             }
@@ -158,29 +150,7 @@
             }
         }
 
-        @media (max-width: 568px) {
-            #map {
-                top: 80px;
-            }
-
-            .vl {
-                display: none;
-            }
-
-            .navbar-subtitle {
-                display: none;
-            }
-        }
-
-        @media (max-width: 336px) {
-            #map {
-                top: 50px;
-            }
-
-            #mountain-icon {
-                display: none;
-            }
-
+        @media (max-width: 565px) {
             .navbar-title {
                 display: none;
             }
@@ -192,7 +162,7 @@
             .navbar-subtitle {
                 display: none;
             }
-        }
+        } */
 
 
         .leaflet-bar {
@@ -651,13 +621,15 @@
 </head>
 
 <body>
-    <header class="main-header">
-        <div class="container">
-            <div>
-                <img id="mountain-icon" src="icons/mountain.svg">
-                <div class="fullTitle">
+    <div class="navbarParent">
+        <div class="navbar">
+            <div class="fullTitle">
+                <div class="logo">
+                    <img id="mountain-icon" src="icons/mountain.svg">
+                </div>
+                <div class="fullTitleText">
                     <span class="navbar-title">Our Vanishing Glaciers</span>
-                    <span class="vl"></span>
+                    <span class="vl">|</span>
                     <span class="navbar-subtitle">Visualizing a Half-Century of Glacier Loss in Glacier National Park,
                         Montana</span>
                 </div>
@@ -702,7 +674,7 @@
                 </div>
             </nav>
         </div>
-    </header>
+    </div>
 
     <div id="map">
         <div id="loader">
@@ -1092,7 +1064,7 @@
                             opacity: 1,
                             fillOpacity: 0.4,
                             lineJoin: 'round',
-                            dashArray: '3,3',
+                            dashArray: '3,4',
                             pane: "layer66",
                         };
                     },
@@ -1107,7 +1079,7 @@
                             opacity: 1,
                             fillOpacity: 0.4,
                             lineJoin: 'round',
-                            dashArray: '3,3',
+                            dashArray: '3,4',
                             pane: "layer98",
                         };
                     }
@@ -1122,7 +1094,7 @@
                             opacity: 1,
                             fillOpacity: 0.4,
                             lineJoin: 'round',
-                            dashArray: '3,3',
+                            dashArray: '3,4',
                             pane: "layer05",
                         };
                     }
@@ -1137,7 +1109,7 @@
                             opacity: 1,
                             fillOpacity: 0.4,
                             lineJoin: 'round',
-                            dashArray: '3,3',
+                            dashArray: '3,4',
                             pane: "layer15",
                         };
                     }
@@ -1725,7 +1697,7 @@
                         $("input[year-right]").empty();
                     });
 
-                    const legendPolyAreaTitle = "<h4 class='polyLegendAreaTitle'>" + "Glacier Area Extent" +
+                    const legendPolyAreaTitle = "<h4 class='polyLegendAreaTitle'>" + "Glacier Area Extents" +
                         "</h4>"
                     $(legendPolyAreaTitle).insertAfter("#camera-icon");
 
