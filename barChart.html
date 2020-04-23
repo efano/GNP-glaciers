@@ -12,6 +12,24 @@
             font-family: 'Gotu', 'Roboto', sans-serif;
             color: #7E7E7E;
             display: flex;
+            margin-left: 16px;
+        }
+
+        h4 {
+            color: #222;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        .legendLineText {
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        #wrapper {
+            position: relative;
         }
 
         .bar {
@@ -29,8 +47,20 @@
 </head>
 
 <body>
-    <div id="my_dataviz"></div>
-    <div id="wrapper"></div>
+    <div class="climateChartsAll">
+        <div>
+            <div class="tempDiv">
+                <h4>Glacier Area</h4>
+                <div>
+                    <div class="legendLines" id="legendLine1">
+                        <div class="legendLineText" id="legendLineText1">Change in area calculation here...</div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="wrapper" id="wrapper"></div>
+        </div>
+    </div>
     <svg></svg>
 
     <script src="https://d3js.org/d3.v5.js"></script>
@@ -46,8 +76,8 @@
                 bottom: 40,
                 left: 60
             },
-            width = 280 - margin.left - margin.right,
-            height = 180 - margin.top - margin.bottom;
+            width = 220 - margin.left - margin.right,
+            height = 160 - margin.top - margin.bottom;
 
         // set the ranges
         var x = d3.scaleBand()
@@ -57,7 +87,8 @@
             .range([height, 0])
             .nice();
 
-        var svg = d3.select("body").append("svg")
+        var svg = d3.select("#wrapper")
+            .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
