@@ -116,7 +116,7 @@
             color: #7E7E7E;
             font-size: 16px;
             font-weight: 600;
-        } 
+        }
 
         #icon-group {
             float: right;
@@ -167,7 +167,7 @@
             .navbar-subtitle {
                 display: none;
             }
-        } 
+        }
 
         .leaflet-bar {
             box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
@@ -612,18 +612,29 @@
         }
 
         .switchInner {
-            height: 13px;
-            width: 21px;
-            border-width: 1px;
+            height: 14px;
+            width: 14px;
+            border-width: 1.5px;
+            border-radius: 4px;
+        }
+
+        .checkbox>.icon {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            top: -3px;
+            left: -4px;
+            right: 0px;
+            bottom: 0px;
         }
 
         .switchText {
             font-size: 10px;
             font-weight: 600;
             color: #7E7E7E;
-            margin-top: 3px;
-            margin-left: 3px;
-            margin-right: 16px;
+            margin-top: 4px;
+            margin-left: 4px;
+            margin-right: 18px;
         }
 
         .areaChartTitle {
@@ -826,35 +837,75 @@
     <div hidden id="polygonYearsGroup">
         <ul id="switchGroup1">
             <li>
-                <label class="switch-container">
+                <label class="checkbox-container">
+                    <input checked type="checkbox" id="polyLIA" class="switchInput" />
+                    <div class="checkbox checkbox--darken50 switchInner">
+                        <svg class="icon">
+                            <use xlink:href="#icon-check" /></svg>
+                    </div>
+                    <span class="switchText">Mid-19th Century</span>
+                </label>
+                <!-- <label class="switch-container">
                     <input checked type="checkbox" id="polyLIA" class="switchInput" />
                     <div class="switch switch--darken50 switchInner"></div>
                     <span class="switchText">Mid-19th Century</span>
-                </label>
+                </label> -->
             </li>
         </ul>
         <ul id="switchGroup2">
             <li>
-                <label class="switch-container">
+                <label class="checkbox-container">
+                    <input checked type="checkbox" id="poly66" class="switchInput" />
+                    <div class="checkbox checkbox--darken50 switchInner">
+                        <svg class="icon">
+                            <use xlink:href="#icon-check" /></svg>
+                    </div>
+                    <span class="switchText">1966</span>
+                </label>
+                <!-- <label class="switch-container">
                     <input checked type="checkbox" id="poly66" class="switchInput" />
                     <div class="switch switch--darken50 switchInner"></div>
                     <span class="switchText">1966</span>
+                </label> -->
+                <label class="checkbox-container">
+                    <input checked type="checkbox" id="poly98" class="switchInput" />
+                    <div class="checkbox checkbox--darken50 switchInner">
+                        <svg class="icon">
+                            <use xlink:href="#icon-check" /></svg>
+                    </div>
+                    <span class="switchText">1998</span>
                 </label>
-                <label class="switch-container">
+                <!-- <label class="switch-container">
                     <input checked type="checkbox" id="poly98" class="switchInput" />
                     <div class="switch switch--darken50 switchInner"></div>
                     <span class="switchText">1998</span>
+                </label> -->
+                <label class="checkbox-container">
+                    <input checked type="checkbox" id="poly05" class="switchInput" />
+                    <div class="checkbox checkbox--darken50 switchInner">
+                        <svg class="icon">
+                            <use xlink:href="#icon-check" /></svg>
+                    </div>
+                    <span class="switchText">2005</span>
                 </label>
-                <label class="switch-container">
+                <!-- <label class="switch-container">
                     <input checked type="checkbox" id="poly05" class="switchInput" />
                     <div class="switch switch--darken50 switchInner"></div>
                     <span class="switchText">2005</span>
+                </label> -->
+                <label class="checkbox-container">
+                    <input checked type="checkbox" id="poly15" class="switchInput" />
+                    <div class="checkbox checkbox--darken50 switchInner">
+                        <svg class="icon">
+                            <use xlink:href="#icon-check" /></svg>
+                    </div>
+                    <span class="switchText">2015</span>
                 </label>
-                <label class="switch-container">
+                <!-- <label class="switch-container">
                     <input checked type="checkbox" id="poly15" class="switchInput" />
                     <div class="switch switch--darken50 switchInner"></div>
                     <span class="switchText">2015</span>
-                </label>
+                </label> -->
             </li>
         </ul>
     </div>
@@ -1723,7 +1774,8 @@
                         $("input[year-right]").empty();
                     });
 
-                    const legendPolyAreaTitle = "<h4 class='polyLegendAreaTitle'>" + "Glacier Area Extents" + "</h4>"
+                    const legendPolyAreaTitle = "<h4 class='polyLegendAreaTitle'>" + "Glacier Area Extents" +
+                        "</h4>"
                     $(legendPolyAreaTitle).insertAfter("#camera-icon");
 
                     // get polygon years toggle buttons
@@ -1733,7 +1785,8 @@
                     const areaChartTitle = "<h4 class='areaChartTitle'>" + "Glacier Area" + "</h4>"
                     $(areaChartTitle).insertAfter("#switchGroup2");
 
-                    const areaChartText = "<h4 class='areaChartText'>" + "Change in area calculation here..." + "</h4>"
+                    const areaChartText = "<h4 class='areaChartText'>" + "Change in area calculation here..." +
+                        "</h4>"
                     $(areaChartText).insertAfter(".areaChartTitle");
 
                 };
