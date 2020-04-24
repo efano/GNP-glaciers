@@ -69,11 +69,11 @@
 <body>
     <div class="wrapper3" id="wrapper3">
         <div id="tooltip3" class="tooltip3">
-            <!-- <div class="tooltip3-range">
-                Area: <span id="range"></span>
-            </div> -->
             <div class="tooltip3-value">
-                <span id="count"></span> m&sup2;
+                <span id="area-m2"></span> m&sup2;
+            </div>
+            <div class="tooltip3-value">
+                <span id="area-acres"></span> acres
             </div>
         </div>
     </div>
@@ -196,15 +196,11 @@
             const tooltip = d3.select("#tooltip3")
 
             function onMouseEnter(datum) {
-                tooltip.select("#count")
-                    .text(area(datum))
+                const formatAreaM2 = tooltip.select("#area-m2")
+                    .text(area(datum).toLocaleString())
 
-                // const formatHumidity = d3.format(".2f")
-                // tooltip.select("#range")
-                //     .text([
-                //         formatHumidity(datum.xScale0),
-                //         formatHumidity(datum.xScale1)
-                //     ].join(" - "))
+                const formatAreaAcres = tooltip.select("#area-acres")
+                    .text((area(datum) * 0.000247105).toFixed(2).toLocaleString())
 
                 const x = xScale(datum.x0) +
                     (xScale(datum.x1) - xScale(datum.xScale0)) / 2 +
