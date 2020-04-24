@@ -15,19 +15,6 @@
             margin-left: 16px;
         }
 
-        h4 {
-            color: #222;
-            font-size: 14px;
-            font-weight: 600;
-            margin-top: 16px;
-        }
-
-        .legendLineText {
-            font-size: 11px;
-            font-weight: 600;
-            display: inline-block;
-        }
-
         #wrapper {
             position: relative;
         }
@@ -39,29 +26,14 @@
         .bar:hover {
             stroke: #e31a1c;
             stroke-width: 1.5px;
-            
-        }
 
-        
+        }
     </style>
 </head>
 
 <body>
-    <div class="climateChartsAll">
-        <div>
-            <div class="tempDiv">
-                <h4>Glacier Area</h4>
-                <div>
-                    <div class="legendLines" id="legendLine1">
-                        <div class="legendLineText" id="legendLineText1">Change in area calculation here...</div>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="wrapper" id="wrapper"></div>
-        </div>
-    </div>
-    <svg></svg>
+    <div class="wrapper" id="wrapper"></div>
+
 
     <script src="https://d3js.org/d3.v5.js"></script>
     <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
@@ -74,9 +46,9 @@
                 top: 15,
                 right: 15,
                 bottom: 40,
-                left: 60
+                left: 70
             },
-            width = 210 - margin.left - margin.right,
+            width = 220 - margin.left - margin.right,
             height = 160 - margin.top - margin.bottom;
 
         // set the ranges
@@ -111,7 +83,7 @@
                 d.area = +d.AREA
             });
 
-            // Scale the range of the data in the domains
+            // scale the range of the data in the domains
             x.domain(data.map(function (d) {
                 return d.Year;
             }));
@@ -119,7 +91,7 @@
                 return d.area;
             })]);
 
-            // append the rectangles for the bar chart
+            // add bars
             svg.selectAll(".bar")
                 .data(data)
                 .enter().append("rect")
@@ -128,21 +100,48 @@
                     return x(d.Year);
                 })
                 .attr("width", x.bandwidth())
-                .attr("y", function (d) {
-                    return y(d.area);
-                })
-                .attr("height", function (d) {
-                    return height - y(d.area);
-                });
 
-            // add the x Axis
+                // no bars on window load
+                .attr("height", function (d) {
+                    return height - y(0);
+                }) // bars equal to 0
+                .attr("y", function (d) {
+                    return y(0);
+                })
+
+            // add x-axis
             svg.append("g")
                 .attr("transform", "translate(0," + height + ")")
                 .call(d3.axisBottom(x));
 
-            // add the y Axis
-            svg.append("g")
+            // add y-axis
+            const yAxis = svg.append("g")
                 .call(d3.axisLeft(y).ticks(5));
+
+            // label y-axis
+            const yAxisLabel = yAxis.append("text")
+                .attr("class", "y-axis-label")
+                .attr("fill", "#7E7E7E")
+                .attr("transform", "rotate(-90)")
+                .attr("x", -margin.top - 30)
+                .attr("y", -margin.left + 12)
+                .attr("text-anchor", "middle")
+                .html("Area m&sup2;");
+
+            // animate bars
+            svg.selectAll("rect")
+                .transition()
+                .duration(800)
+                .attr("y", function(d) { return y(d.area); })
+                .attr("height", function(d) { return height - y(d.area); })
+                .delay(function (d, i) {
+                    return (i * 100)
+                })
+
+            // tooltips
+
+
+
 
         });
     </script>
