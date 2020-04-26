@@ -8,15 +8,16 @@
     <link href="https://fonts.googleapis.com/css?family=Gotu|Roboto&display=swap" rel="stylesheet">
 
     <style>
+        #wrapper3 {
+            position: relative;
+            margin-top: 16px;
+        }
+
         body {
             font-family: 'Gotu', 'Roboto', sans-serif;
             color: #7E7E7E;
             display: flex;
             margin-left: 16px;
-        }
-
-        #wrapper3 {
-            position: relative;
         }
 
         .bar {
@@ -28,27 +29,22 @@
             stroke-width: 1.5px;
         }
 
-        #tooltip3 {
-            opacity: 0;
-            position: absolute;
-            top: 120px;
-            left: 0;
-            padding: 0.6em 1em;
+        .tooltip {
+            height: auto;
+            transition: all 0.1s ease-out;
+            pointer-events: none;
+            padding: 8px;
             background: #fff;
             border: .5px solid #f5f5f5;
             text-align: left;
-            line-height: 1.3em;
+            line-height: 1.4em;
             font-size: .7em;
             font-weight: 600;
-            z-index: 10;
-            transition: all 0.1s ease-out;
-            pointer-events: none;
             border-radius: 5px;
             box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
-            z-index: 999;
         }
 
-        #tooltip3:before {
+        .tooltip:before {
             content: '';
             position: absolute;
             bottom: 0;
@@ -61,24 +57,13 @@
             border-left-color: transparent;
             transform: translate(-50%, 50%) rotate(45deg);
             transform-origin: center center;
-            z-index: 999;
+            z-index: 10;
         }
     </style>
 </head>
 
 <body>
-    <div class="wrapper3" id="wrapper3">
-        <div id="tooltip3" class="tooltip3">
-            <div class="tooltip3-value">
-                <span id="area-m2"></span> m&sup2;
-            </div>
-            <div class="tooltip3-value">
-                <span id="area-acres"></span> acres
-            </div>
-        </div>
-    </div>
-
-
+    <div class="wrapper3" id="wrapper3"></div>
 
     <script src="https://d3js.org/d3.v5.js"></script>
     <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
@@ -86,78 +71,117 @@
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
     <script>
-        // set the dimensions and margins of the graph
-        const margin = {
-                top: 15,
-                right: 15,
-                bottom: 40,
-                left: 70
-            },
-            width = 220 - margin.left - margin.right,
-            height = 160 - margin.top - margin.bottom;
+        async function drawBars() {
 
-        // set the ranges
-        const xScale = d3.scaleBand()
-            .range([0, width])
-            .padding(0.2);
-        const yScale = d3.scaleLinear()
-            .range([height, 0])
-            .nice();
+            // access data
 
-        const wrapper3 = d3.select("#wrapper3")
-            .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform",
-                "translate(" + margin.left + "," + margin.top + ")");
-
-        const bounds = wrapper3.append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-
-        const dataset = d3.csv("data/area-grinnell.csv").then(function (data) {
+            const dataset = await d3.csv("data/area-grinnell.csv")
+            console.log(dataset);
 
             // alphabetize by year
-            data.sort(function (a, b) {
+            dataset.sort(function (a, b) {
                 return a.Year - b.Year
             });
 
+            // create chart dimensions
+            const width = 220
+            let dimensions = {
+                width: width,
+                height: 160,
+                margin: {
+                    top: 15,
+                    right: 15,
+                    bottom: 40,
+                    left: 70,
+                },
+            }
+            dimensions.boundedWidth = dimensions.width - dimensions.margin.left - dimensions.margin.right
+            dimensions.boundedHeight = dimensions.height - dimensions.margin.top - dimensions.margin.bottom
+
+            // draw canvas
+            const wrapper3 = d3.select("#wrapper3")
+                .append("svg")
+                .attr("width", dimensions.width + dimensions.margin.left + dimensions.margin.right)
+                .attr("height", dimensions.height + dimensions.margin.top + dimensions.margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + dimensions.margin.left + "," + dimensions.margin.top + ")");
+
+            const bounds = wrapper3.append("g")
+                .attr("transform", "translate(" + dimensions.margin.left + "," + dimensions.margin.top + ")");
+
             // format the data
-            data.forEach(function (d) {
+            dataset.forEach(function (d) {
                 d.area = +d.AREA
             });
 
-            const area = d => +d.AREA;
+            const area = d => d.area
+            const yAccessor = d => d.length
+            const xAccessor = d => d.Year
 
-            // scale the range of the data in the domains
-            xScale.domain(data.map(function (d) {
-                return d.Year;
-            }));
-            yScale.domain([0, d3.max(data, function (d) {
-                return d.area;
-            })]);
+            // create tooltip
+            const tooltip = d3.select("body")
+                .append("div")
+                .attr("class", "tooltip")
+                .style("position", "absolute")
+                .style("z-index", "10")
+                .style("visibility", "hidden")
+                .text("a simple tooltip")
+
+            // create scales
+            const xScale = d3.scaleBand()
+                .domain(dataset.map(function (d) {
+                    return d.Year;
+                }))
+                .range([0, dimensions.boundedWidth])
+                .padding(0.2)
+
+            const yScale = d3.scaleLinear()
+                .domain([0, d3.max(dataset, function (d) {
+                    return d.area;
+                })])
+                .range([dimensions.boundedHeight, 0])
+                .nice();
 
             // add bars
             const bars = wrapper3.selectAll(".bar")
-                .data(data)
+                .data(dataset)
                 .enter().append("rect")
                 .attr("class", "bar")
                 .attr("x", function (d) {
                     return xScale(d.Year);
                 })
                 .attr("width", xScale.bandwidth())
+
                 // no bars on window load
                 .attr("height", function (d) {
-                    return height - yScale(0);
+                    return dimensions.boundedHeight - yScale(0);
                 }) // bars equal to 0
                 .attr("y", function (d) {
                     return yScale(0);
                 })
 
-            // add x-axis
+                .on("mouseover", function (d) {
+                    const format = d3.format(",.2f")
+                    return tooltip 
+                    .style("visibility", "visible")
+                    .html(format(d.AREA) + " m&sup2;" + "<br>" + 
+                    format(d.AREA * 0.000247105) + " acres")
+                        
+                })
+                .on("mousemove", function () {
+                    return tooltip
+                        .style("top", (event.pageY - 80) + "px")
+                        .style("left", (event.pageX - 40) + "px");
+                })
+                .on("mouseout", function () {
+                    return tooltip
+                        .style("visibility", "hidden");
+                });
+
+            //add x-axis
             const xAxis = wrapper3.append("g")
-                .attr("transform", "translate(0," + height + ")")
+                .attr("transform", "translate(0," + dimensions.boundedHeight + ")")
                 .call(d3.axisBottom(xScale));
 
             // add y-axis
@@ -169,8 +193,8 @@
                 .attr("class", "y-axis-label")
                 .attr("fill", "#7E7E7E")
                 .attr("transform", "rotate(-90)")
-                .attr("x", -margin.top - 30)
-                .attr("y", -margin.left + 12)
+                .attr("x", -dimensions.margin.top - 30)
+                .attr("y", -dimensions.margin.left + 12)
                 .attr("text-anchor", "middle")
                 .html("Area m&sup2;");
 
@@ -182,47 +206,13 @@
                     return yScale(d.area);
                 })
                 .attr("height", function (d) {
-                    return height - yScale(d.area);
+                    return dimensions.boundedHeight - yScale(d.area);
                 })
                 .delay(function (d, i) {
                     return (i * 100)
                 })
-
-            // tooltips
-            wrapper3.select("rect")
-                .on("mouseenter", onMouseEnter)
-                .on("mouseleave", onMouseLeave)
-
-            const tooltip = d3.select("#tooltip3")
-
-            function onMouseEnter(datum) {
-                const formatAreaM2 = tooltip.select("#area-m2")
-                    .text(area(datum).toLocaleString())
-
-                const formatAreaAcres = tooltip.select("#area-acres")
-                    .text((area(datum) * 0.000247105).toFixed(2).toLocaleString())
-
-                const x = xScale(datum.x0) +
-                    (xScale(datum.x1) - xScale(datum.xScale0)) / 2 +
-                    margin.left
-                const y = yScale(area(datum)) +
-                    margin.top
-
-                tooltip.style("transform", `translate(` +
-                    `calc( -50% + ${xScale}px),` +
-                    `calc(-100% + ${yScale}px)` +
-                    `)`)
-
-                tooltip.style("opacity", 1)
-            }
-
-            function onMouseLeave(datum) {
-                tooltip.style("opacity", 0)
-            }
-
-
-
-        });
+        };
+        drawBars()
     </script>
 </body>
 
