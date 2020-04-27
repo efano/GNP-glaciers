@@ -1121,8 +1121,6 @@
 
             function drawMap(data) {
 
-                $('#loader').remove();
-
                 // pull out separate data arrays and assign to variables
                 const boundsData = data[0];
                 const liaData = data[1];
@@ -1437,6 +1435,8 @@
                 map.fitBounds(glacierPoints.getBounds(), {
                     padding: [20, 20]
                 });
+
+                $('#loader').remove();
 
                 map.on('zoomend', function () {
                     const zoomlevel = map.getZoom();
