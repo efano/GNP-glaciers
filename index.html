@@ -443,15 +443,15 @@
             border-radius: 5px;
             left: 11px;
             bottom: 11px;
-            width: 40px;
-            height: 38px;
+            width: 36px;
+            height: 34px;
             position: absolute;
             z-index: 950;
         }
 
         #legend-icon {
-            height: 30px;
-            width: 30px;
+            height: 26px;
+            width: 26px;
             margin-left: 5px;
             margin-top: 5px;
             opacity: 0.6;
@@ -480,7 +480,6 @@
         }
 
         /* glacier polygon css */
-
         .legendPolyList {
             font-size: 10px;
             background-color: rgba(255, 255, 255, .95);
@@ -512,7 +511,6 @@
         }
 
         /* modal css */
-
         .popup_content {
             font-family: "Gotu", sans-serif;
             margin: 10px;
@@ -1707,10 +1705,10 @@
                         });
 
                         if ($(".glacierPtLegendSm").is(":visible")) {
-                                $(".glacierPtLegendSm").fadeOut("fast");
-                            } else {
-                                $(".glacierPtLegend").fadeOut("fast");
-                            }
+                            $(".glacierPtLegendSm").fadeOut("fast");
+                        } else {
+                            $(".glacierPtLegend").fadeOut("fast");
+                        }
 
                         $(".legendPolyList").fadeIn(1600);
                     })
