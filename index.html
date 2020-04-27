@@ -436,13 +436,55 @@
             margin-left: 2px;
         }
 
+        #glacierPtLegendSm {
+            background-color: rgba(255, 255, 255, .95);
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+            opacity: 0.9;
+            border-radius: 5px;
+            left: 11px;
+            bottom: 11px;
+            width: 40px;
+            height: 38px;
+            position: absolute;
+            z-index: 950;
+        }
+
+        #legend-icon {
+            height: 30px;
+            width: 30px;
+            margin-left: 5px;
+            margin-top: 5px;
+            opacity: 0.6;
+        }
+
+        #legend-icon:hover {
+            opacity: 1.0;
+        }
+
+        .legendCloseIcon {
+            float: right;
+            margin-top: -4px;
+            margin-right: 2px;
+        }
+
+        #close-icon {
+            height: 14px;
+            width: 14px;
+            margin-left: 5px;
+            margin-top: 5px;
+            opacity: 0.5;
+        }
+
+        #close-icon:hover {
+            opacity: 1.0;
+        }
+
         /* glacier polygon css */
 
         .legendPolyList {
             font-size: 10px;
             background-color: rgba(255, 255, 255, .95);
             box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-            opacity: 0.9;
             border-radius: 5px;
             text-align: left;
             width: 300px;
@@ -719,8 +761,17 @@
         </div>
     </div>
 
+    <div hidden id="glacierPtLegendSm" class="glacierPtLegendSm">
+        <div class="legendIcon">
+            <img id="legend-icon" src="icons/legend.svg">
+        </div>
+    </div>
+
     <!-- point legend elements -->
     <div id="glacierPtLegend" class="glacierPtLegend">
+        <div class="legendCloseIcon">
+            <img id="close-icon" src="icons/close.svg">
+        </div>
         <div>
             <h4>Glacier Area Loss</h4>
             <h6>(1966 &ndash; 2015)</h6>
@@ -1391,27 +1442,34 @@
                     padding: [20, 20]
                 });
 
-                map.on('zoomstart', function () {
-                    $(".glacierPtLegend").fadeOut("fast");
-                });
+                // map.on('zoomstart', function () {
+                //     if ($(".glacierPtLegendSm").is(":visible")) {
+                //             $(".glacierPtLegendSm").fadeOut("fast");
+                //         } else {
+                //             $(".glacierPtLegend").fadeOut("fast");
+                //         }
+                // });
 
                 map.on('zoomend', function () {
                     const zoomlevel = map.getZoom();
                     if (zoomlevel >= 12) {
                         $('#dropdown-list2 .dropdown-item2').removeClass('highlight');
+                        $(".glacierPtLegend").fadeOut();
+                        $(".glacierPtLegendSm").fadeOut();
                         if (map.hasLayer(glacierPoints)) {
                             map.removeLayer(glacierPoints);
                         }
                     }
                     if (zoomlevel < 12 && zoomlevel > 8) {
                         $("#glacier-btn-dropdown").html("Select Glacier &#9662;").text();
-                        $(".glacierPtLegend").fadeIn();
                         map.addLayer(glacierPoints);
                         drawPts(glacierPoints);
+                        drawPtLegend();
                     }
                     if (zoomlevel <= 8) {
                         $('#dropdown-list2 .dropdown-item2').removeClass('highlight');
                         $(".glacierPtLegend").fadeOut();
+                        $(".glacierPtLegendSm").fadeOut();
                         if (map.hasLayer(glacierPoints)) {
                             map.removeLayer(glacierPoints);
                         }
@@ -1419,6 +1477,7 @@
                 });
 
                 // call functions
+
                 drawPts(glacierPoints);
                 buildPtUI(glacierPoints);
                 drawDropDownList(ptData);
@@ -1426,6 +1485,9 @@
                 zoomToGlacier(glacierPoints);
                 removeLists();
                 drawPolyLegend();
+                drawPtLegend();
+                togglePtLegend();
+
 
                 // draw glacier points
                 function drawPts(glacierPoints) {
@@ -1507,9 +1569,38 @@
                                     });
                                 }
                             });
+
+                            if ($(".glacierPtLegendSm").is(":visible")) {
+                                $(".glacierPtLegendSm").fadeOut("fast");
+                            } else {
+                                $(".glacierPtLegend").fadeOut("fast");
+                            }
+
                             $(".legendPolyList").fadeIn(1600);
                         });
                     })
+                };
+
+                // draw pt legend
+                function drawPtLegend() {
+                    if ($(".glacierPtLegendSm").is(":visible")) {
+                        $(".glacierPtLegendSm").show();
+                    } else {
+                        $(".glacierPtLegend").show();
+                    }
+                };
+
+                // toggle pt legend
+                function togglePtLegend() {
+                    $('.legendCloseIcon').click(function () {
+                        $('.glacierPtLegend').fadeOut();
+                        $('.glacierPtLegendSm').fadeIn();
+                    });
+
+                    $('.glacierPtLegendSm').click(function () {
+                        $('.glacierPtLegendSm').fadeOut();
+                        $('.glacierPtLegend').fadeIn();
+                    });
                 };
 
                 // build active/static toggle ui
@@ -1622,6 +1713,13 @@
                                 });
                             }
                         });
+
+                        if ($(".glacierPtLegendSm").is(":visible")) {
+                                $(".glacierPtLegendSm").fadeOut("fast");
+                            } else {
+                                $(".glacierPtLegend").fadeOut("fast");
+                            }
+                            
                         $(".legendPolyList").fadeIn(1600);
                     })
                 };
