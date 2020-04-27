@@ -1009,7 +1009,7 @@
 
         $(document).ready(function () {
 
-            // set default `pagecontainer` for all popups (optional, but recommended for screen readers and iOS*)
+            // set default `pagecontainer` for all popups (optional, but recommended for screen readers and iOS
             $.fn.popup.defaults.pagecontainer = '#page'
 
             // initialize the modal plugin
@@ -1442,14 +1442,6 @@
                     padding: [20, 20]
                 });
 
-                // map.on('zoomstart', function () {
-                //     if ($(".glacierPtLegendSm").is(":visible")) {
-                //             $(".glacierPtLegendSm").fadeOut("fast");
-                //         } else {
-                //             $(".glacierPtLegend").fadeOut("fast");
-                //         }
-                // });
-
                 map.on('zoomend', function () {
                     const zoomlevel = map.getZoom();
                     if (zoomlevel >= 12) {
@@ -1719,7 +1711,7 @@
                             } else {
                                 $(".glacierPtLegend").fadeOut("fast");
                             }
-                            
+
                         $(".legendPolyList").fadeIn(1600);
                     })
                 };
@@ -1888,8 +1880,6 @@
                     $(areaChartText).insertAfter(".areaChartTitle");
 
                 };
-
-
             };
         });
     </script>
