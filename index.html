@@ -435,7 +435,8 @@
             margin-left: 2px;
         }
 
-        #glacierPtLegendSm {
+        #glacierPtLegendSm,
+        #glacierPolyLegendSm {
             background-color: rgba(255, 255, 255, .95);
             box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
@@ -510,9 +511,10 @@
         }
 
         #camera-icon {
+            float: right;
             opacity: 0.5;
             margin-top: 4px;
-            padding-left: 6px;
+            margin-right: 20px;
         }
 
         #camera-icon:hover {
@@ -814,8 +816,15 @@
     </div>
 
     <!-- polygon legend elements -->
-    <div hidden class="legendPolyCloseIcon" title="Minimize Legend">
-        <img class="closePolyIcon" src="icons/close.svg">
+    <div hidden id="glacierPolyLegendSm" class="glacierPolyLegendSm">
+        <div class="legendPolyIcon" title="Maximize Legend">
+            <img class="legend-icon" src="icons/legend.svg">
+        </div>
+    </div>
+    <div hidden class="legendPolyCloseIcon">
+        <div class="closePolyIconDiv" title="Minimize Legend">
+            <img class="closePolyIcon" src="icons/close.svg">
+        </div>
     </div>
     <div>
         <a hidden href="#" id="photoIcon">
@@ -901,11 +910,6 @@
                     </div>
                     <span class="switchText">Mid-19th Century</span>
                 </label>
-                <!-- <label class="switch-container">
-                    <input checked type="checkbox" id="polyLIA" class="switchInput" />
-                    <div class="switch switch--darken50 switchInner"></div>
-                    <span class="switchText">Mid-19th Century</span>
-                </label> -->
             </li>
         </ul>
         <ul id="switchGroup2">
@@ -918,11 +922,6 @@
                     </div>
                     <span class="switchText">1966</span>
                 </label>
-                <!-- <label class="switch-container">
-                    <input checked type="checkbox" id="poly66" class="switchInput" />
-                    <div class="switch switch--darken50 switchInner"></div>
-                    <span class="switchText">1966</span>
-                </label> -->
                 <label class="checkbox-container">
                     <input checked type="checkbox" id="poly98" class="switchInput" />
                     <div class="checkbox checkbox--darken50 switchInner">
@@ -931,11 +930,6 @@
                     </div>
                     <span class="switchText">1998</span>
                 </label>
-                <!-- <label class="switch-container">
-                    <input checked type="checkbox" id="poly98" class="switchInput" />
-                    <div class="switch switch--darken50 switchInner"></div>
-                    <span class="switchText">1998</span>
-                </label> -->
                 <label class="checkbox-container">
                     <input checked type="checkbox" id="poly05" class="switchInput" />
                     <div class="checkbox checkbox--darken50 switchInner">
@@ -944,11 +938,6 @@
                     </div>
                     <span class="switchText">2005</span>
                 </label>
-                <!-- <label class="switch-container">
-                    <input checked type="checkbox" id="poly05" class="switchInput" />
-                    <div class="switch switch--darken50 switchInner"></div>
-                    <span class="switchText">2005</span>
-                </label> -->
                 <label class="checkbox-container">
                     <input checked type="checkbox" id="poly15" class="switchInput" />
                     <div class="checkbox checkbox--darken50 switchInner">
@@ -957,11 +946,6 @@
                     </div>
                     <span class="switchText">2015</span>
                 </label>
-                <!-- <label class="switch-container">
-                    <input checked type="checkbox" id="poly15" class="switchInput" />
-                    <div class="switch switch--darken50 switchInner"></div>
-                    <span class="switchText">2015</span>
-                </label> -->
             </li>
         </ul>
     </div>
@@ -1262,6 +1246,7 @@
                     }
                     if (zoomlevel < 12) {
                         $(".legendPolyList").fadeOut("fast");
+                        $('#glacierPolyLegendSm').fadeOut("fast");
                         $(".leaflet-tooltip-pane").empty();
                         map.removeLayer(allPolys);
                     }
@@ -1474,7 +1459,6 @@
                 });
 
                 // call functions
-
                 drawPts(glacierPoints);
                 buildPtUI(glacierPoints);
                 drawDropDownList(ptData);
@@ -1484,7 +1468,6 @@
                 drawPolyLegend();
                 drawPtLegend();
                 togglePtLegend();
-
 
                 // draw glacier points
                 function drawPts(glacierPoints) {
@@ -1692,6 +1675,7 @@
                         // extract the specific number from the specific item being moused over
                         let num = this.id.replace('glacierList-', '');
                         glacierNum = parseInt(num);
+                        $('#glacierPolyLegendSm').fadeOut("fast");
 
                         // change 'Select Glacier' button to glacier name
                         btnObj = $(this).parent().parent().parent().siblings('button');
@@ -1728,6 +1712,8 @@
                         $('[id="baselayerDropdownList"]').removeClass('show1');
                     });
                 };
+
+
 
                 // create polygon legend
                 function drawPolyLegend() {
@@ -1806,7 +1792,7 @@
                     const yearRM2 = layer.feature.properties['P4_YR_R'];
                     const yearRM3 = layer.feature.properties['P5_YR_R'];
 
-                    const legendPolyTitle = "<h4 class='polyLegendTitle'>" + legendPolyName + 
+                    const legendPolyTitle = "<h4 class='polyLegendTitle'>" + legendPolyName +
                         $("#photoIcon").html() + "</h4>";
                     $(".legendPolyList").html(legendPolyTitle);
 
@@ -1870,6 +1856,19 @@
                     const closeIcon = $(".legendPolyCloseIcon").html();
                     $(closeIcon).insertBefore(".polyLegendTitle");
 
+                    togglePolyLegend();
+                    // toggle poly legend
+                    function togglePolyLegend() {
+                        $('.closePolyIcon').click(function () {
+                            $('.legendPolyList').fadeOut();
+                            $('#glacierPolyLegendSm').fadeIn();
+                        });
+                        $('.glacierPolyLegendSm').click(function () {
+                            $('#glacierPolyLegendSm').fadeOut();
+                            $('.legendPolyList').fadeIn();
+                        });
+                    };
+
                     const legendPolyAreaTitle = "<h4 class='polyLegendAreaTitle'>" + "Glacier Area Extents " +
                         "</h4>"
                     $(legendPolyAreaTitle).insertAfter("#camera-icon");
@@ -1887,7 +1886,11 @@
 
                     
 
+
                 };
+
+
+
             };
         });
     </script>
