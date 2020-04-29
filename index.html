@@ -167,6 +167,10 @@
             .navbar-subtitle {
                 display: none;
             }
+
+            .leaflet-control-attribution {
+                display: none;
+            }
         }
 
         @media (max-width: 350px) {
@@ -179,6 +183,10 @@
             }
 
             .navbar-subtitle {
+                display: none;
+            }
+
+            .leaflet-control-attribution {
                 display: none;
             }
         }
@@ -1120,10 +1128,12 @@
             const polys05 = d3.json('data/polys05.json');
             const polys15 = d3.json('data/polys15.json');
             const allPoints = d3.json('data/glacier-pts.json');
-            const climateCSV = d3.csv('data/climate-all.csv')
+            const climateCSV = d3.csv('data/climate-all.csv');
+            const areaCSV = d3.csv('data/area-all.csv');
+
 
             // use Promise to wait until data is all loaded
-            Promise.all([parkBoundary, lia, polys66, polys98, polys05, polys15, allPoints, climateCSV]).then(
+            Promise.all([parkBoundary, lia, polys66, polys98, polys05, polys15, allPoints, climateCSV, areaCSV]).then(
                 drawMap);
 
             function drawMap(data) {
@@ -1137,6 +1147,7 @@
                 const polys15Data = data[5];
                 const ptData = data[6];
                 const climateData = data[7];
+                const areaData = data[8];
 
                 // create a park boundary layer with the geojson data
                 const parkBounds = L.geoJson(boundsData, {
@@ -1727,8 +1738,6 @@
                     });
                 };
 
-
-
                 // create polygon legend
                 function drawPolyLegend() {
                     const legendPolyList = L.control({
@@ -1894,16 +1903,17 @@
                     const areaChartTitle = "<h4 class='areaChartTitle'>" + "Glacier Area" + "</h4>"
                     $(areaChartTitle).insertAfter("#switchGroup2");
 
-                    const areaChartText = "<h4 class='areaChartText'>" + "Change in area calculation here..." +
-                        "</h4>"
+                    const areaChartText = "<div class='areaChartText'>" + "Change in area calculation here..." +
+                        "</div>"
                     $(areaChartText).insertAfter(".areaChartTitle");
-
-
 
 
                 };
 
-
+                console.log(areaData);
+                // filter areaData
+                // compute area calculations
+                // copy over d3 chart function
 
             };
         });
