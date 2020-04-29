@@ -704,8 +704,12 @@
             font-size: 14px;
             color: #222;
             font-weight: 600;
-            margin-top: 7px;
+            margin-top: 8px;
             margin-bottom: 4px;
+        }
+
+        .areaChartSubTitle {
+            font-size: 13px;
         }
 
         .areaChartText {
@@ -714,6 +718,10 @@
             color: #7E7E7E;
             margin-top: 4px;
             margin-bottom: 4px;
+        }
+
+        .areaChartCalcs {
+            color:#e31a1c;
         }
     </style>
 </head>
@@ -842,7 +850,7 @@
         </div>
     </div>
     <div>
-        <a hidden href="#" id="photoIcon" >
+        <a hidden href="#" id="photoIcon">
             <img id="camera-icon" src="icons/camera.svg" title="View Photograph">
         </a>
     </div>
@@ -1126,8 +1134,9 @@
 
 
             // use Promise to wait until data is all loaded
-            Promise.all([parkBoundary, lia, polys66, polys98, polys05, polys15, allPoints, climateCSV, areaCSV]).then(
-                drawMap);
+            Promise.all([parkBoundary, lia, polys66, polys98, polys05, polys15, allPoints, climateCSV, areaCSV])
+                .then(
+                    drawMap);
 
             function drawMap(data) {
 
@@ -1744,7 +1753,7 @@
                     $(".legendPolyList").hide();
                 }
 
-                // toggle polygon layers on poygon legend
+                // toggle the polygon layers on the polygon legend
                 function togglePolys() {
 
                     $("#polyLIA").on('change', function () {
@@ -1812,6 +1821,9 @@
                         $("#photoIcon").html() + "</h4>";
                     $(".legendPolyList").html(legendPolyTitle);
 
+                    const closeIcon = $(".legendPolyCloseIcon").html();
+                    $(closeIcon).insertBefore(".polyLegendTitle");
+
                     // get modal type on camera icon click
                     $("#camera-icon").click(function () {
                         $(".modalTitle").append(legendPolyName);
@@ -1869,9 +1881,6 @@
                         $("input[year-right]").empty();
                     });
 
-                    const closeIcon = $(".legendPolyCloseIcon").html();
-                    $(closeIcon).insertBefore(".polyLegendTitle");
-
                     togglePolyLegend();
                     // toggle poly legend
                     function togglePolyLegend() {
@@ -1893,20 +1902,46 @@
                     const polygonYearsGroup = $("#polygonYearsGroup").html();
                     $(polygonYearsGroup).insertAfter(".polyLegendAreaTitle");
 
-                    const areaChartTitle = "<h4 class='areaChartTitle'>" + "Glacier Area" + "</h4>"
+                    const areaChartTitle = "<h4 class='areaChartTitle'>" + "Glacier Area " +
+                        "<span class='areaChartSubTitle'>" + "(1966 &ndash; 2015)" + "</span>" + "</h4>"
                     $(areaChartTitle).insertAfter("#switchGroup2");
 
-                    const areaChartText = "<div class='areaChartText'>" + "Change in area calculation here..." +
-                        "</div>"
-                    $(areaChartText).insertAfter(".areaChartTitle");
+                    getAreaData(areaData);
 
+                    function getAreaData(areaData) {
+                        // filter dataset
+                        const filteredData = areaData.filter(function (d) {
+                            if (d["GLACNAME"] == legendPolyName) {
+                                return d;
+                            }
+                        })
+
+                        // alphabetize by year
+                        areaData.sort(function (a, b) {
+                            return a.Year - b.Year
+                        });
+                        console.log("filtered: ", filteredData);
+
+                        // compute area calculations
+                        const area1966 = filteredData[0].AREA;
+                        const area2015 = filteredData[3].AREA;
+                        const format = d3.format(",.2f");
+                        const areaDif = format(area1966 - area2015);
+                        console.log(areaDif);
+                        const areaAcres = format((area1966 - area2015) * 0.000247105);
+
+                        const areaChartText = "<div class='areaChartText'>" +
+                            "50-year change in area: " + "<span class='areaChartCalcs'>" +
+                            "&thinsp;-" + areaDif + " m&sup2;" + "<br>" + "</span>" + 
+                            "or " + "<span class='areaChartCalcs'>" + "&thinsp;-" + areaAcres + " acres" +
+                            "</span>" + "</div>"
+                        $(areaChartText).insertAfter(".areaChartSubTitle");
+
+
+
+                    }
 
                 };
-
-                console.log(areaData);
-                // filter areaData
-                // compute area calculations
-                // copy over d3 chart function
 
             };
         });
