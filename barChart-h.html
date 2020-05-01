@@ -29,7 +29,7 @@
             stroke-width: 1.5px;
         }
 
-        .tooltip {
+        .tooltip1 {
             height: auto;
             transition: all 0.1s ease-out;
             pointer-events: none;
@@ -44,7 +44,7 @@
             box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
         }
 
-        .tooltip:before {
+        .tooltip1:before {
             content: '';
             position: absolute;
             bottom: 0;
@@ -119,10 +119,10 @@
             const yAccessor = d => d.length
             const xAccessor = d => d.Year
 
-            // create tooltip
-            const tooltip = d3.select("body")
+            // create tooltip1
+            const tooltip1 = d3.select("body")
                 .append("div")
-                .attr("class", "tooltip")
+                .attr("class", "tooltip1")
                 .style("position", "absolute")
                 .style("z-index", "10")
                 .style("visibility", "hidden")
@@ -167,18 +167,20 @@
 
                 .on("mouseover", function (d) {
                     const format = d3.format(",.2f")
-                    return tooltip
+                    return tooltip1
                         .style("visibility", "visible")
                         .html(format(d.AREA) + " m&sup2;" + "<br>" +
                             format(d.AREA * 0.000247105) + " acres")
                 })
                 .on("mousemove", function () {
-                    return tooltip
-                        .style("top", (event.pageY - 60) + "px")
-                        .style("left", (event.pageX - 40) + "px");
+                    return tooltip1
+                        //.style("top", (event.pageY - 60) + "px")
+                        //.style("left", (event.pageX - 40) + "px");
+                        .style("top",  (d3.mouse(this)[1]) + "px")
+                        .style("left", (d3.mouse(this)[0]) + "px")
                 })
                 .on("mouseout", function () {
-                    return tooltip
+                    return tooltip1
                         .style("visibility", "hidden");
                 });
 
