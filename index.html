@@ -31,12 +31,19 @@
             color: #FFF;
         }
 
-        html,
-        body {
+        html {
             margin: 0;
             padding: 0;
             color: whitesmoke;
             background: whitesmoke;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            color: #7E7E7E;
+            background: whitesmoke;
+            display: flex;
         }
 
         #map {
@@ -734,10 +741,10 @@
             margin-left: 9px;
         }
 
-        .body1 {
+        /* .body1 {
             color: #7E7E7E;
             display: flex;
-        }
+        } */
 
         .bar {
             fill: #3BADCC;
@@ -752,7 +759,6 @@
 
         .tooltip1 {
             height: auto;
-            position: absolute;
             transition: all 0.1s ease-out;
             pointer-events: none;
             padding: 8px;
@@ -787,7 +793,6 @@
         .y-axis {
             font-size: 0.6em;
         }
-
     </style>
 </head>
 
@@ -2048,7 +2053,7 @@
                         const xAccessor = d => d.Year
 
                         // create tooltip
-                        const tooltip1 = d3.select(".body1")
+                        const tooltip1 = d3.select("body")
                             .append("div")
                             .attr("class", "tooltip1")
                             .style("position", "absolute")
@@ -2093,12 +2098,8 @@
                             })
                             .on("mousemove", function (d) {
                                 return tooltip1
-                                    //.style("top", (event.pageY - 60) + "px")
-                                    //.style("left", (event.pageX - 40) + "px");
-                                    //.style("top", d3.select(this).attr("cy - 10") + "px")
-                                    //.style("left", d3.select(this).attr("cx - 10") + "px")
-                                    .style("top",  (d3.mouse(this)[1]) + "px")
-                                    .style("left", (d3.mouse(this)[0]) + "px")
+                                    .style("top", (d3.event.pageY - 60) + "px")
+                                    .style("left", (d3.event.pageX - 40) + "px");
                             })
                             .on("mouseout", function (d) {
                                 return tooltip1
@@ -2138,7 +2139,7 @@
                             .attr("y", function (d) {
                                 return yScale(d.Year);
                             })
-                            
+
 
 
 

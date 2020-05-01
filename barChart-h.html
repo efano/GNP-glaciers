@@ -174,10 +174,10 @@
                 })
                 .on("mousemove", function () {
                     return tooltip1
-                        //.style("top", (event.pageY - 60) + "px")
-                        //.style("left", (event.pageX - 40) + "px");
-                        .style("top",  (d3.mouse(this)[1]) + "px")
-                        .style("left", (d3.mouse(this)[0]) + "px")
+                        .style("top", (event.pageY - 60) + "px")
+                        .style("left", (event.pageX - 40) + "px");
+                        //.style("top",  (d3.mouse(this)[1]) + "px")
+                        //.style("left", (d3.mouse(this)[0]) + "px")
                 })
                 .on("mouseout", function () {
                     return tooltip1
