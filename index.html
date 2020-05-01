@@ -508,7 +508,7 @@
             box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
             text-align: left;
-            width: 300px;
+            width: 280px;
             height: 500px;
         }
 
@@ -526,7 +526,7 @@
 
         .polyLegendTitle {
             color: #222;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             margin-top: 14px;
             margin-left: 16px;
@@ -661,13 +661,13 @@
         }
 
         #switchGroup1 {
-            margin-bottom: -10px;
-            margin-left: 10px;
+            margin-bottom: -8px;
+            /* margin-left: 10px; */
         }
 
         #switchGroup2 {
             margin-bottom: 14px;
-            margin-left: 10px;
+            /* margin-left: 10px; */
         }
 
         #switchGroup1 :hover,
@@ -705,14 +705,14 @@
             color: #7E7E7E;
             margin-top: 4px;
             margin-left: 4px;
-            margin-right: 16px;
+            margin-right: 20px;
         }
 
         .areaChartTitle {
             font-size: 14px;
             color: #222;
             font-weight: 600;
-            margin-top: 8px;
+            margin-top: 16px;
             margin-bottom: 4px;
         }
 
@@ -725,7 +725,7 @@
             font-weight: 600;
             color: #7E7E7E;
             margin-top: 4px;
-            margin-left: 10px;
+            /* margin-left: 10px; */
         }
 
         .areaChartCalcs {
@@ -738,13 +738,8 @@
             position: relative;
             z-index: 1000;
             color: #7E7E7E;
-            margin-left: 9px;
+            margin-top: 4px;
         }
-
-        /* .body1 {
-            color: #7E7E7E;
-            display: flex;
-        } */
 
         .bar {
             fill: #3BADCC;
@@ -2013,10 +2008,10 @@
 
                         // horizontal bar chart
                         // create chart dimensions
-                        const width = 250
+                        const width = 245
                         let dimensions = {
                             width: width,
-                            height: 125,
+                            height: 120,
                             margin: {
                                 top: 7,
                                 right: 15,
@@ -2121,8 +2116,8 @@
                         const yAxisLabel = yAxis.append("text")
                             .attr("class", "x-axis-label")
                             .attr("fill", "#7E7E7E")
-                            .attr("x", -dimensions.margin.top + 115)
-                            .attr("y", -dimensions.margin.left + 137)
+                            .attr("x", -dimensions.margin.top + 110)
+                            .attr("y", -dimensions.margin.left + 132)
                             .attr("text-anchor", "middle")
                             .html("Area m&sup2;");
 
