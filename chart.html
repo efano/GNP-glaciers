@@ -273,6 +273,7 @@
             // access data
 
             const dataset = await d3.csv("data/climate-G1-annual.csv")
+            console.log(dataset);
             const yAccessor = d => +d.TMEANF;
             const dateParser = d3.timeParse("%Y");
             const xAccessor = d => dateParser(d.YEAR);

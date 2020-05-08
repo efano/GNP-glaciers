@@ -5,13 +5,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width">
-    <link rel="icon" type="image/svg+xml" href="icons/mountain.svg">
+    <link rel="icon" type="image/svg+xml" href="icons/mountain-fav.svg">
 
     <title>Our Vanishing Glaciers</title>
 
     <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Gotu&family=Nunito:wght@900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Nunito:wght@900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/BeerSlider.css">
 
     <style>
@@ -20,29 +22,17 @@
             margin: 0;
             padding: 0;
             cursor: default !important;
-            font-family: 'Gotu', 'Open Sans', sans-serif;
-        }
-
-        ::-moz-selection {
-            color: #FFF;
-        }
-
-        ::selection {
-            color: #FFF;
+            font-family: 'Lato', sans-serif;
         }
 
         html {
             margin: 0;
             padding: 0;
-            color: whitesmoke;
-            background: whitesmoke;
         }
 
         body {
             margin: 0;
             padding: 0;
-            color: #7E7E7E;
-            background: whitesmoke;
             display: flex;
         }
 
@@ -87,11 +77,12 @@
             display: flex;
             justify-content: space-between;
             height: 50px;
+            align-content: center;
         }
 
         .fullTitle {
             padding-top: 8px;
-            padding-left: 12px;
+            padding-left: 16px;
         }
 
         #mountain-icon {
@@ -100,29 +91,29 @@
         }
 
         .fullTitleText {
-            margin-top: -26px;
+            margin-top: -28px;
             margin-left: 40px;
             align-content: center;
         }
 
         .navbar-title {
-            color: #222;
-            font-size: 25px;
-            font-weight: 600;
+            font-size: 26px;
+            font-weight: bold;
         }
 
         .vl {
-            color: #7E7E7E;
-            font-size: 20px;
-            font-weight: 500;
+            color: #989898;
+            font-size: 24px;
+            font-weight: lighter;
             margin-right: 6px;
             margin-left: 6px;
         }
 
         .navbar-subtitle {
-            color: #7E7E7E;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: normal;
+            font-style: italic;
+            color: #989898;
         }
 
         #icon-group {
@@ -134,12 +125,13 @@
         }
 
         .navbar-icon {
-            color: #7E7E7E;
             font-size: 26px;
+            color: #00acc1;
+
         }
 
         .navbar-icon:hover {
-            color: #222;
+            color: #0097A7;
         }
 
         img {
@@ -147,7 +139,7 @@
             height: auto;
         }
 
-        @media (max-width: 1195px) {
+        @media (max-width: 1275px) {
             .vl {
                 display: none;
             }
@@ -232,15 +224,16 @@
             font-size: 11px;
             font-weight: 400;
             line-height: 1.5;
+            opacity: 0.85;
         }
 
         #baselayerDropdown ::selection {
             font-weight: 400;
-            color: #222;
+            color: #222222;
         }
 
         .leaflet-control-layers-list {
-            color: #222;
+            color: #222222;
         }
 
         .show1 {
@@ -254,19 +247,19 @@
 
         #radioText:hover {
             font-weight: 600;
-            color: #222;
+            color: #0097a7;
         }
 
         .leaflet-control-layers-selector:checked~#radioText {
             font-weight: 600;
-            color: #222;
+            color: #0097a7;
             text-decoration: underline;
         }
 
-        #extent-icon {
+        #globe-icon {
             margin-right: 2px;
             margin-top: -2px;
-            margin-left: -2px
+            margin-left: -2px;
         }
 
         .globe {
@@ -275,7 +268,29 @@
         }
 
         #glacier-btn-dropdown {
-            padding: 3px 16px 2px 16px;
+            display: inline-block;
+            background-color: #00acc1;
+            color: #fff;
+            border-radius: 18px;
+            text-align: center;
+            transition: background-color 0.125s,
+                border-color 0.125s,
+                color 0.125s;
+        }
+
+        #glacier-btn-dropdown:hover {
+            background-color: #0097a7;
+            transition: background-color 0.125s,
+                border-color 0.125s,
+                color 0.125s;
+        }
+
+        .btn--s {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.25px;
+            line-height: 18px;
+            padding: 5px 12px;
         }
 
         .glacierDropdown {
@@ -288,7 +303,7 @@
             display: none;
             position: absolute;
             background-color: white;
-            opacity: 0.9;
+            opacity: 0.85;
             right: 0px;
             margin-top: 6px;
             padding-top: 8px;
@@ -297,12 +312,14 @@
             box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
             z-index: 1001;
             border-radius: 5px;
+            max-height: 95vh;
+            overflow: auto;
         }
 
         #dropdown-list2 {
             text-decoration: none;
             display: block;
-            color: #222;
+            color: #222222;
             font-weight: 400;
             font-size: 11px;
             line-height: 1.45;
@@ -311,12 +328,12 @@
 
         #dropdown-list2 :hover {
             font-weight: 600;
-            color: #222;
+            color: #0097a7;
         }
 
         #dropdown-list2 ::selection {
             font-weight: 400;
-            color: #222;
+            color: #222222;
         }
 
         .show2 {
@@ -325,11 +342,11 @@
 
         .highlight {
             font-weight: 600;
-            color: #222;
+            color: #222222;
         }
 
         .leaflet-control-scale-line {
-            border: 1px solid #222;
+            border: 1px solid #222222;
             border-top: none;
             line-height: .7;
             padding: 2px 5px 1px;
@@ -342,42 +359,55 @@
         }
 
         .leaflet-control-scale-line:not(:first-child) {
-            border-top: 1px solid #222;
+            border-top: 1px solid #222222;
             border-bottom: none;
             margin-top: 1px;
         }
 
         .leaflet-control-scale-line:not(:first-child):not(:last-child) {
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid #222222;
         }
 
         .leaflet-tooltip {
             border-radius: 5px;
             box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+            /* padding: 5px 10px; */
         }
 
         .tooltipTitle {
             white-space: nowrap;
-            color: #222;
-            font-size: 12px;
+            color: #222222;
+            font-size: 13px;
             font-weight: 600;
-            margin-top: -2px;
         }
 
         .tooltipText {
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 600;
-            color: #7E7E7E;
-            margin-top: -20px;
-            margin-bottom: -4px;
+            color: #989898;
+            margin-top: -19px;
         }
 
         .tooltipPct {
             font-weight: 600;
         }
 
+        .tooltipTextArea {
+            font-size: 11px;
+            font-weight: 600;
+            color: #989898;
+            margin-left: 9px;
+        }
+
+        .tooltipTextAcres {
+            font-size: 11px;
+            font-weight: 600;
+            color: #989898;
+            margin-left: 40px;
+        }
+
         .glacierPtLegend {
-            background-color: rgba(255, 255, 255, .95);
+            background-color: rgba(255, 255, 255, .85);
             box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
             left: 11px;
@@ -385,18 +415,19 @@
             width: 200px;
             position: absolute;
             z-index: 950;
-            color: #222;
+            color: #222222;
         }
 
         .glacierPtLegend h4 {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
+            letter-spacing: 0.1px;
             margin-top: 12px;
             margin-left: 16px;
         }
 
         .glacierPtLegend h6 {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
             margin-left: 16px;
             margin-top: -6px;
@@ -404,19 +435,20 @@
 
         #gradient {
             display: inline-block;
-            height: 10px;
+            height: 12px;
             width: 164px;
             margin-left: 16px;
-            border-radius: 5px;
-            background-image: linear-gradient(to right, #feb24c, #fd8d3c, #fc4e2a, #e31a1c, #bd0026, #800026);
+            border-radius: 10px;
+            background-image: linear-gradient(to right, #ffccbc, #ffab91, #ff7043, #f4511e, #e64a19, #bf360c)
+                /* background-image: linear-gradient(to right, #ffe0b2, #ffcc80, #ffa726, #f57c00, #ef6c00, #e65100) */
         }
 
         #gradientGreatest {
-            font-size: 10px;
+            font-size: 0.6em;
             font-weight: 600;
-            color: #7E7E7E;
-            margin-left: 23px;
-            margin-top: -11px;
+            color: #989898;
+            margin-left: 24px;
+            margin-top: -10px;
             margin-bottom: -8px;
         }
 
@@ -425,13 +457,14 @@
             margin-top: 2px;
             list-style: none;
             line-height: .95;
-            color: #222;
+            color: #222222;
         }
 
         .glacierPtLegendText {
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 600;
-            color: #7E7E7E;
+            color: #989898;
+            letter-spacing: 0.25px;
         }
 
         #secondLegendGroup {
@@ -439,24 +472,33 @@
         }
 
         #ui-pt-control {
-            margin-bottom: 3px;
             margin-top: 4px;
+            margin-left: 5px;
         }
 
         .toggle-group :hover {
-            color: #222;
+            color: #0097a7;
         }
 
-        #ui-pt-control .toggle--s {
-            font-size: 10px;
-            line-height: 16px;
-            padding: 2px 7px;
+        #ui-pt-control .toggle {
+            color: #0097a7;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.25px;
+            line-height: 15px;
+            padding: 1px 15px;
+            margin-right: -6px;
+        }
+
+        #ui-pt-control input:checked+.toggle {
+            background: #00acc1;
+            color: #fff;
         }
 
         #symbolActive {
-            color: #7E7E7E;
+            color: #989898;
             font-size: 20px;
-            margin-left: 2px;
+            margin-left: 3px;
         }
 
         #symbolStangnant {
@@ -464,7 +506,7 @@
             font-weight: 900;
             font-size: 17px;
             margin-left: 5px;
-            color: #7E7E7E;
+            color: #989898;
         }
 
         #stangnant {
@@ -473,7 +515,7 @@
 
         #glacierPtLegendSm,
         #glacierPolyLegendSm {
-            background-color: rgba(255, 255, 255, .95);
+            background-color: rgba(255, 255, 255, .85);
             box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
             left: 11px;
@@ -489,7 +531,7 @@
             width: 26px;
             margin-left: 5px;
             margin-top: 5px;
-            opacity: 0.6;
+            opacity: 0.8;
         }
 
         .legend-icon:hover {
@@ -498,55 +540,13 @@
 
         .closePtIcon {
             float: right;
-            height: 16px;
-            width: 16px;
+            height: 18px;
+            width: 18px;
             padding: 2px;
             opacity: 0.4;
         }
 
         .closePtIcon:hover {
-            opacity: 1.0;
-        }
-
-        /* glacier polygon css */
-        .legendPolyList {
-            font-size: 10px;
-            background-color: rgba(255, 255, 255, .95);
-            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-            text-align: left;
-            width: 280px;
-            height: 500px;
-        }
-
-        .closePolyIcon {
-            float: right;
-            height: 16px;
-            width: 16px;
-            padding: 2px;
-            opacity: 0.4;
-        }
-
-        .closePolyIcon:hover {
-            opacity: 1.0;
-        }
-
-        .polyLegendTitle {
-            color: #222;
-            font-size: 18px;
-            font-weight: 600;
-            margin-top: 14px;
-            margin-left: 16px;
-        }
-
-        #camera-icon {
-            float: right;
-            opacity: 0.5;
-            margin-top: 2px;
-            margin-right: 4px;
-        }
-
-        #camera-icon:hover {
             opacity: 1.0;
         }
 
@@ -557,7 +557,7 @@
             padding: 10px 20px;
             max-width: 60%;
             background: rgba(255, 255, 255, 0.9);
-            color: #222;
+            color: #222222;
             border-radius: 5px;
         }
 
@@ -639,14 +639,14 @@
         #closeIcon3 {
             font-size: 24px;
             font-weight: 600;
-            color: #7E7E7E;
+            color: #989898;
         }
 
         #closeIcon1 :hover,
         #closeIcon2 :hover,
         #closeIcon3 :hover {
             font-weight: 600;
-            color: #222;
+            color: #222222;
         }
 
         .image {
@@ -658,29 +658,70 @@
             height: auto;
         }
 
-        /* poly legend css */
+        /* glacier polygon legend css */
+        .legendPolyList {
+            background-color: rgba(255, 255, 255, .85);
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            text-align: left;
+            width: 310px;
+            height: 530px;
+        }
+
+        .closePolyIcon {
+            float: right;
+            height: 18px;
+            width: 18px;
+            padding: 2px;
+            opacity: 0.4;
+        }
+
+        .closePolyIcon:hover {
+            opacity: 1.0;
+        }
+
+        .polyLegendMain {
+            margin: 16px 16px;
+        }
+
+        .polyLegendTitle {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 0.15px;
+        }
+
+        #camera-icon {
+            float: right;
+            opacity: 0.7;
+            margin-top: 4px;
+            margin-bottom: 16px;
+        }
+
+        #camera-icon:hover {
+            opacity: 1.0;
+        }
 
         .polyLegendAreaTitle {
-            font-size: 14px;
-            color: #222;
-            font-weight: 600;
-            margin-top: 40px;
+            font-size: 15px;
+            color: #222222;
+            font-weight: bold;
+            letter-spacing: 0.1px;
+            margin-top: 12px;
         }
 
         #switchGroup1 {
             margin-bottom: -8px;
-            /* margin-left: 10px; */
+            margin-left: 14px;
         }
 
         #switchGroup2 {
-            margin-bottom: 14px;
-            /* margin-left: 10px; */
+            margin-left: 14px;
         }
 
-        #switchGroup1 :hover,
+        /* #switchGroup1 :hover,
         #switchGroup2 :hover {
-            color: #222;
-        }
+            color: #29778C;
+        } */
 
         #switchGroup2 li {
             list-style: none;
@@ -690,53 +731,52 @@
         }
 
         .switchInner {
-            height: 14px;
-            width: 14px;
+            height: 17px;
+            width: 17px;
             border-width: 1.5px;
-            border-radius: 4px;
+            border-radius: 5px;
+            border-color: #00acc1;
         }
 
         .checkbox>.icon {
             position: absolute;
-            width: 18px;
-            height: 18px;
-            top: -3px;
-            left: -4px;
+            width: 17px;
+            height: 17px;
+            top: -2px;
+            left: -2px;
             right: 0px;
-            bottom: 0px;
+            background-color: #00acc1;
+            border-radius: 5px;
         }
 
         .switchText {
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 600;
-            color: #7E7E7E;
+            letter-spacing: 0.25px;
+            color: #989898;
             margin-top: 4px;
             margin-left: 4px;
-            margin-right: 20px;
+            margin-right: 14px;
         }
 
         .areaChartTitle {
-            font-size: 14px;
-            color: #222;
+            font-size: 15px;
+            color: #222222;
+            letter-spacing: 0.1px;
             font-weight: 600;
-            margin-top: 40px;
-            margin-bottom: 4px;
-        }
-
-        .areaChartSubTitle {
-            font-size: 13px;
+            margin-top: 18px;
         }
 
         .areaChartText {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
-            color: #7E7E7E;
-            margin-top: 4px;
-            /* margin-left: 10px; */
+            letter-spacing: 0.25px;
+            color: #989898;
+            margin-top: 7px;
         }
 
         .areaChartCalcs {
-            color: #e31a1c;
+            color: #ff3d00;
         }
 
         /* poly legend bar chart css */
@@ -744,18 +784,22 @@
         #wrapper1 {
             position: relative;
             z-index: 1000;
-            color: #7E7E7E;
-            margin-top: 4px;
+            color: #989898;
+            margin-top: 5px;
         }
 
         .bar {
-            fill: #3BADCC;
+            fill: #00BCD4;
             opacity: 0.8;
+            stroke: #00838F;
+            stroke-width: 1px;
+            stroke-opacity: 1;
         }
 
         .bar:hover {
-            stroke: #e31a1c;
+            stroke: #ff3d00;
             stroke-width: 1.5px;
+            stroke-opacity: 1;
             opacity: 1;
         }
 
@@ -768,7 +812,8 @@
             border: .5px solid #f5f5f5;
             text-align: left;
             line-height: 1.4em;
-            font-size: .7em;
+            color: #989898;
+            font-size: 11px;
             font-weight: 600;
             border-radius: 5px;
             box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
@@ -793,7 +838,16 @@
 
         .x-axis,
         .y-axis {
-            font-size: 0.6em;
+            font-size: 9px;
+        }
+
+        /* poly legend climate chart css */
+        .climateDataTitle {
+            font-size: 15px;
+            color: #222222;
+            letter-spacing: 0.1px;
+            font-weight: 600;
+            margin-top: -46px;
         }
     </style>
 </head>
@@ -817,7 +871,7 @@
                 <div class="flex-parent-inline" id="icon-group">
 
                     <div class="navbar-icon" href="#" id="info-icon" title="Project Information">
-                        <svg class="icon mr6">
+                        <svg class="icon mr6 info">
                             <use xlink:href="#icon-info" />
                         </svg>
                     </div>
@@ -826,7 +880,7 @@
                         <button class="btn btn--white" id="baselayer-btn-dropdown" onclick="baselayerDropdownFunction()"
                             title="Select Basemap">
                             <div class="navbar-icon" id="layers-icon">
-                                <svg class="icon mr6">
+                                <svg class="icon mr6 grid">
                                     <use xlink:href="#icon-grid" />
                                 </svg>
                             </div>
@@ -836,15 +890,15 @@
                         </div>
                     </div>
 
-                    <div class="navbar-icon" href="#" id="extent-icon" title="Zoom to Park Extent">
+                    <div class="navbar-icon" href="#" id="globe-icon" title="Zoom to Park Extent">
                         <svg class="icon mr6 globe">
                             <use xlink:href="#icon-globe" />
                         </svg>
                     </div>
 
                     <div class="glacierDropdown">
-                        <button onclick="glacierDropdownFunction()" class="btn btn--stroke btn--darken50"
-                            id="glacier-btn-dropdown">Select Glacier &#9662;</button>
+                        <button onclick="glacierDropdownFunction()" class="btn btn--s" id="glacier-btn-dropdown">Select
+                            Glacier &thinsp;&#9662;</button>
                         <div id="glacierDropdownList" class="dropdown-content2">
                             <ul id="dropdown-list2"></ul>
                         </div>
@@ -876,24 +930,24 @@
             <h6>(1966 &ndash; 2015)</h6>
             <div id="areaGradient">
                 <div id="gradient"></div>
-                <div id="gradientGreatest"> &ensp; &ensp; &#8594; &emsp; &ensp; &#8594; &emsp; &ensp;&#8594; &emsp;
-                    &ensp;
+                <div id="gradientGreatest"> &emsp; &emsp; &#8594; &emsp; &emsp; &#8594; &emsp; &emsp; &#8594; &emsp;
+                    &emsp;
                     Greatest</div>
             </div>
         </div>
         <div id="secondLegendGroup">
             <h4>Minimum Size Criterion</h4>
-            <h6>(0.1 km&sup2; or ~25 acres)</h6>
+            <h6>(0.1 km&sup2; or &asymp;&thinsp;25 acres)</h6>
             <ul id="sizeCrit">
                 <li>
                     <div class="toggle-group" id="ui-pt-control">
                         <label class="toggle-container">
                             <input checked name="toggle-small pt-radio" type="radio" id="1966" value="active1966" />
-                            <div class="toggle toggle--darken50 toggle--s">1966</div>
+                            <div class="toggle">1966</div>
                         </label>
                         <label class="toggle-container">
                             <input name="toggle-small pt-radio" type="radio" id="2015" value="active2015" />
-                            <div class="toggle toggle--darken50 toggle--s">2015</div>
+                            <div class="toggle">2015</div>
                         </label>
                     </div>
                 </li>
@@ -1003,7 +1057,7 @@
                         <svg class="icon">
                             <use xlink:href="#icon-check" /></svg>
                     </div>
-                    <span class="switchText">Mid-19th Century</span>
+                    <span class="switchText">Mid-19th Century (Little Ice Age)</span>
                 </label>
             </li>
         </ul>
@@ -1018,7 +1072,7 @@
                     <span class="switchText">1966</span>
                 </label>
                 <label class="checkbox-container">
-                    <input checked type="checkbox" id="poly98" class="switchInput" />
+                    <input type="checkbox" id="poly98" class="switchInput" />
                     <div class="checkbox checkbox--darken50 switchInner">
                         <svg class="icon">
                             <use xlink:href="#icon-check" /></svg>
@@ -1026,7 +1080,7 @@
                     <span class="switchText">1998</span>
                 </label>
                 <label class="checkbox-container">
-                    <input checked type="checkbox" id="poly05" class="switchInput" />
+                    <input type="checkbox" id="poly05" class="switchInput" />
                     <div class="checkbox checkbox--darken50 switchInner">
                         <svg class="icon">
                             <use xlink:href="#icon-check" /></svg>
@@ -1115,14 +1169,17 @@
             const topoESRI = L.tileLayer(
                 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
                     attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
+                    opacity: 0.85
                 });
             const imageryESRI = L.tileLayer(
                 'https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                     attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
+                    opacity: 0.85
                 });
             const topoUSGS = L.tileLayer(
                 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
                     attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
+                    opacity: 0.85
                 });
             const imageryUSGS = L.tileLayer(
                 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
@@ -1227,8 +1284,8 @@
                 const parkBounds = L.geoJson(boundsData, {
                     style: function (feature, layer) {
                         return {
-                            color: '#7E7E7E',
-                            weight: 1,
+                            color: '#989898',
+                            weight: 1.5,
                             lineJoin: 'round',
                             dashArray: '2,4'
                         };
@@ -1238,7 +1295,7 @@
 
                 // extent button on click
                 function extentIcon(parkBounds) {
-                    $('#extent-icon').click(function () {
+                    $('#globe-icon').click(function () {
                         map.flyToBounds(parkBounds.getBounds());
                     });
                 };
@@ -1265,6 +1322,7 @@
                             fillOpacity: 0.4,
                             lineJoin: 'round',
                             dashArray: '3,4',
+                            pane: "liaLayer",
                         };
                     },
                 });
@@ -1272,8 +1330,8 @@
                 const layer66 = L.geoJson(polys66Data, {
                     style: function (feature, layer) {
                         return {
-                            color: "#93cfe0",
-                            fillColor: "#b2dce9",
+                            color: "#26C6DA",
+                            fillColor: "#80DEEA",
                             weight: 1.5,
                             opacity: 1,
                             fillOpacity: 0.4,
@@ -1287,8 +1345,8 @@
                 const layer98 = L.geoJson(polys98Data, {
                     style: function (feature, layer) {
                         return {
-                            color: "#75c1d7",
-                            fillColor: "#93cfe0",
+                            color: "#00BCD4",
+                            fillColor: "#4DD0E1",
                             weight: 1.5,
                             opacity: 1,
                             fillOpacity: 0.4,
@@ -1302,8 +1360,8 @@
                 const layer05 = L.geoJson(polys05Data, {
                     style: function (feature, layer) {
                         return {
-                            color: "#56b4ce",
-                            fillColor: "#75c1d7",
+                            color: "#00ACC1",
+                            fillColor: "#26C6DA",
                             weight: 1.5,
                             opacity: 1,
                             fillOpacity: 0.4,
@@ -1317,8 +1375,8 @@
                 const layer15 = L.geoJson(polys15Data, {
                     style: function (feature, layer) {
                         return {
-                            color: "#3499b5",
-                            fillColor: "#39a6c4",
+                            color: "#00A0B5",
+                            fillColor: "#00BCD4",
                             weight: 1.5,
                             opacity: 1,
                             fillOpacity: 0.4,
@@ -1358,7 +1416,7 @@
 
                         layer.on('mouseover', function () {
                             layer.setStyle({
-                                color: "#e31a1c",
+                                color: "#ff3d00",
                                 weight: 2,
                             });
                             // select the corresponding list item and add the highlight class to make bold
@@ -1369,7 +1427,6 @@
                             layer.setStyle({
                                 color: "#a9a7ab",
                                 weight: 1.5,
-
                             });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
                         });
@@ -1377,7 +1434,12 @@
                         // tooltip
                         layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
                             "</b></div><br>" +
-                            "<div class=tooltipText>" + "Mid-19th Century Extent", {
+                            "<div class=tooltipText>" + "Extent: &thinsp;Mid-19th Century" +
+                            "<br></div>" +
+                            "<div class=tooltipTextArea>" + "Area: &thinsp;&asymp;&thinsp;" + Number(polyProps[
+                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></div>" +
+                            "<div class=tooltipTextAcres>" + "or &asymp;&thinsp;" + (polyProps["AREA"] *
+                                0.000247105).toFixed(2) + " acres", {
                                 opacity: 1,
                                 sticky: true,
                             }
@@ -1392,7 +1454,7 @@
 
                         layer.on('mouseover', function () {
                             layer.setStyle({
-                                color: "#e31a1c",
+                                color: "#ff3d00",
                                 weight: 2,
                             });
                             // select the corresponding list item and add the highlight class to make bold
@@ -1401,7 +1463,7 @@
 
                         layer.on('mouseout', function () {
                             layer.setStyle({
-                                color: "#93cfe0",
+                                color: "#26C6DA",
                                 weight: 1.5,
                             });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
@@ -1410,9 +1472,13 @@
                         // tooltip
                         layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
                             "</b></div><br>" +
-                            "<div class=tooltipText>" + "1966 Extent", {
+                            "<div class=tooltipText>" + "Extent: &thinsp;1966" + "<br></div>" +
+                            "<div class=tooltipTextArea>" + "Area: &thinsp;" + Number(polyProps[
+                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></div>" +
+                            "<div class=tooltipTextAcres>" + "or " + (polyProps["AREA"] *
+                                0.000247105).toFixed(2) + " acres", {
                                 opacity: 1,
-                                sticky: true
+                                sticky: true,
                             }
                         );
                     });
@@ -1425,7 +1491,7 @@
 
                         layer.on('mouseover', function () {
                             layer.setStyle({
-                                color: "#e31a1c",
+                                color: "#ff3d00",
                                 weight: 2,
                             });
                             // select the corresponding list item and add the highlight class to make bold
@@ -1434,7 +1500,7 @@
 
                         layer.on('mouseout', function () {
                             layer.setStyle({
-                                color: "#75c1d7",
+                                color: "#00BCD4",
                                 weight: 1.5,
                             });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
@@ -1443,9 +1509,13 @@
                         // tooltip
                         layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
                             "</b></div><br>" +
-                            "<div class=tooltipText>" + "1998 Extent", {
+                            "<div class=tooltipText>" + "Extent: &thinsp;1998" + "<br></div>" +
+                            "<div class=tooltipTextArea>" + "Area: &thinsp;" + Number(polyProps[
+                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></div>" +
+                            "<div class=tooltipTextAcres>" + "or " + (polyProps["AREA"] *
+                                0.000247105).toFixed(2) + " acres", {
                                 opacity: 1,
-                                sticky: true
+                                sticky: true,
                             }
                         );
                     });
@@ -1458,7 +1528,7 @@
 
                         layer.on('mouseover', function () {
                             layer.setStyle({
-                                color: "#e31a1c",
+                                color: "#ff3d00",
                                 weight: 2,
                             });
                             // select the corresponding list item and add the highlight class to make bold
@@ -1467,7 +1537,7 @@
 
                         layer.on('mouseout', function () {
                             layer.setStyle({
-                                color: "#56b4ce",
+                                color: "#00ACC1",
                                 weight: 1.5,
                             });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
@@ -1476,9 +1546,13 @@
                         // tooltip
                         layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
                             "</b></div><br>" +
-                            "<div class=tooltipText>" + "2005 Extent", {
+                            "<div class=tooltipText>" + "Extent: &thinsp;2005" + "<br></div>" +
+                            "<div class=tooltipTextArea>" + "Area: &thinsp;" + Number(polyProps[
+                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></div>" +
+                            "<div class=tooltipTextAcres>" + "or " + (polyProps["AREA"] *
+                                0.000247105).toFixed(2) + " acres", {
                                 opacity: 1,
-                                sticky: true
+                                sticky: true,
                             }
                         );
                     });
@@ -1491,7 +1565,7 @@
 
                         layer.on('mouseover', function () {
                             layer.setStyle({
-                                color: "#e31a1c",
+                                color: "#ff3d00",
                                 weight: 2,
                             });
                             // select the corresponding list item and add the highlight class to make bold
@@ -1500,7 +1574,7 @@
 
                         layer.on('mouseout', function () {
                             layer.setStyle({
-                                color: "#3499b5",
+                                color: "#00A0B5",
                                 weight: 1.5,
                             });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
@@ -1509,9 +1583,13 @@
                         // tooltip
                         layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
                             "</b></div><br>" +
-                            "<div class=tooltipText>" + "2015 Extent", {
+                            "<div class=tooltipText>" + "Extent: &thinsp;2015" + "<br></div>" +
+                            "<div class=tooltipTextArea>" + "Area: &thinsp;" + Number(polyProps[
+                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></div>" +
+                            "<div class=tooltipTextAcres>" + "or " + (polyProps["AREA"] *
+                                0.000247105).toFixed(2) + " acres", {
                                 opacity: 1,
-                                sticky: true
+                                sticky: true,
                             }
                         );
                     });
@@ -1542,7 +1620,7 @@
                         }
                     }
                     if (zoomlevel < 12 && zoomlevel > 8) {
-                        $("#glacier-btn-dropdown").html("Select Glacier &#9662;").text();
+                        $("#glacier-btn-dropdown").html("Select Glacier &thinsp;&#9662;").text();
                         map.addLayer(glacierPoints);
                         drawPts(glacierPoints);
                         drawPtLegend();
@@ -1591,14 +1669,14 @@
                                 shape: "x",
                                 color: colorize(props.pctD),
                                 weight: 3,
-                                radius: 7
+                                radius: 7,
                             })
                         };
 
                         // tooltip
                         layer.bindTooltip("<div class=tooltipTitle><b>" + props["GLACNAME"] +
                             "</b></div><br>" +
-                            "<div class=tooltipText>" + "Area Loss: " +
+                            "<div class=tooltipText>" + "Area loss:&thinsp;" +
                             '<a class="tooltipPct" style="color:' + colorize(props.pctD) + '"> ' + (
                                 parseFloat(
                                     props["pctD"]) *
@@ -1705,7 +1783,9 @@
                     const breaks = chroma.limits(glacierLoss, 'q', 7);
                     // build a colorize function
                     let colorize = chroma
-                        .scale(['#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c', '#bd0026', '#800026'])
+                        .scale(['#ffccbc', '#ffab91', '#ff7043', '#f4511e', '#e64a19', '#bf360c'])
+                        //.scale(['#ffe0b2', '#ffcc80', '#ffa726', '#f57c00', '#ef6c00', '#e65100'])
+
                         .domain(breaks)
                         .mode('lch');
                     return colorize;
@@ -1835,7 +1915,7 @@
                         } else {
                             map.removeLayer(liaLayer);
                         }
-                    });
+                    }).change(); // chain function to work onload and onchange
                     $("#poly66").on('change', function () {
                         if ($(this).is(':checked')) {
                             map.addLayer(layer66);
@@ -1843,7 +1923,7 @@
                         } else {
                             map.removeLayer(layer66);
                         }
-                    });
+                    }).change();
                     $("#poly98").on('change', function () {
                         if ($(this).is(':checked')) {
                             map.addLayer(layer98);
@@ -1851,7 +1931,7 @@
                         } else {
                             map.removeLayer(layer98);
                         }
-                    });
+                    }).change();
                     $("#poly05").on('change', function () {
                         if ($(this).is(':checked')) {
                             map.addLayer(layer05);
@@ -1859,7 +1939,7 @@
                         } else {
                             map.removeLayer(layer05);
                         }
-                    });
+                    }).change();
                     $("#poly15").on('change', function () {
                         if ($(this).is(':checked')) {
                             map.addLayer(layer15);
@@ -1867,12 +1947,13 @@
                         } else {
                             map.removeLayer(layer15);
                         }
-                    });
+                    }).change();
                 };
 
                 // add legend content
                 function updatePolyLegend(layer) {
                     const legendPolyName = layer.feature.properties['GLACNAME'];
+                    const glacNum = layer.feature.properties['num'];
                     const modalType = layer.feature.properties['P_TYPE'];
                     const imageLeftM1 = layer.feature.properties['P_S1'];
                     const imageRightM1 = layer.feature.properties['P_S2'];
@@ -1889,12 +1970,13 @@
                     const yearRM2 = layer.feature.properties['P4_YR_R'];
                     const yearRM3 = layer.feature.properties['P5_YR_R'];
 
-                    const legendPolyTitle = "<h4 class='polyLegendTitle'>" + legendPolyName +
-                        $("#photoIcon").html() + "</h4>";
+                    const legendPolyTitle = "<div class='polyLegendMain'>" + "<h4 class='polyLegendTitle'>" +
+                        legendPolyName +
+                        $("#photoIcon").html() + "</h4>" + "</div>";
                     $(".legendPolyList").html(legendPolyTitle);
 
                     const closeIcon = $(".legendPolyCloseIcon").html();
-                    $(closeIcon).insertBefore(".polyLegendTitle");
+                    $(closeIcon).insertBefore(".polyLegendMain");
 
                     // get modal type on camera icon click
                     $("#camera-icon").click(function () {
@@ -1966,7 +2048,7 @@
                         });
                     };
 
-                    const legendPolyAreaTitle = "<h4 class='polyLegendAreaTitle'>" + "Glacier Area Extents " +
+                    const legendPolyAreaTitle = "<h4 class='polyLegendAreaTitle'>" + "Glacial Extents " +
                         "</h4>"
                     $(legendPolyAreaTitle).insertAfter("#camera-icon");
 
@@ -1992,7 +2074,6 @@
                         filteredData.sort(function (a, b) {
                             return a.Year - b.Year
                         }).reverse();
-                        console.log("filtered: ", filteredData);
 
                         // compute area calculations
                         const area1966 = filteredData[0].AREA;
@@ -2015,10 +2096,10 @@
 
                         // horizontal bar chart
                         // create chart dimensions
-                        const width = 245
+                        const width = 260
                         let dimensions = {
                             width: width,
-                            height: 120,
+                            height: 125,
                             margin: {
                                 top: 7,
                                 right: 15,
@@ -2075,7 +2156,7 @@
                                 return d.Year;
                             }))
                             .range([dimensions.boundedHeight, 0])
-                            .padding(0.25);
+                            .padding(0.3);
 
                         // add bars
                         const bars = wrapper1.selectAll(".bar")
@@ -2092,18 +2173,91 @@
                             .attr("height", yScale.bandwidth())
 
                             .on("mouseover", function (d) {
+                                if (d.Year == 1966) {
+                                    layer66.eachLayer(function (layer) {
+                                        if (layer.feature.properties['GLACNAME'] == d["GLACNAME"] && layer.feature.properties['Year'] === "1966") {
+                                            layer.setStyle({
+                                                color: "#ff3d00",
+                                                weight: 2,
+                                            });
+                                        }
+                                    });
+                                }
+                                if (d.Year == 1998) {
+                                    layer98.eachLayer(function (layer) {
+                                        if (layer.feature.properties['GLACNAME'] == d["GLACNAME"] && layer.feature.properties['Year'] === "1998") {
+                                            layer.setStyle({
+                                                color: "#ff3d00",
+                                                weight: 2,
+                                            });
+                                        }
+                                    });
+                                }
+                                if (d.Year == 2005) {
+                                    layer05.eachLayer(function (layer) {
+                                        if (layer.feature.properties['GLACNAME'] == d["GLACNAME"] && layer.feature.properties['Year'] === "2005") {
+                                            layer.setStyle({
+                                                color: "#ff3d00",
+                                                weight: 2,
+                                            });
+                                        }
+                                    });
+                                }
+                                if (d.Year == 2015) {
+                                    layer15.eachLayer(function (layer) {
+                                        if (layer.feature.properties['GLACNAME'] == d["GLACNAME"] && layer.feature.properties['Year'] === "2015") {
+                                            layer.setStyle({
+                                                color: "#ff3d00",
+                                                weight: 2,
+                                            });
+                                        }
+                                    });
+                                }
+
                                 const format = d3.format(",.2f")
                                 return tooltip1
                                     .style("visibility", "visible")
-                                    .html(format(d.AREA) + " m&sup2;" + "<br>" +
+                                    .html(format(d.AREA) + " m&sup2;" + "<br>" + "or " +
                                         format(d.AREA * 0.000247105) + " acres")
                             })
                             .on("mousemove", function (d) {
                                 return tooltip1
-                                    .style("top", (d3.event.pageY - 60) + "px")
-                                    .style("left", (d3.event.pageX - 40) + "px");
+                                    .style("top", (d3.event.pageY - 55) + "px")
+                                    .style("left", (d3.event.pageX - 43) + "px");
                             })
                             .on("mouseout", function (d) {
+                                if (d.Year == 1966) {
+                                    layer66.eachLayer(function (layer) {
+                                        layer.setStyle({
+                                            color: "#26C6DA",
+                                            weight: 1.5,
+                                        });
+                                    });
+                                }
+                                if (d.Year == 1998) {
+                                    layer98.eachLayer(function (layer) {
+                                        layer.setStyle({
+                                            color: "#00BCD4",
+                                            weight: 1.5,
+                                        });
+                                    });
+                                }
+                                if (d.Year == 2005) {
+                                    layer05.eachLayer(function (layer) {
+                                        layer.setStyle({
+                                            color: "#00ACC1",
+                                            weight: 1.5,
+                                        });
+                                    });
+                                }
+                                if (d.Year == 2015) {
+                                    layer15.eachLayer(function (layer) {
+                                        layer.setStyle({
+                                            color: "#00A0B5",
+                                            weight: 1.5,
+                                        });
+                                    });
+                                }
                                 return tooltip1
                                     .style("visibility", "hidden");
                             });
@@ -2122,9 +2276,9 @@
                         // label y-axis
                         const yAxisLabel = yAxis.append("text")
                             .attr("class", "x-axis-label")
-                            .attr("fill", "#7E7E7E")
-                            .attr("x", -dimensions.margin.top + 110)
-                            .attr("y", -dimensions.margin.left + 132)
+                            .attr("fill", "#989898")
+                            .attr("x", -dimensions.margin.top + 114)
+                            .attr("y", -dimensions.margin.left + 141)
                             .attr("text-anchor", "middle")
                             .html("Area m&sup2;");
 
@@ -2141,152 +2295,24 @@
                             .attr("y", function (d) {
                                 return yScale(d.Year);
                             })
+                    };
+
+                    const climateDataTitle = "<h4 class='climateDataTitle'>" + "Local Climate Data " + "</h4>"
+                    $(climateDataTitle).insertAfter(".wrapper1");
+
+                    getClimateData(climateData);
+
+                    function getClimateData(climateData) {
+                        // filter dataset
+                        const climateFilteredData = climateData.filter(function (d) {
+                            if (d["NUM"] == glacNum) {
+                                return d;
+                            }
+                        });
+                        console.log(climateFilteredData);
+                    };
 
 
-                        // vertical bar chart
-                        // // create chart dimensions
-                        // const width = 240
-                        // let dimensions = {
-                        //     width: width,
-                        //     height: 140,
-                        //     margin: {
-                        //         top: 15,
-                        //         right: 15,
-                        //         bottom: 40,
-                        //         left: 70,
-                        //     },
-                        // }
-                        // dimensions.boundedWidth = dimensions.width - dimensions.margin.left - dimensions
-                        //     .margin
-                        //     .right
-                        // dimensions.boundedHeight = dimensions.height - dimensions.margin.top -
-                        //     dimensions.margin
-                        //     .bottom
-
-                        // // draw canvas
-                        // const wrapper1 = d3.select("#wrapper1")
-                        //     .append("svg")
-                        //     .attr("width", dimensions.width + dimensions.margin.left + dimensions.margin
-                        //         .right)
-                        //     .attr("height", dimensions.height + dimensions.margin.top + dimensions
-                        //         .margin
-                        //         .bottom)
-                        //     .append("g")
-                        //     .attr("transform",
-                        //         "translate(" + dimensions.margin.left + "," + dimensions.margin.top +
-                        //         ")");
-
-                        // const bounds1 = wrapper1.append("g")
-                        //     .attr("transform", "translate(" + dimensions.margin.left + "," + dimensions
-                        //         .margin
-                        //         .top + ")");
-
-                        // // format the data
-                        // filteredData.forEach(function (d) {
-                        //     d.area = +d.AREA
-                        // });
-
-                        // const area = d => d.area
-                        // const yAccessor = d => d.length
-                        // const xAccessor = d => d.Year
-
-                        // // create tooltip
-                        // const tooltip1 = d3.select(".body1")
-                        //     .append("div")
-                        //     .attr("class", "tooltip1")
-                        //     .style("position", "absolute")
-                        //     .style("z-index", "10")
-                        //     .style("visibility", "hidden")
-                        // //.text(" ")
-
-                        // // create scales
-                        // const xScale = d3.scaleBand()
-                        //     .domain(filteredData.map(function (d) {
-                        //         return d.Year;
-                        //     }))
-                        //     .range([0, dimensions.boundedWidth])
-                        //     .padding(0.3)
-
-                        // const yScale = d3.scaleLinear()
-                        //     .domain([0, d3.max(filteredData, function (d) {
-                        //         return d.area;
-                        //     })])
-                        //     .range([dimensions.boundedHeight, 0])
-                        //     .nice();
-
-                        // // add bars
-                        // const bars = wrapper1.selectAll(".bar")
-                        //     .data(filteredData)
-                        //     .enter().append("rect")
-                        //     .attr("class", "bar")
-                        //     .attr("x", function (d) {
-                        //         return xScale(d.Year);
-                        //     })
-                        //     .attr("width", xScale.bandwidth())
-
-                        //     // no bars on window load
-                        //     .attr("height", function (d) {
-                        //         return dimensions.boundedHeight - yScale(0);
-                        //     }) // bars equal to 0
-                        //     .attr("y", function (d) {
-                        //         return yScale(0);
-                        //     })
-
-                        //     .on("mouseover", function (d) {
-                        //         const format = d3.format(",.2f")
-                        //         return tooltip
-                        //             .style("visibility", "visible")
-                        //             .html(format(d.AREA) + " m&sup2;" + "<br>" +
-                        //                 format(d.AREA * 0.000247105) + " acres")
-
-                        //     })
-                        //     .on("mousemove", function () {
-                        //         return tooltip
-                        //             .style("top", (event.pageY - 80) + "px")
-                        //             .style("left", (event.pageX - 40) + "px");
-                        //     })
-                        //     .on("mouseout", function () {
-                        //         return tooltip
-                        //             .style("visibility", "hidden");
-                        //     });
-
-                        // //add x-axis
-                        // const xAxis = wrapper1.append("g")
-                        //     .attr("transform", "translate(0," + dimensions.boundedHeight + ")")
-                        //     .call(d3.axisBottom(xScale));
-
-                        // // add y-axis
-                        // const yAxis = wrapper1.append("g")
-                        //     .call(d3.axisLeft(yScale).ticks(4));
-
-                        // // label y-axis
-                        // const yAxisLabel = yAxis.append("text")
-                        //     .attr("class", "y-axis-label")
-                        //     .attr("fill", "#7E7E7E")
-                        //     .attr("transform", "rotate(-0)")
-                        //     .attr("x", -dimensions.margin.top + 15)
-                        //     .attr("y", -dimensions.margin.left + 73)
-                        //     // .attr("x", -dimensions.margin.top + 15)
-                        //     // .attr("y", -dimensions.margin.left + 68)
-                        //     .style("text-anchor", "middle")
-                        //     .html("m&sup2;");
-
-                        // // animate bars
-                        // const animation = wrapper1.selectAll("rect")
-                        //     .transition()
-                        //     .duration(800)
-                        //     .attr("y", function (d) {
-                        //         return yScale(d.area);
-                        //     })
-                        //     .attr("height", function (d) {
-                        //         return dimensions.boundedHeight - yScale(d.area);
-                        //     })
-                        //     .delay(function (d, i) {
-                        //         return (i * 100)
-                        //     })
-
-                        // $(chart1Canvas).insertAfter(".areaChartText");
-                    }
                 }
 
             };
