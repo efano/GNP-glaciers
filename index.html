@@ -1182,7 +1182,7 @@
         <ul id="switchGroup1">
             <li>
                 <label class="checkbox-container">
-                    <input checked type="checkbox" id="polyLIA" class="switchInput" />
+                    <input type="checkbox" id="polyLIA" class="switchInput" />
                     <div class="checkbox checkbox--darken50 switchInner">
                         <svg class="icon">
                             <use xlink:href="#icon-check" /></svg>
@@ -1935,7 +1935,7 @@
                                 if (liaProps === glacierNum) {
                                     updatePolyLegend(layer);
                                     map.flyToBounds(layer.getBounds(), {
-                                        padding: [20, 20]
+                                        padding: [10, 10]
                                     });
                                 }
                             });
@@ -2082,7 +2082,7 @@
                                 updatePolyLegend(layer);
 
                                 map.flyToBounds(layer.getBounds(), {
-                                    padding: [20, 20]
+                                    padding: [10, 10]
                                 });
                             }
                         });
