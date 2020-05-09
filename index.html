@@ -815,7 +815,6 @@
             stroke: #ff3d00;
             stroke-width: 1.5px;
             stroke-opacity: 1;
-            opacity: 1;
         }
 
         .tooltip1 {
@@ -1648,10 +1647,10 @@
                             "</b></div><br>" +
                             "<div class=tooltipText>" + "Extent: &thinsp;Mid-19th Century" +
                             "<br></div>" +
-                            "<div class=tooltipTextArea>" + "Area: &thinsp;&asymp;&thinsp;" +
+                            "<div class=tooltipTextArea>" + "Area: &thinsp;" +
                             Number(polyProps[
                                 "AREA"]).toLocaleString() + " m&sup2; " + "<br></div>" +
-                            "<div class=tooltipTextAcres>" + "or &asymp;&thinsp;" + (polyProps[
+                            "<div class=tooltipTextAcres>" + "or &thinsp;" + (polyProps[
                                     "AREA"] *
                                 0.000247105).toFixed(2) + " acres", {
                                 opacity: 1,
@@ -2525,15 +2524,6 @@
                     // get climate toggle buttons
                     const climateToggles = $("#climateChartsToggle").html();
                     $(climateToggles).insertAfter(".climateDataTitle");
-
-                    // // get polygon years toggle buttons
-                    // const polygonYearsGroup = $("#polygonYearsGroup").html();
-                    // $(polygonYearsGroup).insertAfter(".polyLegendAreaTitle");
-
-
-
-
-
 
 
 
