@@ -482,7 +482,7 @@
         }
 
         .toggle {
-            color: #00acc1; 
+            color: #00acc1;
         }
 
         #ui-pt-control .toggle {
@@ -499,7 +499,7 @@
             font-weight: 600;
             letter-spacing: 0.25px;
             line-height: 15px;
-            padding: 3px 15px;
+            padding: 3px 17px;
             margin-right: -6px;
         }
 
@@ -683,8 +683,9 @@
             box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
             text-align: left;
-            width: 310px;
-            height: 530px;
+            width: 335px;
+            height: 550px;
+            overflow-y: auto;
         }
 
         .closePolyIcon {
@@ -711,7 +712,7 @@
 
         #camera-icon {
             float: right;
-            opacity: 0.7;
+            opacity: 0.8;
             margin-top: 4px;
             margin-bottom: 16px;
         }
@@ -771,7 +772,7 @@
             color: #989898;
             margin-top: 4px;
             margin-left: 4px;
-            margin-right: 14px;
+            margin-right: 16px;
         }
 
         .areaChartTitle {
@@ -788,6 +789,7 @@
             letter-spacing: 0.25px;
             color: #989898;
             margin-top: 7px;
+            margin-left: 8px;
         }
 
         .areaChartCalcs {
@@ -795,17 +797,17 @@
         }
 
         /* poly legend bar chart css */
-
         #wrapper1 {
             position: relative;
             z-index: 1000;
             color: #989898;
             margin-top: 5px;
+            margin-left: 8px;
         }
 
         .bar {
-            fill: #00BCD4;
-            opacity: 0.7;
+            fill: #00acc1;
+            opacity: 0.9;
             /* stroke: #00838F; */
             /* stroke-width: 1px;
             stroke-opacity: 1; */
@@ -864,32 +866,36 @@
             margin-top: 0px;
         }
 
-        #wrapper2 {
-            position: relative;
-            z-index: 1000;
+        .legendLineText {
             color: #989898;
-            margin-top: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 2px;
+            letter-spacing: 0.25px;
+            display: inline-block;
         }
 
         #legendLine1,
         #legendLine3 {
             display: inline-block;
             vertical-align: middle;
-            margin-left: 16px;
+            margin-left: 8px;
+            margin-top: -18px;
         }
 
         #legendLine2,
         #legendLine4 {
             display: inline-block;
             vertical-align: middle;
-            margin-left: 16px;
-            margin-top: -18px;
+            margin-left: 8px;
+            margin-top: -48px;
         }
 
-        .legendLineText {
-            font-size: 11px;
-            font-weight: 600;
-            display: inline-block;
+        #wrapper2 {
+            position: relative;
+            z-index: 1000;
+            color: #989898;
+            margin-top: 5px;
         }
 
         .listening-rect {
@@ -947,12 +953,12 @@
         }
 
         #temp {
-            color: #e31a1c;
+            color: #ff3d00;
             font-weight: 600;
         }
 
         #precip {
-            color: #3BADCC;
+            color: #00BCD4;
             font-weight: 600;
         }
 
@@ -968,14 +974,14 @@
 
         .year-group-mean1 {
             fill: none;
-            stroke: #e31a1c;
+            stroke: #ff3d00;
             stroke-width: 1.5;
             opacity: 0.8;
         }
 
         .year-group-mean2 {
             fill: none;
-            stroke: #3BADCC;
+            stroke: #00BCD4;
             stroke-width: 1.5;
             opacity: 0.8;
         }
@@ -1177,7 +1183,7 @@
         </div>
     </div>
 
-    <!-- polygon years button group -->
+    <!-- polygon years checkboxes -->
     <div hidden id="polygonYearsGroup">
         <ul id="switchGroup1">
             <li>
@@ -1187,7 +1193,7 @@
                         <svg class="icon">
                             <use xlink:href="#icon-check" /></svg>
                     </div>
-                    <span class="switchText">Mid-19th Century (Little Ice Age)</span>
+                    <span class="switchText">Mid-19th century (Little Ice Age)</span>
                 </label>
             </li>
         </ul>
@@ -1232,7 +1238,7 @@
 
     <!-- climate chart toggle buttons -->
     <div hidden id="climateChartsToggle">
-        <div class="toggle-group" id="ui-lineCharts-control">
+        <div class="toggle-group climateToggleGroup" id="ui-lineCharts-control">
             <label class="toggle-container">
                 <input checked name="toggle-small line-radio" type="radio" id="tempToggle" value="temperature" />
                 <div class="toggle">Temperature</div>
@@ -1242,28 +1248,57 @@
                 <div class="toggle">Precipitation</div>
             </label>
         </div>
-    </div>
 
+        <div hidden class="tempDiv" id="tempDiv">
+            <div class="legendLines" id="legendLine1">
+                <svg height="10" width="10">
+                    <line x1="0" y1="0" x2="50" y2="50" style="stroke:#222;stroke-width:2" />
+                </svg>
+                <div class="legendLineText" id="legendLineText1">Average annual air temperature</div>
+            </div>
+            <div class="legendLines" id="legendLine2">
+                <svg height="10" width="10">
+                    <line x1="0" y1="0" x2="50" y2="50" style="stroke:#ff3d00;stroke-width:1.5" />
+                </svg>
+                <div class="legendLineText" id="legendLineText2">Average temperature between measurements</div>
+            </div>
+        </div>
 
-    <div>
-        <div>
-            <div hidden class="tempDiv">
-                <h4>Average Air Temperature</h4>
-                <div>
-                    <div class="legendLines" id="legendLine1">
-                        <svg height="10" width="10">
-                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#222;stroke-width:2" />
-                        </svg>
-                        <div class="legendLineText" id="legendLineText1">Average Annual Temperature</div>
+        <div hidden class="precipDiv" id="precipDiv">
+            <div class="legendLines" id="legendLine3">
+                <svg height="10" width="10">
+                    <line x1="0" y1="0" x2="50" y2="50" style="stroke:#222;stroke-width:2" />
+                </svg>
+                <div class="legendLineText" id="legendLineText3">Total annual precipitation</div>
+            </div>
+            <div>
+                <div class="legendLines" id="legendLine4">
+                    <svg height="10" width="10">
+                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#00BCD4;stroke-width:1.5" />
+                    </svg>
+                    <div class="legendLineText" id="legendLineText4">Average precipitation between measurements
                     </div>
                 </div>
-                <div>
-                    <div class="legendLines" id="legendLine2">
-                        <svg height="10" width="10">
-                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#e31a1c;stroke-width:1.5" />
-                        </svg>
-                        <div class="legendLineText" id="legendLineText2">Average Temperature Between Measurements</div>
-                    </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- climate charts 
+    <div>
+        <div>
+            <div hidden class="tempDiv" id="tempDiv">
+                <div class="legendLines" id="legendLine1">
+                    <svg height="10" width="10">
+                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#222;stroke-width:2" />
+                    </svg>
+                    <div class="legendLineText" id="legendLineText1">Average annual air temperature</div>
+                </div>
+                <div class="legendLines" id="legendLine2">
+                    <svg height="10" width="10">
+                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#ff3d00;stroke-width:1.5" />
+                    </svg>
+                    <div class="legendLineText" id="legendLineText2">Average temperature between measurements</div>
                 </div>
             </div>
             <div class="wrapper2" id="wrapper2"></div>
@@ -1278,27 +1313,24 @@
         </div>
 
         <div>
-            <div hidden class="precipDiv">
-                <h4>Total Precipitation</h4>
-                <div>
-                    <div class="legendLines" id="legendLine3">
-                        <svg height="10" width="10">
-                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#222;stroke-width:2" />
-                        </svg>
-                        <div class="legendLineText" id="legendLineText3">Total Annual Precipitation</div>
-                    </div>
+            <div hidden class="precipDiv" id="precipDiv">
+                <div class="legendLines" id="legendLine3">
+                    <svg height="10" width="10">
+                        <line x1="0" y1="0" x2="50" y2="50" style="stroke:#222;stroke-width:2" />
+                    </svg>
+                    <div class="legendLineText" id="legendLineText3">Total annual precipitation</div>
                 </div>
                 <div>
                     <div class="legendLines" id="legendLine4">
                         <svg height="10" width="10">
-                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#3BADCC;stroke-width:1.5" />
+                            <line x1="0" y1="0" x2="50" y2="50" style="stroke:#00BCD4;stroke-width:1.5" />
                         </svg>
-                        <div class="legendLineText" id="legendLineText4">Average Precipitation Between Measurements
+                        <div class="legendLineText" id="legendLineText4">Average precipitation between measurements
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="wrapper2" id="wrapper3"></div>
+            <div class="wrapper3" id="wrapper3"></div>
             <div id="tooltip3" class="tooltip2">
                 <div class="tooltip-date">
                     <span class="date"></span>
@@ -1308,7 +1340,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -1645,7 +1677,7 @@
                         // tooltip
                         layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
                             "</b></div><br>" +
-                            "<div class=tooltipText>" + "Extent: &thinsp;Mid-19th Century" +
+                            "<div class=tooltipText>" + "Extent: &thinsp;Mid-19th century" +
                             "<br></div>" +
                             "<div class=tooltipTextArea>" + "Area: &thinsp;" +
                             Number(polyProps[
@@ -2305,9 +2337,8 @@
                         const chart1Canvas = "<div class='wrapper1' id='wrapper1'>" + "</div>"
                         $(chart1Canvas).insertAfter(".areaChartText");
 
-                        // add bar chart
-
                         // horizontal bar chart
+
                         // create chart dimensions
                         const width = 260
                         const height = 110
@@ -2515,22 +2546,47 @@
                             })
                     };
 
-
-
-
-                    const climateDataTitle = "<h4 class='climateDataTitle'>" + "Climatological Data " + "</h4>"
-                    $(climateDataTitle).insertAfter(".wrapper1");
-
-                    // get climate toggle buttons
-                    const climateToggles = $("#climateChartsToggle").html();
-                    $(climateToggles).insertAfter(".climateDataTitle");
-
-
-
-
                     getClimateData(climateData);
 
                     function getClimateData(climateData) {
+
+                        buildLineSwitch();
+                        drawTempChart();
+                        drawPrecipChart();
+
+                        //switch between charts
+                        //$(".precipDiv").hide();
+                        //$('#wrapper3').hide();
+                        //$("#tempToggle").prop('checked', true);
+
+                        function buildLineSwitch() {
+
+                            const climateDataTitle = "<h4 class='climateDataTitle'>" + "Climatological Data " + "</h4>"
+                            $(climateDataTitle).insertAfter(".wrapper1");
+
+                            // get climate toggle buttons
+                            const climateToggles = $("#climateChartsToggle").html();
+                            $(climateToggles).insertAfter(".climateDataTitle");
+                            $(".tempDiv").show();
+
+                            // $("input[name='toggle-small line-radio']").change(function () {
+                            //     $("#wrapper2, #wrapper3").toggle()
+                            // });
+
+                            $("#tempToggle").click(function () {
+                                $(".precipDiv").hide();
+                                $(".tempDiv").show();
+                                //$("#wrapper2").empty();
+                                //drawTempChart();
+                            });
+                            $("#precipToggle").click(function () {
+                                $(".tempDiv").hide();
+                                $(".precipDiv").show();
+                                //$("#wrapper3").empty();
+                                //drawPrecipChart();
+                            });
+                        };
+
                         // filter dataset
                         const filteredClimateData = climateData.filter(function (d) {
                             if (d["NUM"] == glacNum) {
@@ -2543,8 +2599,6 @@
                             return a.YEAR - b.YEAR
                         });
 
-                        drawTempChart();
-
                         function drawTempChart() {
 
                             // // access data
@@ -2554,11 +2608,15 @@
                             // const dateParser = d3.timeParse("%Y");
                             // const xAccessor = d => dateParser(d.YEAR);
 
+                            // // const chart2Canvas = $(".wrapper2").html();
+                            // // $(chart2Canvas).insertAfter("#ui-lineCharts-control");
 
-                            // // ceate chart dimensions
+                            // // create chart dimensions
+                            // const width = 280
+                            // const height = 160
                             // let dimensions = {
-                            //     width: 280,
-                            //     height: 160,
+                            //     width: width,
+                            //     height: height,
                             //     margin: {
                             //         top: 15,
                             //         right: 15,
@@ -2585,16 +2643,6 @@
                             //         `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`)
 
 
-
-                            // // const tempChartText = "<div class='areaChartText'>" +
-                            // // "50-year change in area: " + "<span class='areaChartCalcs'>" +
-                            // // areaDif + " m&sup2;" + "<br>" + "</span>" +
-                            // // "or " + "<span class='areaChartCalcs'>" + areaAcres + " acres" +
-                            // // "</span>" + "</div>"
-                            // // $(tempChartText).insertAfter(".climateDataTitle");
-
-                            // // const chart2Canvas = "<div class='wrapper2' id='wrapper2'>" + "</div>"
-                            // // $(chart2Canvas).insertAfter(".areaChartText");
 
 
 
@@ -2797,7 +2845,13 @@
                             // //     .attr("stroke-dashoffset", 0);
 
                         };
+
+                        function drawPrecipChart() {
+
+                        };
                     };
+
+
                 }
             };
         });
