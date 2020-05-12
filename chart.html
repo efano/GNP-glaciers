@@ -767,6 +767,7 @@
                     .attr("stroke-dashoffset", 0);
 
                 const totalBlueLineLength = yearGroupMeans.node().getTotalLength()
+                console.log('totalBlueLineLength', totalBlueLineLength)
 
                 yearGroupMeans
                     .attr("stroke-dasharray", totalBlueLineLength + " " + totalBlueLineLength)
