@@ -1935,6 +1935,8 @@
                         layer.on('mousedown', function () {
                             let num = layer.feature.properties.num
                             map.removeLayer(glacierPoints);
+                            $("#wrapper2").empty();
+                            $("#wrapper3").empty();
                             // change 'Select Glacier' button to glacier name
                             btnObj = $("#glacier-btn-dropdown");
                             $(btnObj).text($(".highlight").text());
@@ -2076,6 +2078,8 @@
                     $('.dropdown-item2').on('click', function () {
                         map.removeLayer(glacierPoints);
                         map.removeLayer(allPolys);
+                        $("#wrapper2").empty();
+                        $("#wrapper3").empty();
 
                         // extract the specific number from the specific item being moused over
                         let num = this.id.replace('glacierList-', '');
@@ -2624,7 +2628,7 @@
                             const yScale = d3.scaleLinear()
                                 .domain(d3.extent(dataset, yAccessor))
                                 .range([dimensions.boundedHeight, 0])
-                                .nice(3)
+                                .nice()
 
                             const xScale = d3.scaleTime()
                                 .domain(d3.extent(dataset, xAccessor))
@@ -2676,7 +2680,7 @@
                                 mean: d3.mean(yearsFilter3, yAccessor),
                             })
 
-                            const yearOffset = 10
+                            const yearOffset = 0
                             const yearArea = bounds2.selectAll(".yearArea")
                                 .data(yearsData)
                                 .enter().append("rect")
@@ -2871,7 +2875,7 @@
                             const yScale = d3.scaleLinear()
                                 .domain(d3.extent(dataset, yAccessor))
                                 .range([dimensions.boundedHeight, 0])
-                                .nice(5)
+                                .nice()
 
                             const xScale = d3.scaleTime()
                                 .domain(d3.extent(dataset, xAccessor))
@@ -2923,7 +2927,7 @@
                                 mean: d3.mean(yearsFilter3, yAccessor),
                             })
 
-                            const yearOffset = 10
+                            const yearOffset = 0
                             const yearArea = bounds3.selectAll(".yearArea")
                                 .data(yearsData)
                                 .enter().append("rect")
