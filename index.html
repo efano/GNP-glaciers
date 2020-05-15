@@ -2711,6 +2711,12 @@
                                 .attr("x2", d => xScale(d.end))
                                 .attr("y1", d => yScale(d.mean))
                                 .attr("y2", d => yScale(d.mean))
+
+                            yearGroupMeans
+                                .transition()
+                                .delay(1400)
+                                .duration(60)
+                                .ease(d3.easeLinear)
                                 .attr("class", "year-group-mean1")
 
                             const yAxisGenerator = d3.axisLeft()
@@ -2804,29 +2810,15 @@
                             }
 
                             // animation
-                            if ($('#wrapper2').is(':visible')) {
+                            const totalLineLength = line.node().getTotalLength();
 
-                                const totalLineLength = line.node().getTotalLength();
-                                
-                                line
-                                    .attr("stroke-dasharray", totalLineLength + " " + totalLineLength)
-                                    .attr("stroke-dashoffset", totalLineLength)
-                                    .transition()
-                                    .duration(1200)
-                                    .ease(d3.easeLinear)
-                                    .attr("stroke-dashoffset", 0);
-
-                                const totalAvgLineLength = yearGroupMeans.node().getTotalLength();
-
-                                yearGroupMeans
-                                    .attr("stroke-dasharray", totalAvgLineLength + " " + totalAvgLineLength)
-                                    .attr("stroke-dashoffset", totalAvgLineLength)
-                                    .transition()
-                                    .delay(1300)
-                                    .duration(50)
-                                    .ease(d3.easeLinear)
-                                    .attr("stroke-dashoffset", 0);
-                            };
+                            line
+                                .attr("stroke-dasharray", totalLineLength + " " + totalLineLength)
+                                .attr("stroke-dashoffset", totalLineLength)
+                                .transition()
+                                .duration(1200)
+                                .ease(d3.easeLinear)
+                                .attr("stroke-dashoffset", 0);
                         };
 
                         // d3.js precipitation line chart
@@ -2958,6 +2950,12 @@
                                 .attr("x2", d => xScale(d.end))
                                 .attr("y1", d => yScale(d.mean))
                                 .attr("y2", d => yScale(d.mean))
+
+                            yearGroupMeans
+                                .transition()
+                                .delay(1400)
+                                .duration(60)
+                                .ease(d3.easeLinear)
                                 .attr("class", "year-group-mean2")
 
                             const yAxisGenerator = d3.axisLeft()
@@ -3053,23 +3051,12 @@
                             if ($('#wrapper3').is(':visible')) {
 
                                 const totalLineLength = line.node().getTotalLength();
-                                
+
                                 line
                                     .attr("stroke-dasharray", totalLineLength + " " + totalLineLength)
                                     .attr("stroke-dashoffset", totalLineLength)
                                     .transition()
                                     .duration(1200)
-                                    .ease(d3.easeLinear)
-                                    .attr("stroke-dashoffset", 0);
-
-                                const totalAvgLineLength = yearGroupMeans.node().getTotalLength();
-
-                                yearGroupMeans
-                                    .attr("stroke-dasharray", totalAvgLineLength + " " + totalAvgLineLength)
-                                    .attr("stroke-dashoffset", totalAvgLineLength)
-                                    .transition()
-                                    .delay(1300)
-                                    .duration(50)
                                     .ease(d3.easeLinear)
                                     .attr("stroke-dashoffset", 0);
                             };
