@@ -814,7 +814,7 @@
             /* stroke-width: 1px;
             stroke-opacity: 1; */
         }
-
+        .barHover,
         .bar:hover {
             stroke: #ff3d00;
             stroke-width: 1.5px;
@@ -1687,6 +1687,9 @@
                             });
                             // select the corresponding list item and add the highlight class to make bold
                             $('#glacierList-' + polyProps.num).addClass('highlight');
+
+                            // highlight bar chart bar
+                            $('#bar3').addClass('barHover');
                         });
 
                         layer.on('mouseout', function () {
@@ -1695,6 +1698,7 @@
                                 weight: 1.5,
                             });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
+                            $('#bar3').removeClass('barHover');
                         });
 
                         // tooltip
@@ -1724,6 +1728,9 @@
                             });
                             // select the corresponding list item and add the highlight class to make bold
                             $('#glacierList-' + polyProps.num).addClass('highlight');
+
+                            // highlight bar chart bar
+                            $('#bar2').addClass('barHover');
                         });
 
                         layer.on('mouseout', function () {
@@ -1732,6 +1739,7 @@
                                 weight: 1.5,
                             });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
+                            $('#bar2').removeClass('barHover');
                         });
 
                         // tooltip
@@ -1761,6 +1769,9 @@
                             });
                             // select the corresponding list item and add the highlight class to make bold
                             $('#glacierList-' + polyProps.num).addClass('highlight');
+
+                            // highlight bar chart bar
+                            $('#bar1').addClass('barHover');
                         });
 
                         layer.on('mouseout', function () {
@@ -1769,6 +1780,7 @@
                                 weight: 1.5,
                             });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
+                            $('#bar1').removeClass('barHover');
                         });
 
                         // tooltip
@@ -1798,6 +1810,9 @@
                             });
                             // select the corresponding list item and add the highlight class to make bold
                             $('#glacierList-' + polyProps.num).addClass('highlight');
+
+                            // highlight bar chart bar
+                            $('#bar0').addClass('barHover');
                         });
 
                         layer.on('mouseout', function () {
@@ -1806,6 +1821,7 @@
                                 weight: 1.5,
                             });
                             $('#glacierList-' + polyProps.num).removeClass('highlight');
+                            $('#bar0').removeClass('barHover');
                         });
 
                         // tooltip
@@ -2499,6 +2515,12 @@
                                 return tooltip1
                                     .style("visibility", "hidden");
                             });
+
+                        // add unique id to each bar
+                        $('.bar').attr("id", function(i) {
+                                return 'bar' + i;
+                            });
+
 
                         //add x-axis
                         const xAxis = wrapper1.append("g")
