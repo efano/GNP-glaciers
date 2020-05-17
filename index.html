@@ -99,6 +99,7 @@
         .navbar-title {
             font-size: 26px;
             font-weight: bold;
+            color: #333;
         }
 
         .vl {
@@ -221,7 +222,7 @@
 
         #baselayerDropdown {
             margin-top: -3px;
-            color: #222222;
+            color: #333;
             line-height: 1.4;
             font-size: 12px;
             font-weight: 600;
@@ -231,11 +232,11 @@
 
         #baselayerDropdown ::selection {
             font-weight: 600;
-            color: #222222;
+            color: #333;
         }
 
         .leaflet-control-layers-list {
-            color: #222222;
+            color: #333;
         }
 
         .show1 {
@@ -321,7 +322,7 @@
         #dropdown-list2 {
             text-decoration: none;
             display: block;
-            color: #222222;
+            color: #333;
             line-height: 1.4;
             font-size: 12px;
             font-weight: 600;
@@ -336,7 +337,7 @@
 
         #dropdown-list2 ::selection {
             font-weight: 600;
-            color: #222222;
+            color: #333;
         }
 
         .show2 {
@@ -345,11 +346,11 @@
 
         .highlight {
             font-weight: 600;
-            color: #222222;
+            color: #333;
         }
 
         .leaflet-control-scale-line {
-            border: 1px solid #222222;
+            border: 1px solid #333;
             border-top: none;
             line-height: .7;
             padding: 2px 5px 1px;
@@ -362,13 +363,13 @@
         }
 
         .leaflet-control-scale-line:not(:first-child) {
-            border-top: 1px solid #222222;
+            border-top: 1px solid #333;
             border-bottom: none;
             margin-top: 1px;
         }
 
         .leaflet-control-scale-line:not(:first-child):not(:last-child) {
-            border-bottom: 1px solid #222222;
+            border-bottom: 1px solid #333;
         }
 
         .leaflet-tooltip {
@@ -379,7 +380,7 @@
 
         .tooltipTitle {
             white-space: nowrap;
-            color: #222222;
+            color: #333;
             font-size: 12px;
             font-weight: 600;
         }
@@ -418,7 +419,7 @@
             width: 200px;
             position: absolute;
             z-index: 950;
-            color: #222222;
+            color: #333;
         }
 
         .glacierPtLegend h4 {
@@ -459,7 +460,7 @@
             margin-top: 2px;
             list-style: none;
             line-height: .95;
-            color: #222222;
+            color: #333;
         }
 
         .glacierPtLegendText {
@@ -582,7 +583,7 @@
             padding: 10px 20px;
             max-width: 60%;
             background: rgba(255, 255, 255, 0.9);
-            color: #222222;
+            color: #333;
             border-radius: 5px;
         }
 
@@ -671,7 +672,7 @@
         #closeIcon2 :hover,
         #closeIcon3 :hover {
             font-weight: 600;
-            color: #222222;
+            color: #333;
         }
 
         .image {
@@ -717,6 +718,7 @@
             font-size: 22px;
             font-weight: bold;
             letter-spacing: 0.15px;
+            color: #333;
         }
 
         #camera-icon {
@@ -732,7 +734,7 @@
 
         .polyLegendAreaTitle {
             font-size: 15px;
-            color: #222222;
+            color: #333;
             font-weight: bold;
             letter-spacing: 0.1px;
             margin-top: 14px;
@@ -786,7 +788,7 @@
 
         .areaChartTitle {
             font-size: 15px;
-            color: #222222;
+            color: #333;
             letter-spacing: 0.1px;
             font-weight: 600;
             margin-top: 20px;
@@ -837,7 +839,7 @@
             border: 1px solid #f5f5f5;
             text-align: left;
             line-height: 1.4em;
-            color: #222;
+            color: #333;
             font-size: 11px;
             font-weight: 600;
             border-radius: 5px;
@@ -869,7 +871,7 @@
         /* poly legend climate chart css */
         .climateDataTitle {
             font-size: 15px;
-            color: #222222;
+            color: #333;
             letter-spacing: 0.1px;
             font-weight: 600;
             margin-top: 8px;
@@ -936,7 +938,7 @@
 
         .line {
             fill: none;
-            stroke: #222;
+            stroke: #333;
             stroke-width: 2;
         }
 
@@ -977,7 +979,7 @@
 
         .tooltip-date {
             margin-bottom: 0.1em;
-            color: #222;
+            color: #333;
             font-size: 1.2em;
             font-weight: 600;
             padding-top: 4px;
@@ -1281,7 +1283,7 @@
         <div hidden class="tempDiv" id="tempDiv">
             <div class="legendLines" id="legendLine1">
                 <svg height="10" width="10">
-                    <line x1="0" y1="0" x2="50" y2="50" style="stroke:#222;stroke-width:2" />
+                    <line x1="0" y1="0" x2="50" y2="50" style="stroke:#333;stroke-width:2" />
                 </svg>
                 <div class="legendLineText" id="legendLineText1">Average annual air temperature</div>
             </div>
@@ -1306,7 +1308,7 @@
         <div hidden class="precipDiv" id="precipDiv">
             <div class="legendLines" id="legendLine3">
                 <svg height="10" width="10">
-                    <line x1="0" y1="0" x2="50" y2="50" style="stroke:#222;stroke-width:2" />
+                    <line x1="0" y1="0" x2="50" y2="50" style="stroke:#333;stroke-width:2" />
                 </svg>
                 <div class="legendLineText" id="legendLineText4">Total annual precipitation</div>
             </div>
@@ -1908,7 +1910,7 @@
                             layer.bringToBack();
                             layer.setStyle({
                                 shape: "diamond",
-                                color: '#222',
+                                color: '#333',
                                 fillColor: colorize(props.pctD),
                                 fillOpacity: 1,
                                 weight: 1.2,
@@ -2728,7 +2730,7 @@
                             const line = bounds2.append("path")
                                 .attr("d", lineGenerator(dataset))
                                 .attr("fill", "none")
-                                .attr("stroke", "#222")
+                                .attr("stroke", "#333")
                                 .attr("stroke-width", 1.5)
                                 .attr("class", "line")
 
@@ -2789,7 +2791,7 @@
                             const tooltipCircle = bounds2.append("circle")
                                 .attr("class", "tooltip-circle")
                                 .attr("r", 3.5)
-                                .attr("stroke", "#222")
+                                .attr("stroke", "#333")
                                 .attr("fill", "#ff3d00")
                                 .attr("stroke-width", 2)
                                 .style("opacity", 0)
@@ -2967,7 +2969,7 @@
                             const line = bounds3.append("path")
                                 .attr("d", lineGenerator(dataset))
                                 .attr("fill", "none")
-                                .attr("stroke", "#222")
+                                .attr("stroke", "#333")
                                 .attr("stroke-width", 1.5)
                                 .attr("class", "line")
 
@@ -3027,7 +3029,7 @@
                             const tooltipCircle = bounds3.append("circle")
                                 .attr("class", "tooltip-circle")
                                 .attr("r", 3.5)
-                                .attr("stroke", "#222")
+                                .attr("stroke", "#333")
                                 .attr("fill", "#00BCD4")
                                 .attr("stroke-width", 2)
                                 .style("opacity", 0)
