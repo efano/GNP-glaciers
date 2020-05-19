@@ -824,6 +824,7 @@
             /* stroke-width: 1px;
             stroke-opacity: 1; */
         }
+
         .barHover,
         .bar:hover {
             stroke: #ff3d00;
@@ -1038,7 +1039,8 @@
             <nav class="main-nav">
                 <div class="flex-parent-inline" id="icon-group">
 
-                    <a class="navbar-icon" href="https://github.com/efano/GNP-glaciers/blob/master/README.md" target="_blank" id="info-icon" title="Project Information">
+                    <a class="navbar-icon" href="https://github.com/efano/GNP-glaciers/blob/master/README.md"
+                        target="_blank" id="info-icon" title="Project Information">
                         <svg class="icon mr6 info">
                             <use xlink:href="#icon-info" />
                         </svg>
@@ -1699,7 +1701,10 @@
                             $('#glacierList-' + polyProps.num).addClass('highlight');
 
                             // highlight bar chart bar
-                            $('#bar3').addClass('barHover');
+                            let legendPolyName = $('#glacier-btn-dropdown').val();
+                            if (polyProps.GLACNAME === legendPolyName) {
+                                $('#bar3').addClass('barHover');
+                            };
                         });
 
                         layer.on('mouseout', function () {
@@ -1740,7 +1745,10 @@
                             $('#glacierList-' + polyProps.num).addClass('highlight');
 
                             // highlight bar chart bar
-                            $('#bar2').addClass('barHover');
+                            let legendPolyName = $('#glacier-btn-dropdown').val();
+                            if (polyProps.GLACNAME === legendPolyName) {
+                                $('#bar2').addClass('barHover');
+                            };
                         });
 
                         layer.on('mouseout', function () {
@@ -1781,7 +1789,10 @@
                             $('#glacierList-' + polyProps.num).addClass('highlight');
 
                             // highlight bar chart bar
-                            $('#bar1').addClass('barHover');
+                            let legendPolyName = $('#glacier-btn-dropdown').val();
+                            if (polyProps.GLACNAME === legendPolyName) {
+                                $('#bar1').addClass('barHover');
+                            };
                         });
 
                         layer.on('mouseout', function () {
@@ -1822,7 +1833,10 @@
                             $('#glacierList-' + polyProps.num).addClass('highlight');
 
                             // highlight bar chart bar
-                            $('#bar0').addClass('barHover');
+                            let legendPolyName = $('#glacier-btn-dropdown').val();
+                            if (polyProps.GLACNAME === legendPolyName) {
+                                $('#bar0').addClass('barHover');
+                            };
                         });
 
                         layer.on('mouseout', function () {
@@ -2527,9 +2541,9 @@
                             });
 
                         // add unique id to each bar
-                        $('.bar').attr("id", function(i) {
-                                return 'bar' + i;
-                            });
+                        $('.bar').attr("id", function (i) {
+                            return 'bar' + i;
+                        });
 
 
                         //add x-axis
