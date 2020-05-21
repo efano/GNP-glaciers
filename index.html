@@ -47,20 +47,11 @@
 
         #loader {
             position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: rgba(245, 245, 245, 0.7);
-            z-index: 200;
-        }
-
-        #loader img {
-            width: 33px;
-            height: 33px;
-            position: absolute;
             top: 50%;
-            left: 50%;
+            left: 0%;
             margin: -33px 0 0 -33px;
+            width: 100%;
+            z-index: 1010;
         }
 
         .navbarParent {
@@ -1092,11 +1083,9 @@
             </nav>
         </div>
     </div>
-
+    
     <div id="map">
-        <div id="loader">
-            <img src="icons/loader.gif" alt="loader" />
-        </div>
+        <div class="flex-child loading" id="loader"></div>
     </div>
 
     <div hidden id="glacierPtLegendSm" class="glacierPtLegendSm">
@@ -1521,6 +1510,8 @@
                 .then(
                     drawMap);
 
+            $('#loader').remove();
+
             function drawMap(data) {
 
                 // pull out separate data arrays and assign to variables
@@ -1898,8 +1889,6 @@
                 map.fitBounds(glacierPoints.getBounds(), {
                     padding: [20, 20]
                 });
-
-                $('#loader').remove();
 
                 map.on('zoomend', function () {
                     const zoomlevel = map.getZoom();
