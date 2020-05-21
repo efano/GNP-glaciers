@@ -372,7 +372,6 @@
         .leaflet-tooltip {
             border-radius: 5px;
             box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
-            /* padding: 5px 10px; */
         }
 
         .tooltipTitle {
@@ -383,10 +382,10 @@
         }
 
         .tooltipText {
-            font-size: 12px;
+            font-size: 1em;
             font-weight: 500;
             color: #333;
-            margin-top: -18px;
+            margin-top: -19px;
         }
 
         .tooltipPct {
@@ -401,6 +400,16 @@
         .tooltipTextAcres {
             font-weight: 500;
             margin-left: 40px;
+        }
+
+        .barArea {
+            font-weight: 600;
+            color: #ff3d00; 
+        }
+
+        .barTooltipTextAcres {
+            font-weight: 500;
+            margin-left: 30px;
         }
 
         .glacierPtLegend {
@@ -827,7 +836,7 @@
             pointer-events: none;
             padding: 8px;
             background: #fff;
-            border: 1px solid #f5f5f5;
+            border: 1px solid #f0f0f0;
             text-align: left;
             line-height: 1.4em;
             color: #333;
@@ -937,7 +946,7 @@
             left: 2px;
             padding: 0.6em;
             background: #fff;
-            border: 1px solid #f5f5f5;
+            border: 1px solid #f0f0f0;
             text-align: left;
             line-height: 1.4em;
             font-size: 11px;
@@ -965,6 +974,7 @@
             z-index: 1010;
         }
 
+        .barYear,
         .tooltip-date {
             margin-bottom: 0.1em;
             color: #333;
@@ -1288,7 +1298,7 @@
                     <span class="date"></span>
                 </div>
                 <div class="tooltip-text">
-                    Average annual<br>temp: <span id="temp"></span>
+                    Average annual<br>temp: &thinsp;<span id="temp"></span>
                 </div>
             </div>
         </div>
@@ -1314,7 +1324,7 @@
                         <span class="date"></span>
                     </div>
                     <div class="tooltip-text">
-                        Total annual<br>precip: <span id="precip"></span>
+                        Total annual<br>precip: &thinsp;<span id="precip"></span>
                     </div>
                 </div>
             </div>
@@ -1657,12 +1667,12 @@
                         // tooltip
                         layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
                             "</b></div><br>" +
-                            "<div class=tooltipText>" + "Extent: &thinsp;Mid-19th century" +
+                            "<div class='tooltipText'>" + "Extent: &thinsp;Mid-19th century" +
                             "<br></div>" +
-                            "<div class=tooltipTextArea>" + "Area: &thinsp;" +
+                            "<div class='tooltipTextArea'>" + "Area: &thinsp;" +
                             Number(polyProps[
                                 "AREA"]).toLocaleString() + " m&sup2; " + "<br></div>" +
-                            "<div class=tooltipTextAcres>" + "or &thinsp;" + (polyProps[
+                            "<div class='tooltipTextAcres'>" + "or &thinsp;" + (polyProps[
                                     "AREA"] *
                                 0.000247105).toFixed(2) + " acres", {
                                 opacity: 1,
@@ -2344,9 +2354,9 @@
                         const areaAcres = format((area1966 - area2015) * 0.000247105);
 
                         const areaChartText = "<div class='areaChartText'>" +
-                            "50-year change in area: " + "<span class='areaChartCalcs'>" +
+                            "50-year change in area: &thinsp;" + "<span class='areaChartCalcs'>" +
                             areaDif + " m&sup2;" + "<br>" + "</span>" +
-                            "or " + "<span class='areaChartCalcs'>" + areaAcres + " acres" +
+                            "or&thinsp;" + "<span class='areaChartCalcs'>" + areaAcres + " acres" +
                             "</span>" + "</div>"
                         $(areaChartText).insertAfter(".areaChartTitle");
 
@@ -2480,13 +2490,13 @@
                                 const format = d3.format(",.2f")
                                 return tooltip1
                                     .style("visibility", "visible")
-                                    .html(format(d.AREA) + " m&sup2;" + "<br>" + "or " +
-                                        format(d.AREA * 0.000247105) + " acres")
+                                    .html("<span class='barYear'>" + d.Year + "</span><br>" + "Area: &thinsp;" + "<span class='barArea'>" + format(d.AREA) + " m&sup2;" + "</span><br>" 
+                                    + "<span class=barTooltipTextAcres>" + "or " + "<span class='barArea'>" + format(d.AREA * 0.000247105) + " acres" + "</span></span>")                                       
                             })
                             .on("mousemove", function (d) {
                                 return tooltip1
-                                    .style("top", (d3.event.pageY - 55) + "px")
-                                    .style("left", (d3.event.pageX - 43) + "px");
+                                    .style("top", (d3.event.pageY - 70) + "px")
+                                    .style("left", (d3.event.pageX - 60) + "px");
                             })
                             .on("mouseout", function (d) {
                                 if (d.Year == 1966) {
@@ -2626,7 +2636,7 @@
 
                             // create chart dimensions
                             const width = 270
-                            const height = 120
+                            const height = 125
                             let dimensions = {
                                 width: width,
                                 height: height,
@@ -2865,7 +2875,7 @@
 
                             // create chart dimensions
                             const width = 270
-                            const height = 120
+                            const height = 125
                             let dimensions = {
                                 width: width,
                                 height: height,
