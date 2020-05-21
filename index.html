@@ -402,9 +402,29 @@
             margin-left: 40px;
         }
 
+        .polyTooltipText {
+            font-size: .95em;
+            font-weight: 500;
+            color: #333;
+            margin-top: -18px;
+        }
+
+        .polyTooltipTextArea {
+            font-size: .95em;
+            font-weight: 500;
+            margin-left: 9px;
+        }
+
+        .polyTooltipTextAcres {
+            font-size: .95em;
+            font-weight: 500;
+            margin-left: 40px;
+        }
+
+        .polyAreaBold,
         .barArea {
             font-weight: 600;
-            color: #ff3d00; 
+            color: #ff3d00;
         }
 
         .barTooltipTextAcres {
@@ -1118,7 +1138,8 @@
                 </li>
                 <li>
                     <span class="glacierPtLegendText" id="symbolActive">&#x25C6;</span>
-                    <span class="glacierPtLegendText" id="active">Active (&thinsp;&#8805;&thinsp;&#8239;0.1 km&sup2;&#8239;)</span>
+                    <span class="glacierPtLegendText" id="active">Active (&thinsp;&#8805;&thinsp;&#8239;0.1
+                        km&sup2;&#8239;)</span>
                 </li>
                 <li>
                     <span class="glacierPtLegendText" id="symbolStangnant">x</span>
@@ -1667,14 +1688,14 @@
                         // tooltip
                         layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
                             "</b></div><br>" +
-                            "<div class='tooltipText'>" + "Extent: &thinsp;Mid-19th century" +
+                            "<div class=polyTooltipText>" + "Extent: &thinsp;Mid-19th century" +
                             "<br></div>" +
-                            "<div class='tooltipTextArea'>" + "Area: &thinsp;" +
-                            Number(polyProps[
-                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></div>" +
-                            "<div class='tooltipTextAcres'>" + "or &thinsp;" + (polyProps[
-                                    "AREA"] *
-                                0.000247105).toFixed(2) + " acres", {
+                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
+                            "<span class=polyAreaBold>" + Number(polyProps[
+                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></span></div>" +
+                            "<div class=polyTooltipTextAcres>" + "or " +
+                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
+                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
                                 opacity: 1,
                                 sticky: true,
                             }
@@ -1714,11 +1735,13 @@
                         // tooltip
                         layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
                             "</b></div><br>" +
-                            "<div class=tooltipText>" + "Extent: &thinsp;1966" + "<br></div>" +
-                            "<div class=tooltipTextArea>" + "Area: &thinsp;" + Number(polyProps[
-                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></div>" +
-                            "<div class=tooltipTextAcres>" + "or " + (polyProps["AREA"] *
-                                0.000247105).toFixed(2) + " acres", {
+                            "<div class=polyTooltipText>" + "Extent: &thinsp;1966" + "<br></div>" +
+                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
+                            "<span class=polyAreaBold>" + Number(polyProps[
+                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></span></div>" +
+                            "<div class=polyTooltipTextAcres>" + "or " +
+                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
+                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
                                 opacity: 1,
                                 sticky: true,
                             }
@@ -1758,11 +1781,13 @@
                         // tooltip
                         layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
                             "</b></div><br>" +
-                            "<div class=tooltipText>" + "Extent: &thinsp;1998" + "<br></div>" +
-                            "<div class=tooltipTextArea>" + "Area: &thinsp;" + Number(polyProps[
-                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></div>" +
-                            "<div class=tooltipTextAcres>" + "or " + (polyProps["AREA"] *
-                                0.000247105).toFixed(2) + " acres", {
+                            "<div class=polyTooltipText>" + "Extent: &thinsp;1998" + "<br></div>" +
+                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
+                            "<span class=polyAreaBold>" + Number(polyProps[
+                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></span></div>" +
+                            "<div class=polyTooltipTextAcres>" + "or " +
+                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
+                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
                                 opacity: 1,
                                 sticky: true,
                             }
@@ -1802,11 +1827,13 @@
                         // tooltip
                         layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
                             "</b></div><br>" +
-                            "<div class=tooltipText>" + "Extent: &thinsp;2005" + "<br></div>" +
-                            "<div class=tooltipTextArea>" + "Area: &thinsp;" + Number(polyProps[
-                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></div>" +
-                            "<div class=tooltipTextAcres>" + "or " + (polyProps["AREA"] *
-                                0.000247105).toFixed(2) + " acres", {
+                            "<div class=polyTooltipText>" + "Extent: &thinsp;2005" + "<br></div>" +
+                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
+                            "<span class=polyAreaBold>" + Number(polyProps[
+                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></span></div>" +
+                            "<div class=polyTooltipTextAcres>" + "or " +
+                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
+                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
                                 opacity: 1,
                                 sticky: true,
                             }
@@ -1846,11 +1873,13 @@
                         // tooltip
                         layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
                             "</b></div><br>" +
-                            "<div class=tooltipText>" + "Extent: &thinsp;2015" + "<br></div>" +
-                            "<div class=tooltipTextArea>" + "Area: &thinsp;" + Number(polyProps[
-                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></div>" +
-                            "<div class=tooltipTextAcres>" + "or " + (polyProps["AREA"] *
-                                0.000247105).toFixed(2) + " acres", {
+                            "<div class=polyTooltipText>" + "Extent: &thinsp;2015" + "<br></div>" +
+                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
+                            "<span class=polyAreaBold>" + Number(polyProps[
+                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></span></div>" +
+                            "<div class=polyTooltipTextAcres>" + "or " +
+                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
+                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
                                 opacity: 1,
                                 sticky: true,
                             }
@@ -2490,8 +2519,12 @@
                                 const format = d3.format(",.2f")
                                 return tooltip1
                                     .style("visibility", "visible")
-                                    .html("<span class='barYear'>" + d.Year + "</span><br>" + "Area: &thinsp;" + "<span class='barArea'>" + format(d.AREA) + " m&sup2;" + "</span><br>" 
-                                    + "<span class=barTooltipTextAcres>" + "or " + "<span class='barArea'>" + format(d.AREA * 0.000247105) + " acres" + "</span></span>")                                       
+                                    .html("<span class='barYear'>" + d.Year + "</span><br>" +
+                                        "Area: &thinsp;" + "<span class='barArea'>" + format(d.AREA) +
+                                        " m&sup2;" + "</span><br>" +
+                                        "<span class=barTooltipTextAcres>" + "or " +
+                                        "<span class='barArea'>" + format(d.AREA * 0.000247105) + " acres" +
+                                        "</span></span>")
                             })
                             .on("mousemove", function (d) {
                                 return tooltip1
