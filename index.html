@@ -950,11 +950,12 @@
             stroke-width: 2;
         }
 
-        .tooltip2 {
+        .tooltip2,
+        .tooltip3 {
             opacity: 0;
             position: absolute;
-            top: 470px;
-            left: 2px;
+            bottom: 120px;
+            left: 15px;
             padding: 0.6em;
             background: #fff;
             border: 1px solid #f0f0f0;
@@ -969,7 +970,8 @@
             box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
         }
 
-        .tooltip2:before {
+        .tooltip2:before,
+        .tooltip3:before {
             content: '';
             position: absolute;
             bottom: 0;
@@ -1083,7 +1085,7 @@
             </nav>
         </div>
     </div>
-    
+
     <div id="map">
         <div class="flex-child loading" id="loader"></div>
     </div>
@@ -1274,7 +1276,6 @@
         </ul>
     </div>
 
-
     <!-- climate charts -->
     <div hidden id="climateChartsToggle">
         <div class="toggle-group climateToggleGroup" id="ui-lineCharts-control">
@@ -1303,14 +1304,6 @@
                 <div class="legendLineText3" id="legendLineText3">measurements</div>
             </div>
             <div class="wrapper2" id="wrapper2"></div>
-            <div id="tooltip2" class="tooltip2">
-                <div class="tooltip-date">
-                    <span class="date"></span>
-                </div>
-                <div class="tooltip-text">
-                    Average annual<br>temp: &thinsp;<span id="temp"></span>
-                </div>
-            </div>
         </div>
 
         <div hidden class="precipDiv" id="precipDiv">
@@ -1329,14 +1322,6 @@
                     <div class="legendLineText3" id="legendLineText6">measurements</div>
                 </div>
                 <div class="wrapper3" id="wrapper3"></div>
-                <div id="tooltip3" class="tooltip2">
-                    <div class="tooltip-date">
-                        <span class="date"></span>
-                    </div>
-                    <div class="tooltip-text">
-                        Total annual<br>precip: &thinsp;<span id="precip"></span>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -1510,7 +1495,7 @@
                 .then(
                     drawMap);
 
-            
+
 
             function drawMap(data) {
 
@@ -2810,16 +2795,18 @@
                                 .call(xAxisGenerator)
                                 .style("transform", `translateY(${(dimensions.boundedHeight)}px)`)
 
+                            // animation
+                            const totalLineLength = line.node().getTotalLength();
+
+                            line
+                                .attr("stroke-dasharray", totalLineLength + " " + totalLineLength)
+                                .attr("stroke-dashoffset", totalLineLength)
+                                .transition()
+                                .duration(1200)
+                                .ease(d3.easeLinear)
+                                .attr("stroke-dashoffset", 0);
+
                             // hover interactions
-                            const listeningRect = bounds2.append("rect")
-                                .attr("class", "listening-rect")
-                                .attr("width", dimensions.boundedWidth)
-                                .attr("height", dimensions.boundedHeight)
-                                .on("mousemove", onMouseMove)
-                                .on("mouseleave", onMouseLeave)
-
-                            const tooltip2 = d3.select("#tooltip2")
-
                             const tooltipCircle = bounds2.append("circle")
                                 .attr("class", "tooltip-circle")
                                 .attr("r", 3.5)
@@ -2827,6 +2814,30 @@
                                 .attr("fill", "#ff3d00")
                                 .attr("stroke-width", 2)
                                 .style("opacity", 0)
+
+                            const listeningRect = bounds2.append("rect")
+                                .attr("class", "listening-rect")
+                                .attr("width", dimensions.boundedWidth)
+                                .attr("height", dimensions.boundedHeight)
+                                .on("mousemove", onMouseMove)
+                                .on("mouseleave", onMouseLeave)
+
+                            // create tooltip
+                            const tooltip2 = d3.select("body")
+                                .append("div")
+                                .attr("class", "tooltip2")
+                                .style("position", "absolute")
+                                .style("z-index", "10")
+                                .style("visibility", "hidden")
+
+                            const format = d3.format(",.2f")
+                            return tooltip2
+                                .style("visibility", "visible")
+                                .html("<span class='tooltip-date'>" + "<span class='date'>" + "</span>" +
+                                    "</span>" + "<br>" +
+                                    "<span class='tooltip-text'>" + "</span>" + "<div class='tooltip-text'>" +
+                                    "Average annual air" + "<br>" + "temperature: &thinsp;" +
+                                    "<span id='temp'>" + "</span></div>")
 
                             function onMouseMove() {
                                 const mousePosition = d3.mouse(this)
@@ -2871,17 +2882,6 @@
                                 tooltip2.style("opacity", 0)
                                 tooltipCircle.style("opacity", 0)
                             }
-
-                            // animation
-                            const totalLineLength = line.node().getTotalLength();
-
-                            line
-                                .attr("stroke-dasharray", totalLineLength + " " + totalLineLength)
-                                .attr("stroke-dashoffset", totalLineLength)
-                                .transition()
-                                .duration(1200)
-                                .ease(d3.easeLinear)
-                                .attr("stroke-dashoffset", 0);
                         };
 
                         // d3.js precipitation line chart
@@ -3049,15 +3049,21 @@
                                 .call(xAxisGenerator)
                                 .style("transform", `translateY(${(dimensions.boundedHeight)}px)`)
 
-                            // hover interactions
-                            const listeningRect = bounds3.append("rect")
-                                .attr("class", "listening-rect")
-                                .attr("width", dimensions.boundedWidth)
-                                .attr("height", dimensions.boundedHeight)
-                                .on("mousemove", onMouseMove)
-                                .on("mouseleave", onMouseLeave)
+                            // animation
+                            if ($('#wrapper3').is(':visible')) {
 
-                            const tooltip3 = d3.select("#tooltip3")
+                                const totalLineLength = line.node().getTotalLength();
+
+                                line
+                                    .attr("stroke-dasharray", totalLineLength + " " + totalLineLength)
+                                    .attr("stroke-dashoffset", totalLineLength)
+                                    .transition()
+                                    .duration(1200)
+                                    .ease(d3.easeLinear)
+                                    .attr("stroke-dashoffset", 0);
+                            };
+
+                            // hover interactions
                             const tooltipCircle = bounds3.append("circle")
                                 .attr("class", "tooltip-circle")
                                 .attr("r", 3.5)
@@ -3065,6 +3071,30 @@
                                 .attr("fill", "#00BCD4")
                                 .attr("stroke-width", 2)
                                 .style("opacity", 0)
+
+                            const listeningRect = bounds3.append("rect")
+                                .attr("class", "listening-rect")
+                                .attr("width", dimensions.boundedWidth)
+                                .attr("height", dimensions.boundedHeight)
+                                .on("mousemove", onMouseMove)
+                                .on("mouseleave", onMouseLeave)
+
+                            // create tooltip
+                            const tooltip3 = d3.select("body")
+                                .append("div")
+                                .attr("class", "tooltip3")
+                                .style("position", "absolute")
+                                .style("z-index", "10")
+                                .style("visibility", "hidden")
+
+                            const format = d3.format(",.2f")
+                            return tooltip3
+                                .style("visibility", "visible")
+                                .html("<span class='tooltip-date'>" + "<span class='date'>" + "</span>" +
+                                    "</span>" + "<br>" +
+                                    "<span class='tooltip-text'>" + "</span>" + "<div class='tooltip-text'>" +
+                                    "Total annual" + "<br>" + "precipitation: &thinsp;" + "<span id='precip'>" +
+                                    "</span></div>")
 
                             function onMouseMove() {
                                 const mousePosition = d3.mouse(this)
@@ -3109,20 +3139,6 @@
                                 tooltip3.style("opacity", 0)
                                 tooltipCircle.style("opacity", 0)
                             }
-
-                            // animation
-                            if ($('#wrapper3').is(':visible')) {
-
-                                const totalLineLength = line.node().getTotalLength();
-
-                                line
-                                    .attr("stroke-dasharray", totalLineLength + " " + totalLineLength)
-                                    .attr("stroke-dashoffset", totalLineLength)
-                                    .transition()
-                                    .duration(1200)
-                                    .ease(d3.easeLinear)
-                                    .attr("stroke-dashoffset", 0);
-                            };
                         };
                     };
                 }
