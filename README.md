@@ -1,8 +1,8 @@
 # ![logo](/icons/mountainReadme.svg) Our Vanishing Glaciers
 
-![Boulder Glacier in 1913](/photos/Boulder-1913.jpg)
-
 ## [Visualizing a Half-Century of Glacier Loss in Glacier National Park, Montana](https://efano.github.io/GNP-glaciers)
+
+![Boulder Glacier in 1913](/photos/Boulder-1913.jpg)
 
 ### I. Introduction
 
