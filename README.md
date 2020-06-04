@@ -8,7 +8,7 @@ A web mapping application project designed by [Lis Fano](https://efano.github.io
 
 ### I. Introduction
 
-<img align="right" src="/photos/montana.jpg" height="190">
+<img align="right" src="/photos/montana.jpg" height="170">
 
 Over 150 glaciers existed in Glacier National Park, Montana at the end of the Little Ice Age (mid-19th century). In 1966, the park had 35 named glaciers large enough to be considered active. By 2015, only 26 of those glaciers remained. The average area loss was 39 percent, though some glaciers lost as much as 85 percent. This trend of glacier retreat is expected to continue as average temperatures rise.
 
