@@ -4,7 +4,7 @@
 
 ## [*Visualizing a Half-Century of Glacier Loss in Glacier National Park, Montana*](https://efano.github.io/GNP-glaciers)
 
-A web mapping application project designed by [Lis Fano](https://efano.github.io/) as part of the University of Kentucky [New Maps Plus](https://newmapsplus.as.uky.edu/) graduate program.
+A web mapping application project designed by [Lis Fano](https://efano.github.io/){:target="_blank"} as part of the University of Kentucky [New Maps Plus](https://newmapsplus.as.uky.edu/) graduate program.
 
 ### I. Introduction
 
