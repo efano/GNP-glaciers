@@ -1,16 +1,20 @@
-# ![logo](/icons/mountainReadme.svg) Our Vanishing Glaciers 
+# ![logo](/icons/mountainReadme.svg) Our Vanishing Glaciers
 
 ![Boulder Glacier in 1913](/photos/Boulder-1913.jpg)
 
 ## [*Visualizing a Half-Century of Glacier Loss in Glacier National Park, Montana*](https://efano.github.io/GNP-glaciers)
 
+A web mapping application project designed by [Lis Fano](https://efano.github.io/) as part of the University of Kentucky [New Maps Plus](https://newmapsplus.as.uky.edu/) graduate program.
+
 ### I. Introduction
 
-Over 150 glaciers existed in Glacier National Park, Montana at the end of the Little Ice Age (mid-19th century). In 1966, the ark had 35 named glaciers large enough to be considered active. By 2015, only 26 of those glaciers remained. The average area loss was 39 percent, though some glaciers lost as much as 85 percent. This trend of glacier retreat is expected to continue as average temperatures rise.
+<img align="right" src="/photos/montana.jpg" height="200">
 
-Early scientists and park visitors noted that glaciers were retreating as early as 1914. The climate was already warming and glaciers were responding, but the industrial revolution added more carbon dioxide to the atmosphere, furthering glacier retreat. The United States Geological Survey (USGS) has been documenting [glacier area loss within the park](https://www.usgs.gov/centers/norock/science/retreat-glaciers-glacier-national-park?qt-science_center_objects=0#qt-science_center_objects) since 1966. These data consists of a time series of digitized glacier outlines for the 37 named glaciers of Glacier National Park and two glaciers on U.S. Forest Service’s Flathead National Forest land. The polygon features represent the main body portion of each glacier as analyzed from aerial imagery from the years 1966, 1998, 2005 and 2015, marking approximately 50 years of change in glacier area. Additionally, a maximum glacier extent dataset exists from the mid-19th century Little Ice Age (LIA) derived from terminal moraine locations.
+Over 150 glaciers existed in Glacier National Park, Montana at the end of the Little Ice Age (mid-19th century). In 1966, the park had 35 named glaciers large enough to be considered active. By 2015, only 26 of those glaciers remained. The average area loss was 39 percent, though some glaciers lost as much as 85 percent. This trend of glacier retreat is expected to continue as average temperatures rise.
 
-This web mapping project will integrate the digitized glacier outlines for all years, display them interactively, and combine them with local climate data downloaded from the Northwest Alliance for Computational Science and Engineering, [Parameter-elevation Regressions on Independent Slopes Model (PRISM)](http://prism.oregonstate.edu/). The map will provide an interactive visualization of the decrease in glacier extent in response to a changing climate. It will be designed for both the public and professional audience.
+Early scientists and park visitors noted that glaciers were retreating as early as 1914. The climate was already warming and glaciers were responding, but the industrial revolution added more carbon dioxide to the atmosphere, furthering glacier retreat. The United States Geological Survey (USGS) has been documenting [glacier area loss within the park](https://www.usgs.gov/centers/norock/science/retreat-glaciers-glacier-national-park?qt-science_center_objects=0#qt-science_center_objects) since 1966. These data consists of a time series of digitized glacier outlines for the 37 named glaciers of Glacier National Park and two glaciers managed by the adjacent USDA Forest Service Flathead National Forest. The polygon features represent the main body portion of each glacier as analyzed from aerial imagery from the years 1966, 1998, 2005 and 2015, marking approximately 50 years of change in glacier area. Additionally, a maximum glacier extent dataset exists from the mid-19th century Little Ice Age (LIA) that was derived from terminal moraine locations.
+
+This web mapping project integrates the digitized glacier outlines for all years, displays them interactively, and combines them with local climate data downloaded from the Northwest Alliance for Computational Science and Engineering, [Parameter-elevation Regressions on Independent Slopes Model (PRISM)](http://prism.oregonstate.edu/) website. The map provides an interactive visualization of the decrease in glacier extent in response to a changing climate. It is designed for both the public and professional audience.
 
 ### II. Methodology
 
