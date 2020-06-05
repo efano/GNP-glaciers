@@ -36,7 +36,7 @@ The content of the web map are derived from the following data sources:
 
 #### B. Medium for delivery
 
-The map is a web browser-based application accessible across mobile and desktop devices. [All files and code have been hosted on Github](https://github.com/efano/GNP-glaciers) and freely available to the public.
+The map is a web browser-based application accessible across mobile and desktop devices. All files and code have been hosted on [Github](https://github.com/efano/GNP-glaciers) and freely available to the public.
 
 The technology stack for the application includes HTML/SVG/CSS/JS, jQuery, and Leaflet. The responsive and user interface framework includes the use of Mapbox's Assembly.css and vanilla javascript. D3.js has been used as the charting library, and chroma.js to determine the color scales used in symbolizing the glacier points.
 
