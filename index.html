@@ -334,7 +334,7 @@
 
         .highlight {
             font-weight: 600;
-            color: #333;
+            color: #0097a7;
         }
 
         .leaflet-control-scale-line {
@@ -1495,8 +1495,6 @@
                 .then(
                     drawMap);
 
-
-
             function drawMap(data) {
 
                 // pull out separate data arrays and assign to variables
@@ -1530,339 +1528,6 @@
                     });
                 };
 
-                map.createPane("liaLayer");
-                map.getPane("liaLayer").style.zIndex = 446;
-                map.createPane("layer66");
-                map.getPane("layer66").style.zIndex = 447;
-                map.createPane("layer98");
-                map.getPane("layer98").style.zIndex = 448;
-                map.createPane("layer05");
-                map.getPane("layer05").style.zIndex = 449;
-                map.createPane("layer15");
-                map.getPane("layer15").style.zIndex = 450;
-
-                // create a LIA layer with the geojson data
-                const liaLayer = L.geoJson(liaData, {
-                    style: function (feature, layer) {
-                        return {
-                            color: "#a9a7ab",
-                            fillColor: "white",
-                            weight: 1.5,
-                            opacity: 1,
-                            fillOpacity: 0.4,
-                            lineJoin: 'round',
-                            dashArray: '3,4',
-                            pane: "liaLayer",
-                        };
-                    },
-                });
-
-                const layer66 = L.geoJson(polys66Data, {
-                    style: function (feature, layer) {
-                        return {
-                            color: "#26C6DA",
-                            fillColor: "#80DEEA",
-                            weight: 1.5,
-                            opacity: 1,
-                            fillOpacity: 0.4,
-                            lineJoin: 'round',
-                            dashArray: '3,4',
-                            pane: "layer66",
-                        };
-                    },
-                });
-
-                const layer98 = L.geoJson(polys98Data, {
-                    style: function (feature, layer) {
-                        return {
-                            color: "#00BCD4",
-                            fillColor: "#4DD0E1",
-                            weight: 1.5,
-                            opacity: 1,
-                            fillOpacity: 0.4,
-                            lineJoin: 'round',
-                            dashArray: '3,4',
-                            pane: "layer98",
-                        };
-                    }
-                });
-
-                const layer05 = L.geoJson(polys05Data, {
-                    style: function (feature, layer) {
-                        return {
-                            color: "#00ACC1",
-                            fillColor: "#26C6DA",
-                            weight: 1.5,
-                            opacity: 1,
-                            fillOpacity: 0.4,
-                            lineJoin: 'round',
-                            dashArray: '3,4',
-                            pane: "layer05",
-                        };
-                    }
-                });
-
-                const layer15 = L.geoJson(polys15Data, {
-                    style: function (feature, layer) {
-                        return {
-                            color: "#00A0B5",
-                            fillColor: "#00BCD4",
-                            weight: 1.5,
-                            opacity: 1,
-                            fillOpacity: 0.4,
-                            lineJoin: 'round',
-                            dashArray: '3,4',
-                            pane: "layer15",
-                        };
-                    }
-                });
-
-                const allPolys = L.layerGroup([liaLayer, layer66, layer98, layer05, layer15]);
-
-                map.on('zoomend', function () {
-                    const zoomlevel = map.getZoom();
-                    if (zoomlevel >= 12) {
-                        $(".leaflet-tooltip-pane").empty();
-                        map.addLayer(allPolys);
-                        addInteractionsLIA(liaLayer);
-                        addInteractions66(layer66);
-                        addInteractions98(layer98);
-                        addInteractions05(layer05);
-                        addInteractions15(layer15);
-                        togglePolys();
-                    }
-                    if (zoomlevel < 12) {
-                        $(".legendPolyList").fadeOut("fast");
-                        $('#glacierPolyLegendSm').fadeOut("fast");
-                        $(".leaflet-tooltip-pane").empty();
-                        map.removeLayer(allPolys);
-                    }
-                });
-
-                // add lia poly interactions
-                function addInteractionsLIA(liaLayer) {
-                    liaLayer.eachLayer(function (layer) {
-                        let polyProps = layer.feature.properties;
-
-                        layer.on('mouseover', function () {
-                            layer.setStyle({
-                                color: "#ff3d00",
-                                weight: 2,
-                            });
-                            // select the corresponding list item and add the highlight class to make bold
-                            $('#glacierList-' + polyProps.num).addClass('highlight');
-                        });
-
-                        layer.on('mouseout', function () {
-                            layer.setStyle({
-                                color: "#a9a7ab",
-                                weight: 1.5,
-                            });
-                            $('#glacierList-' + polyProps.num).removeClass('highlight');
-                        });
-
-                        // tooltip
-                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
-                            "</b></div><br>" +
-                            "<div class=polyTooltipText>" + "Extent: &thinsp;Mid-19th century" +
-                            "<br></div>" +
-                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
-                            "<span class=polyAreaBold>" + Number(polyProps[
-                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></span></div>" +
-                            "<div class=polyTooltipTextAcres>" + "or " +
-                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
-                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
-                                opacity: 1,
-                                sticky: true,
-                            }
-                        );
-                    });
-                };
-
-                // add poly66 interactions
-                function addInteractions66(layer66) {
-                    layer66.eachLayer(function (layer) {
-                        let polyProps = layer.feature.properties;
-
-                        layer.on('mouseover', function () {
-                            layer.setStyle({
-                                color: "#ff3d00",
-                                weight: 2,
-                            });
-                            // select the corresponding list item and add the highlight class to make bold
-                            $('#glacierList-' + polyProps.num).addClass('highlight');
-
-                            // highlight bar chart bar
-                            let legendPolyName = $('#glacier-btn-dropdown').val();
-                            if (polyProps.GLACNAME === legendPolyName) {
-                                $('#bar3').addClass('barHover');
-                            };
-                        });
-
-                        layer.on('mouseout', function () {
-                            layer.setStyle({
-                                color: "#26C6DA",
-                                weight: 1.5,
-                            });
-                            $('#glacierList-' + polyProps.num).removeClass('highlight');
-                            $('#bar3').removeClass('barHover');
-                        });
-
-                        // tooltip
-                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
-                            "</b></div><br>" +
-                            "<div class=polyTooltipText>" + "Extent: &thinsp;1966" + "<br></div>" +
-                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
-                            "<span class=polyAreaBold>" + Number(polyProps[
-                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></span></div>" +
-                            "<div class=polyTooltipTextAcres>" + "or " +
-                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
-                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
-                                opacity: 1,
-                                sticky: true,
-                            }
-                        );
-                    });
-                };
-
-                // add poly98 interactions
-                function addInteractions98(layer98) {
-                    layer98.eachLayer(function (layer) {
-                        let polyProps = layer.feature.properties;
-
-                        layer.on('mouseover', function () {
-                            layer.setStyle({
-                                color: "#ff3d00",
-                                weight: 2,
-                            });
-                            // select the corresponding list item and add the highlight class to make bold
-                            $('#glacierList-' + polyProps.num).addClass('highlight');
-
-                            // highlight bar chart bar
-                            let legendPolyName = $('#glacier-btn-dropdown').val();
-                            if (polyProps.GLACNAME === legendPolyName) {
-                                $('#bar2').addClass('barHover');
-                            };
-                        });
-
-                        layer.on('mouseout', function () {
-                            layer.setStyle({
-                                color: "#00BCD4",
-                                weight: 1.5,
-                            });
-                            $('#glacierList-' + polyProps.num).removeClass('highlight');
-                            $('#bar2').removeClass('barHover');
-                        });
-
-                        // tooltip
-                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
-                            "</b></div><br>" +
-                            "<div class=polyTooltipText>" + "Extent: &thinsp;1998" + "<br></div>" +
-                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
-                            "<span class=polyAreaBold>" + Number(polyProps[
-                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></span></div>" +
-                            "<div class=polyTooltipTextAcres>" + "or " +
-                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
-                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
-                                opacity: 1,
-                                sticky: true,
-                            }
-                        );
-                    });
-                };
-
-                // add poly05 interactions
-                function addInteractions05(layer05) {
-                    layer05.eachLayer(function (layer) {
-                        let polyProps = layer.feature.properties;
-
-                        layer.on('mouseover', function () {
-                            layer.setStyle({
-                                color: "#ff3d00",
-                                weight: 2,
-                            });
-                            // select the corresponding list item and add the highlight class to make bold
-                            $('#glacierList-' + polyProps.num).addClass('highlight');
-
-                            // highlight bar chart bar
-                            let legendPolyName = $('#glacier-btn-dropdown').val();
-                            if (polyProps.GLACNAME === legendPolyName) {
-                                $('#bar1').addClass('barHover');
-                            };
-                        });
-
-                        layer.on('mouseout', function () {
-                            layer.setStyle({
-                                color: "#00ACC1",
-                                weight: 1.5,
-                            });
-                            $('#glacierList-' + polyProps.num).removeClass('highlight');
-                            $('#bar1').removeClass('barHover');
-                        });
-
-                        // tooltip
-                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
-                            "</b></div><br>" +
-                            "<div class=polyTooltipText>" + "Extent: &thinsp;2005" + "<br></div>" +
-                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
-                            "<span class=polyAreaBold>" + Number(polyProps[
-                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></span></div>" +
-                            "<div class=polyTooltipTextAcres>" + "or " +
-                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
-                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
-                                opacity: 1,
-                                sticky: true,
-                            }
-                        );
-                    });
-                };
-
-                // add poly15 interactions
-                function addInteractions15(layer15) {
-                    layer15.eachLayer(function (layer) {
-                        let polyProps = layer.feature.properties;
-
-                        layer.on('mouseover', function () {
-                            layer.setStyle({
-                                color: "#ff3d00",
-                                weight: 2,
-                            });
-                            // select the corresponding list item and add the highlight class to make bold
-                            $('#glacierList-' + polyProps.num).addClass('highlight');
-
-                            // highlight bar chart bar
-                            let legendPolyName = $('#glacier-btn-dropdown').val();
-                            if (polyProps.GLACNAME === legendPolyName) {
-                                $('#bar0').addClass('barHover');
-                            };
-                        });
-
-                        layer.on('mouseout', function () {
-                            layer.setStyle({
-                                color: "#00A0B5",
-                                weight: 1.5,
-                            });
-                            $('#glacierList-' + polyProps.num).removeClass('highlight');
-                            $('#bar0').removeClass('barHover');
-                        });
-
-                        // tooltip
-                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
-                            "</b></div><br>" +
-                            "<div class=polyTooltipText>" + "Extent: &thinsp;2015" + "<br></div>" +
-                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
-                            "<span class=polyAreaBold>" + Number(polyProps[
-                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></span></div>" +
-                            "<div class=polyTooltipTextAcres>" + "or " +
-                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
-                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
-                                opacity: 1,
-                                sticky: true,
-                            }
-                        );
-                    });
-                };
-
                 // create a point layer with the geojson data
                 const glacierPoints = L.geoJson(ptData, {
                     pointToLayer: function (feature, latlng) {
@@ -1884,12 +1549,32 @@
                         if (map.hasLayer(glacierPoints)) {
                             map.removeLayer(glacierPoints);
                         }
+                        $(".leaflet-tooltip-pane").empty();
+                        map.addLayer(allPolys);
+                        addInteractionsLIA(liaLayer);
+                        addInteractions66(layer66);
+                        addInteractions98(layer98);
+                        addInteractions05(layer05);
+                        addInteractions15(layer15);
+                        togglePolys();
                     }
                     if (zoomlevel < 12 && zoomlevel > 8) {
+                        liaLayer.resetStyle();
+                        layer66.resetStyle();
+                        layer98.resetStyle();
+                        layer05.resetStyle();
+                        layer15.resetStyle();
+                        if (map.hasLayer(allPolys)) {
+                            map.removeLayer(allPolys);
+                        }
                         $("#glacier-btn-dropdown").html("Select Glacier &thinsp;&#9662;").text();
                         map.addLayer(glacierPoints);
                         drawPts(glacierPoints);
                         drawPtLegend();
+                        $(".legendPolyList").fadeOut("fast");
+                        $('#glacierPolyLegendSm').fadeOut("fast");
+                        $(".leaflet-tooltip-pane").empty();
+                        $('#dropdown-list2 .dropdown-item2').removeClass('highlight');
                     }
                     if (zoomlevel <= 8) {
                         $('#dropdown-list2 .dropdown-item2').removeClass('highlight');
@@ -2109,6 +1794,339 @@
                     })
                 };
 
+                map.createPane("liaLayer");
+                map.getPane("liaLayer").style.zIndex = 446;
+                map.createPane("layer66");
+                map.getPane("layer66").style.zIndex = 447;
+                map.createPane("layer98");
+                map.getPane("layer98").style.zIndex = 448;
+                map.createPane("layer05");
+                map.getPane("layer05").style.zIndex = 449;
+                map.createPane("layer15");
+                map.getPane("layer15").style.zIndex = 450;
+
+                // create a LIA layer with the geojson data
+                const liaLayer = L.geoJson(liaData, {
+                    style: function (feature, layer) {
+                        return {
+                            color: "#a9a7ab",
+                            fillColor: "white",
+                            weight: 1.5,
+                            opacity: 1,
+                            fillOpacity: 0.4,
+                            lineJoin: 'round',
+                            dashArray: '3,4',
+                            pane: "liaLayer",
+                        };
+                    },
+                });
+
+                const layer66 = L.geoJson(polys66Data, {
+                    style: function (feature, layer) {
+                        return {
+                            color: "#26C6DA",
+                            fillColor: "#80DEEA",
+                            weight: 1.5,
+                            opacity: 1,
+                            fillOpacity: 0.4,
+                            lineJoin: 'round',
+                            dashArray: '3,4',
+                            pane: "layer66",
+                        };
+                    },
+                });
+
+                const layer98 = L.geoJson(polys98Data, {
+                    style: function (feature, layer) {
+                        return {
+                            color: "#00BCD4",
+                            fillColor: "#4DD0E1",
+                            weight: 1.5,
+                            opacity: 1,
+                            fillOpacity: 0.4,
+                            lineJoin: 'round',
+                            dashArray: '3,4',
+                            pane: "layer98",
+                        };
+                    }
+                });
+
+                const layer05 = L.geoJson(polys05Data, {
+                    style: function (feature, layer) {
+                        return {
+                            color: "#00ACC1",
+                            fillColor: "#26C6DA",
+                            weight: 1.5,
+                            opacity: 1,
+                            fillOpacity: 0.4,
+                            lineJoin: 'round',
+                            dashArray: '3,4',
+                            pane: "layer05",
+                        };
+                    }
+                });
+
+                const layer15 = L.geoJson(polys15Data, {
+                    style: function (feature, layer) {
+                        return {
+                            color: "#00A0B5",
+                            fillColor: "#00BCD4",
+                            weight: 1.5,
+                            opacity: 1,
+                            fillOpacity: 0.4,
+                            lineJoin: 'round',
+                            dashArray: '3,4',
+                            pane: "layer15",
+                        };
+                    }
+                });
+
+                const allPolys = L.layerGroup([liaLayer, layer66, layer98, layer05, layer15]);
+
+                // add lia poly interactions
+                function addInteractionsLIA(liaLayer) {
+                    liaLayer.eachLayer(function (layer) {
+                        let polyProps = layer.feature.properties;
+
+                        layer.on('mouseover', function () {
+                            layer.setStyle({
+                                color: "#ff3d00",
+                                weight: 2,
+                            });
+                            // select the corresponding list item and add the highlight class to make bold
+                            $('#glacierList-' + polyProps.num).addClass('highlight');
+                        });
+
+                        layer.on('mouseout', function () {
+                            layer.setStyle({
+                                color: "#a9a7ab",
+                                weight: 1.5,
+                            });
+                            $('#glacierList-' + polyProps.num).removeClass('highlight');
+                        });
+
+                        // tooltip
+                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
+                            "</b></div><br>" +
+                            "<div class=polyTooltipText>" + "Extent: &thinsp;Mid-19th century" +
+                            "<br></div>" +
+                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
+                            "<span class=polyAreaBold>" + Number(polyProps[
+                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></span></div>" +
+                            "<div class=polyTooltipTextAcres>" + "or " +
+                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
+                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
+                                opacity: 1,
+                                sticky: true,
+                            }
+                        );
+                    });
+                };
+
+                // add poly66 interactions
+                function addInteractions66(layer66) {
+                    layer66.eachLayer(function (layer) {
+                        let polyProps = layer.feature.properties;
+
+                        layer.on('mouseover', function () {
+                            layer.setStyle({
+                                color: "#ff3d00",
+                                weight: 2,
+                            });
+
+                            // select the corresponding list item and add the highlight class to make bold
+                            $('#glacierList-' + polyProps.num).addClass('highlight');
+
+                            // highlight bar chart bar
+                            let legendPolyName = $('#glacier-btn-dropdown').val();
+                            if (polyProps.GLACNAME === legendPolyName) {
+                                $('#bar3').addClass('barHover');
+                            };
+                        });
+
+                        layer.on('mouseout', function () {
+                            layer.setStyle({
+                                color: "#26C6DA",
+                                weight: 1.5,
+                            });
+
+                            $('#glacierList-' + polyProps.num).removeClass('highlight');
+                            $('#bar3').removeClass('barHover');
+                        });
+
+                        // tooltip
+                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps[
+                                "GLACNAME"] +
+                            "</b></div><br>" +
+                            "<div class=polyTooltipText>" + "Extent: &thinsp;1966" +
+                            "<br></div>" +
+                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
+                            "<span class=polyAreaBold>" + Number(polyProps[
+                                "AREA"]).toLocaleString() + " m&sup2; " +
+                            "<br></span></div>" +
+                            "<div class=polyTooltipTextAcres>" + "or " +
+                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
+                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
+                                opacity: 1,
+                                sticky: true,
+                            }
+                        );
+                    });
+                };
+
+                // add poly98 interactions
+                function addInteractions98(layer98) {
+                    layer98.eachLayer(function (layer) {
+                        let polyProps = layer.feature.properties;
+
+                        layer.on('mouseover', function () {
+                            layer.setStyle({
+                                color: "#ff3d00",
+                                weight: 2,
+                            });
+                            // select the corresponding list item and add the highlight class to make bold
+                            $('#glacierList-' + polyProps.num).addClass(
+                                'highlight');
+
+                            // highlight bar chart bar
+                            let legendPolyName = $('#glacier-btn-dropdown').val();
+                            if (polyProps.GLACNAME === legendPolyName) {
+                                $('#bar2').addClass('barHover');
+                            };
+                        });
+
+                        layer.on('mouseout', function () {
+                            layer.setStyle({
+                                color: "#00BCD4",
+                                weight: 1.5,
+                            });
+                            $('#glacierList-' + polyProps.num).removeClass(
+                                'highlight');
+                            $('#bar2').removeClass('barHover');
+                        });
+
+                        // tooltip
+                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps[
+                                "GLACNAME"] +
+                            "</b></div><br>" +
+                            "<div class=polyTooltipText>" + "Extent: &thinsp;1998" +
+                            "<br></div>" +
+                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
+                            "<span class=polyAreaBold>" + Number(polyProps[
+                                "AREA"]).toLocaleString() + " m&sup2; " +
+                            "<br></span></div>" +
+                            "<div class=polyTooltipTextAcres>" + "or " +
+                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
+                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
+                                opacity: 1,
+                                sticky: true,
+                            }
+                        );
+                    });
+                };
+
+                // add poly05 interactions
+                function addInteractions05(layer05) {
+                    layer05.eachLayer(function (layer) {
+                        let polyProps = layer.feature.properties;
+
+                        layer.on('mouseover', function () {
+                            layer.setStyle({
+                                color: "#ff3d00",
+                                weight: 2,
+                            });
+                            // select the corresponding list item and add the highlight class to make bold
+                            $('#glacierList-' + polyProps.num).addClass(
+                                'highlight');
+
+                            // highlight bar chart bar
+                            let legendPolyName = $('#glacier-btn-dropdown').val();
+                            if (polyProps.GLACNAME === legendPolyName) {
+                                $('#bar1').addClass('barHover');
+                            };
+                        });
+
+                        layer.on('mouseout', function () {
+                            layer.setStyle({
+                                color: "#00ACC1",
+                                weight: 1.5,
+                            });
+                            $('#glacierList-' + polyProps.num).removeClass(
+                                'highlight');
+                            $('#bar1').removeClass('barHover');
+                        });
+
+                        // tooltip
+                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps[
+                                "GLACNAME"] +
+                            "</b></div><br>" +
+                            "<div class=polyTooltipText>" + "Extent: &thinsp;2005" +
+                            "<br></div>" +
+                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
+                            "<span class=polyAreaBold>" + Number(polyProps[
+                                "AREA"]).toLocaleString() + " m&sup2; " +
+                            "<br></span></div>" +
+                            "<div class=polyTooltipTextAcres>" + "or " +
+                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
+                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
+                                opacity: 1,
+                                sticky: true,
+                            }
+                        );
+                    });
+                };
+
+                // add poly15 interactions
+                function addInteractions15(layer15) {
+                    layer15.eachLayer(function (layer) {
+                        let polyProps = layer.feature.properties;
+
+                        layer.on('mouseover', function () {
+                            layer.setStyle({
+                                color: "#ff3d00",
+                                weight: 2,
+                            });
+                            // select the corresponding list item and add the highlight class to make bold
+                            $('#glacierList-' + polyProps.num).addClass(
+                                'highlight');
+
+                            // highlight bar chart bar
+                            let legendPolyName = $('#glacier-btn-dropdown').val();
+                            if (polyProps.GLACNAME === legendPolyName) {
+                                $('#bar0').addClass('barHover');
+                            };
+                        });
+
+                        layer.on('mouseout', function () {
+                            layer.setStyle({
+                                color: "#00A0B5",
+                                weight: 1.5,
+                            });
+                            $('#glacierList-' + polyProps.num).removeClass(
+                                'highlight');
+                            $('#bar0').removeClass('barHover');
+                        });
+
+                        // tooltip
+                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps[
+                                "GLACNAME"] +
+                            "</b></div><br>" +
+                            "<div class=polyTooltipText>" + "Extent: &thinsp;2015" +
+                            "<br></div>" +
+                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
+                            "<span class=polyAreaBold>" + Number(polyProps[
+                                "AREA"]).toLocaleString() + " m&sup2; " +
+                            "<br></span></div>" +
+                            "<div class=polyTooltipTextAcres>" + "or " +
+                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
+                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
+                                opacity: 1,
+                                sticky: true,
+                            }
+                        );
+                    });
+                };
+
                 // zoom to glacier from dropdown list and change selected glacier name in button
                 function zoomToGlacier(glacierPoints) {
 
@@ -2242,7 +2260,8 @@
                     const yearRM2 = layer.feature.properties['P4_YR_R'];
                     const yearRM3 = layer.feature.properties['P5_YR_R'];
 
-                    const legendPolyTitle = "<div class='polyLegendMain'>" + "<h4 class='polyLegendTitle'>" +
+                    const legendPolyTitle = "<div class='polyLegendMain'>" +
+                        "<h4 class='polyLegendTitle'>" +
                         legendPolyName +
                         $("#photoIcon").html() + "</h4>" + "</div>";
                     $(".legendPolyList").html(legendPolyTitle);
@@ -2321,7 +2340,8 @@
                         });
                     };
 
-                    const legendPolyAreaTitle = "<h4 class='polyLegendAreaTitle'>" + "Glacial Extents " +
+                    const legendPolyAreaTitle = "<h4 class='polyLegendAreaTitle'>" +
+                        "Glacial Extents " +
                         "</h4>"
                     $(legendPolyAreaTitle).insertAfter("#camera-icon");
 
@@ -2330,7 +2350,8 @@
                     $(polygonYearsGroup).insertAfter(".polyLegendAreaTitle");
 
                     const areaChartTitle = "<h4 class='areaChartTitle'>" + "Glacier Area " +
-                        "<span class='areaChartSubTitle'>" + "(1966 &ndash; 2015)" + "</span>" + "</h4>"
+                        "<span class='areaChartSubTitle'>" + "(1966 &ndash; 2015)" + "</span>" +
+                        "</h4>"
                     $(areaChartTitle).insertAfter("#switchGroup2");
 
                     // d3.js bar chart
@@ -2379,23 +2400,29 @@
                                 left: 30,
                             },
                         }
-                        dimensions.boundedWidth = dimensions.width - dimensions.margin.left - dimensions.margin
+                        dimensions.boundedWidth = dimensions.width - dimensions.margin.left -
+                            dimensions.margin
                             .right
-                        dimensions.boundedHeight = dimensions.height - dimensions.margin.top - dimensions.margin
+                        dimensions.boundedHeight = dimensions.height - dimensions.margin.top -
+                            dimensions.margin
                             .bottom
 
                         // draw canvas
                         const wrapper1 = d3.select("#wrapper1")
                             .append("svg")
-                            .attr("width", dimensions.width + dimensions.margin.left + dimensions.margin.right)
-                            .attr("height", dimensions.height + dimensions.margin.top + dimensions.margin
+                            .attr("width", dimensions.width + dimensions.margin.left + dimensions
+                                .margin.right)
+                            .attr("height", dimensions.height + dimensions.margin.top + dimensions
+                                .margin
                                 .bottom)
                             .append("g")
-                            .attr("transform", "translate(" + dimensions.margin.left + "," + dimensions.margin
+                            .attr("transform", "translate(" + dimensions.margin.left + "," +
+                                dimensions.margin
                                 .top + ")");
 
                         const bounds1 = wrapper1.append("g")
-                            .attr("transform", "translate(" + dimensions.margin.left + "," + dimensions.margin
+                            .attr("transform", "translate(" + dimensions.margin.left + "," +
+                                dimensions.margin
                                 .top + ")");
 
                         // format the data
@@ -2447,8 +2474,10 @@
                             .on("mouseover", function (d) {
                                 if (d.Year == 1966) {
                                     layer66.eachLayer(function (layer) {
-                                        if (layer.feature.properties['GLACNAME'] == d["GLACNAME"] &&
-                                            layer.feature.properties['Year'] === "1966") {
+                                        if (layer.feature.properties['GLACNAME'] == d[
+                                                "GLACNAME"] &&
+                                            layer.feature.properties['Year'] === "1966"
+                                        ) {
                                             layer.setStyle({
                                                 color: "#ff3d00",
                                                 weight: 2,
@@ -2458,8 +2487,10 @@
                                 }
                                 if (d.Year == 1998) {
                                     layer98.eachLayer(function (layer) {
-                                        if (layer.feature.properties['GLACNAME'] == d["GLACNAME"] &&
-                                            layer.feature.properties['Year'] === "1998") {
+                                        if (layer.feature.properties['GLACNAME'] == d[
+                                                "GLACNAME"] &&
+                                            layer.feature.properties['Year'] === "1998"
+                                        ) {
                                             layer.setStyle({
                                                 color: "#ff3d00",
                                                 weight: 2,
@@ -2469,8 +2500,10 @@
                                 }
                                 if (d.Year == 2005) {
                                     layer05.eachLayer(function (layer) {
-                                        if (layer.feature.properties['GLACNAME'] == d["GLACNAME"] &&
-                                            layer.feature.properties['Year'] === "2005") {
+                                        if (layer.feature.properties['GLACNAME'] == d[
+                                                "GLACNAME"] &&
+                                            layer.feature.properties['Year'] === "2005"
+                                        ) {
                                             layer.setStyle({
                                                 color: "#ff3d00",
                                                 weight: 2,
@@ -2480,8 +2513,10 @@
                                 }
                                 if (d.Year == 2015) {
                                     layer15.eachLayer(function (layer) {
-                                        if (layer.feature.properties['GLACNAME'] == d["GLACNAME"] &&
-                                            layer.feature.properties['Year'] === "2015") {
+                                        if (layer.feature.properties['GLACNAME'] == d[
+                                                "GLACNAME"] &&
+                                            layer.feature.properties['Year'] === "2015"
+                                        ) {
                                             layer.setStyle({
                                                 color: "#ff3d00",
                                                 weight: 2,
@@ -2494,10 +2529,12 @@
                                 return tooltip1
                                     .style("visibility", "visible")
                                     .html("<span class='barYear'>" + d.Year + "</span><br>" +
-                                        "Area: &thinsp;" + "<span class='barArea'>" + format(d.AREA) +
+                                        "Area: &thinsp;" + "<span class='barArea'>" + format(d
+                                            .AREA) +
                                         " m&sup2;" + "</span><br>" +
                                         "<span class=barTooltipTextAcres>" + "or " +
-                                        "<span class='barArea'>" + format(d.AREA * 0.000247105) + " acres" +
+                                        "<span class='barArea'>" + format(d.AREA *
+                                            0.000247105) + " acres" +
                                         "</span></span>")
                             })
                             .on("mousemove", function (d) {
@@ -2607,7 +2644,8 @@
                         // climate chart toggle button 
                         function buildLineSwitch() {
 
-                            const climateDataTitle = "<h4 class='climateDataTitle'>" + "Climatological Data " +
+                            const climateDataTitle = "<h4 class='climateDataTitle'>" +
+                                "Climatological Data " +
                                 "</h4>"
                             $(climateDataTitle).insertAfter(".wrapper1");
 
@@ -2670,7 +2708,8 @@
 
                             const bounds2 = wrapper2.append("g")
                                 .style("transform",
-                                    `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`)
+                                    `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`
+                                )
 
                             // create scales
                             const yScale = d3.scaleLinear()
@@ -2695,8 +2734,9 @@
                             const endDate3 = xAccessor(dataset[49])
 
                             const group1 = d3.timeYears(startDate1, endDate1)
-                            const yearsFilter1 = dataset.filter(d => xAccessor(d) >= startDate1 && xAccessor(
-                                d) < endDate1)
+                            const yearsFilter1 = dataset.filter(d => xAccessor(d) >= startDate1 &&
+                                xAccessor(
+                                    d) < endDate1)
                             if (!yearsFilter1.length) return
                             yearsData.push({
                                 start: startDate1,
@@ -2706,8 +2746,9 @@
                                 mean: d3.mean(yearsFilter1, yAccessor),
                             })
                             const group2 = d3.timeYears(startDate2, endDate2)
-                            const yearsFilter2 = dataset.filter(d => xAccessor(d) >= startDate2 && xAccessor(
-                                d) < endDate2)
+                            const yearsFilter2 = dataset.filter(d => xAccessor(d) >= startDate2 &&
+                                xAccessor(
+                                    d) < endDate2)
                             if (!yearsFilter2.length) return
                             yearsData.push({
                                 start: startDate2,
@@ -2717,8 +2758,9 @@
                                 mean: d3.mean(yearsFilter2, yAccessor),
                             })
                             const group3 = d3.timeYears(startDate3, endDate3)
-                            const yearsFilter3 = dataset.filter(d => xAccessor(d) >= startDate3 && xAccessor(
-                                d) <= endDate3)
+                            const yearsFilter3 = dataset.filter(d => xAccessor(d) >= startDate3 &&
+                                xAccessor(
+                                    d) <= endDate3)
                             if (!yearsFilter3.length) return
                             yearsData.push({
                                 start: startDate3,
@@ -2832,9 +2874,11 @@
 
                             return tooltip2
                                 .style("visibility", "visible")
-                                .html("<span class='tooltip-date'>" + "<span class='date'>" + "</span>" +
+                                .html("<span class='tooltip-date'>" + "<span class='date'>" +
+                                    "</span>" +
                                     "</span>" + "<br>" +
-                                    "<span class='tooltip-text'>" + "</span>" + "<div class='tooltip-text'>" +
+                                    "<span class='tooltip-text'>" + "</span>" +
+                                    "<div class='tooltip-text'>" +
                                     "Average annual air" + "<br>" + "temperature: &thinsp;" +
                                     "<span id='temp'>" + "</span></div>")
 
@@ -2842,9 +2886,11 @@
                                 const mousePosition = d3.mouse(this)
                                 const hoveredDate = xScale.invert(mousePosition[0])
 
-                                const getDistanceFromHoveredDate = d => Math.abs(xAccessor(d) - hoveredDate)
+                                const getDistanceFromHoveredDate = d => Math.abs(xAccessor(d) -
+                                    hoveredDate)
                                 const closestIndex = d3.scan(dataset, (a, b) => (
-                                    getDistanceFromHoveredDate(a) - getDistanceFromHoveredDate(b)
+                                    getDistanceFromHoveredDate(a) -
+                                    getDistanceFromHoveredDate(b)
                                 ))
                                 const closestDataPoint = dataset[closestIndex]
 
@@ -2923,7 +2969,8 @@
 
                             const bounds3 = wrapper3.append("g")
                                 .style("transform",
-                                    `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`)
+                                    `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`
+                                )
 
                             // create scales
                             const yScale = d3.scaleLinear()
@@ -2948,8 +2995,9 @@
                             const endDate3 = xAccessor(dataset[49])
 
                             const group1 = d3.timeYears(startDate1, endDate1)
-                            const yearsFilter1 = dataset.filter(d => xAccessor(d) >= startDate1 && xAccessor(
-                                d) < endDate1)
+                            const yearsFilter1 = dataset.filter(d => xAccessor(d) >= startDate1 &&
+                                xAccessor(
+                                    d) < endDate1)
                             if (!yearsFilter1.length) return
                             yearsData.push({
                                 start: startDate1,
@@ -2959,8 +3007,9 @@
                                 mean: d3.mean(yearsFilter1, yAccessor),
                             })
                             const group2 = d3.timeYears(startDate2, endDate2)
-                            const yearsFilter2 = dataset.filter(d => xAccessor(d) >= startDate2 && xAccessor(
-                                d) < endDate2)
+                            const yearsFilter2 = dataset.filter(d => xAccessor(d) >= startDate2 &&
+                                xAccessor(
+                                    d) < endDate2)
                             if (!yearsFilter2.length) return
                             yearsData.push({
                                 start: startDate2,
@@ -2970,8 +3019,9 @@
                                 mean: d3.mean(yearsFilter2, yAccessor),
                             })
                             const group3 = d3.timeYears(startDate3, endDate3)
-                            const yearsFilter3 = dataset.filter(d => xAccessor(d) >= startDate3 && xAccessor(
-                                d) <= endDate3)
+                            const yearsFilter3 = dataset.filter(d => xAccessor(d) >= startDate3 &&
+                                xAccessor(
+                                    d) <= endDate3)
                             if (!yearsFilter3.length) return
                             yearsData.push({
                                 start: startDate3,
@@ -3054,7 +3104,8 @@
                                 const totalLineLength = line.node().getTotalLength();
 
                                 line
-                                    .attr("stroke-dasharray", totalLineLength + " " + totalLineLength)
+                                    .attr("stroke-dasharray", totalLineLength + " " +
+                                        totalLineLength)
                                     .attr("stroke-dashoffset", totalLineLength)
                                     .transition()
                                     .duration(1200)
@@ -3088,19 +3139,24 @@
 
                             return tooltip3
                                 .style("visibility", "visible")
-                                .html("<span class='tooltip-date'>" + "<span class='date'>" + "</span>" +
+                                .html("<span class='tooltip-date'>" + "<span class='date'>" +
+                                    "</span>" +
                                     "</span>" + "<br>" +
-                                    "<span class='tooltip-text'>" + "</span>" + "<div class='tooltip-text'>" +
-                                    "Total annual" + "<br>" + "precipitation: &thinsp;" + "<span id='precip'>" +
+                                    "<span class='tooltip-text'>" + "</span>" +
+                                    "<div class='tooltip-text'>" +
+                                    "Total annual" + "<br>" + "precipitation: &thinsp;" +
+                                    "<span id='precip'>" +
                                     "</span></div>")
 
                             function onMouseMove() {
                                 const mousePosition = d3.mouse(this)
                                 const hoveredDate = xScale.invert(mousePosition[0])
 
-                                const getDistanceFromHoveredDate = d => Math.abs(xAccessor(d) - hoveredDate)
+                                const getDistanceFromHoveredDate = d => Math.abs(xAccessor(d) -
+                                    hoveredDate)
                                 const closestIndex = d3.scan(dataset, (a, b) => (
-                                    getDistanceFromHoveredDate(a) - getDistanceFromHoveredDate(b)
+                                    getDistanceFromHoveredDate(a) -
+                                    getDistanceFromHoveredDate(b)
                                 ))
                                 const closestDataPoint = dataset[closestIndex]
 
