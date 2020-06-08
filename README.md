@@ -22,7 +22,13 @@ The application is designed to provide both the professional and public audience
 
 Data for this project is sourced from the [United States Geological Survey (USGS)](https://www.usgs.gov/centers/norock/science/repeat-photography-project?qt-science_center_objects=0#qt-science_center_objects), the [National Park Service (NPS)](https://www.nps.gov/glac/index.htm), [Oregon State University](http://prism.oregonstate.edu/) and [Portland State University](http://glaciers.us/image-galleries/lewis-range-mt.html). QGIS and Python 3 are used to process and analyze the datasets.
 
-#### A. Data
+#### A. Medium for delivery
+
+The map is a web browser-based application accessible across mobile and desktop devices. All files and code have been hosted on [Github](https://github.com/efano/GNP-glaciers) and freely available to the public.
+
+The technology stack for the application includes HTML/SVG/CSS/JS, jQuery, and Leaflet. The responsive and user interface framework includes the use of Mapbox's Assembly.css and vanilla JavaScript. D3.js has been used as the charting library, and chroma.js to determine the color scales used in symbolizing the glacier points.
+
+#### B. Data
 
 The content of the web map are derived from the following data sources:
 
@@ -35,12 +41,6 @@ The content of the web map are derived from the following data sources:
 * Mid-19th century shapefile: [USGS Little Ice Age polygon dataset](https://www.sciencebase.gov/catalog/item/5b194f1ce4b092d965237f5f). The shapefile has been converted to JSON through the use of QGIS and Mapshaper. The historical photograph metadata has been joined with this dataset.
 
 * Localized climatological data: 1966 - 2015 localized to individual glacier climatological data was queried using the 2015 point dataset and extracted as CSV files from Oregon State University Northwest Alliance for Computational Science and Engineering, [Parameter-elevation Regressions on Independent Slopes Model (PRISM)](http://prism.oregonstate.edu/). The spatial resolution of each glacier point location is within four square kilometers, using a predetermined grid and using inverse-distance squared weighting between grid cells. A 15-year limit for bulk downloads from the PRISM site resulted in multiple downloads to obtain the full 50-year dataset. These files were then merged into one CSV file and loaded into a [Jupyter Notebook](https://github.com/efano/GNP-glaciers/blob/master/climate-data-exploratory.ipynb) to further format the data for project use. Using Python 3, the climate data was resampled from monthly averages to annual averages to better display general trends on the relatively small map legend charts.
-
-#### B. Medium for delivery
-
-The map is a web browser-based application accessible across mobile and desktop devices. All files and code have been hosted on [Github](https://github.com/efano/GNP-glaciers) and freely available to the public.
-
-The technology stack for the application includes HTML/SVG/CSS/JS, jQuery, and Leaflet. The responsive and user interface framework includes the use of Mapbox's Assembly.css and vanilla JavaScript. D3.js has been used as the charting library, and chroma.js to determine the color scales used in symbolizing the glacier points.
 
 #### C. Application layout
 
