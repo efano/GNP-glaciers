@@ -4,7 +4,7 @@
 
 ## [*Visualizing a Half-Century of Glacier Loss in Glacier National Park, Montana*](https://efano.github.io/GNP-glaciers)
 
-A web mapping application project designed by [Lis Fano](https://efano.github.io/) as part of the University of Kentucky [New Maps Plus](https://newmapsplus.as.uky.edu/) graduate program.
+A web mapping application project designed by [Lis Fano](https://efano.github.io/) as part of the University of Kentucky [New Maps Plus](https://newmapsplus.as.uky.edu/) graduate program
 
 ### I. Introduction
 
@@ -28,7 +28,7 @@ The content of the web map are derived from the following data sources:
 
 * Park boundary: [NPS Glacier National Park boundary shapefile](https://public-nps.opendata.arcgis.com/datasets/nps-boundary-1/data?orderBy=UNIT_CODE&page=17). The shapefile has been converted to JSON through the use of QGIS and Mapshaper.
 
-* Historical and recent photographs: [USGS repeat photography Project](https://www.usgs.gov/centers/norock/science/repeat-photography-project?qt-science_center_objects=0#qt-science_center_objects) and [Department of Geology and Geography at Portland State University](http://glaciers.us/image-galleries/lewis-range-mt.html). Historical photographs were downloaded, formatted/aligned, attributed, and resized for the web. Photographs that were part of the USGS Repeat Photography Project and overlayed well enough to create a before/after photo slider were aligned using Adobe Photoshop. Photos that did not align were formatted as side-by-side before/after visualizations. Glaciers without two, comparable photos were formatted to show one, recent photograph. These visualizations are accessible to the user via a hyperlinked photograph icon on the legend for the individual glacier. A modal popup displays these visualizations when the icon is clicked.
+* Historical and recent photographs: [USGS repeat photography Project](https://www.usgs.gov/centers/norock/science/repeat-photography-project?qt-science_center_objects=0#qt-science_center_objects) and [Department of Geology and Geography at Portland State University](http://glaciers.us/image-galleries/lewis-range-mt.html). Historical photographs were downloaded, formatted/aligned, attributed, and resized for the web. Photographs that were part of the USGS Repeat Photography Project and overlaid well enough to create a before/after photo slider were aligned using Adobe Photoshop. Photos that did not align were formatted as side-by-side before/after visualizations. Glaciers without two, comparable photos were formatted to show one, recent photograph. These visualizations are accessible to the user via a hyperlinked photograph icon on the legend for the individual glacier. A modal popup displays these visualizations when the icon is clicked.
 
 * Glacier extent shapefiles: [USGS glacier extent polygon datasets (1966 - 2015)](https://www.sciencebase.gov/catalog/item/58af7022e4b01ccd54f9f542). The four shapefiles have been combined into one shapefile using QGIS and converted to JSON through the use of Mapshaper. Point data are derived from the 2015 polygon shapefile in QGIS using the polygon-to-centroid point tool/script. The percent area loss (1966-2015) has been calculated and compared with the [USGS data table](https://www.usgs.gov/data-tools/area-named-glaciers-glacier-national-park-gnp-and-flathead-national-forest-fnf-including) and added to the point dataset. Active/Stagnant fields (Boolean y/n) in 1966 and 2015 have been determined based on computed area (< > 0.1 square km) and added to the file. The dataset was then converted to JSON format using Mapshaper.
 
@@ -40,7 +40,7 @@ The content of the web map are derived from the following data sources:
 
 The map is a web browser-based application accessible across mobile and desktop devices. All files and code have been hosted on [Github](https://github.com/efano/GNP-glaciers) and freely available to the public.
 
-The technology stack for the application includes HTML/SVG/CSS/JS, jQuery, and Leaflet. The responsive and user interface framework includes the use of Mapbox's Assembly.css and vanilla javascript. D3.js has been used as the charting library, and chroma.js to determine the color scales used in symbolizing the glacier points.
+The technology stack for the application includes HTML/SVG/CSS/JS, jQuery, and Leaflet. The responsive and user interface framework includes the use of Mapbox's Assembly.css and vanilla JavaScript. D3.js has been used as the charting library, and chroma.js to determine the color scales used in symbolizing the glacier points.
 
 #### C. Application layout
 
@@ -52,7 +52,7 @@ The project integrates the digitized glacier outlines for all years, displays th
 
 #### E. User interaction
 
-The user engages with the mapping application by initially selecting a glacier, symbolized as a point, by either clicking directly on the point or by selecting the glacier by name through the use of a dropdown list located on the top navigation bar. Once selected, the map will zoom to the full extent of the mid-19th century glacier outline and a custom legend appears containing information and tools that allows the user to further interact with the individual glacier. The legend also contains an icon link to historical photos along with interactive climatic and area charts. A full extent icon, located on the top navigation bar can be used to zoom back to the full park extent where the map data returns to the original state of point data. Additional filtering is available through the glacier point legend to toggle between active and stagnant glacial states at the beginning of the study (1966) and the last measurement (2015). A collection of basemaps is accessible through the use of a basemap icon located on the top navigational bar. The user is able to minimize both legends to an icon for smaller device use, if necessary.
+The user engages with the mapping application by initially selecting a glacier, symbolized as a point, by either clicking directly on the point or by selecting the glacier by name through the use of a dropdown list located on the top navigation bar. Once selected, the map will zoom to the full extent of the mid-19th century glacier outline and a custom legend appears containing information and tools that allow the user to further interact with the individual glacier. The legend also contains an icon link to historical photos along with interactive climatic and area charts. A full extent icon, located on the top navigation bar can be used to zoom back to the full park extent where the map data returns to the original state of point data. Additional filtering is available through the glacier point legend to toggle between active and stagnant glacial states at the beginning of the study (1966) and the last measurement (2015). A collection of basemaps is accessible through the use of a basemap icon located on the top navigational bar. The user is able to minimize both legends to an icon for smaller device use, if necessary.
 
 #### F. Aesthetics and design considerations
 
