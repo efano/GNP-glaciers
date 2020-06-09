@@ -1912,10 +1912,12 @@
                             "<br></div>" +
                             "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
                             "<span class=polyAreaBold>" + Number(polyProps[
-                                "AREA"]).toLocaleString() + " m&sup2; " + "<br></span></div>" +
-                            "<div class=polyTooltipTextAcres>" + "or " +
+                                "AREA"] * 0.000001).toLocaleString() + " km&sup2; " + "</span>" +
+                            "&thinsp;or" + "</div>" +
+                            "<div class=polyTooltipTextAcres>" +
                             "<span class=polyAreaBold>" + (polyProps["AREA"] *
-                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
+                                0.0002471053814671738146717).toFixed(3) + " acres" +
+                            "</span></div>", {
                                 opacity: 1,
                                 sticky: true,
                             }
@@ -1962,11 +1964,12 @@
                             "<br></div>" +
                             "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
                             "<span class=polyAreaBold>" + Number(polyProps[
-                                "AREA"]).toLocaleString() + " m&sup2; " +
-                            "<br></span></div>" +
-                            "<div class=polyTooltipTextAcres>" + "or " +
+                                "AREA"] * 0.000001).toLocaleString() + " km&sup2; " + "</span>" +
+                            "&thinsp;or" + "</div>" +
+                            "<div class=polyTooltipTextAcres>" +
                             "<span class=polyAreaBold>" + (polyProps["AREA"] *
-                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
+                                0.0002471053814671738146717).toFixed(3) + " acres" +
+                            "</span></div>", {
                                 opacity: 1,
                                 sticky: true,
                             }
@@ -2013,11 +2016,12 @@
                             "<br></div>" +
                             "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
                             "<span class=polyAreaBold>" + Number(polyProps[
-                                "AREA"]).toLocaleString() + " m&sup2; " +
-                            "<br></span></div>" +
-                            "<div class=polyTooltipTextAcres>" + "or " +
+                                "AREA"] * 0.000001).toLocaleString() + " km&sup2; " + "</span>" +
+                            "&thinsp;or" + "</div>" +
+                            "<div class=polyTooltipTextAcres>" +
                             "<span class=polyAreaBold>" + (polyProps["AREA"] *
-                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
+                                0.0002471053814671738146717).toFixed(3) + " acres" +
+                            "</span></div>", {
                                 opacity: 1,
                                 sticky: true,
                             }
@@ -2064,11 +2068,12 @@
                             "<br></div>" +
                             "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
                             "<span class=polyAreaBold>" + Number(polyProps[
-                                "AREA"]).toLocaleString() + " m&sup2; " +
-                            "<br></span></div>" +
-                            "<div class=polyTooltipTextAcres>" + "or " +
+                                "AREA"] * 0.000001).toLocaleString() + " km&sup2; " + "</span>" +
+                            "&thinsp;or" + "</div>" +
+                            "<div class=polyTooltipTextAcres>" +
                             "<span class=polyAreaBold>" + (polyProps["AREA"] *
-                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
+                                0.0002471053814671738146717).toFixed(3) + " acres" +
+                            "</span></div>", {
                                 opacity: 1,
                                 sticky: true,
                             }
@@ -2115,11 +2120,12 @@
                             "<br></div>" +
                             "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
                             "<span class=polyAreaBold>" + Number(polyProps[
-                                "AREA"]).toLocaleString() + " m&sup2; " +
-                            "<br></span></div>" +
-                            "<div class=polyTooltipTextAcres>" + "or " +
+                                "AREA"] * 0.000001).toLocaleString() + " km&sup2; " + "</span>" +
+                            "&thinsp;or" + "</div>" +
+                            "<div class=polyTooltipTextAcres>" +
                             "<span class=polyAreaBold>" + (polyProps["AREA"] *
-                                0.000247105).toFixed(2) + " acres" + "</span></div>", {
+                                0.0002471053814671738146717).toFixed(3) + " acres" +
+                            "</span></div>", {
                                 opacity: 1,
                                 sticky: true,
                             }
@@ -2373,14 +2379,14 @@
                         // compute area calculations
                         const area1966 = filteredData[0].AREA;
                         const area2015 = filteredData[3].AREA;
-                        const format = d3.format(",.2f");
-                        const areaDif = format(area1966 - area2015);
-                        const areaAcres = format((area1966 - area2015) * 0.000247105);
+                        const format = d3.format(",.3f");
+                        const areaDif = format((area1966 - area2015) * 0.000001);
+                        const areaAcres = format((area1966 - area2015) * 0.0002471053814671738146717);
 
                         const areaChartText = "<div class='areaChartText'>" +
                             "50-year change in area: &thinsp;" + "<span class='areaChartCalcs'>" +
-                            areaDif + " m&sup2;" + "<br>" + "</span>" +
-                            "or&thinsp;" + "<span class='areaChartCalcs'>" + areaAcres + " acres" +
+                            areaDif + " km&sup2;" + "</span>" + "&thinsp;or" + "<br>" +
+                            "<span class='areaChartCalcs'>" + areaAcres + " acres" +
                             "</span>" + "</div>"
                         $(areaChartText).insertAfter(".areaChartTitle");
 
@@ -2525,16 +2531,16 @@
                                     });
                                 }
 
-                                const format = d3.format(",.2f")
+                                const format = d3.format(",.3f")
                                 return tooltip1
                                     .style("visibility", "visible")
                                     .html("<span class='barYear'>" + d.Year + "</span><br>" +
-                                        "Area: &thinsp;" + "<span class='barArea'>" + format(d
-                                            .AREA) +
-                                        " m&sup2;" + "</span><br>" +
-                                        "<span class=barTooltipTextAcres>" + "or " +
+                                        "Area: &thinsp;" + "<span class='barArea'>" + format((d
+                                            .AREA) * 0.000001) +
+                                        " km&sup2;" + "</span>" + " or" + "<br>" +
+                                        "<span class=barTooltipTextAcres>" +
                                         "<span class='barArea'>" + format(d.AREA *
-                                            0.000247105) + " acres" +
+                                            0.0002471053814671738146717) + " acres" +
                                         "</span></span>")
                             })
                             .on("mousemove", function (d) {
