@@ -429,7 +429,7 @@
             border-radius: 5px;
             left: 11px;
             bottom: 11px;
-            width: 196px;
+            width: 200px;
             position: absolute;
             z-index: 950;
             color: #333;
@@ -543,8 +543,20 @@
             color: #444444;
         }
 
-        #stangnant {
+        #stagnant {
             margin-left: 2px;
+        }
+
+        .glacierPtLegendText2 {
+            font-size: 12px;
+            font-weight: 500;
+            color: #333;
+            margin-left: 20px;
+        }
+
+        .list1 {
+            margin-top: 5px;
+            margin-bottom: 8px;
         }
 
         .glacierPtLegendText {
@@ -1126,15 +1138,17 @@
                         </label>
                     </div>
                 </li>
-                <li>
+                <li class="list1">
                     <span class="glacierPtLegendText" id="symbolActive">&#x25C6;</span>
-                    <span class="glacierPtLegendText" id="active">Active (&thinsp;&#8805;&thinsp;&#8239;0.1
-                        km&sup2;&#8239;)</span>
+                    <span class="glacierPtLegendText" id="active">Active: defined as a glacier</span>
+                    <br>
+                    <span class="glacierPtLegendText2" id="active2">(&thinsp;&#8805;&thinsp;&#8239;0.1km&sup2;&#8239;)</span>
                 </li>
-                <li>
+                <li class="list2">
                     <span class="glacierPtLegendText" id="symbolStangnant">x</span>
-                    <span class="glacierPtLegendText" id="stangnant">Stagnant (&#8239;&lt; 0.1
-                        km&sup2;&#8239;)</span>
+                    <span class="glacierPtLegendText" id="stagnant">Stagnant: no longer a glacier </span>
+                    <br>
+                    <span class="glacierPtLegendText2" id="stagnant2">(&#8239;&lt; 0.1km&sup2;&#8239;)</span>
                 </li>
             </ul>
         </div>
