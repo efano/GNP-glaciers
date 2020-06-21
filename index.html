@@ -1142,13 +1142,15 @@
                     <span class="glacierPtLegendText" id="symbolActive">&#x25C6;</span>
                     <span class="glacierPtLegendText" id="active">Active: defined as a glacier</span>
                     <br>
-                    <span class="glacierPtLegendText2" id="active2">(&thinsp;&#8805;&thinsp;&#8239;0.1km&sup2;&#8239;)</span>
+                    <span class="glacierPtLegendText2"
+                        id="active2">(&thinsp;&#8805;&thinsp;&#8239;0.1km&sup2;&#8239;)</span>
                 </li>
                 <li class="list2">
                     <span class="glacierPtLegendText" id="symbolStangnant">x</span>
                     <span class="glacierPtLegendText" id="stagnant">Stagnant: no longer defined </span>
                     <br>
-                    <span class="glacierPtLegendText2" id="stagnant2">as a glacier (&#8239;&lt; 0.1km&sup2;&#8239;)</span>
+                    <span class="glacierPtLegendText2" id="stagnant2">as a glacier (&#8239;&lt;
+                        0.1km&sup2;&#8239;)</span>
                 </li>
             </ul>
         </div>
@@ -1674,7 +1676,7 @@
                             $("#wrapper2").empty();
                             $("#wrapper3").empty();
                             // change 'Select Glacier' button to glacier name
-                            btnObj = $("#glacier-btn-dropdown");
+                            let btnObj = $("#glacier-btn-dropdown");
                             $(btnObj).text($(".highlight").text());
                             $(btnObj).val($(".highlight").text());
                             $('[id="glacierDropdownList"]').removeClass('show2');
