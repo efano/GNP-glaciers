@@ -1237,6 +1237,26 @@
                 </div>
             </div>
         </div>
+
+        <!-- intro modal
+        <div hidden class="introModal" id="introModal">
+            <div class="modalHeader">
+                <div class="modalTitle"></div>
+                <button class="absolute top right px12 py12  modal_close">
+                    <svg class="icon link color-darken50 modal3_close" id="closeIcon4">
+                        <use xlink:href="#icon-close"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body modal-body-container">
+                <img id="imageM4" src="photos/placeholder.jpg" class="image" alt="">
+                <div class="side-right yearRM3" year-right=" "></div>
+                <div>
+                    <div class="attributionRM3" value="attributionRight"></div>
+                </div>
+            </div>
+        </div> -->
+
     </div>
 
     <!-- polygon years checkboxes -->
@@ -1411,35 +1431,42 @@
             // basemaps
             const topoESRI = L.tileLayer(
                 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-                    attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
+                    attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community' + '<br>' +
+                    "<span id='appDevBy'>Application developed by:&thinsp; </span><a id='me' href='https://efano.github.io/' target='_blank'>Lis Fano</a>",
                     opacity: 0.85
                 });
             const imageryESRI = L.tileLayer(
                 'https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                    attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
+                    attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community' + '<br>' +
+                    "<span id='appDevBy'>Application developed by:&thinsp; </span><a id='me' href='https://efano.github.io/' target='_blank'>Lis Fano</a>",
                     opacity: 0.85
                 });
             const topoUSGS = L.tileLayer(
                 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
-                    attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
+                    attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community' + '<br>' +
+                    "<span id='appDevBy'>Application developed by:&thinsp; </span><a id='me' href='https://efano.github.io/' target='_blank'>Lis Fano</a>",
                     opacity: 0.85
                 });
             const imageryUSGS = L.tileLayer(
                 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
-                    attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
+                    attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community' + '<br>' +
+                    "<span id='appDevBy'>Application developed by:&thinsp; </span><a id='me' href='https://efano.github.io/' target='_blank'>Lis Fano</a>",
                 });
             const imageryTopoUSGS = L.tileLayer(
                 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}', {
-                    attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community',
+                    attribution: 'Tiles &copy; Esri, USGS, NPS, and the GIS User Community' + '<br>' +
+                    "<span id='appDevBy'>Application developed by:&thinsp; </span><a id='me' href='https://efano.github.io/' target='_blank'>Lis Fano</a>",
                 });
             const voyagerCARTO = L.tileLayer(
                 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>' + '<br>' +
+                    "<span id='appDevBy'>Application developed by:&thinsp; </span><a id='me' href='https://efano.github.io/' target='_blank'>Lis Fano</a>",
                     subdomains: 'abcd',
                     maxZoom: 19
                 });
             const darkCARTO = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>' + '<br>' +
+                    "<span id='appDevBy'>Application developed by:&thinsp; </span><a id='me' href='https://efano.github.io/' target='_blank'>Lis Fano</a>",
                 subdomains: 'abcd',
                 maxZoom: 19
             });
