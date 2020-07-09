@@ -11,9 +11,7 @@
 
     <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Nunito:wght@900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@1,400&family=Nunito:wght@900&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/BeerSlider.css">
 
     <style>
@@ -22,7 +20,7 @@
             margin: 0;
             padding: 0;
             cursor: default !important;
-            font-family: 'Lato', sans-serif;
+            font-family: 'Roboto', sans-serif;
         }
 
         html {
@@ -72,7 +70,7 @@
         }
 
         .fullTitle {
-            padding-top: 8px;
+            padding-top: 10px;
             padding-left: 16px;
         }
 
@@ -88,14 +86,14 @@
         }
 
         .navbar-title {
-            font-size: 26px;
-            font-weight: bold;
+            font-size: 28px;
+            font-weight: 500;
             color: #333;
         }
 
         .vl {
             color: #989898;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: lighter;
             margin-right: 6px;
             margin-left: 6px;
@@ -103,7 +101,8 @@
 
         .navbar-subtitle {
             font-size: 18px;
-            font-weight: normal;
+            font-family: 'Nunito Sans', sans-serif;
+            font-weight: 400;
             font-style: italic;
             color: #989898;
         }
@@ -215,13 +214,13 @@
             margin-top: -3px;
             color: #333;
             line-height: 1.5;
-            font-size: 12px;
-            font-weight: 500;
+            font-size: 11px;
+            font-weight: 400;
             opacity: 1;
         }
 
         #baselayerDropdown ::selection {
-            font-weight: 600;
+            font-weight: 500;
             color: #333;
         }
 
@@ -239,12 +238,12 @@
         }
 
         #radioText:hover {
-            font-weight: 600;
+            font-weight: 500;
             color: #0088A3;
         }
 
         .leaflet-control-layers-selector:checked~#radioText {
-            font-weight: 600;
+            font-weight: 500;
             color: #0088A3;
             text-decoration: underline;
         }
@@ -285,7 +284,7 @@
 
         .btn--s {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 18px;
             padding: 5px 12px;
         }
@@ -305,7 +304,7 @@
             margin-top: 6px;
             padding-top: 8px;
             padding-bottom: 8px;
-            width: 154px;
+            width: 150px;
             box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
             z-index: 1001;
             border-radius: 5px;
@@ -318,18 +317,18 @@
             display: block;
             color: #333;
             line-height: 1.5;
-            font-size: 12px;
-            font-weight: 500;
+            font-size: 11px;
+            font-weight: 400;
             padding: 0px 10px 10px 16px;
         }
 
         #dropdown-list2 :hover {
-            font-weight: 600;
+            font-weight: 500;
             color: #0088A3;
         }
 
         #dropdown-list2 ::selection {
-            font-weight: 600;
+            font-weight: 500;
             color: #333;
         }
 
@@ -338,7 +337,7 @@
         }
 
         .highlight {
-            font-weight: 600;
+            font-weight: 500;
             color: #0088A3;
         }
 
@@ -374,57 +373,54 @@
             white-space: nowrap;
             color: #333;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .tooltipText {
-            font-size: 1em;
-            font-weight: 500;
-            color: #333;
             margin-top: -19px;
         }
 
         .tooltipPct {
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .tooltipTextArea {
-            font-weight: 500;
+            font-weight: 400;
             margin-left: 9px;
         }
 
         .tooltipTextAcres {
-            font-weight: 500;
+            font-weight: 400;
             margin-left: 40px;
         }
 
         .polyTooltipText {
             font-size: .93em;
-            font-weight: 500;
+            font-weight: 400;
             color: #333;
             margin-top: -18px;
         }
 
         .polyTooltipTextArea {
             font-size: .93em;
-            font-weight: 500;
+            font-weight: 400;
             margin-left: 9px;
         }
 
         .polyTooltipTextAcres {
             font-size: .93em;
-            font-weight: 500;
+            font-weight: 400;
             margin-left: 40px;
         }
 
         .polyAreaBold,
         .barArea {
-            font-weight: 600;
+            font-weight: 500;
             color: #ff3d00;
         }
 
         .barTooltipTextAcres {
-            font-weight: 500;
+            font-weight: 400;
             margin-left: 30px;
         }
 
@@ -444,7 +440,7 @@
 
         .glacierPtLegend h4 {
             font-size: 15px;
-            font-weight: 600;
+            font-weight: 500;
             letter-spacing: 0.1px;
             margin-top: 12px;
             margin-left: 16px;
@@ -452,7 +448,7 @@
 
         .glacierPtLegend h6 {
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 500;
             margin-left: 16px;
             margin-top: -4px;
         }
@@ -468,7 +464,7 @@
 
         #gradientGreatest {
             font-size: 0.6em;
-            font-weight: 600;
+            font-weight: 500;
             color: #989898;
             margin-left: 20px;
             margin-top: -10px;
@@ -503,7 +499,7 @@
 
         #ui-pt-control .toggle {
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 15px;
             padding: 1px 15px;
             margin-right: -6px;
@@ -511,7 +507,7 @@
 
         #ui-lineCharts-control .toggle {
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 15px;
             padding: 3px 17px;
             margin-right: -6px;
@@ -548,14 +544,14 @@
 
         .glacierPtLegendText {
             font-size: 11px;
-            font-weight: 500;
+            font-weight: 400;
             color: #333;
             line-height: 1.0em;
         }
 
         .glacierPtLegendText2 {
             font-size: 11px;
-            font-weight: 500;
+            font-weight: 400;
             color: #333;
             margin-left: 20px;
         }
@@ -614,7 +610,7 @@
 
         .modalTitle {
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 500;
             margin-top: 12px;
             margin-bottom: 10px;
         }
@@ -689,14 +685,14 @@
         #closeIcon2,
         #closeIcon3 {
             font-size: 24px;
-            font-weight: 600;
+            font-weight: 500;
             color: #989898;
         }
 
         #closeIcon1 :hover,
         #closeIcon2 :hover,
         #closeIcon3 :hover {
-            font-weight: 600;
+            font-weight: 500;
             color: #333;
         }
 
@@ -740,7 +736,7 @@
 
         .polyLegendTitle {
             font-size: 22px;
-            font-weight: bold;
+            font-weight: 500;
             letter-spacing: 0.15px;
             color: #333;
         }
@@ -759,7 +755,7 @@
         .polyLegendAreaTitle {
             font-size: 15px;
             color: #333;
-            font-weight: bold;
+            font-weight: 500;
             letter-spacing: 0.1px;
             margin-top: 16px;
         }
@@ -802,7 +798,7 @@
 
         .switchText {
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 400;
             color: #333333;
             margin-top: 4px;
             margin-left: 4px;
@@ -813,13 +809,13 @@
             font-size: 15px;
             color: #333;
             letter-spacing: 0.1px;
-            font-weight: 600;
+            font-weight: 500;
             margin-top: 19px;
         }
 
         .areaChartText {
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 400;
             color: #333333;
             margin-top: 6px;
             margin-left: 8px;
@@ -827,7 +823,7 @@
 
         .areaChartCalcs {
             color: #ff3d00;
-            font-weight: 600;
+            font-weight: 500;
         }
 
         /* poly legend bar chart css */
@@ -865,7 +861,7 @@
             line-height: 1.4em;
             color: #333;
             font-size: 11px;
-            font-weight: 500;
+            font-weight: 400;
             border-radius: 5px;
             box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
             z-index: 1000;
@@ -897,7 +893,7 @@
             font-size: 15px;
             color: #333;
             letter-spacing: 0.1px;
-            font-weight: 600;
+            font-weight: 500;
             margin-top: 10px;
         }
 
@@ -921,7 +917,7 @@
         #legendLineText4 {
             color: #333;
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 400;
             margin-left: 2px;
             display: inline-block;
         }
@@ -930,7 +926,7 @@
         #legendLineText5 {
             color: #333;
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 400;
             margin-left: 2px;
             display: inline-block;
         }
@@ -939,7 +935,7 @@
         #legendLineText6 {
             color: #333;
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 400;
             margin-left: 16px;
             margin-top: -6px;
         }
@@ -975,7 +971,7 @@
             text-align: left;
             line-height: 1.4em;
             font-size: 11px;
-            font-weight: 500;
+            font-weight: 400;
             z-index: 1010;
             transition: all 0.1s ease-out;
             pointer-events: none;
@@ -1005,18 +1001,18 @@
             margin-bottom: 0.1em;
             color: #333;
             font-size: 1.2em;
-            font-weight: 600;
+            font-weight: 500;
             padding-top: 4px;
         }
 
         #temp {
             color: #ff3d00;
-            font-weight: 600;
+            font-weight: 500;
         }
 
         #precip {
             color: #009DBD;
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .year {
@@ -1669,16 +1665,10 @@
                         };
 
                         // tooltip
-                        layer.bindTooltip("<div class=tooltipTitle><b>" + props["GLACNAME"] +
-                            "</b></div><br>" +
-                            "<div class=tooltipText>" + "Area loss:&thinsp;" +
-                            '<a class="tooltipPct" style="color:' + colorize(props.pctD) + '"> ' + (
-                                parseFloat(
-                                    props["pctD"]) *
-                                100).toFixed(0) + "%" + '</a>', {
-                                opacity: 1
-                            }
-                        );
+                        layer.bindTooltip("<div class='tooltipTitle'>" + props["GLACNAME"] +
+                            "</div><br>" +
+                            "<div class='tooltipText'>" + "Area loss:&thinsp;" +
+                            '<a class="tooltipPct" style="color:' + colorize(props.pctD) + '"> ' + (parseFloat(props["pctD"]) * 100).toFixed(0) + "%" + '</a>', {opacity: 1});
 
                         //when mousing over a glacier point
                         layer.on('mouseover', function () {
@@ -1950,16 +1940,16 @@
                         });
 
                         // tooltip
-                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps["GLACNAME"] +
-                            "</b></div><br>" +
-                            "<div class=polyTooltipText>" + "Extent: &thinsp;Mid-19th century" +
+                        layer.bindTooltip("<div class='tooltipTitle'>" + polyProps["GLACNAME"] +
+                            "</div><br>" +
+                            "<div class='polyTooltipText'>" + "Extent: &thinsp;Mid-19th century" +
                             "<br></div>" +
-                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
-                            "<span class=polyAreaBold>" + Number(polyProps[
+                            "<div class='polyTooltipTextArea'>" + "Area: &thinsp;" +
+                            "<span class='polyAreaBold'>" + Number(polyProps[
                                 "AREA"] * 0.000001).toLocaleString() + " km&sup2; " + "</span>" +
                             "&thinsp;or" + "</div>" +
-                            "<div class=polyTooltipTextAcres>" +
-                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
+                            "<div class='polyTooltipTextAcres'>" +
+                            "<span class='polyAreaBold'>" + (polyProps["AREA"] *
                                 0.0002471053814671738146717).toFixed(3) + " acres" +
                             "</span></div>", {
                                 opacity: 1,
@@ -2001,17 +1991,17 @@
                         });
 
                         // tooltip
-                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps[
+                        layer.bindTooltip("<div class='tooltipTitle'>" + polyProps[
                                 "GLACNAME"] +
-                            "</b></div><br>" +
-                            "<div class=polyTooltipText>" + "Extent: &thinsp;1966" +
+                            "</div><br>" +
+                            "<div class='polyTooltipText'>" + "Extent: &thinsp;1966" +
                             "<br></div>" +
-                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
-                            "<span class=polyAreaBold>" + Number(polyProps[
+                            "<div class='polyTooltipTextArea'>" + "Area: &thinsp;" +
+                            "<span class='polyAreaBold'>" + Number(polyProps[
                                 "AREA"] * 0.000001).toLocaleString() + " km&sup2; " + "</span>" +
                             "&thinsp;or" + "</div>" +
-                            "<div class=polyTooltipTextAcres>" +
-                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
+                            "<div class='polyTooltipTextAcres'>" +
+                            "<span class='polyAreaBold'>" + (polyProps["AREA"] *
                                 0.0002471053814671738146717).toFixed(3) + " acres" +
                             "</span></div>", {
                                 opacity: 1,
@@ -2053,17 +2043,17 @@
                         });
 
                         // tooltip
-                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps[
+                        layer.bindTooltip("<div class='tooltipTitle'>" + polyProps[
                                 "GLACNAME"] +
-                            "</b></div><br>" +
-                            "<div class=polyTooltipText>" + "Extent: &thinsp;1998" +
+                            "</div><br>" +
+                            "<div class='polyTooltipText'>" + "Extent: &thinsp;1998" +
                             "<br></div>" +
-                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
-                            "<span class=polyAreaBold>" + Number(polyProps[
+                            "<div class='polyTooltipTextArea'>" + "Area: &thinsp;" +
+                            "<span class='polyAreaBold'>" + Number(polyProps[
                                 "AREA"] * 0.000001).toLocaleString() + " km&sup2; " + "</span>" +
                             "&thinsp;or" + "</div>" +
-                            "<div class=polyTooltipTextAcres>" +
-                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
+                            "<div class='polyTooltipTextAcres'>" +
+                            "<span class='polyAreaBold'>" + (polyProps["AREA"] *
                                 0.0002471053814671738146717).toFixed(3) + " acres" +
                             "</span></div>", {
                                 opacity: 1,
@@ -2105,17 +2095,17 @@
                         });
 
                         // tooltip
-                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps[
+                        layer.bindTooltip("<div class='tooltipTitle'>" + polyProps[
                                 "GLACNAME"] +
-                            "</b></div><br>" +
-                            "<div class=polyTooltipText>" + "Extent: &thinsp;2005" +
+                            "</div><br>" +
+                            "<div class='polyTooltipText'>" + "Extent: &thinsp;2005" +
                             "<br></div>" +
-                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
-                            "<span class=polyAreaBold>" + Number(polyProps[
+                            "<div class='polyTooltipTextArea'>" + "Area: &thinsp;" +
+                            "<span class='polyAreaBold'>" + Number(polyProps[
                                 "AREA"] * 0.000001).toLocaleString() + " km&sup2; " + "</span>" +
                             "&thinsp;or" + "</div>" +
-                            "<div class=polyTooltipTextAcres>" +
-                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
+                            "<div class='polyTooltipTextAcres'>" +
+                            "<span class='polyAreaBold'>" + (polyProps["AREA"] *
                                 0.0002471053814671738146717).toFixed(3) + " acres" +
                             "</span></div>", {
                                 opacity: 1,
@@ -2157,17 +2147,17 @@
                         });
 
                         // tooltip
-                        layer.bindTooltip("<div class=tooltipTitle><b>" + polyProps[
+                        layer.bindTooltip("<div class='tooltipTitle'>" + polyProps[
                                 "GLACNAME"] +
-                            "</b></div><br>" +
-                            "<div class=polyTooltipText>" + "Extent: &thinsp;2015" +
+                            "</div><br>" +
+                            "<div class='polyTooltipText'>" + "Extent: &thinsp;2015" +
                             "<br></div>" +
-                            "<div class=polyTooltipTextArea>" + "Area: &thinsp;" +
-                            "<span class=polyAreaBold>" + Number(polyProps[
+                            "<div class='polyTooltipTextArea'>" + "Area: &thinsp;" +
+                            "<span class='polyAreaBold'>" + Number(polyProps[
                                 "AREA"] * 0.000001).toLocaleString() + " km&sup2; " + "</span>" +
                             "&thinsp;or" + "</div>" +
-                            "<div class=polyTooltipTextAcres>" +
-                            "<span class=polyAreaBold>" + (polyProps["AREA"] *
+                            "<div class='polyTooltipTextAcres'>" +
+                            "<span class='polyAreaBold'>" + (polyProps["AREA"] *
                                 0.0002471053814671738146717).toFixed(3) + " acres" +
                             "</span></div>", {
                                 opacity: 1,
